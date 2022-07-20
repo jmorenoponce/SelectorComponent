@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Practica · Componente selector de Usuarios</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/sass/styles.css">
+    <link rel="stylesheet" href="src/sass/components/AppTheme.css">
+    <link rel="stylesheet" href="src/sass/components/SelectorComponent.css">
+</head>
+
+<body>
+
+<div class="practice-cnt">
+    <div class="practice-inner">
+
+        <div class="practice-info-cnt">
+
+            <div class="info-block general-data">
+
+                <span class="info-title">SelectorComponent.js</span>
+                <p class="info-description">Creación de un componente que permita...</p>
+            </div>
+
+            <div class="info-block documents-data">
+
+                <span class="info-subtitle">// Documentación:</span>
+
+                <ul class="documents-list">
+
+                    <li class="doc-item"><a href="#">Documentación aportada (image/jpeg)</a></li>
+                    <li class="doc-item"><a href="#">Fuente de datos de usuarios clasificados por departamento (text/json)</a></li>
+                </ul>
+            </div>
+
+            <div class="info-block testing-data">
+
+                <span class="info-subtitle">// Testeo de posicionamiento:</span>
+
+                <ul class="testing-list">
+
+                    <li class="doc-item">
+                        <button>Centrado</button>
+                    </li>
+                    <li class="doc-item">
+                        <button>Superior izquierda</button>
+                    </li>
+                    <li class="doc-item">
+                        <button>Superior derecha</button>
+                    </li>
+                    <li class="doc-item">
+                        <button>Inferior izquierda</button>
+                    </li>
+                    <li class="doc-item">
+                        <button>Inferior derecha</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="release-block">
+
+                <span class="release-version">Practice Skeleton 1.0.0</span>
+            </div>
+        </div>
+
+
+        <div class="practice-body-cnt">
+
+            <div class="app-cnt">
+
+                <!-- Users Selector Component -->
+                <div class="cmp-selector">
+                    <div class="selector-inner">
+
+                        <label class="selector-caption">Selección de usuarios:
+                            <select class="selector-base-element ux-selector-observer" data-name="app-user-selector">
+                                <!-- usersByDepartment-source-data-->
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Another Selector Component -->
+                <div class="cmp-selector">
+                    <div class="selector-inner">
+
+                        <label class="selector-caption">Otro selector para testeo:
+                            <select class="selector-base-element ux-selector-observer" data-name="app-another-selector">
+                                <!-- anotherTypology-source-data-->
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="src/js/components/SelectorComponent.js"></script>
+<script src="src/js/main.js"></script>
+
+</body>
+
+</html>
