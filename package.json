@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "selectorcomponent",
+  "version": "1.0.0",
+  "description": "This is a practice coding for a selector component that replaces the normal HTML Select",
+  "main": "main.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmorenoponce/SelectorComponent.git"
+  },
+  "author": "Jose Manuel Moreno Ponce",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmorenoponce/SelectorComponent/issues"
+  },
+  "homepage": "https://github.com/jmorenoponce/SelectorComponent#readme",
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "sass": "^1.53.0"
+  }
+}
