@@ -1,35 +1,52 @@
+import $ from "jquery";
 
 class SelectorManager {
 
-    constructor(test1, test2) {
 
-        let _instances = null;
-        let _manager = null;
+    constructor() {
 
-        return this._initialize();
+        this._id = undefined;
+        this._instances = null;
+        this._selectors = {
+            observable_items: '.ux-select-observe'
+        };
+
+        this._initialize();
+
+        return this._id;
     }
 
-    _initialize () {
 
-        return this._newInstance();
+    _initialize() {
+
+        this._id = this._generateId();
+        this._instances = 0;
     }
 
-    newInstance () {
 
-        this._manager = new SelectorComponent(test1, test2);
+    _generateId() {
 
-        return this._manager;
+        return Date.now();
     }
 
-    getInstances () {
+
+    getId() {
+
+        return this._id;
+    }
+
+
+    newInstance() {
+
+        let _tmpId = this._generateId();
+        this._instances++;
+
+        return new SelectorComponent(this._id, _tmpId);
+    }
+
+
+    getInstances() {
 
         return this._instances;
     }
-
-    _setInstances (amount) {
-
-        this._instances = amount;
-    }
-
-
 }

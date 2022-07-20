@@ -1,13 +1,33 @@
+import $ from "jquery";
 
-"use strict"
+'use strict'
 
-const mySelectorManager = new SelectorManager();
 
-const mySelectorComponent1 = mySelectorManager.newInstance();
-const mySelectorComponent2 = mySelectorManager.newInstance();
+let selectorManager = new SelectorManager();
+console.log(selectorManager.getId());
 
-mySelectorComponent1.bind(document.getElementsByClassName("ux-selector-observer"), {});
-mySelectorComponent1.init();
 
-mySelectorComponent2.bind(document.getElementsByClassName("ux-selector-observer"), {});
-mySelectorComponent2.init();
+// Users Selector Component
+let userSelectorComponent = selectorManager.newInstance();
+
+userSelectorComponent.bind(document.getElementsByClassName(".app-user-selector"), {
+    active: true,
+    searchable: true,
+    dataSrc: './data-src/users-src.json'
+});
+userSelectorComponent.init();
+
+
+
+//
+//
+// // Another Selector Component for testing
+// let AnotherSelectorComponent = SelectorManager.newInstance();
+//
+// AnotherSelectorComponent.bind(document.getElementsByClassName("app-another-selector"), {
+//     // Example for some problems with a not valid config, course the component must show problem status.
+//     active: true,
+//     searchable: false,
+//     dataSrc: './data-src/this-file-not-exist.json'
+// });
+// AnotherSelectorComponent.init();

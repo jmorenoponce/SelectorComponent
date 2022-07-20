@@ -1,7 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:develop" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:develop" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="b162bbe7-9201-4eff-bf83-a87dfd1a8413" name="Default Changelist" comment="" />
+    <list default="true" id="b162bbe7-9201-4eff-bf83-a87dfd1a8413" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jmore.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM (1).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM (2).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image3.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM (3).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image4.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM (4).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image5.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image1.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.51 PM (1).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image7.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.51 PM.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image6.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/components/.sass-cache/4dc1a84daa6acab1f66356507c5f1922efe085a6/AppTheme.sassc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/components/.sass-cache/4dc1a84daa6acab1f66356507c5f1922efe085a6/SelectorComponent.sassc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/components/AppTheme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/components/AppTheme.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/components/AppTheme.sass" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,9 +70,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\SelectorComponent\src\sass" />
+    </key>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -34,21 +88,38 @@
       <option name="presentableId" value="Default" />
       <updated>1658315853121</updated>
       <workItem from="1658315854795" duration="406000" />
-      <workItem from="1658316648889" duration="714000" />
+      <workItem from="1658316648889" duration="2252000" />
+      <workItem from="1658319077929" duration="5808000" />
+      <workItem from="1658350718055" duration="5696000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="887" y="417" key="EditFileWatcherDialog" timestamp="1658315910968">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="887" y="417" key="EditFileWatcherDialog/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658315910968" />
-    <state x="670" y="254" key="SettingsEditor" timestamp="1658315911942">
+    <state x="720" y="329" key="SettingsEditor" timestamp="1658318672529">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
-    <state x="670" y="254" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658315911942" />
+    <state x="720" y="329" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658318672529" />
+    <state x="852" y="325" key="run.anything.popup" timestamp="1658351126224">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="852" y="325" key="run.anything.popup/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658351126224" />
   </component>
 </project>
