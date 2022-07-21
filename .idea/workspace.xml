@@ -31,24 +31,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b162bbe7-9201-4eff-bf83-a87dfd1a8413" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jmore.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/wallpaper3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorInterface.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM (1).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image2.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM (2).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image3.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM (3).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image4.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM (4).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image5.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.50 PM.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image1.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.51 PM (1).jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image7.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/WhatsApp Image 2022-06-01 at 3.33.51 PM.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/image6.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/data-src/users-src.json" beforeDir="false" afterPath="$PROJECT_DIR$/dist/data-src/users-src.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/components/.sass-cache/4dc1a84daa6acab1f66356507c5f1922efe085a6/AppTheme.sassc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/components/.sass-cache/4dc1a84daa6acab1f66356507c5f1922efe085a6/SelectorComponent.sassc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/components/AppTheme.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/components/AppTheme.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/components/AppTheme.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/AppTheme.sassc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/_base_variables.sassc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/_helpers.sassc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/_main.sassc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/_reset.sassc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/styles.sassc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/AppTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/components/AppTheme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/AppTheme.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/components/AppTheme.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/AppTheme.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/components/AppTheme.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/_base_variables.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/_base_variables.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/_main.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/_main.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/styles.css.map" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,13 +78,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\SelectorComponent\src\js\components\SelectorField" />
+      <recent name="C:\laragon\www\SelectorComponent\src\sass\components" />
       <recent name="C:\laragon\www\SelectorComponent\src\sass" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\SelectorComponent\src\assets" />
+    </key>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -91,6 +105,7 @@
       <workItem from="1658316648889" duration="2252000" />
       <workItem from="1658319077929" duration="5808000" />
       <workItem from="1658350718055" duration="5696000" />
+      <workItem from="1658391484219" duration="4393000" />
     </task>
     <servers />
   </component>
@@ -107,6 +122,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="887" y="417" key="EditFileWatcherDialog" timestamp="1658315910968">

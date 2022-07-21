@@ -4,9 +4,6 @@
 class SelectorComponent {
 
 
-    // ESTADOS: (Por definir)
-    //
-
     constructor(managerId, instanceId) {
 
         this._STATES = {
@@ -14,18 +11,24 @@ class SelectorComponent {
             BINDED: 200,
             RUNNING: 210,
             WRONG_SOURCE_DATA: 400,
+            UNKNOWN_SOURCE_DATA: 410,
+            WRONG_CONFIG_OBJECT: 410,
             UNKNOWN_PROBLEM: 900
         }
 
         this._managerId = managerId;
         this._instanceId = instanceId;
-        this._status = this._STATES.WHAITING_FOR_BINDING;
         this._name = undefined;
+
         this._configObj = {
             active: undefined,
-            searchable: undefined,
-            dataSrc: undefined
+            editable: undefined,
+            dataSrc: ''
         };
+
+        this._state = this._STATES.WHAITING_FOR_BINDING;
+
+        return this._state;
     }
 
 
@@ -33,7 +36,13 @@ class SelectorComponent {
 
         component ? this._name = component.attr('data-name') : false;
 
-        return this._validateConfig();
+        this._validateConfig(configObject) ? this._configObj = configObject : this._state = this._STATES.WRONG_CONFIG_OBJECT;
+    }
+
+
+    _init() {
+
+        // let _this = this; // ?????
     }
 
 
@@ -43,15 +52,9 @@ class SelectorComponent {
     }
 
 
-    _init() {
+    _validateConfig(config) {
 
-        let _this = this; // ?????
-    }
-
-
-    _validateConfig() {
-
-        console.log('Objeto de configuración: ', this._configObj);
+        console.log('Objeto de configuración: ', config);
 
         return true;
     }
@@ -61,15 +64,18 @@ class SelectorComponent {
 
         let f_fileUrl = this._configObj.dataSrc;
 
-        !f_fileUrl ? this._status = 200 : this._status = this._getDefaultConfig();
+        // Haz cosas...
+
+        // !f_fileUrl ? this._state = this._STATES.WRONG_SOURCE_DATA : this._state = this._STATES.BINDED;
     };
 
 
     _getDefaultConfig() {
 
         return {
-
-            //Do Stuff
+            active: true,
+            editable: true,
+            dataSrc: this._STATES.UNKNOWN_SOURCE_DATA
         };
     }
 
@@ -82,12 +88,13 @@ class SelectorComponent {
 
     _showError(msg) {
 
+
     }
 
 
     get id() {
 
-        return this._id;
+        return this._instanceId;
     }
 
 
@@ -95,4 +102,17 @@ class SelectorComponent {
 
         return this._name;
     }
+
+
+    set name(newName) {
+
+        this._name = newName;
+    }
+
+
+    get state() {
+
+        return this._state;
+    }
+
 }

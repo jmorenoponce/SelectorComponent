@@ -1,7 +1,7 @@
 [
   {
-    "dataSource": "Do Stuff",
-    "notes": "Esto es una prueba de fuente de datos de usuarios, incluyendo los últimos 6 recientemente seleccionados",
+    "dataSource": "usersByDepartment",
+    "notes": "Esto es una simulación de fuente de datos de <usuarios>, categorizados por <departamento>, incluyendo los últimos 6 recientemente seleccionados",
     "lastItemsSelected": [
       3, 20, 35, 48, 54, 8
     ],
