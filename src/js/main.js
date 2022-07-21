@@ -5,12 +5,9 @@ import $ from "jquery";
 
 
 let selectorManager = new SelectorManager();
-console.log(selectorManager.id);
-console.log(selectorManager.amountComponents);
-console.log(selectorManager.getAllComponents);
 
 
-// Users Selector Component
+//  Users Selector Component
 let userSelectorComponent = selectorManager.newComponent();
 
 userSelectorComponent.bind($('app-user-selector'), {
@@ -31,3 +28,9 @@ anotherSelectorComponent.bind(document.getElementsByClassName("app-another-selec
     dataSrc: './data-src/this-file-not-exist.json'
 });
 anotherSelectorComponent.init();
+
+
+// Some test for functionality
+console.log(selectorManager.id);
+console.log(selectorManager.amountComponents);
+console.log(selectorManager.getAllComponents);

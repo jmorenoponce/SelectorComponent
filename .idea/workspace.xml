@@ -31,30 +31,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b162bbe7-9201-4eff-bf83-a87dfd1a8413" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/wallpaper3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorConfig.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorInterface.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/data-src/users-src.json" beforeDir="false" afterPath="$PROJECT_DIR$/dist/data-src/users-src.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/ParallaxNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Others/ParallaxNavigation/ParallaxNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Others/ColorPromedio/ColorPromedio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorInterface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorInterface.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/AppTheme.sassc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/_base_variables.sassc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/_helpers.sassc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/_main.sassc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/_reset.sassc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/.sass-cache/da0fcfe87741cffdafeeffbd62723fad41c62fb9/styles.sassc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/AppTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/components/AppTheme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/AppTheme.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/components/AppTheme.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/AppTheme.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/components/AppTheme.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/_base_variables.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/_base_variables.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/_main.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/_main.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sass/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/styles.css.map" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,17 +63,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tektumhomes" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\SelectorComponent\src\js\components\SelectorField" />
-      <recent name="C:\laragon\www\SelectorComponent\src\sass\components" />
-      <recent name="C:\laragon\www\SelectorComponent\src\sass" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\laragon\www\SelectorComponent\src\assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others\ColorPromedio" />
+      <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others\Parallax" />
+      <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others" />
+      <recent name="C:\laragon\www\SelectorComponent\src\js\components\SelectorField" />
+      <recent name="C:\laragon\www\SelectorComponent\src\sass\components" />
     </key>
   </component>
   <component name="StructureViewFactory">
@@ -105,7 +92,9 @@
       <workItem from="1658316648889" duration="2252000" />
       <workItem from="1658319077929" duration="5808000" />
       <workItem from="1658350718055" duration="5696000" />
-      <workItem from="1658391484219" duration="4393000" />
+      <workItem from="1658391484219" duration="9456000" />
+      <workItem from="1658412011536" duration="768000" />
+      <workItem from="1658414394287" duration="2024000" />
     </task>
     <servers />
   </component>
@@ -129,6 +118,10 @@
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="887" y="417" key="EditFileWatcherDialog/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658315910968" />
+    <state x="1006" y="391" key="FileChooserDialogImpl" timestamp="1658412535591">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="1006" y="391" key="FileChooserDialogImpl/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658412535591" />
     <state x="720" y="329" key="SettingsEditor" timestamp="1658318672529">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>

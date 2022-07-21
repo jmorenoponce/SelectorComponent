@@ -17,8 +17,9 @@ class SelectorComponent {
         }
 
         this._managerId = managerId;
+
         this._instanceId = instanceId;
-        this._name = undefined;
+        this._instanceName = undefined;
 
         this._configObj = {
             active: undefined,
@@ -34,7 +35,7 @@ class SelectorComponent {
 
     bind(component, configObject) {
 
-        component ? this._name = component.attr('data-name') : false;
+        component ? this._instanceName = component.attr('data-name') : false;
 
         this._validateConfig(configObject) ? this._configObj = configObject : this._state = this._STATES.WRONG_CONFIG_OBJECT;
     }
@@ -42,7 +43,7 @@ class SelectorComponent {
 
     _init() {
 
-        // let _this = this; // ?????
+        // let _this = this; // ????
     }
 
 
@@ -100,13 +101,13 @@ class SelectorComponent {
 
     get name() {
 
-        return this._name;
+        return this._instanceName;
     }
 
 
     set name(newName) {
 
-        this._name = newName;
+        this._instanceName = newName;
     }
 
 

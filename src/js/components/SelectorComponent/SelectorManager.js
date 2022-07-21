@@ -6,12 +6,14 @@ class SelectorManager {
 
     constructor() {
 
-        this._id = undefined;
-        this._components = 0;
-        this._componentsObj = {};
         this._selectors = {
             observable_items: '.ux-select-observe'
         };
+
+        this._id = undefined;
+
+        this._components = 0;
+        this._componentsObj = {}; // ????
 
         this._initialize();
     }
@@ -36,7 +38,7 @@ class SelectorManager {
 
     getAllComponents() {
 
-        // Devolver un array de objetos?
+        return this._componentsObj;
     }
 
 
