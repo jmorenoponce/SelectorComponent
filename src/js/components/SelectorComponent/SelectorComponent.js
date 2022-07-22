@@ -1,18 +1,20 @@
 'use strict'
 
+import $ from "jquery";
 
-class SelectorComponent {
+export class SelectorComponent {
 
 
     constructor(managerId, instanceId) {
 
         this._STATES = {
-            WHAITING_FOR_BINDING: 100,
+            WAITING_FOR_BINDING: 100,
             BINDED: 200,
             RUNNING: 210,
+            STOPPED: 220,
             WRONG_SOURCE_DATA: 400,
             UNKNOWN_SOURCE_DATA: 410,
-            WRONG_CONFIG_OBJECT: 410,
+            WRONG_CONFIG_OBJECT: 420,
             UNKNOWN_PROBLEM: 900
         }
 
@@ -22,28 +24,38 @@ class SelectorComponent {
         this._instanceName = undefined;
 
         this._configObj = {
-            active: undefined,
-            editable: undefined,
+            active: false,
+            editable: false,
             dataSrc: ''
         };
 
-        this._state = this._STATES.WHAITING_FOR_BINDING;
+        this._state = this._STATES.WAITING_FOR_BINDING;
 
         return this._state;
     }
 
 
-    bind(component, configObject) {
+    bind(component, configObj) {
 
-        component ? this._instanceName = component.attr('data-name') : false;
+        let $_component = $(component);
 
-        this._validateConfig(configObject) ? this._configObj = configObject : this._state = this._STATES.WRONG_CONFIG_OBJECT;
+        let _tmpName = $_component.attr('data-selector-name').trim();
+        _tmpName ? this._instanceName = _tmpName : false;
+
+        if (!this._validateConfig(configObj)) {
+            this._state = this._STATES.WRONG_CONFIG_OBJECT;
+            return false;
+        }
+
+        this._configObj = Object.assign(configObj);
+        this._state = this._STATES.BINDED;
+        return true;
     }
 
 
     _init() {
 
-        // let _this = this; // ????
+        // Do Stuff...
     }
 
 
@@ -53,22 +65,36 @@ class SelectorComponent {
     }
 
 
+    get managerId() {
+
+        return this._managerId;
+    }
+
+
+    get id() {
+
+        return this._instanceId;
+    }
+
+
+    get name() {
+
+        return this._instanceName;
+    }
+
+
+    get state() {
+
+        return this._state;
+    }
+
+
     _validateConfig(config) {
 
         console.log('Objeto de configuración: ', config);
 
         return true;
     }
-
-
-    _loadDataFromFile() {
-
-        let f_fileUrl = this._configObj.dataSrc;
-
-        // Haz cosas...
-
-        // !f_fileUrl ? this._state = this._STATES.WRONG_SOURCE_DATA : this._state = this._STATES.BINDED;
-    };
 
 
     _getDefaultConfig() {
@@ -91,29 +117,4 @@ class SelectorComponent {
 
 
     }
-
-
-    get id() {
-
-        return this._instanceId;
-    }
-
-
-    get name() {
-
-        return this._instanceName;
-    }
-
-
-    set name(newName) {
-
-        this._instanceName = newName;
-    }
-
-
-    get state() {
-
-        return this._state;
-    }
-
 }

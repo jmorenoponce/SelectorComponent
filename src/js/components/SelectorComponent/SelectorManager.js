@@ -1,7 +1,10 @@
 'use strict'
 
+import { v4 as uuidv4 } from 'uuid';
+import { SelectorComponent } from './SelectorComponent';
 
-class SelectorManager {
+
+export class SelectorManager {
 
 
     constructor() {
@@ -11,9 +14,7 @@ class SelectorManager {
         };
 
         this._id = undefined;
-
-        this._components = 0;
-        this._componentsObj = {}; // ????
+        this._instancesObj = [];
 
         this._initialize();
     }
@@ -25,37 +26,43 @@ class SelectorManager {
     }
 
 
-    newComponent() {
-
-        let _tmpId = this._generateId();
-        let _tmpObj = new SelectorComponent(this._id, _tmpId);
-
-        this._components++;
-
-        return _tmpObj;
-    }
-
-
-    getAllComponents() {
-
-        return this._componentsObj;
-    }
-
-
-    get amountComponents() {
-
-        return this._components;
-    }
-
-
     get id() {
 
         return this._id;
     }
 
 
-    _generateId() {
+    instanceNew() {
 
-        return Date.now();
+        let _tmpId = this._generateId();
+        let _tmpObj = new SelectorComponent(this._id, _tmpId);
+
+        this._instancesObj.push(_tmpObj);
+
+        return _tmpObj;
+    }
+
+
+    get instancesObj() {
+
+        return this._instancesObj;
+    }
+
+
+    get instancesAmount() {
+
+        return this._instancesObj.count();
+    }
+
+
+    sendAction(target, callback) {
+
+        // Do stuff...
+    }
+
+
+    _generateId() { // Todo: Llévalo a una clase utilitaria
+
+        return uuidv4(); // Todo: Wrapear !important
     }
 }

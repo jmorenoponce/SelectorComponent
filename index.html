@@ -82,7 +82,7 @@
                     <div class="selector-inner">
 
                         <label class="selector-caption">Selección de usuarios:
-                            <select class="selector-base-element ux-selector-observer" data-name="app-user-selector">
+                            <select class="selector-base-element ux-selector-users ux-selector-observer" data-selector-name="usersByDepartment">
                                 <!-- usersByDepartment-source-data-->
                             </select>
                         </label>
@@ -94,7 +94,7 @@
                     <div class="selector-inner">
 
                         <label class="selector-caption">Otro selector para testeo:
-                            <select class="selector-base-element ux-selector-observer" data-name="app-another-selector">
+                            <select class="selector-base-element ux-selector-other ux-selector-observer" data-selector-name="app-another-selector">
                                 <!-- anotherTypology-source-data-->
                             </select>
                         </label>
@@ -106,11 +106,7 @@
     </div>
 </div>
 
-<script src="src/js/components/SelectorComponent/SelectorConfig.js"></script>
-<script src="src/js/components/SelectorComponent/SelectorInterface.js"></script>
-<script src="src/js/components/SelectorComponent/SelectorComponent.js"></script>
-<script src="src/js/components/SelectorComponent/SelectorManager.js"></script>
-<script src="src/js/main.js"></script>
+<script type="module" src="dist/js/main.bundle.js"></script>
 
 </body>
 

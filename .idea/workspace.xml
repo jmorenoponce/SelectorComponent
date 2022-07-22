@@ -31,14 +31,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b162bbe7-9201-4eff-bf83-a87dfd1a8413" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorConfig.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/js/components/Others/ThisExamples/thisExamples.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/jmore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/jmore.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/data-src/users-src.json" beforeDir="false" afterPath="$PROJECT_DIR$/dist/data-src/users-src.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/ParallaxNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Others/ParallaxNavigation/ParallaxNavigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Others/ColorPromedio/ColorPromedio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorInterface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorInterface.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorField/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,18 +66,18 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../tektumhomes" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\laragon\www\SelectorComponent\src\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others\thisExplication" />
       <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others\ColorPromedio" />
       <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others\Parallax" />
       <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others" />
       <recent name="C:\laragon\www\SelectorComponent\src\js\components\SelectorField" />
-      <recent name="C:\laragon\www\SelectorComponent\src\sass\components" />
     </key>
   </component>
   <component name="StructureViewFactory">
@@ -94,7 +96,10 @@
       <workItem from="1658350718055" duration="5696000" />
       <workItem from="1658391484219" duration="9456000" />
       <workItem from="1658412011536" duration="768000" />
-      <workItem from="1658414394287" duration="2024000" />
+      <workItem from="1658414394287" duration="2449000" />
+      <workItem from="1658425597963" duration="10187000" />
+      <workItem from="1658440964184" duration="7597000" />
+      <workItem from="1658473397998" duration="15600000" />
     </task>
     <servers />
   </component>
@@ -122,13 +127,21 @@
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="1006" y="391" key="FileChooserDialogImpl/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658412535591" />
-    <state x="720" y="329" key="SettingsEditor" timestamp="1658318672529">
+    <state x="547" y="207" width="1569" height="1044" key="SettingsEditor" timestamp="1658442180057">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
-    <state x="720" y="329" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658318672529" />
+    <state x="547" y="207" width="1569" height="1044" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658442180057" />
+    <state x="925" y="322" width="710" height="748" key="find.popup" timestamp="1658476480397">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="925" y="322" width="710" height="748" key="find.popup/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658476480397" />
     <state x="852" y="325" key="run.anything.popup" timestamp="1658351126224">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="852" y="325" key="run.anything.popup/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658351126224" />
+    <state x="859" y="306" width="840" height="1034" key="search.everywhere.popup" timestamp="1658485186251">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="859" y="306" width="840" height="1034" key="search.everywhere.popup/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658485186251" />
   </component>
 </project>
