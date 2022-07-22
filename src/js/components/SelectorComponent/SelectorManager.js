@@ -1,7 +1,8 @@
 'use strict'
 
-import { v4 as uuidv4 } from 'uuid';
-import { SelectorComponent } from './SelectorComponent';
+
+import {SelectorComponent} from './SelectorComponent';
+import {UtilityClass} from '../General/UtilityClass';
 
 
 export class SelectorManager {
@@ -51,18 +52,19 @@ export class SelectorManager {
 
     get instancesAmount() {
 
-        return this._instancesObj.count();
+        return this._instancesObj.length;
     }
 
 
-    sendAction(target, callback) {
+    sendInstanceAction(target, callback) {
 
         // Do stuff...
     }
 
 
-    _generateId() { // Todo: Llévalo a una clase utilitaria
+    _generateId() {
 
-        return uuidv4(); // Todo: Wrapear !important
+        const _tmpUtil = new UtilityClass();
+        return _tmpUtil.generateUuid();
     }
 }

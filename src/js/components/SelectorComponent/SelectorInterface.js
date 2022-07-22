@@ -1,10 +1,15 @@
-'use strict'
+'use strict';
 
 
-class selectorInterface {
+export class selectorInterface {
 
-    constructor() {
+    constructor(htmlObj) {
 
+        this._htmlObj = htmlObj;
+    }
 
+    test() {
+
+        return this._htmlObj;
     }
 }

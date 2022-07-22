@@ -1,9 +1,10 @@
 'use strict'
 
 import $ from "jquery";
+import {SelectorInterface} from './SelectorInterface';
+
 
 export class SelectorComponent {
-
 
     constructor(managerId, instanceId) {
 
@@ -23,6 +24,9 @@ export class SelectorComponent {
         this._instanceId = instanceId;
         this._instanceName = undefined;
 
+        this._interface = undefined;
+        this._htmlObj = undefined;
+
         this._configObj = {
             active: false,
             editable: false,
@@ -37,37 +41,32 @@ export class SelectorComponent {
 
     bind(component, configObj) {
 
-        let $_component = $(component);
-
-        let _tmpName = $_component.attr('data-selector-name').trim();
-        _tmpName ? this._instanceName = _tmpName : false;
-
         if (!this._validateConfig(configObj)) {
             this._state = this._STATES.WRONG_CONFIG_OBJECT;
             return false;
         }
 
+        this._htmlObj = $(component);
         this._configObj = Object.assign(configObj);
         this._state = this._STATES.BINDED;
+
+        let _tmpName = this._htmlObj.attr('data-selector-name').trim();
+        _tmpName ? this._instanceName = _tmpName : false;
+
         return true;
     }
 
 
     _init() {
 
-        // Do Stuff...
+        let _interface = new SelectorInterface(this._htmlObj);
+        this._state = this._STATES.RUNNING;
     }
 
 
     init() {
 
         this._init();
-    }
-
-
-    get managerId() {
-
-        return this._managerId;
     }
 
 
@@ -86,6 +85,12 @@ export class SelectorComponent {
     get state() {
 
         return this._state;
+    }
+
+
+    get parentManagerId() {
+
+        return this._managerId;
     }
 
 
