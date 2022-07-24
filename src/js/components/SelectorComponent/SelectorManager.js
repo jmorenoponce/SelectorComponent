@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 
 
 import {SelectorComponent} from './SelectorComponent';
-import {UtilityClass} from '../General/UtilityClass';
+import {UtilityClass} from '../Util/UtilityClass';
 
 
 export class SelectorManager {
@@ -27,12 +27,6 @@ export class SelectorManager {
     }
 
 
-    get id() {
-
-        return this._id;
-    }
-
-
     instanceNew() {
 
         let _tmpId = this._generateId();
@@ -41,6 +35,12 @@ export class SelectorManager {
         this._instancesObj.push(_tmpObj);
 
         return _tmpObj;
+    }
+
+
+    get id() {
+
+        return this._id;
     }
 
 
@@ -56,7 +56,7 @@ export class SelectorManager {
     }
 
 
-    sendInstanceAction(target, callback) {
+    submitInstanceAction(target, action) {
 
         // Do stuff...
     }

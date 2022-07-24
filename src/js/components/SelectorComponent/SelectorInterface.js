@@ -1,15 +1,24 @@
 'use strict';
 
 
-export class selectorInterface {
+export class SelectorInterface {
+
 
     constructor(htmlObj) {
 
         this._htmlObj = htmlObj;
+        this._error = undefined;
     }
 
-    test() {
+
+    render() {
 
         return this._htmlObj;
+    }
+
+
+    getError(code) {
+
+        this.error = code;
     }
 }

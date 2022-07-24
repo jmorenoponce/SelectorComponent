@@ -31,23 +31,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b162bbe7-9201-4eff-bf83-a87dfd1a8413" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/js/components/General/UtilityClass.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/js/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/main.bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/Others/Ajax/Ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Examples/Ajax/Ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/Others/Ajax/AjaxManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Examples/Ajax/AjaxManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/Others/Ajax/System.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Examples/Ajax/System.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/Others/ColorPromedio/ColorPromedio.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Examples/ColorPromedio/ColorPromedio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/Others/ParallaxNavigation/ParallaxNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Examples/ParallaxNavigation/ParallaxNavigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/Others/ThisExamples/thisExamples.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Examples/ThisExamples/thisExamples.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/General/UtilityClass.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Util/UtilityClass.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorInterface.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorInterface.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +98,9 @@
       <workItem from="1658425597963" duration="10187000" />
       <workItem from="1658440964184" duration="7597000" />
       <workItem from="1658473397998" duration="25249000" />
-      <workItem from="1658521089131" duration="7966000" />
+      <workItem from="1658521089131" duration="16621000" />
+      <workItem from="1658568874558" duration="749000" />
+      <workItem from="1658577704183" duration="6589000" />
     </task>
     <servers />
   </component>
@@ -134,10 +128,10 @@
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="1006" y="391" key="FileChooserDialogImpl/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658412535591" />
-    <state x="547" y="207" width="1569" height="1044" key="SettingsEditor" timestamp="1658442180057">
+    <state x="362" y="229" width="1569" height="1044" key="SettingsEditor" timestamp="1658580338741">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
-    <state x="547" y="207" width="1569" height="1044" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658442180057" />
+    <state x="362" y="229" width="1569" height="1044" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658580338741" />
     <state x="925" y="322" width="710" height="748" key="find.popup" timestamp="1658476480397">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>

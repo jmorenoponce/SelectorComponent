@@ -2,7 +2,7 @@
 
 
 import {SelectorManager} from './components/SelectorComponent/SelectorManager';
-import {UtilityClass} from "./components/General/UtilityClass";
+import {UtilityClass} from "./components/Util/UtilityClass";
 
 
 let util = new UtilityClass();
@@ -33,6 +33,4 @@ anotherSelectorComponent.init();
 // Some test for functionality
 console.log('[manager_id]...', selectorManager.id);
 console.log('[manager_amount_instances]...', selectorManager.instancesAmount);
-
-
 util.print('Esto es una prueba', selectorManager.instancesObj);

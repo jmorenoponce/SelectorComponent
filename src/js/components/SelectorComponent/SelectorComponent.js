@@ -1,10 +1,12 @@
-'use strict'
+'use strict';
+
 
 import $ from "jquery";
 import {SelectorInterface} from './SelectorInterface';
 
 
 export class SelectorComponent {
+
 
     constructor(managerId, instanceId) {
 
@@ -13,8 +15,9 @@ export class SelectorComponent {
             BINDED: 200,
             RUNNING: 210,
             STOPPED: 220,
-            WRONG_SOURCE_DATA: 400,
-            UNKNOWN_SOURCE_DATA: 410,
+            FINISHED: 230,
+            UNKNOWN_SOURCE_DATA: 400,
+            WRONG_SOURCE_DATA: 410,
             WRONG_CONFIG_OBJECT: 420,
             UNKNOWN_PROBLEM: 900
         }
@@ -43,7 +46,8 @@ export class SelectorComponent {
 
         if (!this._validateConfig(configObj)) {
             this._state = this._STATES.WRONG_CONFIG_OBJECT;
-            return false;
+            this._submitInterfaceError(this._state);
+            return this._state;
         }
 
         this._htmlObj = $(component);
@@ -59,14 +63,16 @@ export class SelectorComponent {
 
     _init() {
 
-        let _interface = new SelectorInterface(this._htmlObj);
+        this._interface = new SelectorInterface(this._htmlObj);
         this._state = this._STATES.RUNNING;
+
+        return this._state;
     }
 
 
     init() {
 
-        this._init();
+        return this._init();
     }
 
 
@@ -112,14 +118,14 @@ export class SelectorComponent {
     }
 
 
-    deactivate(subject) {
+    _submitInterfaceError(code) {
 
-        this._showError(subject);
+        this._interface.error(code);
     }
 
 
-    _showError(msg) {
+    _submitAction(subject) {
 
-
+        this._submitInterfaceError(subject);
     }
 }
