@@ -44,15 +44,15 @@ export class SelectorManager {
     }
 
 
-    get instancesObj() {
-
-        return this._instancesObj;
-    }
-
-
     get instancesAmount() {
 
         return this._instancesObj.length;
+    }
+
+
+    get instancesObj() {
+
+        return this._instancesObj;
     }
 
 

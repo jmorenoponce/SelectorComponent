@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "This is a practice coding for a selector component that replaces the normal HTML Select",
   "main": "./src/js/main.js",
+  "type": "module",
   "directories": {
     "doc": "docs",
     "test": "test"
