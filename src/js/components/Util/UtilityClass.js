@@ -24,14 +24,13 @@ export class UtilityClass {
 
 	static loadFromFile(path) {
 
-		let _tmpData = {};
-
 		async function fetchData() {
-			_tmpData = await fetch(path)
+			let _tmpData = await fetch(path)
 				.then(response => response.json())
 				.then((value) => {
 					return value;
 				});
+
 			return _tmpData;
 		}
 

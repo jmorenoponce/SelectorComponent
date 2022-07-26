@@ -1,8 +1,8 @@
 'use strict';
 
 
-import $ from "jquery";
 import {SelectorInterface} from './SelectorInterface.js';
+import $ from "jquery";
 
 
 export class SelectorComponent {
@@ -16,16 +16,16 @@ export class SelectorComponent {
             RUNNING: 210,
             STOPPED: 220,
             FINISHED: 230,
-            UNKNOWN_SOURCE_DATA: 400,
-            WRONG_SOURCE_DATA: 410,
-            WRONG_CONFIG_OBJECT: 420,
+            INVALID_CONFIG_OBJECT: 400,
+            UNKNOWN_SOURCE_DATA: 410,
+            INVALID_SOURCE_DATA: 420,
             UNKNOWN_PROBLEM: 900
         }
 
         this._managerId = managerId;
 
         this._instanceId = instanceId;
-        this._instanceName = undefined;
+        this._instanceName = this._STATES.UNKNOWN_SOURCE_DATA;
 
         this._interface = undefined;
         this._htmlObj = undefined;
@@ -45,11 +45,12 @@ export class SelectorComponent {
     bind(component, configObj) {
 
         if (!this._validateConfig(configObj)) {
-            this._state = this._STATES.WRONG_CONFIG_OBJECT;
+            this._state = this._STATES.INVALID_CONFIG_OBJECT;
             this._submitInterfaceError(this._state);
             return this._state;
         }
 
+        // Refactor: esto va a la función _declareObject()
         this._htmlObj = $(component);
         this._configObj = Object.assign(configObj);
         this._state = this._STATES.BINDED;
@@ -118,14 +119,14 @@ export class SelectorComponent {
     }
 
 
-    _submitInterfaceError(code) {
-
-        this._interface.error(code);
-    }
-
-
-    _submitAction(subject) {
-
-        this._submitInterfaceError(subject);
-    }
+    // _submitInterfaceError(code) {
+    //
+    //     this._interface.error(code);
+    // }
+    //
+    //
+    // _submitAction(subject) {
+    //
+    //     this._submitInterfaceError(subject);
+    // }
 }

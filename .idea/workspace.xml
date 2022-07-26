@@ -33,8 +33,7 @@
     <list default="true" id="b162bbe7-9201-4eff-bf83-a87dfd1a8413" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/js/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/main.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/components/Util/UtilityClass.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/Util/UtilityClass.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/main.js" afterDir="false" />
@@ -105,6 +104,7 @@
       <workItem from="1658695776789" duration="563000" />
       <workItem from="1658758111821" duration="3781000" />
       <workItem from="1658804912575" duration="598000" />
+      <workItem from="1658847919944" duration="3529000" />
     </task>
     <servers />
   </component>
