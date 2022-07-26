@@ -2,7 +2,7 @@
 
 
 import {SelectorComponent} from './SelectorComponent.js';
-import {UtilityClass} from '../Util/UtilityClass.js';
+import {UtilityClass as Util} from '../Util/UtilityClass.js';
 
 
 export class SelectorManager {
@@ -64,8 +64,6 @@ export class SelectorManager {
 
     _generateId() {
 
-        // const _tmpUtil = new UtilityClass();
-        let tmp = UtilityClass.generateUuid();
-        console.log(tmp);
+        return Util.generateUuid();
     }
 }
