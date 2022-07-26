@@ -59,6 +59,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\SelectorComponent\src\assets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\SelectorComponent\src\js\components\General" />
       <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others" />
@@ -66,12 +69,12 @@
       <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others\ColorPromedio" />
       <recent name="C:\laragon\www\SelectorComponent\src\js\components\Others\Parallax" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\SelectorComponent\src\assets" />
-    </key>
   </component>
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -123,10 +126,18 @@
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="1006" y="391" key="FileChooserDialogImpl/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658412535591" />
+<<<<<<< HEAD
     <state x="465" y="230" width="1569" height="1044" key="SettingsEditor" timestamp="1658806774996">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="465" y="230" width="1569" height="1044" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658806774996" />
+=======
+    <state x="272" y="157" width="1177" height="883" key="SettingsEditor" timestamp="1658815614676">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="362" y="229" width="1569" height="1044" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658580338741" />
+    <state x="272" y="157" width="1177" height="883" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1658815614676" />
+>>>>>>> 0ccae95b110506e660966e382f5113969a26ae24
     <state x="925" y="322" width="710" height="748" key="find.popup" timestamp="1658476480397">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>

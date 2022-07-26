@@ -7,26 +7,40 @@ import {v4 as uuidv4} from 'uuid';
 export class UtilityClass {
 
 
-    constructor() {
+	constructor() {
 
-        this.request_q = 0;
-    }
-
-
-    // Puedo escuchar un evento para saber las llamadas a los métodos de esta clase?
-    // this.request_q++;
-
-    print(msg, result) {
-
-        let _tmpString = '[' + msg + ']';
-        _tmpString += result;
-
-        console.log(_tmpString);
-    }
+		UtilityClass.request_q = 0;
+	}
 
 
-    generateUuid() {
+	static print(msg, result) {
 
-        return uuidv4();
-    }
+		let _tmpString = '[' + msg + ']';
+		_tmpString += result;
+
+		console.log(_tmpString);
+	}
+
+
+	static loadFromFile(path) {
+
+		let _tmpData = {};
+
+		async function fetchData() {
+			_tmpData = await fetch(path)
+				.then(response => response.json())
+				.then((value) => {
+					return value;
+				});
+			return _tmpData;
+		}
+
+		return fetchData();
+	}
+
+
+	static generateUuid() {
+
+		return uuidv4();
+	}
 }
