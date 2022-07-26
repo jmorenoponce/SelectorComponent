@@ -1,8 +1,8 @@
 'use strict';
 
 
-import {SelectorComponent} from './SelectorComponent';
-import {UtilityClass} from '../Util/UtilityClass';
+import {SelectorComponent} from './SelectorComponent.js';
+import {UtilityClass} from '../Util/UtilityClass.js';
 
 
 export class SelectorManager {

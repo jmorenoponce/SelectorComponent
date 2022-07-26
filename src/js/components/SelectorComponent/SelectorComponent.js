@@ -2,7 +2,7 @@
 
 
 import $ from "jquery";
-import {SelectorInterface} from './SelectorInterface';
+import {SelectorInterface} from './SelectorInterface.js';
 
 
 export class SelectorComponent {

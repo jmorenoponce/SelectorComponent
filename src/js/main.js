@@ -1,8 +1,8 @@
 'use strict';
 
 
-import {SelectorManager} from './components/SelectorComponent/SelectorManager';
-import {UtilityClass} from "./components/Util/UtilityClass";
+import {SelectorManager} from './components/SelectorComponent/SelectorManager.js';
+import {UtilityClass} from "./components/Util/UtilityClass.js";
 
 
 let util = new UtilityClass();

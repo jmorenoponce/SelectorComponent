@@ -4,15 +4,15 @@
   "version": "1.0.0",
   "description": "This is a practice coding for a selector component that replaces the normal HTML Select",
   "main": "./src/js/main.js",
-  "type": "module",
   "directories": {
     "doc": "docs",
     "test": "test"
   },
   "scripts": {
-    "dev": "webpack --mode development",
     "start": "webpack serve",
-    "build": "webpack --config webpack.config.js",
+    "build": "node_modules/.bin/webpack --config webpack.config.js --mode=production",
+    "dev": "node_modules/.bin/webpack --config webpack.config.js --mode=development",
+    "watch": "node_modules/.bin/webpack --config webpack.config.js --mode=development -w",
     "test": "jest"
   },
   "repository": {
