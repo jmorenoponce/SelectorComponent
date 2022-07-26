@@ -32,13 +32,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b162bbe7-9201-4eff-bf83-a87dfd1a8413" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/js/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/js/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/main.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/components/SelectorComponent/SelectorManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +95,7 @@
       <workItem from="1658577704183" duration="6589000" />
       <workItem from="1658695776789" duration="563000" />
       <workItem from="1658758111821" duration="3781000" />
-      <workItem from="1658804912575" duration="598000" />
+      <workItem from="1658804912575" duration="1404000" />
     </task>
     <servers />
   </component>
@@ -130,10 +123,10 @@
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
     <state x="1006" y="391" key="FileChooserDialogImpl/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658412535591" />
-    <state x="362" y="229" width="1569" height="1044" key="SettingsEditor" timestamp="1658580338741">
+    <state x="465" y="230" width="1569" height="1044" key="SettingsEditor" timestamp="1658806774996">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
-    <state x="362" y="229" width="1569" height="1044" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658580338741" />
+    <state x="465" y="230" width="1569" height="1044" key="SettingsEditor/0.0.2560.1392/-1680.481.1680.1002@0.0.2560.1392" timestamp="1658806774996" />
     <state x="925" y="322" width="710" height="748" key="find.popup" timestamp="1658476480397">
       <screen x="0" y="0" width="2560" height="1392" />
     </state>
