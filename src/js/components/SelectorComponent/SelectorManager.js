@@ -64,7 +64,8 @@ export class SelectorManager {
 
     _generateId() {
 
-        const _tmpUtil = new UtilityClass();
-        return _tmpUtil.generateUuid();
+        // const _tmpUtil = new UtilityClass();
+        let tmp = UtilityClass.generateUuid();
+        console.log(tmp);
     }
 }
