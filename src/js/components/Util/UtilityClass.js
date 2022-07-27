@@ -7,9 +7,31 @@ import {v4 as uuidv4} from 'uuid';
 export class UtilityClass {
 
 
+	static request_q = 0; // Some extra functionality only for my learning process
+
+
 	constructor() {
 
-		UtilityClass.request_q = 0;
+		console.log(this.getMethods(this));
+	}
+
+
+	getMethods = (obj) => {
+
+		let _currentObj = obj;
+		let _properties = new Set();
+
+		do {
+			Object.getOwnPropertyNames(_currentObj).map(item => _properties.add(item));
+		} while ((_currentObj = Object.getPrototypeOf(_currentObj)));
+
+		return [..._properties.keys()].filter(item => typeof obj[item] === 'function');
+	}
+
+
+	testEnumerableDinamicMethod () {
+
+		// This method is created for listing properties comparison
 	}
 
 
@@ -25,13 +47,11 @@ export class UtilityClass {
 	static loadFromFile(path) {
 
 		async function fetchData() {
-			let _tmpData = await fetch(path)
+			return await fetch(path)
 				.then(response => response.json())
 				.then((value) => {
 					return value;
 				});
-
-			return _tmpData;
 		}
 
 		return fetchData();
