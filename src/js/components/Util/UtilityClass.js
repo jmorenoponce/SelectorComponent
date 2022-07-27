@@ -7,59 +7,59 @@ import {v4 as uuidv4} from 'uuid';
 export class UtilityClass {
 
 
-	static request_q = 0; // Some extra functionality only for my learning process
+    static request_q = 0; // Some extra functionality for my learning process
 
 
-	constructor() {
+    constructor() {
 
-		console.log(this.getMethods(this));
-	}
-
-
-	getMethods = (obj) => {
-
-		let _currentObj = obj;
-		let _properties = new Set();
-
-		do {
-			Object.getOwnPropertyNames(_currentObj).map(item => _properties.add(item));
-		} while ((_currentObj = Object.getPrototypeOf(_currentObj)));
-
-		return [..._properties.keys()].filter(item => typeof obj[item] === 'function');
-	}
+        console.log(this.getMethods(this));
+    }
 
 
-	testEnumerableDinamicMethod () {
+    getMethods = (obj) => {
 
-		// This method is created for listing properties comparison
-	}
+        let _currentObj = obj;
+        let _properties = new Set();
 
+        do {
+            Object.getOwnPropertyNames(_currentObj).map(item => _properties.add(item));
+        } while ((_currentObj = Object.getPrototypeOf(_currentObj)));
 
-	static print(msg, result) {
-
-		let _tmpString = '[' + msg + ']';
-		_tmpString += result;
-
-		console.log(_tmpString);
-	}
+        return [..._properties.keys()].filter(item => typeof obj[item] === 'function');
+    }
 
 
-	static loadFromFile(path) {
+    testEnumerableDinamicMethod() {
 
-		async function fetchData() {
-			return await fetch(path)
-				.then(response => response.json())
-				.then((value) => {
-					return value;
-				});
-		}
-
-		return fetchData();
-	}
+        // This method is created for listing properties comparison
+    }
 
 
-	static generateUuid() {
+    static print(msg, result) {
 
-		return uuidv4();
-	}
+        let _tmpString = '[' + msg + ']';
+        _tmpString += result;
+
+        console.log(_tmpString);
+    }
+
+
+    static loadFromFile(path) {
+
+        async function fetchData() {
+            return await fetch(path)
+                .then(response => response.json())
+                .then((value) => {
+                    return value;
+                });
+        }
+
+        return fetchData();
+    }
+
+
+    static generateUuid() {
+
+        return uuidv4();
+    }
 }
