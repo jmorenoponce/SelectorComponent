@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     mode: 'development',
@@ -10,9 +9,6 @@ module.exports = {
         filename: 'main.bundle.js',
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "./", "index.html")
-        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'

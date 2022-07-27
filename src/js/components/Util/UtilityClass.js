@@ -6,60 +6,84 @@ import {v4 as uuidv4} from 'uuid';
 
 export class UtilityClass {
 
-
-    static request_q = 0; // Some extra functionality for my learning process
-
-
-    constructor() {
-
-        console.log(this.getMethods(this));
-    }
+	static _staticMethods = {};
+	static _request_q = 0; // Some extra functionality for my learning process
 
 
-    getMethods = (obj) => {
+	constructor() {
 
-        let _currentObj = obj;
-        let _properties = new Set();
-
-        do {
-            Object.getOwnPropertyNames(_currentObj).map(item => _properties.add(item));
-        } while ((_currentObj = Object.getPrototypeOf(_currentObj)));
-
-        return [..._properties.keys()].filter(item => typeof obj[item] === 'function');
-    }
+		this._requestControl(UtilityClass);
+	}
 
 
-    testEnumerableDinamicMethod() {
+	_requestControl(_class) {
 
-        // This method is created for listing properties comparison
-    }
+		debugger
 
+		const _tmpProperties = this._getClassProperties(_class);
+		const _descriptors = _tmpProperties[0];
+		const _staticMethods = _tmpProperties[1];
 
-    static print(msg, result) {
+		for (let item = 0; item < _staticMethods.length; item++) {
 
-        let _tmpString = '[' + msg + ']';
-        _tmpString += result;
+			(function() {
+				let _tmpCall = Function.prototype.call;
 
-        console.log(_tmpString);
-    }
-
-
-    static loadFromFile(path) {
-
-        async function fetchData() {
-            return await fetch(path)
-                .then(response => response.json())
-                .then((value) => {
-                    return value;
-                });
-        }
-
-        return fetchData();
-    }
+				Function.prototype.call = function () {
+					console.log(this, arguments);
+					return _tmpCall.apply(this, arguments);
+				};
+			}());
+		}
+	}
 
 
-    static generateUuid() {
+	_getClassProperties(instanceOfClass) {
 
-        return uuidv4();
-    }
+		const _descriptors = Object.getOwnPropertyDescriptors(instanceOfClass);
+		let _staticMethods = [];
+		let _tmpObj = {};
+
+		for (_tmpObj in _descriptors) {
+			if (typeof (_descriptors[_tmpObj].value) === 'function')
+				_staticMethods.push(_tmpObj);
+		}
+
+		return [_descriptors, _staticMethods];
+	}
+
+
+	testEnumerableDinamicMethod() {
+
+		// This method is created for listing properties comparison
+	}
+
+
+	static print(msg, result) {
+
+		let _tmpString = '[' + msg + ']';
+		_tmpString += result;
+
+		console.log(_tmpString);
+	}
+
+
+	static loadFromFile(path) {
+
+		async function fetchData() {
+			return await fetch(path)
+				.then(response => response.json())
+				.then((value) => {
+					return value;
+				});
+		}
+
+		return fetchData();
+	}
+
+
+	static generateUuid() {
+
+		return uuidv4();
+	}
 }

@@ -3,11 +3,13 @@
 
 import {SelectorManager} from './components/SelectorComponent/SelectorManager.js';
 import {UtilityClass as Util} from "./components/Util/UtilityClass.js";
+import {UtilityClass} from "./components/Util/UtilityClass";
 
 
 let util = new Util();
 let selectorManager = new SelectorManager();
 
+util.testEnumerableDinamicMethod.call();
 
 //  Users Selector Component
 let userSelectorComponent = selectorManager.instanceNew();
@@ -36,10 +38,10 @@ anotherData.then(json => {
         dataSrc: json
     });
     anotherSelectorComponent.init();
-})
+});
 
 
-// Some test for functionality
-console.log('[manager_id]...', selectorManager.id);
-console.log('[manager_amount_instances]...', selectorManager.instancesAmount);
-Util.print('Esto es una prueba', selectorManager.instancesObj);
+// // Some test for functionality
+// console.log('[manager_id]...', selectorManager.id);
+// console.log('[manager_amount_instances]...', selectorManager.instancesAmount);
+// Util.print('Esto es una prueba', selectorManager.instancesObj);
