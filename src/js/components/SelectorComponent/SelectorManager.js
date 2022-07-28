@@ -1,7 +1,7 @@
 'use strict';
 
 
-import {SelectorComponent} from './SelectorComponent.js';
+import {SelectorCore} from './SelectorCore.js';
 import {UtilityClass as Util} from '../Util/UtilityClass.js';
 
 
@@ -11,7 +11,7 @@ export class SelectorManager {
     constructor() {
 
         this._selectors = {
-            observable_items: '.ux-select-observe'
+            observable_items: '.ux-select-observer'
         };
 
         this._id = undefined;
@@ -30,7 +30,7 @@ export class SelectorManager {
     instanceNew() {
 
         let _tmpId = this._generateId();
-        let _tmpObj = new SelectorComponent(this._id, _tmpId);
+        let _tmpObj = new SelectorCore(this._id, _tmpId);
 
         this._instancesObj.push(_tmpObj);
 

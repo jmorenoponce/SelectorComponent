@@ -5,7 +5,7 @@ import {SelectorInterface} from './SelectorInterface.js';
 import $ from "jquery";
 
 
-export class SelectorComponent {
+export class SelectorCore {
 
 
     constructor(managerId, instanceId) {
@@ -28,7 +28,7 @@ export class SelectorComponent {
         this._instanceName = this._STATES.UNKNOWN_SOURCE_DATA;
 
         this._interface = undefined;
-        this._htmlObj = undefined;
+        this._htmlObjDom = undefined;
 
         this._configObj = {
             active: false,
@@ -46,16 +46,15 @@ export class SelectorComponent {
 
         if (!this._validateConfig(configObj)) {
             this._state = this._STATES.INVALID_CONFIG_OBJECT;
-            this._submitInterfaceError(this._state);
             return this._state;
         }
 
         // Refactor: esto va a la función _declareObject()
-        this._htmlObj = $(component);
+        this._htmlObjDom = $(component);
         this._configObj = Object.assign(configObj);
         this._state = this._STATES.BINDED;
 
-        let _tmpName = this._htmlObj.attr('data-selector-name').trim();
+        let _tmpName = this._htmlObjDom.attr('data-selector-name').trim();
         _tmpName ? this._instanceName = _tmpName : false;
 
         return true;
@@ -64,7 +63,7 @@ export class SelectorComponent {
 
     _init() {
 
-        this._interface = new SelectorInterface(this._htmlObj);
+        this._interface = new SelectorInterface(this._htmlObjDom);
         this._state = this._STATES.RUNNING;
 
         return this._state;
@@ -106,16 +105,6 @@ export class SelectorComponent {
         console.log('Objeto de configuración: ', config);
 
         return true;
-    }
-
-
-    _getDefaultConfig() {
-
-        return {
-            active: true,
-            editable: true,
-            dataSrc: this._STATES.UNKNOWN_SOURCE_DATA
-        };
     }
 
 
