@@ -20,17 +20,21 @@ export class UtilityClass {
 
 		debugger
 
-		const _tmpProperties = this._getClassProperties(_class);
-		const _descriptors = _tmpProperties[0];
-		const _staticMethods = _tmpProperties[1];
+		const _properties = this._getClassProperties(_class);
+		const _staticMethodsList = _properties[0];
+		const _staticMethodsDescriptors = _properties[1];
 
-		for (let item = 0; item < _staticMethods.length; item++) {
+		for (let item = 0; item < _staticMethodsList.length; item++) {
 
-			(function() {
+			let _tmpMethod = _staticMethodsDescriptors._staticMethods
+
+			(function () {
 				let _tmpCall = Function.prototype.call;
 
 				Function.prototype.call = function () {
+
 					console.log(this, arguments);
+
 					return _tmpCall.apply(this, arguments);
 				};
 			}());
@@ -40,16 +44,16 @@ export class UtilityClass {
 
 	_getClassProperties(instanceOfClass) {
 
-		const _descriptors = Object.getOwnPropertyDescriptors(instanceOfClass);
-		let _staticMethods = [];
+		let _staticMethodsList = [];
+		let _staticMethodsDescriptors = Object.getOwnPropertyDescriptors(instanceOfClass);
 		let _tmpObj = {};
 
-		for (_tmpObj in _descriptors) {
-			if (typeof (_descriptors[_tmpObj].value) === 'function')
-				_staticMethods.push(_tmpObj);
+		for (_tmpObj in _staticMethodsDescriptors) {
+			if (typeof (_staticMethodsDescriptors[_tmpObj].value) === 'function')
+				_staticMethodsList.push(_tmpObj);
 		}
 
-		return [_descriptors, _staticMethods];
+		return [_staticMethodsList, _staticMethodsDescriptors];
 	}
 
 
