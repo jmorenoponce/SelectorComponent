@@ -6,22 +6,60 @@ export class SelectorConfig {
 
 	constructor() {
 
-		this.KEY_CODES = this._keyCodes;
+		this.PATTERN_CONFIG = this._patternConfig();
 		this.DEFAULT_CONFIG = this._defaultConfig;
+		this.KEY_CODES = this._keyCodes;
 	}
 
 
 	_defaultConfig() {
 
+	}
+
+
+	_patternConfig() {
+
 		return {
-			isActive: true,
-			isEditable: true,
-			caption: 'Selección:',
-			placeholder: 'Seleccionar...',
-			searchPlaceholder: 'Buscar...',
-			searchingText: 'Buscando...',
-			searchNoResults: 'No hay resultados para esta búsqueda',
-			dataSrc: {}
+			isActive: {
+				isNullable: true,
+				type: Boolean,
+				defaultValue: true
+			},
+			isEditable: {
+				isNullable: true,
+				type: Boolean,
+				defaultValue: true
+			},
+			caption: {
+				isNullable: true,
+				type: String,
+				defaultValue: 'Selección:'
+			},
+			placeholder: {
+				isNullable: true,
+				type: String,
+				defaultValue: 'Seleccionar...',
+			},
+			searchPlaceholder: {
+				isNullable: true,
+				type: String,
+				defaultValue: 'Buscar...',
+			},
+			searchingText: {
+				isNullable: true,
+				type: String,
+				defaultValue: 'Buscando...',
+			},
+			searchResultsNone: {
+				isNullable: true,
+				type: String,
+				defaultValue:  'No hay resultados para esta búsqueda',
+			},
+			dataSrc: {
+				isNullable: false,
+				type: Object,
+				defaultValue: false
+			}
 		};
 	}
 

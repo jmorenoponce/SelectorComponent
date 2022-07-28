@@ -10,6 +10,7 @@ export class SelectorCore {
 
     constructor(managerId, instanceId) {
 
+
         this._STATES = {
             WAITING_FOR_BINDING: 100,
             BINDED: 200,
@@ -112,8 +113,8 @@ export class SelectorCore {
     //
     //     this._interface.error(code);
     // }
-    //
-    //
+
+
     // _submitAction(subject) {
     //
     //     this._submitInterfaceError(subject);

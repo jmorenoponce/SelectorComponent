@@ -14,8 +14,8 @@ let userData = Util.loadFromFile('./dist/data-src/users-src.json');
 
 userData.then(json => {
     userSelectorComponent.bind('.ux-selector-users', {
-        active: true,
-        editable: true,
+        isActive: true,
+        isEditable: true,
         dataSrc: json
     });
     userSelectorComponent.init();
@@ -30,8 +30,8 @@ anotherData.then(json => {
     anotherSelectorComponent.bind('.ux-selector-another', {
         // Example for some problems with a not valid config,
         // the file not exists, and component must show problem status.
-        active: false,
-        editable: false,
+        isActive: false,
+        isEditable: false,
         dataSrc: json
     });
     anotherSelectorComponent.init();
