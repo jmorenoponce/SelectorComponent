@@ -30,7 +30,7 @@ export class SelectorConfig {
 				type: Boolean,
 				defaultValue: true
 			},
-			caption: {
+			label: {
 				isNullable: true,
 				type: String,
 				defaultValue: 'Selección:'
