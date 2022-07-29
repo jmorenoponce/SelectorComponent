@@ -26,22 +26,21 @@ userData.then(json => {
 });
 
 
-// Another Selector Component for testing
-let wrongSelectorComponent = selectorManager.instanceNew();
-let anotherData = Util.loadFromFile('./dist/data-src/file-not-exists-src.json');
+// // Another Selector Component for testing
+// let wrongSelectorComponent = selectorManager.instanceNew();
+// let anotherData = Util.loadFromFile('./dist/data-src/file-not-exists-src.json');
+//
+// anotherData.then(json => {
+//
+//     wrongSelectorComponent.bind('.ux-selector-another', {
+//         isActiv: true,      // => Wrong property
+//         placeholder: 45,    // => Wrong type
+//         dataSource: json    // => Invalid source data
+//     });
+//     wrongSelectorComponent.init();
+// });
 
-anotherData.then(json => {
-
-    wrongSelectorComponent.bind('.ux-selector-another', {
-        isActiv: true,      // => Wrong property
-        placeholder: 45,    // => Wrong type
-        dataSource: json    // => Invalid source data
-    });
-    wrongSelectorComponent.init();
-});
-
-// Some test for functionality
-console.log('[manager_id]...', selectorManager.id);
-console.log('[manager_amount_instances]...', selectorManager.instancesAmount);
-
-Util.print('Esto es una prueba', selectorManager.instancesObj);
+// // Some test for functionality
+// console.log('[manager_id]...', selectorManager.id);
+// console.log('[manager_amount_instances]...', selectorManager.instancesAmount);
+// Util.print('Esto es una prueba', selectorManager.instancesObj);

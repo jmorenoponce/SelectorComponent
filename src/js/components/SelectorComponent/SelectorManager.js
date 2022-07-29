@@ -14,7 +14,7 @@ export class SelectorManager {
             observable_items: '.ux-select-observer'
         };
 
-        this._id = undefined;
+        this._id = null;
         this._instancesObj = [];
 
         this._initialize();

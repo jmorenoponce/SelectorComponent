@@ -7,12 +7,14 @@ import {v4 as uuidv4} from 'uuid';
 export class UtilityClass {
 
 
-	static print(msg, result) {
+	static print(msg, ...result) {
 
-		let _tmpString = '[' + msg + ']';
-		_tmpString += result;
+		let _tmpMsg = [];
 
-		console.log(_tmpString);
+		_tmpMsg.push('[' + msg + ']');
+		_tmpMsg.push(result);
+
+		console.log(_tmpMsg);
 	}
 
 

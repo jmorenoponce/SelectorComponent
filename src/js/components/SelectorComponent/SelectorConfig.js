@@ -6,6 +6,8 @@ export class SelectorConfig {
 
 	constructor() {
 
+		this.configObj = {};
+
 		this.STATES = this._states();
 		this.PATTERN_CONFIG = this._patternConfig();
 		this.DEFAULT_CONFIG = this._defaultConfig();
@@ -38,14 +40,58 @@ export class SelectorConfig {
 
 	validateConfig(configObj) {
 
-		console.log('Objeto de configuración: ', configObj);
+		let _tmpConfig = {};
+		let _tmpPattern = this._patternConfig();
+		let _error = false;
+
+		Object.entries(_tmpPattern).forEach((item => {
+
+			let _tmpProperty = item[0];
+			let _tmpValues = item[1];
+
+			if (!Object.keys(configObj).includes(_tmpProperty)) {
+
+				if (_tmpValues.isNullable) {
+					Object.assign(_tmpConfig, {[_tmpProperty]: _tmpValues.defaultValue});
+				} else {
+					_error = true;
+				}
+			} else {
+
+				console.log(typeof (configObj[_tmpProperty]))
+				console.log(_tmpValues.type.name)
+
+				if (typeof configObj[_tmpProperty] !== _tmpValues.type.name) {
+					_error = true;
+				}
+			}
+		}));
+
+		if (_error) alert('kiyooo')
+
+		// console.log('Objeto de configuración: ', configObj);
+		// console.log('Objeto default: ', this._defaultConfig());
 
 		return true;
 	}
 
 
+	assignConfig(newConfig) {
+
+		this.configObj = Object.assign(newConfig);
+		return this;
+	}
+
+
 	_defaultConfig() {
 
+		let _tmpConfig = {};
+
+		Object.entries(this._patternConfig()).forEach(item => {
+			Object.assign(_tmpConfig, {[item[0]]: item[1].defaultValue});
+		})
+
+		return _tmpConfig;
 	}
 
 
@@ -65,12 +111,12 @@ export class SelectorConfig {
 			singularModelName: {
 				isNullable: true,
 				type: String,
-				defaultValue: 'Usuario/a'
+				defaultValue: 'Elemento'
 			},
 			pluralModelName: {
 				isNullable: true,
 				type: String,
-				defaultValue: 'Usuarios/as'
+				defaultValue: 'Elementos'
 			},
 			label: {
 				isNullable: true,
@@ -95,7 +141,17 @@ export class SelectorConfig {
 			searchResultsNone: {
 				isNullable: true,
 				type: String,
-				defaultValue:  'No hay resultados para esta búsqueda',
+				defaultValue: 'No hay resultados para esta búsqueda',
+			},
+			minWidth: {
+				isNullable: true,
+				type: String,
+				defaultValue: 'auto'
+			},
+			maxRows: {
+				isNullable: true,
+				type: Number,
+				defaultValue: 10
 			},
 			dataSource: {
 				isNullable: false,
@@ -128,4 +184,15 @@ export class SelectorConfig {
 			DELETE: 46
 		};
 	}
+
+
+	_types() {
+
+		return {
+
+
+
+		}
+	}
+
 }

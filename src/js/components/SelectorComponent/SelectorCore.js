@@ -14,11 +14,11 @@ export class SelectorCore {
         this._managerId = managerId;
 
         this._instanceId = instanceId;
-        this._instanceName = undefined;
+        this._instanceName = null;
 
         this._config = new SelectorConfig();
-        this._interface = undefined;
-        this._htmlObj = undefined;
+        this._interface = null;
+        this._htmlObj = null;
 
         this._state = this._config.STATES.WAITING_FOR_BINDING;
 
@@ -34,8 +34,8 @@ export class SelectorCore {
         }
 
         // Refactor: esto va a la función _declareObject()
+        this._config.assignConfig(configObj);
         this._htmlObj = $(component);
-        this._configObj = Object.assign(configObj);
         this._state = this._config.STATES.BINDED;
 
         let _tmpName = this._htmlObj.attr('data-selector-name').trim();
@@ -81,6 +81,41 @@ export class SelectorCore {
     get parentManagerId() {
 
         return this._managerId;
+    }
+
+
+    setValues() {
+
+    }
+
+
+    emptyValues() {
+
+    }
+
+
+    selectItems() {
+
+    }
+
+
+    unselectItems() {
+
+    }
+
+
+    enable() {
+
+    }
+
+
+    disable() {
+
+    }
+
+
+    destroy() {
+
     }
 
 
