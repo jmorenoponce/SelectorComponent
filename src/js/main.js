@@ -13,31 +13,35 @@ let userSelectorComponent = selectorManager.instanceNew();
 let userData = Util.loadFromFile('./dist/data-src/users-src.json');
 
 userData.then(json => {
+
     userSelectorComponent.bind('.ux-selector-users', {
         isActive: true,
-        isEditable: true,
-        dataSrc: json
+        label: 'Selección de usuarios:',
+        // placeholder: 'Seleccionar usuarios...',
+        searchingText: 'Buscando usuarios...',
+        searchResultsNone: 'No se encontraron usuarios para esta búsqueda',
+        dataSource: json
     });
     userSelectorComponent.init();
 });
 
 
 // Another Selector Component for testing
-let anotherSelectorComponent = selectorManager.instanceNew();
+let wrongSelectorComponent = selectorManager.instanceNew();
 let anotherData = Util.loadFromFile('./dist/data-src/file-not-exists-src.json');
 
 anotherData.then(json => {
-    anotherSelectorComponent.bind('.ux-selector-another', {
-        // Example for some problems with a not valid config,
-        // the file not exists, and component must show problem status.
-        isActive: false,
-        isEditable: false,
-        dataSrc: json
+
+    wrongSelectorComponent.bind('.ux-selector-another', {
+        isActiv: true,      // => Wrong property
+        placeholder: 45,    // => Wrong type
+        dataSource: json    // => Invalid source data
     });
-    anotherSelectorComponent.init();
+    wrongSelectorComponent.init();
 });
 
 // Some test for functionality
 console.log('[manager_id]...', selectorManager.id);
 console.log('[manager_amount_instances]...', selectorManager.instancesAmount);
+
 Util.print('Esto es una prueba', selectorManager.instancesObj);

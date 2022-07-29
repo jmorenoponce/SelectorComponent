@@ -6,9 +6,41 @@ export class SelectorConfig {
 
 	constructor() {
 
+		this.STATES = this._states();
 		this.PATTERN_CONFIG = this._patternConfig();
-		this.DEFAULT_CONFIG = this._defaultConfig;
-		this.KEY_CODES = this._keyCodes;
+		this.DEFAULT_CONFIG = this._defaultConfig();
+		this.KEY_CODES = this._keyCodes();
+	}
+
+
+	_states() {
+
+		return {
+			// Informational
+			WAITING_FOR_BINDING: 100,
+
+			// Successful
+			BINDED: 200,
+			RUNNING: 210,
+			STOPPED: 220,
+			FINISHED: 230,
+
+			// Error
+			INVALID_CONFIG_OBJECT: 400,
+			UNKNOWN_SOURCE_DATA: 410,
+			INVALID_SOURCE_DATA: 420,
+
+			// Other
+			UNKNOWN_PROBLEM: 900
+		}
+	}
+
+
+	validateConfig(configObj) {
+
+		console.log('Objeto de configuración: ', configObj);
+
+		return true;
 	}
 
 
@@ -29,6 +61,16 @@ export class SelectorConfig {
 				isNullable: true,
 				type: Boolean,
 				defaultValue: true
+			},
+			singularModelName: {
+				isNullable: true,
+				type: String,
+				defaultValue: 'Usuario/a'
+			},
+			pluralModelName: {
+				isNullable: true,
+				type: String,
+				defaultValue: 'Usuarios/as'
 			},
 			label: {
 				isNullable: true,
@@ -55,10 +97,10 @@ export class SelectorConfig {
 				type: String,
 				defaultValue:  'No hay resultados para esta búsqueda',
 			},
-			dataSrc: {
+			dataSource: {
 				isNullable: false,
 				type: Object,
-				defaultValue: false
+				defaultValue: this.STATES.UNKNOWN_SOURCE_DATA
 			}
 		};
 	}

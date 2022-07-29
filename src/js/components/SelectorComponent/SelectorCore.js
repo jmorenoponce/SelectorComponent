@@ -1,6 +1,7 @@
 'use strict';
 
 
+import {SelectorConfig} from "./SelectorConfig";
 import {SelectorInterface} from './SelectorInterface.js';
 import $ from "jquery";
 
@@ -10,34 +11,16 @@ export class SelectorCore {
 
     constructor(managerId, instanceId) {
 
-
-        this._STATES = {
-            WAITING_FOR_BINDING: 100,
-            BINDED: 200,
-            RUNNING: 210,
-            STOPPED: 220,
-            FINISHED: 230,
-            INVALID_CONFIG_OBJECT: 400,
-            UNKNOWN_SOURCE_DATA: 410,
-            INVALID_SOURCE_DATA: 420,
-            UNKNOWN_PROBLEM: 900
-        }
-
         this._managerId = managerId;
 
         this._instanceId = instanceId;
-        this._instanceName = this._STATES.UNKNOWN_SOURCE_DATA;
+        this._instanceName = undefined;
 
+        this._config = new SelectorConfig();
         this._interface = undefined;
-        this._htmlObjDom = undefined;
+        this._htmlObj = undefined;
 
-        this._configObj = {
-            active: false,
-            editable: false,
-            dataSrc: ''
-        };
-
-        this._state = this._STATES.WAITING_FOR_BINDING;
+        this._state = this._config.STATES.WAITING_FOR_BINDING;
 
         return this._state;
     }
@@ -45,27 +28,27 @@ export class SelectorCore {
 
     bind(component, configObj) {
 
-        if (!this._validateConfig(configObj)) {
-            this._state = this._STATES.INVALID_CONFIG_OBJECT;
+        if (!this._config.validateConfig(configObj)) {
+            this._state = this._config.STATES.INVALID_CONFIG_OBJECT;
             return this._state;
         }
 
         // Refactor: esto va a la función _declareObject()
-        this._htmlObjDom = $(component);
+        this._htmlObj = $(component);
         this._configObj = Object.assign(configObj);
-        this._state = this._STATES.BINDED;
+        this._state = this._config.STATES.BINDED;
 
-        let _tmpName = this._htmlObjDom.attr('data-selector-name').trim();
+        let _tmpName = this._htmlObj.attr('data-selector-name').trim();
         _tmpName ? this._instanceName = _tmpName : false;
 
-        return true;
+        return this._state;
     }
 
 
     _init() {
 
-        this._interface = new SelectorInterface(this._htmlObjDom);
-        this._state = this._STATES.RUNNING;
+        this._interface = new SelectorInterface(this._htmlObj);
+        this._state = this._config.STATES.RUNNING;
 
         return this._state;
     }
@@ -101,22 +84,8 @@ export class SelectorCore {
     }
 
 
-    _validateConfig(config) {
+    _submitInterfaceError(code) {
 
-        console.log('Objeto de configuración: ', config);
-
-        return true;
+        // this._interface.error(code);
     }
-
-
-    // _submitInterfaceError(code) {
-    //
-    //     this._interface.error(code);
-    // }
-
-
-    // _submitAction(subject) {
-    //
-    //     this._submitInterfaceError(subject);
-    // }
 }
