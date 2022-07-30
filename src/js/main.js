@@ -17,7 +17,7 @@ userData.then(json => {
     userSelectorComponent.bind('.ux-selector-users', {
         isActive: true,
         label: 'Selección de usuarios:',
-        // placeholder: 'Seleccionar usuarios...',
+        placeholder: 'Seleccionar usuarios...',
         searchingText: 'Buscando usuarios...',
         searchResultsNone: 'No se encontraron usuarios para esta búsqueda',
         dataSource: json

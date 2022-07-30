@@ -28,18 +28,19 @@ export class SelectorCore {
 
     bind(component, configObj) {
 
-        if (!this._config.validateConfig(configObj)) {
-            this._state = this._config.STATES.INVALID_CONFIG_OBJECT;
-            return this._state;
+        this._tmpResponse = this._config.validateConfig(configObj);
+
+        if (typeof this._tmpResponse === 'object') {
+            this._config.assignConfig(this._tmpResponse);
+            this._htmlObj = $(component);
+
+            let _tmpName = this._htmlObj.attr('data-selector-name').trim();
+            _tmpName ? this._instanceName = _tmpName : false;
+
+            this._state = this._config.STATES.BINDED;
+        } else {
+            this._state = this._tmpResponse;
         }
-
-        // Refactor: esto va a la función _declareObject()
-        this._config.assignConfig(configObj);
-        this._htmlObj = $(component);
-        this._state = this._config.STATES.BINDED;
-
-        let _tmpName = this._htmlObj.attr('data-selector-name').trim();
-        _tmpName ? this._instanceName = _tmpName : false;
 
         return this._state;
     }
@@ -47,8 +48,13 @@ export class SelectorCore {
 
     _init() {
 
-        this._interface = new SelectorInterface(this._htmlObj);
-        this._state = this._config.STATES.RUNNING;
+        if (this._state === this._config.STATES.BINDED) {
+            this._interface = new SelectorInterface(this._htmlObj);
+            this._state = this._config.STATES.RUNNING;
+
+        } else {
+            console.log('Problema de configuración:', this._state);
+        }
 
         return this._state;
     }
@@ -84,28 +90,24 @@ export class SelectorCore {
     }
 
 
-    setValues() {
+    setValues(target, newValue) {
 
     }
 
 
-    emptyValues() {
-
+    emptyValues(target) {
     }
 
 
-    selectItems() {
-
+    selectItems(target) {
     }
 
 
-    unselectItems() {
-
+    unselectItems(target) {
     }
 
 
     enable() {
-
     }
 
 
@@ -115,7 +117,6 @@ export class SelectorCore {
 
 
     destroy() {
-
     }
 
 
