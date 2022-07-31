@@ -18,7 +18,7 @@ export class SelectorConfig {
     _states() {
 
         return {
-            // Informational
+            // Informative
             WAITING_FOR_BINDING: 100,
 
             // Successful
@@ -38,7 +38,19 @@ export class SelectorConfig {
     }
 
 
-    validateConfig(configObj) {
+    assignConfig(newConfig) {
+
+        let _tmpResponse = this._validateConfig(newConfig);
+
+        if (typeof _tmpResponse !== 'object')
+            return this.STATES.INVALID_CONFIG_OBJECT;
+
+        this.configObj = Object.assign(_tmpResponse);
+        return true;
+    }
+
+
+    _validateConfig(configObj) {
 
         let _newConfig = {};
         let _pattern = this.PATTERN_CONFIG;
@@ -70,13 +82,6 @@ export class SelectorConfig {
         }));
 
         return !_errorCode ? _newConfig : _errorCode;
-    }
-
-
-    assignConfig(newConfig) {
-
-        this.configObj = Object.assign(newConfig);
-        return true;
     }
 
 

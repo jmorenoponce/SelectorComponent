@@ -31,10 +31,10 @@ userData.then(json => {
 let wrongSelectorComponent = selectorManager.instanceNew();
 
 wrongSelectorComponent.bind('.ux-selector-another', {
-    isActiv: true,      // => Wrong property
+    isActiv: true,                  // => Wrong property
     isEditable: false,
-    placeholder: 45,    // => Wrong type
-    dataSource: {cosas: 'faltan'}     // => Invalid source data
+    placeholder: 45,                // => Wrong type
+    dataSource: {cosas: 'faltan'}   // => Invalid source data
 });
 wrongSelectorComponent.init();
 

@@ -28,21 +28,16 @@ export class SelectorCore {
 
     bind(component, configObj) {
 
-        this._tmpResponse = this._config.validateConfig(configObj);
+        let _tmpResponse = this._config.assignConfig(configObj);
+        this._state = _tmpResponse;
 
-        if (typeof this._tmpResponse === 'object') {
-            this._config.assignConfig(this._tmpResponse);
+        if (_tmpResponse === true) {
             this._htmlObj = $(component);
-
             let _tmpName = this._htmlObj.attr('data-selector-name').trim();
             _tmpName ? this._instanceName = _tmpName : false;
 
             this._state = this._config.STATES.BINDED;
-
-        } else {
-            this._state = this._tmpResponse;
         }
-
         return this._state;
     }
 
@@ -52,11 +47,7 @@ export class SelectorCore {
         if (this._state === this._config.STATES.BINDED) {
             this._interface = new SelectorInterface(this._htmlObj);
             this._state = this._config.STATES.RUNNING;
-
-        } else {
-            console.log('Configuración no válida:', this._state);
         }
-
         return this._state;
     }
 
