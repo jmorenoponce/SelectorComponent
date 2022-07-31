@@ -48,23 +48,25 @@ export class SelectorConfig {
 
             let _key = parts[0];
             let _values = parts[1];
+            let _tmpValue = '';
 
             if (!Object.keys(configObj).includes(_key)) {
 
                 if (!_values.isNullable) {
                     _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
-                    return;
+                    return; // Todo: ¿No puedo hacer break sin hacer un Try Catch y tirar Throw?
                 }
-                Object.assign(_newConfig, {[_key]: _values.defaultValue});
-
+                _tmpValue = _values.defaultValue;
             } else {
 
                 if (typeof configObj[_key] !== _values.type.name.toLowerCase()) {
                     _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
                     return;
                 }
-                Object.assign(_newConfig, {[_key]: configObj[_key]});
+                _tmpValue = configObj[_key];
             }
+
+            Object.assign(_newConfig, {[_key]: _tmpValue});
         }));
 
         return !_errorCode ? _newConfig : _errorCode;
@@ -74,6 +76,7 @@ export class SelectorConfig {
     assignConfig(newConfig) {
 
         this.configObj = Object.assign(newConfig);
+        return true;
     }
 
 
@@ -84,7 +87,6 @@ export class SelectorConfig {
         Object.entries(this._patternConfig()).forEach(item => {
             Object.assign(_tmpConfig, {[item[0]]: item[1].defaultValue});
         })
-
         return _tmpConfig;
     }
 
@@ -93,12 +95,12 @@ export class SelectorConfig {
 
         return {
             isActive: {
-                isNullable: true,
+                isNullable: false,
                 type: Boolean,
                 defaultValue: true
             },
             isEditable: {
-                isNullable: true,
+                isNullable: false,
                 type: Boolean,
                 defaultValue: true
             },

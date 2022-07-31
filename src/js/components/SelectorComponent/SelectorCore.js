@@ -38,6 +38,7 @@ export class SelectorCore {
             _tmpName ? this._instanceName = _tmpName : false;
 
             this._state = this._config.STATES.BINDED;
+
         } else {
             this._state = this._tmpResponse;
         }
@@ -53,7 +54,7 @@ export class SelectorCore {
             this._state = this._config.STATES.RUNNING;
 
         } else {
-            console.log('Problema de configuración:', this._state);
+            console.log('Configuración no válida:', this._state);
         }
 
         return this._state;

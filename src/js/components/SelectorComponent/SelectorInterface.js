@@ -1,6 +1,9 @@
 'use strict';
 
 
+import $ from "jquery";
+
+
 export class SelectorInterface {
 
 

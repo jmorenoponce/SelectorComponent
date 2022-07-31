@@ -16,6 +16,7 @@ userData.then(json => {
 
     userSelectorComponent.bind('.ux-selector-users', {
         isActive: true,
+        isEditable: true,
         label: 'Selección de usuarios:',
         placeholder: 'Seleccionar usuarios...',
         searchingText: 'Buscando usuarios...',
@@ -26,19 +27,17 @@ userData.then(json => {
 });
 
 
-// // Another Selector Component for testing
-// let wrongSelectorComponent = selectorManager.instanceNew();
-// let anotherData = Util.loadFromFile('./dist/data-src/file-not-exists-src.json');
-//
-// anotherData.then(json => {
-//
-//     wrongSelectorComponent.bind('.ux-selector-another', {
-//         isActiv: true,      // => Wrong property
-//         placeholder: 45,    // => Wrong type
-//         dataSource: json    // => Invalid source data
-//     });
-//     wrongSelectorComponent.init();
-// });
+// Another Selector Component for testing
+let wrongSelectorComponent = selectorManager.instanceNew();
+
+wrongSelectorComponent.bind('.ux-selector-another', {
+    isActiv: true,      // => Wrong property
+    isEditable: false,
+    placeholder: 45,    // => Wrong type
+    dataSource: {cosas: 'faltan'}     // => Invalid source data
+});
+wrongSelectorComponent.init();
+
 
 // // Some test for functionality
 // console.log('[manager_id]...', selectorManager.id);
