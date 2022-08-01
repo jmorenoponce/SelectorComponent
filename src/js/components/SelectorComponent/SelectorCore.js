@@ -17,12 +17,10 @@ export class SelectorCore {
         this._instanceName = null;
 
         this._config = new SelectorConfig();
-        this._interface = null;
         this._htmlObj = null;
+        this._interface = null;
 
-        this._state = this._config.STATES.WAITING_FOR_BINDING;
-
-        return this._state;
+        return this._state = this._config.STATES.WAITING_FOR_BINDING;
     }
 
 
