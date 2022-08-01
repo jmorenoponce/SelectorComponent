@@ -35,6 +35,7 @@ export class SelectorCore {
 
             this._state = this._config.STATES.BINDED;
         }
+
         return this._state;
     }
 
@@ -42,9 +43,11 @@ export class SelectorCore {
     _init() {
 
         if (this._state === this._config.STATES.BINDED) {
+
             this._interface = new SelectorInterface(this._htmlObj);
             this._state = this._config.STATES.RUNNING;
         }
+
         return this._state;
     }
 
