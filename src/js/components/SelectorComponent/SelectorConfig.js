@@ -51,11 +51,13 @@ export class SelectorConfig {
 
 	_validateConfig(configObj) {
 
+		const _pattern = this.PATTERN_CONFIG;
+		const _entries = Object.entries(_pattern)
+
 		let _newConfig = {};
-		let _pattern = this.PATTERN_CONFIG;
 		let _errorCode = false;
 
-		for (const parts of Object.entries(_pattern)) {
+		for (const parts of _entries ) {
 
 			let _key = parts[0];
 			let _values = parts[1];
@@ -88,7 +90,7 @@ export class SelectorConfig {
 
 		Object.entries(this._patternConfig()).forEach(item => {
 			Object.assign(_tmpConfig, {[item[0]]: item[1].defaultValue});
-		})
+		});
 		return _tmpConfig;
 	}
 
