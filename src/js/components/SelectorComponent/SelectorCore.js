@@ -28,10 +28,9 @@ export class SelectorCore {
 
     bind(component, configObj) {
 
-        let _tmpResponse = this._config.assignConfig(configObj);
-        this._state = _tmpResponse;
+        this._state = this._config.assignConfig(configObj);
 
-        if (_tmpResponse === true) {
+        if (typeof this._state === 'object') {
             this._htmlObj = $(component);
             let _tmpName = this._htmlObj.attr('data-selector-name').trim();
             _tmpName ? this._instanceName = _tmpName : false;

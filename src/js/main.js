@@ -23,20 +23,23 @@ userData.then(json => {
         searchResultsNone: 'No se encontraron usuarios para esta búsqueda',
         dataSource: json
     });
-    userSelectorComponent.init();
+    console.log(userSelectorComponent.init());
 });
 
 
 // Another Selector Component for testing
 let wrongSelectorComponent = selectorManager.instanceNew();
+let anotherData = Util.loadFromFile('./dist/data-src/another-src.json');
 
-wrongSelectorComponent.bind('.ux-selector-another', {
-    isActiv: true,                  // => Wrong property
-    isEditable: false,
-    placeholder: 45,                // => Wrong type
-    dataSource: {cosas: 'faltan'}   // => Invalid source data
-});
-wrongSelectorComponent.init();
+anotherData.then(json => {
+    wrongSelectorComponent.bind('.ux-selector-another', {
+        isActiv: true,                  // => Wrong property
+        isEditable: false,
+        placeholder: 45,                // => Wrong type
+        dataSource: anotherData    // => Invalid source data
+    });
+    console.log(wrongSelectorComponent.init());
+})
 
 
 // // Some test for functionality

@@ -45,8 +45,7 @@ export class SelectorConfig {
         if (typeof _tmpResponse !== 'object')
             return this.STATES.INVALID_CONFIG_OBJECT;
 
-        this.configObj = Object.assign(_tmpResponse);
-        return true;
+        return this.configObj = Object.assign(_tmpResponse);
     }
 
 
