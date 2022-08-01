@@ -28,8 +28,7 @@ export class SelectorCore {
 
         this._state = this._config.assignConfig(configObj);
 
-        if (typeof this._state !== 'object') {
-
+        if (typeof this._state === 'object') {
             this._htmlObj = $(component);
             let _tmpName = this._htmlObj.attr('data-selector-name').trim();
             _tmpName ? this._instanceName = _tmpName : false;

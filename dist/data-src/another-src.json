@@ -1,0 +1,22 @@
+[
+  {
+    "dataSource": "anotherTypology",
+    "notes": "No existe información",
+    "data": [
+      {
+        "id": 1,
+        "first_name": "Brannon",
+        "last_name": "Sully",
+        "email": "bsully0@hibu.com",
+        "department": "Support"
+      },
+      {
+        "id": 2,
+        "first_name": "Payton",
+        "last_name": "Peeters",
+        "email": "ppeeters1@cnn.com",
+        "department": "Training"
+      }
+    ]
+  }
+]
