@@ -45,8 +45,7 @@ export class SelectorConfig {
         if (typeof _tmpResponse !== 'object')
             return this.STATES.INVALID_CONFIG_OBJECT;
 
-        this.configObj = Object.assign(_tmpResponse);
-        return true;
+        return this.configObj = Object.assign(_tmpResponse);
     }
 
 
@@ -63,18 +62,15 @@ export class SelectorConfig {
             let _tmpValue = '';
 
             if (!Object.keys(configObj).includes(_key)) {
+                if (!_values.isNullable)
+                    return _errorCode = this.STATES.INVALID_CONFIG_OBJECT; // Todo: ¿No puedo hacer break sin hacer un Try Catch y tirar Throw?
 
-                if (!_values.isNullable) {
-                    _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
-                    return; // Todo: ¿No puedo hacer break sin hacer un Try Catch y tirar Throw?
-                }
                 _tmpValue = _values.defaultValue;
-            } else {
 
-                if (typeof configObj[_key] !== _values.type.name.toLowerCase()) {
-                    _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
-                    return;
-                }
+            } else {
+                if (typeof configObj[_key] !== _values.type.name.toLowerCase())
+                    return _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
+
                 _tmpValue = configObj[_key];
             }
 
@@ -92,6 +88,7 @@ export class SelectorConfig {
         Object.entries(this._patternConfig()).forEach(item => {
             Object.assign(_tmpConfig, {[item[0]]: item[1].defaultValue});
         })
+
         return _tmpConfig;
     }
 
@@ -175,11 +172,4 @@ export class SelectorConfig {
             DELETE: 46
         };
     }
-
-
-    _types() {
-
-        return {}
-    }
-
 }
