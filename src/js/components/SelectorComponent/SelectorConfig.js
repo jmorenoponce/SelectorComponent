@@ -55,8 +55,8 @@ export class SelectorConfig {
 		let _errorCode = false;
 		let _entries = Object.entries(this.PATTERN_CONFIG);
 
-
 		for (const _parts of _entries) {
+
 			let _key = _parts[0];
 			let _values = _parts[1];
 			let _newValue = null;

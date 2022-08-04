@@ -38,6 +38,9 @@ export class SelectorCore {
             _tmpName ? this._instanceName = _tmpName : false;
 
             this._state = this._config.STATES.BINDED;
+        } else {
+
+            this._state = _tmpResponse;
         }
 
         return this._state;
