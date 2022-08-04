@@ -38,7 +38,7 @@ anotherData.then(anotherData => {
         dataSource: anotherData     // => Invalid source data
     });
     console.log(wrongSelectorComponent.init());
-})
+});
 
 
 // Some test for functionality
