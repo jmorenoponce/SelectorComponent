@@ -3,6 +3,7 @@
 
 import {SelectorConfig} from "./SelectorConfig";
 import {SelectorInterface} from './SelectorInterface.js';
+
 import $ from "jquery";
 
 
@@ -20,15 +21,18 @@ export class SelectorCore {
         this._htmlObj = null;
         this._interface = null;
 
-        return this._state = this._config.STATES.WAITING_FOR_BINDING;
+        this._state = this._config.STATES.WAITING_FOR_BINDING;
+
+        return this._state;
     }
 
 
     bind(component, configObj) {
 
-        this._state = this._config.assignConfig(configObj);
+        let _tmpResponse = this._config.assignConfig(configObj);
 
-        if (typeof this._state === 'object') {
+        if (typeof _tmpResponse === 'object') {
+
             this._htmlObj = $(component);
             let _tmpName = this._htmlObj.attr('data-selector-name').trim();
             _tmpName ? this._instanceName = _tmpName : false;
@@ -44,7 +48,7 @@ export class SelectorCore {
 
         if (this._state === this._config.STATES.BINDED) {
 
-            this._interface = new SelectorInterface(this._htmlObj);
+            this._interface = new SelectorInterface(this._htmlObj, this._config);
             this._state = this._config.STATES.RUNNING;
         }
 
@@ -88,18 +92,22 @@ export class SelectorCore {
 
 
     emptyValues(target) {
+
     }
 
 
     selectItems(target) {
+
     }
 
 
     unselectItems(target) {
+
     }
 
 
     enable() {
+
     }
 
 

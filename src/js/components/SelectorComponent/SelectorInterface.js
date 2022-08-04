@@ -14,6 +14,12 @@ export class SelectorInterface {
     }
 
 
+    createElement () {
+
+
+    }
+
+
     render() {
 
         return this._htmlObj;
