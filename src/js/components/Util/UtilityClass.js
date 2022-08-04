@@ -12,7 +12,7 @@ export class UtilityClass {
 		let _tmpMsg = [];
 
 		_tmpMsg.push('[' + msg + ']');
-		_tmpMsg.push(result);
+		_tmpMsg.push(...result);
 
 		console.log(_tmpMsg);
 	}

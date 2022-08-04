@@ -13,7 +13,6 @@ let userSelectorComponent = selectorManager.instanceNew();
 let userData = Util.loadFromFile('./dist/data-src/users-src.json');
 
 userData.then(json => {
-
     userSelectorComponent.bind('.ux-selector-users', {
         isActive: true,
         isEditable: true,
@@ -31,7 +30,7 @@ userData.then(json => {
 let wrongSelectorComponent = selectorManager.instanceNew();
 let anotherData = Util.loadFromFile('./dist/data-src/another-src.json');
 
-anotherData.then(json => {
+anotherData.then(anotherData => {
     wrongSelectorComponent.bind('.ux-selector-another', {
         isActive: true,             // => Wrong property
         isEditable: false,
@@ -42,7 +41,8 @@ anotherData.then(json => {
 })
 
 
-// // Some test for functionality
-// console.log('[manager_id]...', selectorManager.id);
-// console.log('[manager_amount_instances]...', selectorManager.instancesAmount);
-// Util.print('Esto es una prueba', selectorManager.instancesObj);
+// Some test for functionality
+console.log('manager_id...', selectorManager.id);
+console.log('manager_amount_instances...', selectorManager.instancesAmount);
+console.log('component_state...', userSelectorComponent.id, userSelectorComponent.state);
+Util.print('manager_instances_object...', selectorManager.instancesObj);

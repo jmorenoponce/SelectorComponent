@@ -51,11 +51,12 @@ export class SelectorConfig {
 
 	_validateConfig(configObj) {
 
-		let _errorCode = false;
 		let _entries = Object.entries(this.PATTERN_CONFIG);
 		let _newConfig = {};
+		let _errorCode = false;
 
 		for (const _parts of _entries) {
+
 			let _key = _parts[0];
 			let _values = _parts[1];
 			let _newValue = null;
