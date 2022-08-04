@@ -6,7 +6,7 @@ export class spyClass {
 
 	static _dinamicMethods = {};
 	static _staticMethods = {};
-	static _request_q = 0; // Some extra functionality for my learning process
+	static _request_q = 0;
 	static _arguments = [];
 
 

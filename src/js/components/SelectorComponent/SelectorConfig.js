@@ -49,36 +49,34 @@ export class SelectorConfig {
 	}
 
 
-
 	_validateConfig(configObj) {
 
-		const _pattern = this.PATTERN_CONFIG;
-		let _newConfig = {};
 		let _errorCode = false;
+		let _entries = Object.entries(this.PATTERN_CONFIG);
+		let _newConfig = {};
 
-		for (const parts of Object.entries(_pattern)) {
-
-			const _key = parts[0];
-			const _values = parts[1];
-			let _tmpValue = '';
+		for (const _parts of _entries) {
+			let _key = _parts[0];
+			let _values = _parts[1];
+			let _newValue = null;
 
 			if (!Object.keys(configObj).includes(_key)) {
 
 				if (!_values.isNullable)
 					return _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
 
-				_tmpValue = _values.defaultValue;
-
+				_newValue = _values.defaultValue;
 			} else {
 
 				if (typeof configObj[_key] !== _values.type.name.toLowerCase())
 					return _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
 
-				_tmpValue = configObj[_key];
+				_newValue = configObj[_key];
 			}
 
-			Object.assign(_newConfig, {[_key]: _tmpValue});
+			Object.assign(_newConfig, {[_key]: _newValue});
 		}
+
 		return !_errorCode ? _newConfig : _errorCode;
 	}
 
@@ -90,6 +88,7 @@ export class SelectorConfig {
 		Object.entries(this._patternConfig()).forEach(item => {
 			Object.assign(_tmpConfig, {[item[0]]: item[1].defaultValue});
 		});
+
 		return _tmpConfig;
 	}
 
