@@ -9,9 +9,7 @@ export class SelectorConfig {
 		this.configObj = {};
 
 		this.STATES = this._states();
-		this.PATTERN_CONFIG = this._patternConfig();
-		this.DEFAULT_CONFIG = this._defaultConfig();
-		this.KEY_CODES = this._keyCodes();
+		this._PATTERN_CONFIG = this._patternConfig();
 	}
 
 
@@ -29,13 +27,12 @@ export class SelectorConfig {
 	_validateConfig(configObj) {
 
 		let _newConfig = {};
-		let _entries = Object.entries(this.PATTERN_CONFIG);
+		let _entries = Object.entries(this._PATTERN_CONFIG);
 		let _errorCode = false;
 
 		for (const _parts of _entries) {
 
-			let _key = _parts[0];
-			let _values = _parts[1];
+			let [_key, _values] = _parts;
 			let _newValue = null;
 
 			if (!Object.keys(configObj).includes(_key)) {
@@ -56,18 +53,6 @@ export class SelectorConfig {
 		}
 
 		return !_errorCode ? _newConfig : _errorCode;
-	}
-
-
-	_defaultConfig() {
-
-		let _tmpConfig = {};
-
-		Object.entries(this._patternConfig()).forEach(item => {
-			Object.assign(_tmpConfig, {[item[0]]: item[1].defaultValue});
-		});
-
-		return _tmpConfig;
 	}
 
 
@@ -151,32 +136,14 @@ export class SelectorConfig {
 	}
 
 
-	_keyCodes() {
+	_defaultConfig() {
 
-		return {
-			BACKSPACE: 8,
-			TAB: 9,
-			ENTER: 13,
-			SHIFT: 16,
-			CTRL: 17,
-			ALT: 18,
-			ESC: 27,
-			SPACE: 32,
-			PAGE_UP: 33,
-			PAGE_DOWN: 34,
-			END: 35,
-			HOME: 36,
-			LEFT: 37,
-			UP: 38,
-			RIGHT: 39,
-			DOWN: 40,
-			DELETE: 46
-		};
-	}
+		let _tmpConfig = {};
 
+		Object.entries(this._patternConfig()).forEach(item => {
+			Object.assign(_tmpConfig, {[item[0]]: item[1].defaultValue});
+		});
 
-	_types() {
-
-		return {}
+		return _tmpConfig;
 	}
 }
