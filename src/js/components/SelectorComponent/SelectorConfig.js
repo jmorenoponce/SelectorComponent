@@ -27,8 +27,8 @@ export class SelectorConfig {
 	_validateConfig(configObj) {
 
 		let _newConfig = {};
-		let _entries = Object.entries(this._PATTERN_CONFIG);
 		let _errorCode = false;
+		let _entries = Object.entries(this._PATTERN_CONFIG);
 
 		for (const _parts of _entries) {
 

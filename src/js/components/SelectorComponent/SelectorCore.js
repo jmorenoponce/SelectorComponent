@@ -17,10 +17,12 @@ export class SelectorCore {
 		this._instanceId = instanceId;
 		this._instanceName = null;
 
+        // Todo: Refactor, la config la lleva la interface
 		this._config = new SelectorConfig();
 		this._sourceHtmlObj = null;
-		this._interface = null;
+		this._interface = null; // Todo: Retorna State
 
+		// Todo: Refactor, los states vienen de la interface ¿pero necesito estados aquí en Core?
 		this._state = this._config.STATES.WAITING_FOR_BINDING;
 
 		return this._state;
@@ -34,6 +36,7 @@ export class SelectorCore {
 		if (typeof _tmpResponse === 'object') {
 
 			this._sourceHtmlObj = $(component); // Todo: Validar componente
+
 			let _tmpName = this._sourceHtmlObj.attr('data-selector-name').trim();
 			_tmpName ? this._instanceName = _tmpName : false;
 
@@ -52,8 +55,9 @@ export class SelectorCore {
 
 		if (this._state === this._config.STATES.BINDED) {
 
-			this._interface = new SelectorInterface(this._sourceHtmlObj, this._config.configObj);
-			this._state = this._config.STATES.RUNNING;
+			// Todo: Refactor, instanciar la interface en el bind para darle config
+		    this._interface = new SelectorInterface(this._sourceHtmlObj, this._config.configObj);
+			this._state = this._config.STATES.RUNNING; // Todo: again
 		}
 
 		return this._state;
