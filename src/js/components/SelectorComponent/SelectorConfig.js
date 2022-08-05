@@ -15,29 +15,6 @@ export class SelectorConfig {
 	}
 
 
-	_states() {
-
-		return {
-			// Informative
-			WAITING_FOR_BINDING: 100,
-
-			// Successful
-			BINDED: 200,
-			RUNNING: 210,
-			STOPPED: 220,
-			FINISHED: 230,
-
-			// Error
-			INVALID_CONFIG_OBJECT: 400,
-			UNKNOWN_SOURCE_DATA: 410,
-			INVALID_SOURCE_DATA: 420,
-
-			// Other
-			UNKNOWN_PROBLEM: 900
-		}
-	}
-
-
 	assignConfig(newConfig) {
 
 		let _tmpResponse = this._validateConfig(newConfig);
@@ -51,8 +28,8 @@ export class SelectorConfig {
 
 	_validateConfig(configObj) {
 
-		let _entries = Object.entries(this.PATTERN_CONFIG);
 		let _newConfig = {};
+		let _entries = Object.entries(this.PATTERN_CONFIG);
 		let _errorCode = false;
 
 		for (const _parts of _entries) {
@@ -91,6 +68,29 @@ export class SelectorConfig {
 		});
 
 		return _tmpConfig;
+	}
+
+
+	_states() {
+
+		return {
+			// Informative
+			WAITING_FOR_BINDING: 100,
+
+			// Successful
+			BINDED: 200,
+			RUNNING: 210,
+			STOPPED: 220,
+			FINISHED: 230,
+
+			// Error
+			INVALID_CONFIG_OBJECT: 400,
+			UNKNOWN_SOURCE_DATA: 410,
+			INVALID_SOURCE_DATA: 420,
+
+			// Other
+			UNKNOWN_PROBLEM: 900
+		}
 	}
 
 
