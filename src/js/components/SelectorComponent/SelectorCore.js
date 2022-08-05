@@ -10,124 +10,124 @@ import $ from "jquery";
 export class SelectorCore {
 
 
-    constructor(managerId, instanceId) {
+	constructor(managerId, instanceId) {
 
-        this._managerId = managerId;
+		this._managerId = managerId;
 
-        this._instanceId = instanceId;
-        this._instanceName = null;
+		this._instanceId = instanceId;
+		this._instanceName = null;
 
-        this._config = new SelectorConfig();
-        this._sourceHtmlObj = null;
-        this._interface = null;
+		this._config = new SelectorConfig();
+		this._sourceHtmlObj = null;
+		this._interface = null;
 
-        this._state = this._config.STATES.WAITING_FOR_BINDING;
+		this._state = this._config.STATES.WAITING_FOR_BINDING;
 
-        return this._state;
-    }
-
-
-    bind(component, configObj) {
-
-        let _tmpResponse = this._config.assignConfig(configObj);
-
-        if (typeof _tmpResponse === 'object') {
-
-            this._sourceHtmlObj = $(component);
-            let _tmpName = this._sourceHtmlObj.attr('data-selector-name').trim();
-            _tmpName ? this._instanceName = _tmpName : false;
-
-            this._state = this._config.STATES.BINDED;
-
-        } else {
-
-            this._state = _tmpResponse;
-        }
-
-        return this._state;
-    }
+		return this._state;
+	}
 
 
-    _init() {
+	bind(component, configObj) {
 
-        if (this._state === this._config.STATES.BINDED) {
+		let _tmpResponse = this._config.assignConfig(configObj);
 
-            this._interface = new SelectorInterface(this._sourceHtmlObj, this._config);
-            this._state = this._config.STATES.RUNNING;
-        }
+		if (typeof _tmpResponse === 'object') {
 
-        return this._state;
-    }
+			this._sourceHtmlObj = $(component); // Todo: Validar componente
+			let _tmpName = this._sourceHtmlObj.attr('data-selector-name').trim();
+			_tmpName ? this._instanceName = _tmpName : false;
 
+			this._state = this._config.STATES.BINDED;
 
-    init() {
+		} else {
 
-        return this._init();
-    }
+			this._state = _tmpResponse;
+		}
 
-
-    get id() {
-
-        return this._instanceId;
-    }
+		return this._state;
+	}
 
 
-    get name() {
+	_init() {
 
-        return this._instanceName;
-    }
+		if (this._state === this._config.STATES.BINDED) {
 
+			this._interface = new SelectorInterface(this._sourceHtmlObj, this._config.configObj);
+			this._state = this._config.STATES.RUNNING;
+		}
 
-    get state() {
-
-        return this._state;
-    }
-
-
-    get parentManagerId() {
-
-        return this._managerId;
-    }
+		return this._state;
+	}
 
 
-    enable() {
+	init() {
 
-    }
-
-
-    disable() {
-
-    }
+		return this._init();
+	}
 
 
-    update() {
+	get id() {
+
+		return this._instanceId;
+	}
 
 
-    }
+	get name() {
+
+		return this._instanceName;
+	}
 
 
-    selectItems(target) {
+	get state() {
 
-    }
-
-
-    unselectItems(target) {
-
-    }
+		return this._state;
+	}
 
 
-    clear() {
+	get parentManagerId() {
 
-    }
-
-
-    destroy() {
-
-    }
+		return this._managerId;
+	}
 
 
-    _submitInterfaceError(code) {
+	enable() {
 
-        // this._interface.error(code);
-    }
+	}
+
+
+	disable() {
+
+	}
+
+
+	update() {
+
+
+	}
+
+
+	selectItems(target) {
+
+	}
+
+
+	unselectItems(target) {
+
+	}
+
+
+	clear() {
+
+	}
+
+
+	destroy() {
+
+	}
+
+
+	_submitInterfaceError(code) {
+
+		// this._interface.error(code);
+	}
 }
