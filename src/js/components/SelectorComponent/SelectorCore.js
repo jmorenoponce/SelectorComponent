@@ -18,7 +18,7 @@ export class SelectorCore {
         this._instanceName = null;
 
         this._config = new SelectorConfig();
-        this._htmlObj = null;
+        this._sourceHtmlObj = null;
         this._interface = null;
 
         this._state = this._config.STATES.WAITING_FOR_BINDING;
@@ -33,11 +33,12 @@ export class SelectorCore {
 
         if (typeof _tmpResponse === 'object') {
 
-            this._htmlObj = $(component);
-            let _tmpName = this._htmlObj.attr('data-selector-name').trim();
+            this._sourceHtmlObj = $(component);
+            let _tmpName = this._sourceHtmlObj.attr('data-selector-name').trim();
             _tmpName ? this._instanceName = _tmpName : false;
 
             this._state = this._config.STATES.BINDED;
+
         } else {
 
             this._state = _tmpResponse;
@@ -51,7 +52,7 @@ export class SelectorCore {
 
         if (this._state === this._config.STATES.BINDED) {
 
-            this._interface = new SelectorInterface(this._htmlObj, this._config);
+            this._interface = new SelectorInterface(this._sourceHtmlObj, this._config);
             this._state = this._config.STATES.RUNNING;
         }
 
@@ -89,12 +90,18 @@ export class SelectorCore {
     }
 
 
-    setValues(target, newValue) {
+    enable() {
 
     }
 
 
-    emptyValues(target) {
+    disable() {
+
+    }
+
+
+    update() {
+
 
     }
 
@@ -109,17 +116,13 @@ export class SelectorCore {
     }
 
 
-    enable() {
-
-    }
-
-
-    disable() {
+    clear() {
 
     }
 
 
     destroy() {
+
     }
 
 
