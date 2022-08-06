@@ -10,10 +10,6 @@ export class SelectorManager {
 
     constructor() {
 
-        this._selectors = {
-            observable_items: '.ux-select-observer'
-        };
-
         this._id = null;
         this._instancesObj = [];
 

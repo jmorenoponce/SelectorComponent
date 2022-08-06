@@ -28,11 +28,12 @@ export class SelectorConfig {
 
 		let _newConfig = {};
 		let _errorCode = false;
-		let _entries = Object.entries(this._PATTERN_CONFIG);
+
+		const _entries = Object.entries(this._PATTERN_CONFIG);
 
 		for (const _parts of _entries) {
 
-			let [_key, _values] = _parts;
+			const [_key, _values] = _parts;
 			let _newValue = null;
 
 			if (!Object.keys(configObj).includes(_key)) {
@@ -56,7 +57,7 @@ export class SelectorConfig {
 	}
 
 
-	_states() {
+	_states() { // Todo: Los estados no van aquí, esto huele.
 
 		return {
 			// Informative
@@ -69,10 +70,10 @@ export class SelectorConfig {
 			FINISHED: 230,
 
 			// Error
-			INVALID_SOURCE_COMPONENT : 400,
+			INVALID_TARGET_COMPONENT : 400,
 			INVALID_CONFIG_OBJECT: 410,
-			UNKNOWN_SOURCE_DATA: 420,
-			INVALID_SOURCE_DATA: 430,
+			INVALID_SOURCE_DATA: 420,
+			UNKNOWN_SOURCE_DATA: 430,
 
 			// Other
 			UNKNOWN_PROBLEM: 900

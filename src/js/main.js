@@ -13,7 +13,7 @@ let userSelectorComponent = selectorManager.instanceNew();
 let userData = Util.loadFromFile('./dist/data-src/users-src.json');
 
 userData.then(json => {
-    userSelectorComponent.bind('.ux-seldector-users', {
+    userSelectorComponent.bind('.ux-selector-users', {
         isActive: true,
         isEditable: true,
         label: 'Selección de usuarios:',
@@ -26,23 +26,33 @@ userData.then(json => {
 });
 
 
-// Another Selector Component for testing
+// Another Selector Component with errors for testing
 let wrongSelectorComponent = selectorManager.instanceNew();
 let anotherData = Util.loadFromFile('./dist/data-src/another-src.json');
 
 anotherData.then(anotherData => {
     wrongSelectorComponent.bind('.ux-selector-another', {
-        isActive: true,             // => Wrong property
+        isActdive: true,            // => Wrong property
         isEditable: false,
-        placeholder: 45,            // => Wrong type
+        placeholder: '45',          // => Wrong type
         dataSource: anotherData     // => Invalid source data
     });
     console.log(wrongSelectorComponent.init());
 });
 
 
-// Some test for functionality
-console.log('manager_id...', selectorManager.id);
-console.log('manager_amount_instances...', selectorManager.instancesAmount);
-console.log('component_state...', userSelectorComponent.id, userSelectorComponent.state);
-Util.print('manager_instances_object...', selectorManager.instancesObj);
+
+const espera = setTimeout(info, 5000);
+
+function info() {
+
+    // Some test for functionality
+    console.log('manager_id...', selectorManager.id);
+    console.log('manager_amount_instances...', selectorManager.instancesAmount);
+    console.log('component_state...', userSelectorComponent.id, userSelectorComponent.state);
+    console.log('manager_instances_object...', selectorManager.instancesObj);
+
+    clearTimeout(espera);
+}
+
+

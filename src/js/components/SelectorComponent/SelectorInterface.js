@@ -7,13 +7,12 @@ import $ from "jquery";
 export class SelectorInterface {
 
 
-	constructor(htmlObj, configObj) {
+	constructor(htmlObj) {
 
 		this._sourceHtmlObj = htmlObj;
-		this._configObj = configObj;
 		this._error = undefined;
 
-		this._SELECTORS = this._selectorDefinitions();
+		this._SELECTORS = this._selectorClasses();
 		this._KEY_CODES = this._keyCodes();
 	}
 
@@ -30,23 +29,27 @@ export class SelectorInterface {
 	}
 
 
-	_selectorDefinitions() {
+	render() {
 
-		return {
 
-			sourceHidden: '.ui-selector-source-hidden',
-			enable: '.ui-selector-enable',
-			disable: '.ui-selector-disable',
-			dropdownExpanded: '.ui-selector-dropdown-expanded',
-			viewGrouped: '.ui-selector-view-grouped',
-			viewExtended: '.ui-selector-view-extended',
-			hasError: '.ui-selector-has-error'
-		};
 	}
 
 
-	render() {
+	_selectorClasses() {
 
+		return {
+
+			// General
+			SOURCE_HIDDEN: '.ui-selector-source-hidden',
+
+			// Status
+			ENABLE: '.ui-selector-enable',
+			DISABLE: '.ui-selector-disable',
+			DROPDOWN_EXPANDED: '.ui-selector-dropdown-expanded',
+			VIEW_GROUPED: '.ui-selector-view-grouped',
+			VIEW_EXTENDED: '.ui-selector-view-extended',
+			HAS_ERROR: '.ui-selector-has-error'
+		};
 	}
 
 
