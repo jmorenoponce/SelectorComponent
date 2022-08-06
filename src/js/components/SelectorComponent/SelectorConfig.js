@@ -27,9 +27,8 @@ export class SelectorConfig {
 	_validateConfig(configObj) {
 
 		let _newConfig = {};
-		let _entries = Object.entries(this._PATTERN_CONFIG);
 		let _errorCode = false;
-		let _entries = Object.entries(this.PATTERN_CONFIG);
+		let _entries = Object.entries(this._PATTERN_CONFIG);
 
 		for (const _parts of _entries) {
 
@@ -70,9 +69,10 @@ export class SelectorConfig {
 			FINISHED: 230,
 
 			// Error
-			INVALID_CONFIG_OBJECT: 400,
-			UNKNOWN_SOURCE_DATA: 410,
-			INVALID_SOURCE_DATA: 420,
+			INVALID_SOURCE_COMPONENT : 400,
+			INVALID_CONFIG_OBJECT: 410,
+			UNKNOWN_SOURCE_DATA: 420,
+			INVALID_SOURCE_DATA: 430,
 
 			// Other
 			UNKNOWN_PROBLEM: 900

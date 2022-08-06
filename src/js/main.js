@@ -13,7 +13,7 @@ let userSelectorComponent = selectorManager.instanceNew();
 let userData = Util.loadFromFile('./dist/data-src/users-src.json');
 
 userData.then(json => {
-    userSelectorComponent.bind('.ux-selector-users', {
+    userSelectorComponent.bind('.ux-seldector-users', {
         isActive: true,
         isEditable: true,
         label: 'Selección de usuarios:',
