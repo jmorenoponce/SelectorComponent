@@ -9,17 +9,17 @@ export class SelectorInterface {
 
 	constructor(htmlObj) {
 
-		this._sourceHtmlObj = htmlObj;
+		this._$sourceHtmlObj = htmlObj;
 		this._error = undefined;
 
-		this._SELECTORS = this._selectorClasses();
-		this._KEY_CODES = this._keyCodes();
+		this._selectors = this._selectorClasses();
+		this._key_codes = this._keyCodes();
 	}
 
 
 	createElement() {
 
-		$(this._sourceHtmlObj).addClass(this._SELECTORS.sourceHidden);
+		$(this._$sourceHtmlObj).addClass(this._selectors.SOURCE_HIDDEN);
 	}
 
 
@@ -42,18 +42,21 @@ export class SelectorInterface {
 			// General
 			SOURCE_HIDDEN: '.ui-selector-source-hidden',
 
-			// Status
+			// Config
 			ENABLE: '.ui-selector-enable',
 			DISABLE: '.ui-selector-disable',
 			DROPDOWN_EXPANDED: '.ui-selector-dropdown-expanded',
 			VIEW_GROUPED: '.ui-selector-view-grouped',
 			VIEW_EXTENDED: '.ui-selector-view-extended',
+
+			// State
 			HAS_ERROR: '.ui-selector-has-error'
 		};
 	}
 
 
 	getError(code) {
+
 
 	}
 

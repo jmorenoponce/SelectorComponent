@@ -4,148 +4,123 @@
 export class SelectorConfig {
 
 
-	constructor() {
+    constructor() {
 
-		this.configObj = {};
-
-		this.STATES = this._states();
-		this._PATTERN_CONFIG = this._patternConfig();
-	}
+        this.configObj = {};
+        this._PATTERN_CONFIG = this._patternConfig();
+    }
 
 
-	assignConfig(newConfig) {
+    assignConfig(newConfig) {
 
-		let _tmpResponse = this._validateConfig(newConfig);
+        let _tmpResponse = this._validateConfig(newConfig);
 
-		if (typeof _tmpResponse !== 'object')
-			return this.STATES.INVALID_CONFIG_OBJECT;
-
-		return this.configObj = Object.assign(_tmpResponse);
-	}
+        return _tmpResponse ? this.configObj = Object.assign(_tmpResponse) : false;
+    }
 
 
-	_validateConfig(configObj) {
+    _defaultConfig() {
 
-		let _newConfig = {};
-		let _errorCode = false;
+        let _tmpConfig = {};
 
-		const _entries = Object.entries(this._PATTERN_CONFIG);
+        const _entries = Object.entries(this._PATTERN_CONFIG);
 
-		for (const _parts of _entries) {
+        for (const _parts of _entries) {
 
-			const [_key, _values] = _parts;
-			let _newValue = null;
+            const [_key, _values] = _parts;
+            Object.assign(_tmpConfig, {[_key]: _values.defaultValue});
+        }
 
-			if (!Object.keys(configObj).includes(_key)) {
-
-				if (!_values.isNullable)
-					return _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
-
-				_newValue = _values.defaultValue;
-			} else {
-
-				if (typeof configObj[_key] !== _values.type.name.toLowerCase())
-					return _errorCode = this.STATES.INVALID_CONFIG_OBJECT;
-
-				_newValue = configObj[_key];
-			}
-
-			Object.assign(_newConfig, {[_key]: _newValue});
-		}
-
-		return !_errorCode ? _newConfig : _errorCode;
-	}
+        return _tmpConfig;
+    }
 
 
-	_states() { // Todo: Los estados no van aquí, esto huele.
+    _validateConfig(configObj) {
 
-		return {
-			// Informative
-			WAITING_FOR_BINDING: 100,
+        let _newConfig = {};
+        let _isValid = true;
 
-			// Successful
-			BINDED: 200,
-			RUNNING: 210,
-			STOPPED: 220,
-			FINISHED: 230,
+        const _entries = Object.entries(this._PATTERN_CONFIG);
 
-			// Error
-			INVALID_TARGET_COMPONENT : 400,
-			INVALID_CONFIG_OBJECT: 410,
-			INVALID_SOURCE_DATA: 420,
-			UNKNOWN_SOURCE_DATA: 430,
+        for (const _parts of _entries) {
 
-			// Other
-			UNKNOWN_PROBLEM: 900
-		}
-	}
+            const [_key, _values] = _parts;
+            let _newValue = null;
 
+            if (!Object.keys(configObj).includes(_key)) {
 
-	_patternConfig() {
+                if (!_values.isNullable)
+                    return _isValid = false;
 
-		return {
-			isActive: {
-				isNullable: false,
-				type: Boolean,
-				defaultValue: true
-			},
-			isEditable: {
-				isNullable: false,
-				type: Boolean,
-				defaultValue: true
-			},
-			label: {
-				isNullable: true,
-				type: String,
-				defaultValue: 'Selección:'
-			},
-			placeholder: {
-				isNullable: true,
-				type: String,
-				defaultValue: 'Seleccionar...',
-			},
-			searchPlaceholder: {
-				isNullable: true,
-				type: String,
-				defaultValue: 'Buscar...',
-			},
-			searchingText: {
-				isNullable: true,
-				type: String,
-				defaultValue: 'Buscando...',
-			},
-			searchResultsNone: {
-				isNullable: true,
-				type: String,
-				defaultValue: 'No hay resultados para esta búsqueda',
-			},
-			minWidth: {
-				isNullable: true,
-				type: String,
-				defaultValue: 'auto'
-			},
-			maxRows: {
-				isNullable: true,
-				type: Number,
-				defaultValue: 10
-			},
-			dataSource: {
-				isNullable: false,
-				type: Object,
-				defaultValue: this.STATES.UNKNOWN_SOURCE_DATA
-			}
-		};
-	}
+                _newValue = _values.defaultValue;
+            } else {
+
+                if (typeof configObj[_key] !== _values.type.name.toLowerCase())
+                    return _isValid = false;
+
+                _newValue = configObj[_key];
+            }
+
+            Object.assign(_newConfig, {[_key]: _newValue});
+        }
+
+        return _isValid ? _newConfig : _isValid;
+    }
 
 
-	_defaultConfig() {
+    _patternConfig() {
 
-		let _tmpConfig = {};
-
-		Object.entries(this._patternConfig()).forEach(item => {
-			Object.assign(_tmpConfig, {[item[0]]: item[1].defaultValue});
-		});
-
-		return _tmpConfig;
-	}
+        return {
+            isActive: {
+                isNullable: false,
+                type: Boolean,
+                defaultValue: true
+            },
+            isEditable: {
+                isNullable: false,
+                type: Boolean,
+                defaultValue: true
+            },
+            label: {
+                isNullable: true,
+                type: String,
+                defaultValue: 'Selección:'
+            },
+            placeholder: {
+                isNullable: true,
+                type: String,
+                defaultValue: 'Seleccionar...',
+            },
+            searchPlaceholder: {
+                isNullable: true,
+                type: String,
+                defaultValue: 'Buscar...',
+            },
+            searchingText: {
+                isNullable: true,
+                type: String,
+                defaultValue: 'Buscando...',
+            },
+            searchResultsNone: {
+                isNullable: true,
+                type: String,
+                defaultValue: 'No hay resultados para esta búsqueda',
+            },
+            minWidth: {
+                isNullable: true,
+                type: String,
+                defaultValue: 'auto'
+            },
+            maxRows: {
+                isNullable: true,
+                type: Number,
+                defaultValue: 10
+            },
+            dataSource: {
+                isNullable: false,
+                type: Object,
+                defaultValue: false
+            }
+        };
+    }
 }

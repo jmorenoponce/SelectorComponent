@@ -12,7 +12,7 @@ let selectorManager = new SelectorManager();
 let userSelectorComponent = selectorManager.instanceNew();
 let userData = Util.loadFromFile('./dist/data-src/users-src.json');
 
-userData.then(json => {
+userData.then(userData => {
     userSelectorComponent.bind('.ux-selector-users', {
         isActive: true,
         isEditable: true,
@@ -20,9 +20,9 @@ userData.then(json => {
         placeholder: 'Seleccionar usuarios...',
         searchingText: 'Buscando usuarios...',
         searchResultsNone: 'No se encontraron usuarios para esta búsqueda',
-        dataSource: json
+        dataSource: userData
     });
-    console.log(userSelectorComponent.init());
+    console.log(userSelectorComponent.parentManagerId, userSelectorComponent.id, userSelectorComponent.init());
 });
 
 
@@ -34,25 +34,24 @@ anotherData.then(anotherData => {
     wrongSelectorComponent.bind('.ux-selector-another', {
         isActdive: true,            // => Wrong property
         isEditable: false,
-        placeholder: '45',          // => Wrong type
-        dataSource: anotherData     // => Invalid source data
+        placeholder: 45,            // => Wrong type
+        dataSource: anotherData
     });
-    console.log(wrongSelectorComponent.init());
+    console.log(userSelectorComponent.parentManagerId, wrongSelectorComponent.id, wrongSelectorComponent.init());
 });
 
 
+// Some test for functionality
+const wait = setTimeout(printInfo, 1000);
 
-const espera = setTimeout(info, 5000);
+function printInfo() {
 
-function info() {
-
-    // Some test for functionality
     console.log('manager_id...', selectorManager.id);
     console.log('manager_amount_instances...', selectorManager.instancesAmount);
     console.log('component_state...', userSelectorComponent.id, userSelectorComponent.state);
+    console.log('component_state...', wrongSelectorComponent.id, wrongSelectorComponent.state);
+
     console.log('manager_instances_object...', selectorManager.instancesObj);
 
-    clearTimeout(espera);
+    clearTimeout(wait);
 }
-
-
