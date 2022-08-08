@@ -22,10 +22,7 @@ export class UtilityClass {
 
 		async function fetchData() {
 			return await fetch(path)
-				.then(response => response.json())
-				.then((value) => {
-					return value;
-				});
+				.then(response => response.json());
 		}
 
 		return fetchData();

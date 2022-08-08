@@ -10,161 +10,172 @@ import $ from "jquery";
 export class SelectorCore {
 
 
-    constructor(managerId, instanceId) {
+	constructor(managerId, instanceId) {
 
-        this._managerId = managerId;
+		this._managerId = managerId;
 
-        this._instanceId = instanceId;
+		this._instanceId = instanceId;
+		this._instanceName = null;
 
-        this._instanceName = null;
-        this._$sourceHtmlObj = null; // Todo: Esto huele
+		this._$sourceHtmlObj = null; // Todo: Esto huele
 
-        this._config = new SelectorConfig();
-        this._interface = null;
+		this._config = new SelectorConfig();
+		this._interface = null;
 
-        this._STATES = this._stateCodes();
+		this._STATES = this._stateCodes();
 
-        return this._state = this._STATES.WAITING_FOR_BINDING;
-    }
+		this._state = this._STATES.WAITING_FOR_BINDING;
+		return this._state;
+	}
 
 
-    bind(targetCmp, configObj) {
+	bind(targetCmp, configObj) {
 
-        if (!$(targetCmp).length > 0)
-            return this._state = this._STATES.INVALID_TARGET_COMPONENT;
+		let $targetCmp = $(targetCmp);
 
-        this._$sourceHtmlObj = $(targetCmp);
+		if (!$targetCmp.length > 0) {
 
-        const _tmpName = this._$sourceHtmlObj.attr('data-selector-name').trim();
-        _tmpName ? this._instanceName = _tmpName : this._instanceName = this._STATES.UNKNOWN_TARGET_NAME;
+			this._state = this._STATES.INVALID_TARGET_COMPONENT;
+			return this._state;
+		}
 
-        const _tmpResponse = this._config.assignConfig(configObj);
-        _tmpResponse ? this._state = this._STATES.BINDED : this._state = this._STATES.INVALID_CONFIG_OBJECT;
+		this._$sourceHtmlObj = $targetCmp;
 
-        return this._state;
-    }
+		const _tmpName = $.trim(this._$sourceHtmlObj.attr('data-selector-name'));
+		// _tmpName ? this._instanceName = _tmpName : this._instanceName = this._STATES.UNKNOWN_TARGET_NAME;
+		// this._instanceName = _tmpName ? _tmpName : this._STATES.UNKNOWN_TARGET_NAME;
+		this._instanceName = _tmpName || this._STATES.UNKNOWN_TARGET_NAME;
 
+		this._config.assign(configObj);
 
-    _init() {
+		this._state = this._config.isValid() ?
+			this._STATES.BINDED :
+			this._STATES.INVALID_CONFIG_OBJECT;
 
-        if (this._state === this._STATES.BINDED) {
+		return this._state;
+	}
 
-            this._interface = new SelectorInterface(this._$sourceHtmlObj);
-            this._interface.render();
 
-            this._state = this._STATES.RUNNING;
-        }
+	_init() {
 
-        return this._state;
-    }
+		if (this._state === this._STATES.BINDED) {
 
+			this._interface = new SelectorInterface(this._$sourceHtmlObj);
+			this._interface.render();
 
-    init() {
+			this._state = this._STATES.RUNNING;
+		}
 
-        return this._init();
-    }
+		return this._state;
+	}
 
 
-    get id() {
+	init() {
 
-        return this._instanceId;
-    }
+		return this._init();
+	}
 
 
-    get name() {
+	get id() {
 
-        return this._instanceName;
-    }
+		return this._instanceId;
+	}
 
 
-    get state() {
+	get name() {
 
-        return this._state;
-    }
+		return this._instanceName;
+	}
 
 
-    get parentManagerId() {
+	get state() {
 
-        return this._managerId;
-    }
+		return this._state;
+	}
 
 
-    enable() {
+	get parentManagerId() {
 
+		return this._managerId;
+	}
 
-    }
 
+	enable() {
 
-    disable() {
 
+	}
 
-    }
 
+	disable() {
 
-    update() {
 
+	}
 
-    }
 
+	update() {
 
-    selectItems(target) {
 
+	}
 
-    }
 
+	selectItems(target) {
 
-    unselectItems(target) {
 
+	}
 
-    }
 
+	unselectItems(target) {
 
-    clear() {
 
+	}
 
-    }
 
+	clear() {
 
-    destroy() {
 
+	}
 
-    }
 
+	destroy() {
 
-    getErrorMsg(code) {
 
-        // Do stuff
-    }
+	}
 
 
-    _submitInterfaceError(code) {
+	getErrorMsg(code) {
 
-        // this._interface.error(code);
-    }
+		// Do stuff
+	}
 
 
-    _stateCodes() {
+	_submitInterfaceError(code) {
 
-        return {
+		// this._interface.error(code);
+	}
 
-            // Informative
-            WAITING_FOR_BINDING: 100,
 
-            // Successful
-            BINDED: 200,
-            RUNNING: 210,
-            STOPPED: 220,
-            FINISHED: 230,
+	_stateCodes() {
 
-            // Error
-            INVALID_TARGET_COMPONENT: 400,
-            UNKNOWN_TARGET_NAME: 410,
-            INVALID_CONFIG_OBJECT: 420,
-            INVALID_SOURCE_DATA: 430,
-            UNKNOWN_SOURCE_DATA: 440,
+		return {
 
-            // Other
-            UNKNOWN_PROBLEM: 900
-        };
-    }
+			// Informative
+			WAITING_FOR_BINDING: 100,
+
+			// Successful
+			BINDED: 200,
+			RUNNING: 210,
+			STOPPED: 220,
+			FINISHED: 230,
+
+			// Error
+			INVALID_TARGET_COMPONENT: 400,
+			UNKNOWN_TARGET_NAME: 410,
+			INVALID_CONFIG_OBJECT: 420,
+			INVALID_SOURCE_DATA: 430,
+			UNKNOWN_SOURCE_DATA: 440,
+
+			// Other
+			UNKNOWN_PROBLEM: 900
+		};
+	}
 }

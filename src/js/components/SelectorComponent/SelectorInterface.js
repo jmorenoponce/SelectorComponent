@@ -48,14 +48,14 @@ export class SelectorInterface {
 			// General
 			SOURCE_HIDDEN: '.ui-selector-source-hidden',
 
-			// Config
+			// Actions
 			ENABLE: '.ui-selector-enable',
 			DISABLE: '.ui-selector-disable',
 			DROPDOWN_EXPANDED: '.ui-selector-dropdown-expanded',
 			VIEW_GROUPED: '.ui-selector-view-grouped',
 			VIEW_EXTENDED: '.ui-selector-view-extended',
 
-			// State
+			// States
 			HAS_ERROR: '.ui-selector-has-error'
 		};
 	}

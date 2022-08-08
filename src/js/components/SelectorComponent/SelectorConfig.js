@@ -4,124 +4,110 @@
 export class SelectorConfig {
 
 
+    static _CONFIG_MAP = {
+
+        isActive: {
+            isNullable: false,
+            type: 'boolean',
+        },
+        isEditable: {
+            isNullable: false,
+            type: 'boolean',
+        },
+        label: {
+            isNullable: true,
+            type: 'string',
+        },
+        placeholder: {
+            isNullable: true,
+            type: 'string',
+        },
+        searchPlaceholder: {
+            isNullable: true,
+            type: 'string',
+        },
+        searchingText: {
+            isNullable: true,
+            type: 'string',
+        },
+        searchResultsNone: {
+            isNullable: true,
+            type: 'string',
+        },
+        minWidth: {
+            isNullable: true,
+            type: 'string',
+        },
+        maxRows: {
+            isNullable: true,
+            type: 'number',
+        },
+        dataSource: {
+            isNullable: false,
+            type: 'object',
+        }
+    };
+
+
+    static _CONFIG_DEFAULT = {
+        isActive: true,
+        isEditable: true,
+        label: 'Selección:',
+        placeholder: 'Seleccionar...',
+        searchPlaceholder: 'Buscar...',
+        searchingText: 'Buscando...',
+        searchResultsNone: 'No hay resultados para esta búsqueda',
+        minWidth: 'auto',
+        maxRows: 10,
+        dataSource: false,
+    };
+
+
     constructor() {
 
-        this._PATTERN_CONFIG = this._patternConfig();
-
         this.configObj = {};
+
+        this._isValid = false;
     }
 
 
-    assignConfig(newConfig) {
-
-        let _tmpResponse = this._validateConfig(newConfig);
-
-        return _tmpResponse ? this.configObj = Object.assign(_tmpResponse) : false;
-    }
-
-
-    _defaultConfig() {
-
-        let _tmpConfig = {};
-
-        const _entries = Object.entries(this._PATTERN_CONFIG);
-
-        for (const _parts of _entries) {
-
-            const [_key, _values] = _parts;
-            Object.assign(_tmpConfig, {[_key]: _values.defaultValue});
-        }
-
-        return _tmpConfig;
-    }
-
-
-    _validateConfig(configObj) {
+    assign(newConfig) {
 
         let _newConfig = {};
-        let _isValid = true;
 
-        const _entries = Object.entries(this._PATTERN_CONFIG);
+        $.extend(true, _newConfig, SelectorConfig._CONFIG_DEFAULT, newConfig);
 
-        for (const _parts of _entries) {
-
-            const [_key, _values] = _parts;
-            let _newValue = null;
-
-            if (!Object.keys(configObj).includes(_key)) {
-
-                if (!_values.isNullable)
-                    return _isValid = false;
-
-                _newValue = _values.defaultValue;
-            } else {
-
-                if (typeof configObj[_key] !== _values.type.name.toLowerCase())
-                    return _isValid = false;
-
-                _newValue = configObj[_key];
-            }
-
-            Object.assign(_newConfig, {[_key]: _newValue});
+        if (this._validateConfig(_newConfig)) {
+            this._isValid = true;
         }
 
-        return _isValid ? _newConfig : _isValid;
+        this.configObj = _newConfig;
     }
 
 
-    _patternConfig() {
+    isValid () {
+        return this._isValid;
+    }
 
-        return {
-            isActive: {
-                isNullable: false,
-                type: Boolean,
-                defaultValue: true
-            },
-            isEditable: {
-                isNullable: false,
-                type: Boolean,
-                defaultValue: true
-            },
-            label: {
-                isNullable: true,
-                type: String,
-                defaultValue: 'Selección:'
-            },
-            placeholder: {
-                isNullable: true,
-                type: String,
-                defaultValue: 'Seleccionar...',
-            },
-            searchPlaceholder: {
-                isNullable: true,
-                type: String,
-                defaultValue: 'Buscar...',
-            },
-            searchingText: {
-                isNullable: true,
-                type: String,
-                defaultValue: 'Buscando...',
-            },
-            searchResultsNone: {
-                isNullable: true,
-                type: String,
-                defaultValue: 'No hay resultados para esta búsqueda',
-            },
-            minWidth: {
-                isNullable: true,
-                type: String,
-                defaultValue: 'auto'
-            },
-            maxRows: {
-                isNullable: true,
-                type: Number,
-                defaultValue: 10
-            },
-            dataSource: {
-                isNullable: false,
-                type: Object,
-                defaultValue: false
+
+    _validateConfig(_newConfig) {
+
+        for (const _key in SelectorConfig._CONFIG_MAP) {
+
+            const _key_spec = SelectorConfig._CONFIG_MAP[_key];
+            const _entry_val = _newConfig[_key];
+
+            // Validate same type
+            if (typeof _entry_val !== _key_spec.type) {
+                return false;
             }
-        };
+
+            // Validate nullable key
+            if (_key_spec.isNullable && _entry_val === null) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
