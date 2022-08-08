@@ -6,8 +6,9 @@ export class SelectorConfig {
 
     constructor() {
 
-        this.configObj = {};
         this._PATTERN_CONFIG = this._patternConfig();
+
+        this.configObj = {};
     }
 
 

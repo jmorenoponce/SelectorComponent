@@ -12,36 +12,17 @@ export class SelectorCore {
 
     constructor(managerId, instanceId) {
 
-        this._STATES = {
-
-            // Informative
-            WAITING_FOR_BINDING: 100,
-
-            // Successful
-            BINDED: 200,
-            RUNNING: 210,
-            STOPPED: 220,
-            FINISHED: 230,
-
-            // Error
-            INVALID_TARGET_COMPONENT: 400,
-            UNKNOWN_TARGET_NAME: 410,
-            INVALID_CONFIG_OBJECT: 420,
-            INVALID_SOURCE_DATA: 430,
-            UNKNOWN_SOURCE_DATA: 440,
-
-            // Other
-            UNKNOWN_PROBLEM: 900
-        };
-
         this._managerId = managerId;
 
         this._instanceId = instanceId;
-        this._instanceName = null;
 
-        this._$sourceHtmlObj = null;
+        this._instanceName = null;
+        this._$sourceHtmlObj = null; // Todo: Esto huele
+
         this._config = new SelectorConfig();
         this._interface = null;
+
+        this._STATES = this._stateCodes();
 
         return this._state = this._STATES.WAITING_FOR_BINDING;
     }
@@ -110,10 +91,12 @@ export class SelectorCore {
 
     enable() {
 
+
     }
 
 
     disable() {
+
 
     }
 
@@ -126,20 +109,24 @@ export class SelectorCore {
 
     selectItems(target) {
 
+
     }
 
 
     unselectItems(target) {
+
 
     }
 
 
     clear() {
 
+
     }
 
 
     destroy() {
+
 
     }
 
@@ -153,5 +140,31 @@ export class SelectorCore {
     _submitInterfaceError(code) {
 
         // this._interface.error(code);
+    }
+
+
+    _stateCodes() {
+
+        return {
+
+            // Informative
+            WAITING_FOR_BINDING: 100,
+
+            // Successful
+            BINDED: 200,
+            RUNNING: 210,
+            STOPPED: 220,
+            FINISHED: 230,
+
+            // Error
+            INVALID_TARGET_COMPONENT: 400,
+            UNKNOWN_TARGET_NAME: 410,
+            INVALID_CONFIG_OBJECT: 420,
+            INVALID_SOURCE_DATA: 430,
+            UNKNOWN_SOURCE_DATA: 440,
+
+            // Other
+            UNKNOWN_PROBLEM: 900
+        };
     }
 }
