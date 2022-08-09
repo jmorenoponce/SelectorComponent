@@ -56,10 +56,9 @@ export class SelectorUi {
     }
 
 
-    get name() {
+    name() {
 
-        // this._instanceName = tmpName || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
-        // const tmpName = $.trim(this._$sourceHtmlObj.attr('data-selector-name'));
+        return $.trim(this._$sourceHtmlObj.attr('data-selector-name'));
     }
 
 
