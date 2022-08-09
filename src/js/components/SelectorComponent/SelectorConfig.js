@@ -4,6 +4,21 @@
 export class SelectorConfig {
 
 
+    static _CONFIG_DEFAULT = {
+
+        isActive: true,
+        isEditable: true,
+        label: 'Selección:',
+        placeholder: 'Seleccionar...',
+        searchPlaceholder: 'Buscar...',
+        searchingText: 'Buscando...',
+        searchResultsNone: 'No hay resultados para esta búsqueda',
+        minWidth: 'auto',
+        maxRows: 10,
+        dataSource: false,
+    };
+
+
     static _CONFIG_MAP = {
 
         isActive: {
@@ -49,20 +64,6 @@ export class SelectorConfig {
     };
 
 
-    static _CONFIG_DEFAULT = {
-        isActive: true,
-        isEditable: true,
-        label: 'Selección:',
-        placeholder: 'Seleccionar...',
-        searchPlaceholder: 'Buscar...',
-        searchingText: 'Buscando...',
-        searchResultsNone: 'No hay resultados para esta búsqueda',
-        minWidth: 'auto',
-        maxRows: 10,
-        dataSource: false,
-    };
-
-
     constructor() {
 
         this.configObj = {};
@@ -71,39 +72,48 @@ export class SelectorConfig {
     }
 
 
+    /**
+     *
+     * @param newConfig
+     */
     assign(newConfig) {
 
-        let _newConfig = {};
+        let tmpConfig = {};
 
-        $.extend(true, _newConfig, SelectorConfig._CONFIG_DEFAULT, newConfig);
+        $.extend(true, tmpConfig, SelectorConfig._CONFIG_DEFAULT, newConfig);
 
-        if (this._validateConfig(_newConfig)) {
+        if (this._validate(tmpConfig)) {
             this._isValid = true;
         }
 
-        this.configObj = _newConfig;
+        this.configObj = tmpConfig;
     }
 
 
-    isValid () {
+    isValid() {
+
         return this._isValid;
     }
 
 
-    _validateConfig(_newConfig) {
+    /**
+     *
+     * @param newConfig
+     * @returns {boolean}
+     * @private
+     */
+    _validate(newConfig) {
 
-        for (const _key in SelectorConfig._CONFIG_MAP) {
+        for (const key in SelectorConfig._CONFIG_MAP) {
 
-            const _key_spec = SelectorConfig._CONFIG_MAP[_key];
-            const _entry_val = _newConfig[_key];
+            const keySpec = SelectorConfig._CONFIG_MAP[key];
+            const entryVal = newConfig[key];
 
-            // Validate same type
-            if (typeof _entry_val !== _key_spec.type) {
+            if (typeof entryVal !== keySpec.type) {
                 return false;
             }
 
-            // Validate nullable key
-            if (_key_spec.isNullable && _entry_val === null) {
+            if (keySpec.isNullable && entryVal === null) {
                 return false;
             }
         }

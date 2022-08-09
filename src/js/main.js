@@ -32,9 +32,9 @@ let anotherData = Util.loadFromFile('./dist/data-src/another-src.json');
 
 anotherData.then(anotherData => {
     wrongSelectorComponent.bind('.ux-selector-another', {
-        isActive: true,            // => Wrong property
+        isActive: true,             // => Wrong property
         isEditable: false,
-        placeholder: '45',            // => Wrong type
+        placeholder: '45',          // => Wrong type
         dataSource: anotherData
     });
     console.log(userSelectorComponent.parentManagerId, wrongSelectorComponent.id, wrongSelectorComponent.init());

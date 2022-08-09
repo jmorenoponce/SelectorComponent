@@ -23,14 +23,18 @@ export class SelectorManager {
     }
 
 
+    /**
+     *
+     * @returns {SelectorCore}
+     */
     instanceNew() {
 
-        let _tmpId = this._generateId();
-        let _tmpObj = new SelectorCore(this._id, _tmpId);
+        let tmpId = this._generateId();
+        let tmpObj = new SelectorCore(this._id, tmpId);
 
-        this._instancesObj.push(_tmpObj);
+        this._instancesObj.push(tmpObj);
 
-        return _tmpObj;
+        return tmpObj;
     }
 
 
@@ -40,18 +44,31 @@ export class SelectorManager {
     }
 
 
+    /**
+     *
+     * @returns {number}
+     */
     get instancesAmount() {
 
         return this._instancesObj.length;
     }
 
 
+    /**
+     *
+     * @returns {[]}
+     */
     get instancesObj() {
 
         return this._instancesObj;
     }
 
 
+    /**
+     *
+     * @param target
+     * @param action
+     */
     submitInstanceAction(target, action) {
 
         // Do stuff...
