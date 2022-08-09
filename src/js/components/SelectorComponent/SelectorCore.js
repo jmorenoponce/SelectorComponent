@@ -8,190 +8,190 @@ import {SelectorUi} from './SelectorUi.js';
 export class SelectorCore {
 
 
-	static _STATES = {
+    static _STATES = {
 
-		// Informative
-		WAITING_FOR_BINDING: 100,
+        // Informative
+        WAITING_FOR_BINDING: 100,
 
-		// Successful
-		BINDED: 200,
-		RUNNING: 210,
-		STOPPED: 220,
-		FINISHED: 230,
+        // Successful
+        BINDED: 200,
+        RUNNING: 210,
+        STOPPED: 220,
+        FINISHED: 230,
 
-		// Error
-		INVALID_TARGET_COMPONENT: 400,
-		UNKNOWN_TARGET_NAME: 410,
-		INVALID_CONFIG_OBJECT: 420,
-		INVALID_SOURCE_DATA: 430,
-		UNKNOWN_SOURCE_DATA: 440,
+        // Error
+        INVALID_TARGET_COMPONENT: 400,
+        UNKNOWN_TARGET_NAME: 410,
+        INVALID_CONFIG_OBJECT: 420,
+        INVALID_SOURCE_DATA: 430,
+        UNKNOWN_SOURCE_DATA: 440,
 
-		// Other
-		UNKNOWN_PROBLEM: 900
-	};
+        // Other
+        UNKNOWN_PROBLEM: 900
+    };
 
 
-	/**
-	 *
-	 * @param managerId
-	 * @param instanceId
-	 * @returns {number}
-	 */
-	constructor(managerId, instanceId) {
+    /**
+     *
+     * @param managerId
+     * @param instanceId
+     * @returns {number}
+     */
+    constructor(managerId, instanceId) {
 
-		this._managerId = managerId;
+        this._managerId = managerId;
 
-		this._instanceId = instanceId;
-		this._instanceName = null;
+        this._instanceId = instanceId;
+        this._instanceName = null;
 
-		this._config = new SelectorConfig();
-		this._interface = null;
+        this._config = new SelectorConfig();
+        this._interface = null;
 
-		this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
-		return this._state;
-	}
+        this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
+        return this._state;
+    }
 
 
-	/**
-	 *
-	 * @param targetCmp
-	 * @param configObj
-	 * @returns {number}
-	 */
-	bind(targetCmp, configObj) {
+    /**
+     *
+     * @param targetCmp
+     * @param configObj
+     * @returns {number}
+     */
+    bind(targetCmp, configObj) {
 
-		let $targetCmp = $(targetCmp);
-		if (!$targetCmp.length > 0) {
-			this._state = SelectorCore._STATES.INVALID_TARGET_COMPONENT;
-			return this._state;
-		}
+        let $targetCmp = $(targetCmp);
+        if (!$targetCmp.length > 0) {
+            this._state = SelectorCore._STATES.INVALID_TARGET_COMPONENT;
+            return this._state;
+        }
 
-		this._instanceName = this._interface.name();
-		this._interface = new SelectorUi($targetCmp);
-		this._config.assign(configObj);
+        this._instanceName = this._interface.name();
+        this._interface = new SelectorUi($targetCmp);
+        this._config.assign(configObj);
 
-		this._state = this._config.isValid() ?
-			SelectorCore._STATES.BINDED :
-			SelectorCore._STATES.INVALID_CONFIG_OBJECT;
+        this._state = this._config.isValid() ?
+            SelectorCore._STATES.BINDED :
+            SelectorCore._STATES.INVALID_CONFIG_OBJECT;
 
-		return this._state;
-	}
+        return this._state;
+    }
 
 
-	/**
-	 *
-	 * @returns {number}
-	 * @private
-	 */
-	_init() {
+    /**
+     *
+     * @returns {number}
+     * @private
+     */
+    _init() {
 
-		if (this._state === SelectorCore._STATES.BINDED) {
+        if (this._state === SelectorCore._STATES.BINDED) {
 
-			this._interface.render();
-			this._state = SelectorCore._STATES.RUNNING;
-		}
+            this._interface.render();
+            this._state = SelectorCore._STATES.RUNNING;
+        }
 
-		return this._state;
-	}
+        return this._state;
+    }
 
 
-	init() {
+    init() {
 
-		return this._init();
-	}
+        return this._init();
+    }
 
 
-	get id() {
+    get id() {
 
-		return this._instanceId;
-	}
+        return this._instanceId;
+    }
 
 
-	get name() {
+    get name() {
 
-		return this._instanceName;
-	}
+        return this._instanceName;
+    }
 
 
-	get state() {
+    get state() {
 
-		return this._state;
-	}
+        return this._state;
+    }
 
 
-	get parentManagerId() {
+    get parentManagerId() {
 
-		return this._managerId;
-	}
+        return this._managerId;
+    }
 
 
-	enable() {
+    enable() {
 
 
-	}
+    }
 
 
-	disable() {
+    disable() {
 
 
-	}
+    }
 
 
-	update() {
+    update() {
 
 
-	}
+    }
 
 
-	/**
-	 *
-	 * @param target
-	 */
-	selectItems(target) {
+    /**
+     *
+     * @param target
+     */
+    selectItems(target) {
 
 
-	}
+    }
 
 
-	/**
-	 *
-	 * @param target
-	 */
-	unselectItems(target) {
+    /**
+     *
+     * @param target
+     */
+    unselectItems(target) {
 
 
-	}
+    }
 
 
-	clear() {
+    clear() {
 
 
-	}
+    }
 
 
-	destroy() {
+    destroy() {
 
 
-	}
+    }
 
 
-	/**
-	 *
-	 * @param code
-	 */
-	getErrorMsg(code) {
+    /**
+     *
+     * @param code
+     */
+    getErrorMsg(code) {
 
-		// Do stuff
-	}
+        // Do stuff
+    }
 
 
-	/**
-	 *
-	 * @param code
-	 * @private
-	 */
-	_submitInterfaceError(code) {
+    /**
+     *
+     * @param code
+     * @private
+     */
+    _submitInterfaceError(code) {
 
-		// this._interface.error(code);
-	}
+        // this._interface.error(code);
+    }
 }
