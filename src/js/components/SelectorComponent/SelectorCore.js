@@ -44,21 +44,33 @@ export class SelectorCore {
         this._instanceId = instanceId;
         this._instanceName = null;
 
-        this._config = new SelectorConfig();
-        this._interface = null;
+		this._data = {};
+		this._dataConfig = {
+			categoryKey: '',
+			filter: function (term, item) {
+				return item.name.toLowerCase().includes(term);
+			}
+		};
+
+		this._searchTerm = '';
+		this._selectedIds = [];
+
+		this._ui = null;
+		this._uiConfig = new SelectorConfig();
 
         this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
         return this._state;
     }
 
 
-    /**
-     *
-     * @param targetCmp
-     * @param configObj
-     * @returns {number}
-     */
-    bind(targetCmp, configObj) {
+	/**
+	 *
+	 * @param targetCmp
+	 * @param sourceData
+	 * @param configObj
+	 * @returns {number}
+	 */
+	bind(targetCmp, sourceData, configObj) {
 
         let $targetCmp = $(targetCmp);
         if (!$targetCmp.length > 0) {
@@ -66,13 +78,16 @@ export class SelectorCore {
             return this._state;
         }
 
-        this._instanceName = this._interface.name();
-        this._interface = new SelectorUi($targetCmp);
-        this._config.assign(configObj);
+		// this._data = sourceData;
+		// this._dataConfig.categoryKey
 
-        this._state = this._config.isValid() ?
-            SelectorCore._STATES.BINDED :
-            SelectorCore._STATES.INVALID_CONFIG_OBJECT;
+		this._ui = new SelectorUi($targetCmp);
+		this._instanceName = this._ui.name() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
+
+		this._uiConfig.assign(configObj);
+		this._state = this._uiConfig.isValid() ?
+			SelectorCore._STATES.BINDED :
+			SelectorCore._STATES.INVALID_CONFIG_OBJECT;
 
         return this._state;
     }
@@ -87,12 +102,15 @@ export class SelectorCore {
 
         if (this._state === SelectorCore._STATES.BINDED) {
 
-            this._interface.render();
-            this._state = SelectorCore._STATES.RUNNING;
-        }
+			this._ui.render();
+			this._state = SelectorCore._STATES.RUNNING;
+		}
 
-        return this._state;
-    }
+		// this._searchTerm = 'Brannon';
+		// this._filterItems();
+
+		return this._state;
+	}
 
 
     init() {
@@ -101,7 +119,27 @@ export class SelectorCore {
     }
 
 
-    get id() {
+	/**
+	 * Returns the filtered item list (taking search term as filter seed)
+	 * @return {}
+	 */
+	_filterItems () {
+
+		let filtered = [];
+
+		for (let item of this._uiConfig.configObj.dataSource) {
+
+			if (this._uiConfig.filter.apply(null, [this._searchTerm, item])) {
+				filtered.push(item);
+			}
+		}
+
+		return filtered;
+	}
+
+
+
+	get id() {
 
         return this._instanceId;
     }

@@ -17,6 +17,10 @@ export class SelectorManager {
     }
 
 
+    /**
+     * Initialize the manager instance width new id.
+     * @private
+     */
     _initialize() {
 
         this._id = this._generateId();
@@ -45,7 +49,7 @@ export class SelectorManager {
 
 
     /**
-     *
+     * Returns amount of component instances managed for this manager instance
      * @returns {number}
      */
     get instancesAmount() {
@@ -55,7 +59,7 @@ export class SelectorManager {
 
 
     /**
-     *
+     * Returns all component instances managed for this manager instance
      * @returns {[]}
      */
     get instancesObj() {
