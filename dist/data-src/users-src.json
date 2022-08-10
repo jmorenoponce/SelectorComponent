@@ -2,7 +2,7 @@
   {
     "dataSource": "usersByDepartment",
     "notes": "Simulación de fuente de datos de <usuarios>, categorizados por <departamento>, incluye 6 recientemente seleccionados",
-    "lastItemsSelected": [
+    "lastSelectedIds": [
       3, 20, 35, 48, 54, 8
     ],
     "categoryKey" : "department",

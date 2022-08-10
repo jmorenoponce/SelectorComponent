@@ -8,30 +8,37 @@ import {SelectorUi} from './SelectorUi.js';
 export class SelectorCore {
 
 
-    static _STATES = {
+	static _STATES =  {
 
-        // Informative
-        WAITING_FOR_BINDING: 100,
+		// Informative
+		WAITING_FOR_BINDING: 100,
 
-        // Successful
-        BINDED: 200,
-        RUNNING: 210,
-        STOPPED: 220,
-        FINISHED: 230,
+		// Successful
+		BINDED: 200,
+		RUNNING: 210,
+		STOPPED: 220,
+		FINISHED: 230,
 
-        // Error
-        INVALID_TARGET_COMPONENT: 400,
-        UNKNOWN_TARGET_NAME: 410,
-        INVALID_CONFIG_OBJECT: 420,
-        INVALID_SOURCE_DATA: 430,
-        UNKNOWN_SOURCE_DATA: 440,
+		// Error
+		INVALID_TARGET_COMPONENT: 400,
+		UNKNOWN_TARGET_NAME: 410,
+		INVALID_CONFIG_OBJECT: 420,
+		INVALID_SOURCE_DATA: 430,
+		UNKNOWN_SOURCE_DATA: 440,
 
-        // Other
-        UNKNOWN_PROBLEM: 900
-    };
+		// Other
+		UNKNOWN_PROBLEM: 900
+	};
 
 
-	static _JSON_KEYS = {}
+	static _JSON_KEYS = {
+
+		DATA_SOURCE: 'dataSource',
+		NOTES: 'notes',
+		LAST_SELECTED_IDS: 'lastItemsSelected',
+		CATEGORY_KEY: 'categoryKey',
+		DATA: 'data'
+	}
 
 
 	/**
@@ -42,48 +49,49 @@ export class SelectorCore {
 	 */
 	constructor(managerId, instanceId) {
 
-        this._managerId = managerId;
+		this._managerId = managerId;
 
-        this._instanceId = instanceId;
-        this._instanceName = null;
+		this._instanceId = instanceId;
+		this._instanceName = null;
 
 		this._data = {};
 		this._dataConfig = {
+			lastSelectedIds: [],
 			categoryKey: '',
-            dataKey: '',
 			filter: function (term, item) {
-				return item.name.toLowerCase().includes(term);
+				return Object.values(item).includes(term);
 			}
 		};
 
 		this._ui = null;
-        this._uiConfig = new SelectorConfig();
+		this._uiConfig = new SelectorConfig();
 
-        this._searchTerm = '';
-        this._selectedIds = [];
+		this._searchTerm = '';
+		this._selectedIds = [];
 
-        this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
-        return this._state;
-    }
+		this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
+		return this._state;
+	}
 
 
 	/**
 	 *
 	 * @param targetCmp
-	 * @param sourceData
+	 * @param dataSrc
 	 * @param configObj
 	 * @returns {number}
 	 */
-	bind(targetCmp, sourceData, configObj) {
+	bind(targetCmp, dataSrc, configObj) {
 
-        let $targetCmp = $(targetCmp);
-        if (!$targetCmp.length > 0) {
-            this._state = SelectorCore._STATES.INVALID_TARGET_COMPONENT;
-            return this._state;
-        }
+		let $targetCmp = $(targetCmp);
+		if (!$targetCmp.length > 0) {
+			this._state = SelectorCore._STATES.INVALID_TARGET_COMPONENT;
+			return this._state;
+		}
 
-		this._data = sourceData.data;
-		this._dataConfig = sourceData.categoryKey;
+		this._dataConfig.lastSelectedIds = dataSrc[0][SelectorCore._JSON_KEYS.LAST_SELECTED_IDS];
+		this._dataConfig.categoryKey = dataSrc[0][SelectorCore._JSON_KEYS.CATEGORY_KEY];
+		this._data = dataSrc[0][SelectorCore._JSON_KEYS.DATA];
 
 		this._ui = new SelectorUi($targetCmp);
 		this._instanceName = this._ui.name() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
@@ -93,47 +101,61 @@ export class SelectorCore {
 			SelectorCore._STATES.BINDED :
 			SelectorCore._STATES.INVALID_CONFIG_OBJECT;
 
-        return this._state;
-    }
+		return this._state;
+	}
 
 
-    /**
-     *
-     * @returns {number}
-     * @private
-     */
-    _init() {
+	/**
+	 *
+	 * @returns {number}
+	 * @private
+	 */
+	_init() {
 
-        if (this._state === SelectorCore._STATES.BINDED) {
+		if (this._state === SelectorCore._STATES.BINDED) {
 
 			this._ui.render();
 			this._state = SelectorCore._STATES.RUNNING;
 		}
 
-		// this._searchTerm = 'Brannon';
-		// this._filterItems();
+		this.setSearchTerm('marketing');
+		console.log(this._filterItems())
 
 		return this._state;
 	}
 
 
-    init() {
+	init() {
 
-        return this._init();
-    }
+		return this._init();
+	}
+
+
+	_setSearchTerm(text) {
+
+		this._searchTerm = (String(text)).toLowerCase();
+		// TODO Replace accents
+	}
+
+
+	setSearchTerm(text) {
+
+		this._setSearchTerm(text);
+		this.update();
+	}
 
 
 	/**
 	 * Returns the filtered item list (taking search term as filter seed)
-	 * @return {}
+	 * @return {Array}
 	 */
-	_filterItems () {
+	_filterItems() {
 
 		let filtered = [];
 
-		for (let item of this._uiConfig.configObj.dataSource) {
+		for (let item of this._data) {
 
-			if (this._uiConfig.filter.apply(null, [this._searchTerm, item])) {
+			if (this._dataConfig.filter.apply(null, [this._searchTerm, item])) {
 				filtered.push(item);
 			}
 		}
@@ -142,98 +164,129 @@ export class SelectorCore {
 	}
 
 
+	/**
+	 * Returns an enumerated array containing the categories of data items
+	 * @private
+	 */
+	_getItemsGroups(data) {
+
+		let groups = {};
+
+		for (let item of data) {
+
+			let group = item[this._dataConfig.categoryKey];
+			groups[group] = 1;
+		}
+
+		return Object.keys(groups);
+	}
+
+
+	setSelection(targetId) {
+
+		this._selectedIds = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
+	}
+
+
+	selectItem(targetId) {
+
+		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+		let k;
+
+		for (id of ids) {
+
+			if (!this._selectedIds.contains(id)) {
+
+				this._selectedIds.push(id);
+			}
+		}
+
+		this._refreshSelection();
+	}
+
+
+	unselectItem(targetId) {
+
+		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+		let k;
+
+		for (id of ids) {
+
+			if ((k = this._selectedIds.indexOf(id)) !== -1) {
+				this._selectedIds.splice(k, 1);
+			}
+		}
+
+		this._refreshSelection();
+	}
+
+
+	unselectAll() {
+
+
+	}
+
 
 	get id() {
 
-        return this._instanceId;
-    }
+		return this._instanceId;
+	}
 
 
-    get name() {
+	get name() {
 
-        return this._instanceName;
-    }
-
-
-    get state() {
-
-        return this._state;
-    }
+		return this._instanceName;
+	}
 
 
-    get parentManagerId() {
+	get state() {
 
-        return this._managerId;
-    }
-
-
-    enable() {
+		return this._state;
+	}
 
 
-    }
+	get parentManagerId() {
+
+		return this._managerId;
+	}
 
 
-    disable() {
+	enable() {
 
 
-    }
+	}
 
 
-    update() {
+	disable() {
 
 
-    }
+	}
 
 
-    /**
-     *
-     * @param target
-     */
-    selectItems(target) {
+	update() {
 
 
-    }
+	}
 
 
-    /**
-     *
-     * @param target
-     */
-    unselectItems(target) {
+	refresh() {
+
+	}
 
 
-    }
+	open() {
+
+	}
 
 
-    clear() {
+	close() {
 
 
-    }
+	}
 
 
-    destroy() {
+	destroy() {
 
 
-    }
-
-
-    /**
-     *
-     * @param code
-     */
-    getErrorMsg(code) {
-
-        // Do stuff
-    }
-
-
-    /**
-     *
-     * @param code
-     * @private
-     */
-    _submitInterfaceError(code) {
-
-        // this._interface.error(code);
-    }
+	}
 }

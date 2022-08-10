@@ -9,8 +9,6 @@ export class Selector {
 
 	constructor() {
 
-		// Programaticaly...
-
 		this._id = ++Selector._id_counter;
 
 		this._data = {};
@@ -104,6 +102,7 @@ export class Selector {
 
 	}
 
+
 	close () {
 
 	}
@@ -179,6 +178,7 @@ export class Selector {
 
 		this._refreshSelection();
 	}
+
 
 	unselectAll () {
 
