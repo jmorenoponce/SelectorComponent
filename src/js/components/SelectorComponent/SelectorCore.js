@@ -42,7 +42,6 @@ export class SelectorCore {
 
 
 	/**
-	 *
 	 * @param managerId
 	 * @param instanceId
 	 * @returns {number}
@@ -89,9 +88,9 @@ export class SelectorCore {
 			return this._state;
 		}
 
-		this._dataConfig.lastSelectedIds = dataSrc[0][SelectorCore._JSON_KEYS.LAST_SELECTED_IDS];
-		this._dataConfig.categoryKey = dataSrc[0][SelectorCore._JSON_KEYS.CATEGORY_KEY];
-		this._data = dataSrc[0][SelectorCore._JSON_KEYS.DATA];
+        this._data = dataSrc[0][SelectorCore._JSON_KEYS.DATA];
+        this._dataConfig.categoryKey = dataSrc[0][SelectorCore._JSON_KEYS.CATEGORY_KEY];
+        this._dataConfig.lastSelectedIds = dataSrc[0][SelectorCore._JSON_KEYS.LAST_SELECTED_IDS];
 
 		this._ui = new SelectorUi($targetCmp);
 		this._instanceName = this._ui.name() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
@@ -106,7 +105,6 @@ export class SelectorCore {
 
 
 	/**
-	 *
 	 * @returns {number}
 	 * @private
 	 */
@@ -145,10 +143,11 @@ export class SelectorCore {
 	}
 
 
-	/**
-	 * Returns the filtered item list (taking search term as filter seed)
-	 * @return {Array}
-	 */
+    /**
+     * Returns the filtered item list (taking search term as filter seed)
+     * @returns {[]}
+     * @private
+     */
 	_filterItems() {
 
 		let filtered = [];
@@ -164,10 +163,12 @@ export class SelectorCore {
 	}
 
 
-	/**
-	 * Returns an enumerated array containing the categories of data items
-	 * @private
-	 */
+    /**
+     * Returns an enumerated array containing the categories of data items
+     * @param data
+     * @returns {string[]}
+     * @private
+     */
 	_getItemsGroups(data) {
 
 		let groups = {};
@@ -182,12 +183,20 @@ export class SelectorCore {
 	}
 
 
+    /**
+     *
+     * @param targetId
+     */
 	setSelection(targetId) {
 
 		this._selectedIds = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
 	}
 
 
+    /**
+     *
+     * @param targetId
+     */
 	selectItem(targetId) {
 
 		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
@@ -205,6 +214,10 @@ export class SelectorCore {
 	}
 
 
+    /**
+     *
+     * @param targetId
+     */
 	unselectItem(targetId) {
 
 		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
@@ -223,7 +236,38 @@ export class SelectorCore {
 
 	unselectAll() {
 
+		this._selectedIds = [];
 
+		this._refreshSelection();
+	}
+
+
+
+	_refreshSelection () {
+
+		this._updateNativeValue();
+	}
+
+
+	/**
+	 * Updates native select value
+	 */
+	_updateNativeValue () {
+
+		let _opts = '';
+
+		let _prev_value = this.$select.html();
+
+		for (id of this._selectedIds) {
+			_opts += '<option value="' + id + '" selected="selected"></option>';
+		}
+
+		this.$select.html(_opts);
+
+		// Fire native select on change event
+		if (_opts != _prev_value) {
+			this.$select.trigger('change');
+		}
 	}
 
 
@@ -271,15 +315,56 @@ export class SelectorCore {
 
 	refresh() {
 
+
 	}
 
 
 	open() {
 
+
 	}
 
 
 	close() {
+
+
+	}
+
+
+	loadData () {
+
+
+	}
+
+
+	reloadData () {
+
+
+	}
+
+
+	setData () {
+
+
+	}
+
+
+	/**
+	 * Render main component
+	 */
+	render () {
+
+
+	}
+
+
+	renderList_ungrouped () {
+
+
+	}
+
+
+	renderList_grouped () {
 
 
 	}
