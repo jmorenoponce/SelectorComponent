@@ -1,7 +1,7 @@
 'use strict';
 
 
-export class SelectorConfig {
+export class SelectorUiConfig {
 
 
 	static _CONFIG_DEFAULT = {
@@ -61,9 +61,8 @@ export class SelectorConfig {
 
 	constructor() {
 
-		this._isValid = false;
-
 		this.configObj = {};
+		this._isValid = false;
 	}
 
 
@@ -75,7 +74,7 @@ export class SelectorConfig {
 
 		let tmpConfig = {};
 
-		$.extend(true, tmpConfig, SelectorConfig._CONFIG_DEFAULT, newConfig);
+		$.extend(true, tmpConfig, SelectorUiConfig._CONFIG_DEFAULT, newConfig);
 
 		if (this._validate(tmpConfig)) {
 			this._isValid = true;
@@ -93,9 +92,9 @@ export class SelectorConfig {
 	 */
 	_validate(newConfig) {
 
-		for (const key in SelectorConfig._CONFIG_MAP) {
+		for (const key in SelectorUiConfig._CONFIG_MAP) {
 
-			const keySpec = SelectorConfig._CONFIG_MAP[key];
+			const keySpec = SelectorUiConfig._CONFIG_MAP[key];
 			const entryVal = newConfig[key];
 
 			if (typeof entryVal !== keySpec.type) {

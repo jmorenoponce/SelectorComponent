@@ -1,13 +1,17 @@
 'use strict';
 
 
+// import {SelectorUiTemplates} from "./SelectorUiTemplates.html";
+
+
 export class SelectorUi {
 
 
+    // Todo: llevar a uiConfig
     static _SELECTORS = {
 
         // General
-        SOURCE_HIDDEN: '.ui-selector-source-hidden',
+        SOURCE_OBJECT_HIDDEN: '.ui-selector-source-hidden',
 
         // Actions
         ENABLE: '.ui-selector-enable',
@@ -17,6 +21,7 @@ export class SelectorUi {
         VIEW_EXTENDED: '.ui-selector-view-extended',
 
         // States
+        IS_LOADING: '.ui-selector-loading',
         HAS_ERROR: '.ui-selector-has-error'
     };
 
@@ -52,7 +57,7 @@ export class SelectorUi {
 
     createElement() {
 
-        this._$sourceHtmlObj.addClass(SelectorUi._SELECTORS.SOURCE_HIDDEN);
+        this._$sourceHtmlObj.addClass(SelectorUi._SELECTORS.SOURCE_OBJECT_HIDDEN);
     }
 
 

@@ -21,7 +21,11 @@ userData.then(userData => {
 		searchingText: 'Buscando usuarios...',
 		searchResultsNone: 'No se encontraron usuarios para esta búsqueda',
 	});
-	console.log(userSelectorComponent.parentManagerId, userSelectorComponent.id, userSelectorComponent.init());
+
+	console.log(
+		userSelectorComponent.parentManagerId,
+		userSelectorComponent.id,
+		userSelectorComponent.init());
 });
 
 // Another Selector Component with errors for testing
@@ -34,7 +38,11 @@ anotherData.then(anotherData => {
 		isEditable: false,
 		placeholder: 45			// => Wrong type
 	});
-	console.log(userSelectorComponent.parentManagerId, wrongSelectorComponent.id, wrongSelectorComponent.init());
+
+	console.log(
+		userSelectorComponent.parentManagerId,
+		wrongSelectorComponent.id,
+		wrongSelectorComponent.init());
 });
 
 
