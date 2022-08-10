@@ -31,6 +31,12 @@ export class SelectorCore {
 	};
 
 
+	static _JSON_KEYS = {
+
+
+    }
+
+
 	/**
 	 *
 	 * @param managerId
@@ -47,16 +53,17 @@ export class SelectorCore {
 		this._data = {};
 		this._dataConfig = {
 			categoryKey: '',
+            dataKey: '',
 			filter: function (term, item) {
 				return item.name.toLowerCase().includes(term);
 			}
 		};
 
-		this._searchTerm = '';
-		this._selectedIds = [];
-
 		this._ui = null;
-		this._uiConfig = new SelectorConfig();
+        this._uiConfig = new SelectorConfig();
+
+        this._searchTerm = '';
+        this._selectedIds = [];
 
 		this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
 		return this._state;
@@ -78,8 +85,8 @@ export class SelectorCore {
 			return this._state;
 		}
 
-		// this._data = sourceData;
-		// this._dataConfig.categoryKey
+		this._data = sourceData.data;
+		this._dataConfig = sourceData.categoryKey;
 
 		this._ui = new SelectorUi($targetCmp);
 		this._instanceName = this._ui.name() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;

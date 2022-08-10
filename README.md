@@ -1,89 +1,34 @@
 ## SelectorComponent
 
-#### Notas
+#### Don't forget
     - https://es.javascript.info/task/spy-decorator
+    
     - https://www.30secondsofcode.org/articles/s/javascript-array-comparison
+    
     - https://www.youtube.com/watch?v=3AIT1RdLprg
     
-#### Colors    
-    /* Palette */
+#### Vite 
+    - Levanta su propio servidor de desarrollo en un puerto configurable.
     
-    $color-blue        : #3699FF
-    $color-light-blue  : #E1F0FF
-    $color-dark-blue   : #187DE4
-    $color-purple      : #8950FC
-    $color-light-purple: #EEE5FF
-    $color-dark-purple : #7337EE
-    $color-red         : #F64E60
-    $color-light-red   : #FFE2E5
-    $color-dark-red    : #EE2D41
-    $color-yellow      : #FFA800
-    $color-light-yellow: #FFF4DE
-    $color-dark-yellow : #EE9D01
-    $color-teal        : #1BC5BD
-    $color-light-teal  : #C9F7F5
-    $color-dark-teal   : #0BB7AF
+    - Se basa en el funcionamiendo del dev server, prepara un index.html para desarrollo con ES Modules 
+    y otro index diferente para producción con el bundle terminado.
     
-    $color-orange      : #FD7E14
-    $color-indigo      : #6610F2
-    $color-pink        : #E83E8C
-    $color-green       : #28A745
-    $color-cyan        : #17A2B8
+    - Empaqueta el Css automáticamente si lo importas en el .js
     
-    $color-white       : #FFFFFF
-    $color-white-75    : rgba($color-white, .75)
-    $color-white-50    : rgba($color-white, .5)
-    $color-white-25    : rgba($color-white, .25)
-    $color-black       : #000000
-    $color-dark        : #181C32
-    $color-dark-gray   : #3F4254
-    $color-gray        : #7E8299
-    $color-gray-900    : #181C32
-    $color-gray-800    : #3F4254
-    $color-gray-700    : #5E6278
-    $color-gray-600    : #7E8299
-    $color-gray-500    : #B5B5C3
-    $color-gray-400    : #D1D3E0
-    $color-gray-300    : #E4E6EF
-    $color-gray-200    : #EBEDF3
-    $color-gray-100    : #F3F6F9
-    $color-gray-50     : #F9FAFC
-    $color-inactive    : #FAFBFC
+    - El concepto es orientado a componentes igual que Vue, React, etc...
     
-    /* Text color */
-    $text-dark            : #181C32
-    $text-dark-75         : #3F4254
-    $text-dark-65         : #5E6278
-    $text-dark-50         : #7E8299
-    $text-dark-25         : #D1D3E0
-    $text-body            : #3F4254
-    $text-muted           : #B5B5C3
-    $text-black-50        : rgba(0,0,0,.5)
-    $text-light           : #F3F6F9
-    $text-white           : #FFFFFF
-    $text-white-50        : rgba(255,255,255,.5)
+    - Mete una porción de código en tiempo de desarrollo "refreshRuntime" que actualiza los cambios en
+     tiempo real en el navegador, también carga el bundle con un timestamp para evitar la caché del navegador.
+     
+    - No necesitas ni siquiera un vite.config.js inicial, hace el bundle automático con los imports de ES Modules.
     
-    /* State colors */
-    $color-default        : #D1D3E0
-    $color-light-default  : #E4E6Ef
-    $color-dark-default   : #5e6278
-    $color-secondary      : #7E8299
-    $color-light-secondary: #D1D3E0
-    $color-dark-secondary : #3F4254
-    $color-primary        : #3699FF
-    $color-light-primary  : #E1F0FF
-    $color-dark-primary   : #187DE4
-    $color-success        : #1BC5BD
-    $color-light-success  : #C9F7F5
-    $color-dark-success   : #0BB7AF
-    $color-danger         : #F64E60
-    $color-light-danger   : #FFE2E5
-    $color-dark-danger    : #EE2D41
-    $color-warning        : #FFA800
-    $color-light-warning  : #FFF4DE
-    $color-dark-warning   : #EE9D01
-    $color-info           : #8950FC
-    $color-light-info     : #EEE5FF
-    $color-dark-info      : #7337EE
+    - Levanta una estructura.... <src>, <public>, <dist>, <node_modules> básica, donde lleva a <dist> el bundle final para producción con el contenido de <public>.
     
-    $color-link-visited   : #7457cc
+    - <vite run "preview"> bundeliza producción en un dev server.
+    
+    - Puedes tener un archivo .ENV para la configuración de desarrollo y producción.
+    
+    - Tira de PostCss, La importación de archivos .css inyectará su contenido en la página a través de una etiqueta <style> con soporte HMR (Reemplazo de módulo en caliente)
+    
+    - Estudiar Webcomponents
+    
