@@ -1,8 +1,8 @@
 'use strict';
 
 
-import {SelectorUiConfig} from "./SelectorUiConfig";
-import {SelectorUi} from './SelectorUi.js';
+import {SelectorData} from "./SelectorData";
+import {SelectorUI} from './SelectorUI.js';
 
 
 export class SelectorCore {
@@ -12,6 +12,7 @@ export class SelectorCore {
 
         // Informative
         WAITING_FOR_BINDING: 100,
+        SINGLE_COMPONENT: 110,
 
         // Successful
         BINDED: 200,
@@ -23,86 +24,62 @@ export class SelectorCore {
         INVALID_TARGET_COMPONENT: 400,
         UNKNOWN_TARGET_NAME: 410,
         INVALID_CONFIG_OBJECT: 420,
-        INVALID_SOURCE_DATA: 430,
-        UNKNOWN_SOURCE_DATA: 440,
+        INVALID_DATA_SOURCE: 430,
+        UNKNOWN_DATA_SOURCE: 440,
 
         // Other
         UNKNOWN_PROBLEM: 900
     };
 
 
-    // Todo: llevar a SelectorDataConfig
-    static _JSON_KEYS = {
-
-        DATA_SOURCE: 'dataSource',
-        NOTES: 'notes',
-        LAST_SELECTED_IDS: 'lastItemsSelected',
-        CATEGORY_KEY: 'categoryKey',
-        DATA: 'data'
-    }
-
-
     /**
-     * @param managerId
      * @param instanceId
+     * @param managerId
      * @returns {number}
      */
-    constructor(managerId, instanceId) {
-
-        this._managerId = managerId;
+    constructor(instanceId, managerId = null) {
 
         this._instanceId = instanceId;
-        this._instanceName = null;
+        this._instanceName = '';
 
-        this._data = {};
-        this._dataConfig = {
-            lastSelectedIds: [],
-            categoryKey: '',
-            filter: function (term, item) {
-                return Object.values(item).includes(term);
-            }
-        };
+        this._managerId = managerId || SelectorCore._STATES.SINGLE_COMPONENT;
 
-        this._$ui = null;
-        this._uiConfig = new SelectorUiConfig();
+        this._data = new SelectorData();
+        this._ui = new SelectorUI();
 
-        this._searchTerm = '';
+        this._searchTerm = ''; // Todo a SelectorData
         this._selectedIds = [];
 
         this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
+
         return this._state;
     }
 
 
     /**
-     * Link the new selector getting an html object, data categorize source and config behaviour parameters
+     * Link the created component getting native Html component, categorized source data, and
+     * behaviour parameters configuration object.
      * @param sourceCmp
      * @param dataSrc
      * @param configObj
-     * @returns {number} State code
+     * @returns {number} State
      */
     bind(sourceCmp, dataSrc, configObj) {
 
-        // Todo Refactor in functions
+        if(!this._data.load(dataSrc)) {
+            this._state = SelectorCore._STATES.INVALID_DATA_SOURCE;
+        }
 
-        // Function: Read source data
-        this._data = dataSrc[0][SelectorCore._JSON_KEYS.DATA];
-        this._dataConfig.categoryKey = dataSrc[0][SelectorCore._JSON_KEYS.CATEGORY_KEY];
-        this._dataConfig.lastSelectedIds = dataSrc[0][SelectorCore._JSON_KEYS.LAST_SELECTED_IDS];
+        this._ui.assignNativeObj(sourceCmp);
 
-        // Function: If Exist Html component then assign and get info (name)
-        let $targetCmp = $(sourceCmp);
-        if (!$targetCmp.length > 0) {
+        if (!this._ui.isValidNativeComponent) {
             this._state = SelectorCore._STATES.INVALID_TARGET_COMPONENT;
             return this._state;
         }
 
-        // Function: Create interface
-        this._$ui = new SelectorUi($targetCmp);
-        this._instanceName = this._$ui.name() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
+        this._ui.assignConfig(configObj);
 
-        this._uiConfig.assign(configObj);
-        this._state = this._uiConfig.isValid() ?
+        this._state = this._ui.isValidConfig() ?
             SelectorCore._STATES.BINDED :
             SelectorCore._STATES.INVALID_CONFIG_OBJECT;
 
@@ -110,16 +87,22 @@ export class SelectorCore {
     }
 
 
+    /**
+     * @returns {number} State
+     * @private
+     */
     _init() {
 
         if (this._state === SelectorCore._STATES.BINDED) {
+
+            this._instanceName = this._ui.create() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
 
             this.render();
             this._state = SelectorCore._STATES.RUNNING;
         }
 
-        // this.setSearchTerm('marketing');
-        // console.log(this._filterItems())
+        console.log('Buscando "marketing"...', this._data.filterItems('marketing'));
+        console.log('Lista de categorías...', this._data.getItemsGroups());
 
         return this._state;
     }
@@ -131,44 +114,17 @@ export class SelectorCore {
     }
 
 
-    get id() {
-
-        return this._instanceId;
-    }
-
-
-    get name() {
-
-        return this._instanceName;
-    }
-
-
-    get state() {
-
-        return this._state;
-    }
-
-
-    get parentManagerId() {
-
-        return this._managerId;
-    }
-
-
     /**
-     *
      * @param text
      * @private
      */
     _setSearchTerm(text) {
 
         this._searchTerm = (String(text)).toLowerCase();
-        // TODO Replace accents
     }
 
 
     /**
-     *
      * @param text
      */
     setSearchTerm(text) {
@@ -179,32 +135,13 @@ export class SelectorCore {
 
 
     /**
-     * Returns the filtered item list (taking search term as filter seed)
-     * @returns {[]}
-     * @private
-     */
-    _filterItems() {
-
-        let filtered = [];
-
-        for (let item of this._data) {
-
-            if (this._dataConfig.filter.apply(null, [this._searchTerm, item])) {
-                filtered.push(item);
-            }
-        }
-
-        return filtered;
-    }
-
-
-    /**
      *
      * @param targetId
      */
     setSelection(targetId) {
 
         this._selectedIds = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
+        this.update();
     }
 
 
@@ -214,6 +151,7 @@ export class SelectorCore {
      */
     selectItem(targetId) {
 
+        // Todo: Refactor, hay un anzuelo aquí
         const ids = typeof (targetId) == 'object' ? targetId : [targetId];
         let k;
 
@@ -262,23 +200,9 @@ export class SelectorCore {
     }
 
 
-    /**
-     * Returns an enumerated array containing the categories of data items
-     * @param data
-     * @returns {string[]}
-     * @private
-     */
-    _getItemsGroups(data) {
+    getNativeValue() {
 
-        let groups = {};
 
-        for (let item of data) {
-
-            let group = item[this._dataConfig.categoryKey];
-            groups[group] = 1;
-        }
-
-        return Object.keys(groups);
     }
 
 
@@ -322,12 +246,6 @@ export class SelectorCore {
     }
 
 
-    refresh() {
-
-
-    }
-
-
     open() {
 
 
@@ -335,24 +253,6 @@ export class SelectorCore {
 
 
     close() {
-
-
-    }
-
-
-    loadData() {
-
-
-    }
-
-
-    reloadData() {
-
-
-    }
-
-
-    setData() {
 
 
     }
@@ -382,5 +282,29 @@ export class SelectorCore {
     destroy() {
 
 
+    }
+
+
+    get id() {
+
+        return this._instanceId;
+    }
+
+
+    get name() {
+
+        return this._instanceName;
+    }
+
+
+    get state() {
+
+        return this._state;
+    }
+
+
+    get parentManagerId() {
+
+        return this._managerId;
     }
 }

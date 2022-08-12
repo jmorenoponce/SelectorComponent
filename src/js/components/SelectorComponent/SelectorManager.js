@@ -28,13 +28,13 @@ export class SelectorManager {
 
 
     /**
-     *
+     * Create new instance core width new id and passing manager parent id
      * @returns {SelectorCore}
      */
     instanceNew() {
 
         let tmpId = this._generateId();
-        let tmpObj = new SelectorCore(this._id, tmpId);
+        let tmpObj = new SelectorCore(tmpId, this._id);
 
         this._instancesObj.push(tmpObj);
 

@@ -36,7 +36,7 @@ anotherData.then(anotherData => {
 	wrongSelectorComponent.bind('.ux-selector-another', anotherData, {
 		isActive: true,			// => Wrong property
 		isEditable: false,
-		placeholder: 45			// => Wrong type
+		placeholder: '45'			// => Wrong type
 	});
 
 	console.log(
@@ -44,7 +44,6 @@ anotherData.then(anotherData => {
 		wrongSelectorComponent.id,
 		wrongSelectorComponent.init());
 });
-
 
 // Some test for functionality
 const wait = setTimeout(printInfo, 1000);
