@@ -1,6 +1,8 @@
 {
+  "timestamp": "",
   "dataSource": "anotherTypology",
   "notes": "No existe información",
+  "categoryKey": "department",
   "data": [
     {
       "id": 1,

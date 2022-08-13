@@ -47,7 +47,7 @@ export class SelectorCore {
         this._data = new SelectorData();
         this._ui = new SelectorUI();
 
-        this._searchTerm = ''; // Todo a SelectorData
+        this._searchTerm = '';
         this._selectedIds = [];
 
         this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
@@ -57,8 +57,8 @@ export class SelectorCore {
 
 
     /**
-     * Link the created component getting native Html component, categorized source data, and
-     * behaviour parameters configuration object.
+     * Link the created component getting native Html component, categorized source data,
+     * and configuration object with behaviour parameters.
      * @param sourceCmp
      * @param dataSrc
      * @param configObj
@@ -66,19 +66,19 @@ export class SelectorCore {
      */
     bind(sourceCmp, dataSrc, configObj) {
 
-        if(!this._data.load(dataSrc)) {
+        this._data.load(dataSrc);
+        if(!this._data.isValidData()) {
             this._state = SelectorCore._STATES.INVALID_DATA_SOURCE;
+            return this._state
         }
 
-        this._ui.assignNativeObj(sourceCmp);
-
+        this._ui.setNativeObj(sourceCmp);
         if (!this._ui.isValidNativeComponent) {
             this._state = SelectorCore._STATES.INVALID_TARGET_COMPONENT;
             return this._state;
         }
 
         this._ui.assignConfig(configObj);
-
         this._state = this._ui.isValidConfig() ?
             SelectorCore._STATES.BINDED :
             SelectorCore._STATES.INVALID_CONFIG_OBJECT;
@@ -100,9 +100,6 @@ export class SelectorCore {
             this.render();
             this._state = SelectorCore._STATES.RUNNING;
         }
-
-        console.log('Buscando "marketing"...', this._data.filterItems('marketing'));
-        console.log('Lista de categorías...', this._data.getItemsGroups());
 
         return this._state;
     }
@@ -246,13 +243,13 @@ export class SelectorCore {
     }
 
 
-    open() {
+    openDropdown() {
 
 
     }
 
 
-    close() {
+    closeDropdown() {
 
 
     }
@@ -306,5 +303,11 @@ export class SelectorCore {
     get parentManagerId() {
 
         return this._managerId;
+    }
+
+
+    getErrorMessage(codeValue) {
+
+        return Object.keys(SelectorCore._STATES).find((key) => SelectorCore._STATES[key] === codeValue);
     }
 }

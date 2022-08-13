@@ -57,5 +57,10 @@ function printInfo() {
 
 	console.log('manager_instances_object...', selectorManager.instancesObj);
 
+	userSelectorComponent.setSearchTerm('marketing');
+
+	// console.log('Buscando "marketing"...', this._data.filterItems('marketing'));
+	// console.log('Lista de categorías...', this._data.getItemsGroups());
+
 	clearTimeout(wait);
 }

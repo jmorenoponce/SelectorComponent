@@ -17,6 +17,7 @@ export class SelectorData {
     constructor() {
 
         this.data = {};
+        this._isValidData = false;
 
         this.configObj = {
             categoryKey: '',
@@ -30,14 +31,26 @@ export class SelectorData {
 
     /**
      * Take de values from json data filling owner configuration keys.
+     *  <data> and <category_key> are required keys.
      * @param dataSrc
+     * @returns {boolean}
      */
     load(dataSrc) {
 
-        // Todo Comprobaciones aquí?
+        if (!dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.DATA) ||
+            !dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.CATEGORY_KEY)) {
+            return false;
+        }
+
         this.data = dataSrc[SelectorData._JSON_KEYS.DATA];
         this.configObj.categoryKey = dataSrc[SelectorData._JSON_KEYS.CATEGORY_KEY];
-        this.configObj.lastSelectedIds = dataSrc[SelectorData._JSON_KEYS.LAST_SELECTED_IDS];
+
+        let tmpLastSelectedIds = dataSrc[SelectorData._JSON_KEYS.LAST_SELECTED_IDS];
+        tmpLastSelectedIds ? this.configObj.lastSelectedIds = tmpLastSelectedIds : false;
+
+        this._isValidData = true;
+
+        return this._isValidData;
     }
 
 
@@ -47,7 +60,7 @@ export class SelectorData {
      */
     reload(dataSrc) {
 
-        // Control de versión de los datos ??
+        // Control de versión de los datos con un timestamp?
     }
 
 
@@ -86,5 +99,11 @@ export class SelectorData {
         }
 
         return Object.keys(groups);
+    }
+
+
+    isValidData() {
+
+        return this._isValidData;
     }
 }

@@ -113,7 +113,7 @@ export class SelectorUI {
     }
 
 
-    assignNativeObj(sourceCmp) {
+    setNativeObj(sourceCmp) {
 
         let $sourceCmp = $(sourceCmp);
 
