@@ -68,18 +68,49 @@ export class SelectorManager {
     }
 
 
-    getInstanceById() {
+    /**
+     * @param targetId
+     */
+    getInstanceById(targetId) {
+
+        return this._getInstanceByProp('id', targetId);
+    }
 
 
+    /**
+     * @param targetName
+     */
+    getInstanceByName(targetName) {
+
+        return this._getInstanceByProp('name', targetName);
+    }
+
+
+    /**
+     * Returns object instance looking for targetValue in any property as key.
+     * @param prop
+     * @param targetValue
+     * @returns {boolean|number}
+     * @private
+     */
+    _getInstanceByProp(prop, targetValue) {
+
+        let tmpResponse = this._instancesObj.findIndex((instance) => instance[prop] === targetValue);
+
+        if (tmpResponse < 0) {
+            return false;
+        }
+
+        return this._instancesObj[tmpResponse];
     }
 
 
     /**
      *
-     * @param target
+     * @param targetId
      * @param action
      */
-    submitInstanceAction(target, action) {
+    sendInstanceAction(targetId, action) {
 
         // Do stuff...
     }

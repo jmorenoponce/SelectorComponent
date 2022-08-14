@@ -6,6 +6,7 @@ export class SelectorData {
 
     static _JSON_KEYS = {
 
+        TIMESTAMP: '',
         NAME: 'dataSource',
         NOTES: 'notes',
         CATEGORY_KEY: 'categoryKey',
@@ -21,6 +22,13 @@ export class SelectorData {
         this.configObj = {
             categoryKey: '',
             lastSelectedIds: [],
+
+            /**
+             * Returns ...
+             * @param term
+             * @param item
+             * @returns {boolean}
+             */
             filter: function (term, item) {
                 return Object.values(item).toString().toLowerCase().includes((term));
             }
@@ -30,22 +38,20 @@ export class SelectorData {
 
     /**
      * Take de values from json data filling owner configuration keys.
-     *  <data> and <category_key> are required keys.
+     *  <data> and <category_key> are required keys for valid <dataSrc>.
      * @param dataSrc
      * @returns {boolean}
      */
     load(dataSrc) {
 
-        if (!dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.DATA) ||
-            !dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.CATEGORY_KEY)) {
+        if (!dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.DATA)
+            || !dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.CATEGORY_KEY)) {
             return false;
         }
 
         this.data = dataSrc[SelectorData._JSON_KEYS.DATA];
         this.configObj.categoryKey = dataSrc[SelectorData._JSON_KEYS.CATEGORY_KEY];
-
-        let tmpLastSelectedIds = dataSrc[SelectorData._JSON_KEYS.LAST_SELECTED_IDS];
-        tmpLastSelectedIds ? this.configObj.lastSelectedIds = tmpLastSelectedIds : false;
+        this.configObj.lastSelectedIds = dataSrc[SelectorData._JSON_KEYS.LAST_SELECTED_IDS] || null;
 
         return true;
     }
@@ -55,14 +61,14 @@ export class SelectorData {
      *
      * @param dataSrc
      */
-    reload(dataSrc) {
+    refresh(dataSrc) {
 
         // Control de versión de los datos con un timestamp?
     }
 
 
     /**
-     * Returns the filtered item list (taking search term as filter seed)
+     * Returns the filtered item list (taking search term as filter seed).
      * @param searchTerm
      * @returns {[]}
      */
@@ -82,7 +88,7 @@ export class SelectorData {
 
 
     /**
-     * Returns an enumerated array containing the categories of data items
+     * Returns an enumerated array containing the categories of data items.
      * @returns {string[]}
      */
     getItemsGroups() {
@@ -96,11 +102,5 @@ export class SelectorData {
         }
 
         return Object.keys(groups);
-    }
-
-
-    isValidData() {
-
-        return this._isValidData;
     }
 }

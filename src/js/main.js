@@ -10,6 +10,9 @@ let selectorManager = new SelectorManager();
 
 //  Users Selector Component
 let userSelectorComponent = selectorManager.instanceNew();
+
+let tmpId = userSelectorComponent.id; // Test functionality.
+
 let userData = Util.loadFromFile('./dist/data-src/users-src.json');
 
 userData.then(userData => {
@@ -21,6 +24,7 @@ userData.then(userData => {
 		searchingText: 'Buscando usuarios...',
 		searchResultsNone: 'No se encontraron usuarios para esta búsqueda',
 	});
+	userSelectorComponent.init();
 });
 
 
@@ -30,15 +34,16 @@ let anotherData = Util.loadFromFile('./dist/data-src/another-src.json');
 
 anotherData.then(anotherData => {
 	wrongSelectorComponent.bind('.ux-selector-another', anotherData, {
-		isActive: null,			// => Wrong property
+		isActive: false,		// => Wrong property
 		isEditable: false,
 		placeholder: '45'		// => Wrong type
 	});
+	wrongSelectorComponent.init();
 });
 
 
 // Some test for functionality
-const wait = setTimeout(printInfo, 200);
+const wait = setTimeout(printInfo, 500);
 
 function printInfo() {
 
@@ -51,16 +56,19 @@ function printInfo() {
 	for (const instance of instancesObj) {
 		console.log('Component: ', instance.id);
 		console.log('Name: ', instance.name);
-		console.log('State: ', instance.getStatusMessage(instance.state));
+		console.log('State: ', instance.getStateMessage());
 		console.log('Native value: ', instance.getNativeValue());
+		console.log('Object: ', instance);
 		console.log('\n');
 
 		console.log('Department list...', instance.getItemGroups());
 		console.log('Looking for "anna"...', instance.setSearchTerm('anna'));
-		console.log('Looking for "mark"...', instance.setSearchTerm('mark'));
+		console.log('Looking for "rk"...', instance.setSearchTerm('mark'));
 		console.log('\n');
 	}
 
+	console.log('Looking for name property: ', selectorManager.getInstanceByName('anotherTypology'));
+	console.log('Looking for id property: ', selectorManager.getInstanceById(tmpId));
 
 	clearTimeout(wait);
 }

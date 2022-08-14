@@ -47,11 +47,10 @@ export class SelectorCore {
         this._data = new SelectorData();
         this._ui = new SelectorUI();
 
-        this._searchTerm = '';
         this._selectedIds = [];
+        this._searchTerm = '';
 
         this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
-
         return this._state;
     }
 
@@ -68,7 +67,7 @@ export class SelectorCore {
 
         if(!this._data.load(dataSrc)) {
             this._state = SelectorCore._STATES.INVALID_DATA_SOURCE;
-            return this._state
+            return this._state;
         }
 
         if (!this._ui.setNativeObj(sourceCmp)) {
@@ -85,18 +84,18 @@ export class SelectorCore {
 
 
     /**
+     *
      * @returns {number} State
      * @private
      */
     _init() {
 
-        if (this._state === SelectorCore._STATES.BINDED) {
-
-            this._instanceName = this._ui.create() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
-
-            this.render();
-            this._state = SelectorCore._STATES.RUNNING;
+        if (this._state !== SelectorCore._STATES.BINDED) {
+            return this._state;
         }
+
+        this._instanceName = this._ui.create() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
+        this._state = SelectorCore._STATES.RUNNING;
 
         return this._state;
     }
@@ -109,45 +108,16 @@ export class SelectorCore {
 
 
     /**
+     * Establishes new search term and throw filter method.
      * @param text
-     * @private
-     */
-    _setSearchTerm(text) {
-
-        this._searchTerm = (String(text)).toLowerCase();
-        return this._data.filterItems(this._searchTerm);
-    }
-
-
-    /**
-     * @param text
+     * @returns {*[]}
      */
     setSearchTerm(text) {
 
-        return this._setSearchTerm(text);
-    }
+        this._searchTerm = (String(text)).toLowerCase();
 
-
-    _getItemGroups() {
-
-        return this._data.getItemsGroups();
-    }
-
-
-    getItemGroups() {
-
-        return this._getItemGroups();
-    }
-
-
-    /**
-     *
-     * @param targetId
-     */
-    setSelection(targetId) {
-
-        this._selectedIds = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
-        this.update();
+        // Todo: Paso previo para extraer sólo Id's
+        return this._data.filterItems(this._searchTerm);
     }
 
 
@@ -191,11 +161,38 @@ export class SelectorCore {
         this._refreshSelection();
     }
 
+    /**
+     *
+     * @param targetId
+     * @private
+     */
+    _setSelection(targetId) {
+
+        this._selectedIds = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
+        // refresh method
+    }
+
+
+    setSelection(targetId) {
+
+        this._setSelection(targetId);
+    }
+
 
     unselectAll() {
 
         this._selectedIds = [];
         this._refreshSelection();
+    }
+
+
+    /**
+     *
+     * @returns {string[]}
+     */
+    getItemGroups() {
+
+        return this._data.getItemsGroups();
     }
 
 
@@ -237,13 +234,13 @@ export class SelectorCore {
 
     openDropdown() {
 
-
+        this._ui.open();
     }
 
 
     closeDropdown() {
 
-
+        this._ui.close();
     }
 
 
@@ -277,6 +274,12 @@ export class SelectorCore {
     }
 
 
+    get parentManagerId() {
+
+        return this._managerId;
+    }
+
+
     get name() {
 
         return this._instanceName;
@@ -289,13 +292,12 @@ export class SelectorCore {
     }
 
 
-    get parentManagerId() {
-
-        return this._managerId;
-    }
-
-
-    getStatusMessage(codeValue) {
+    /**
+     * Returns the state value from code value parameter, if default value returns the actual state.
+     * @param codeValue
+     * @returns {string}
+     */
+    getStateMessage(codeValue = this._state) {
 
         return Object.keys(SelectorCore._STATES).find((key) => SelectorCore._STATES[key] === codeValue);
     }
