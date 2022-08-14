@@ -49,7 +49,7 @@ export class SelectorManager {
 
 
     /**
-     * Returns amount of component instances managed for this manager instance
+     * Returns amount of component instances managed for this manager.
      * @returns {number}
      */
     get instancesAmount() {
@@ -59,12 +59,18 @@ export class SelectorManager {
 
 
     /**
-     * Returns all component instances managed for this manager instance
+     * Returns object that contains all component instances managed for this manager.
      * @returns {[]}
      */
     get instancesObj() {
 
         return this._instancesObj;
+    }
+
+
+    getInstanceById() {
+
+
     }
 
 

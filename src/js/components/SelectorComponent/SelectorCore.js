@@ -62,24 +62,21 @@ export class SelectorCore {
      * @param sourceCmp
      * @param dataSrc
      * @param configObj
-     * @returns {number} State
+     * @returns {number}
      */
     bind(sourceCmp, dataSrc, configObj) {
 
-        this._data.load(dataSrc);
-        if(!this._data.isValidData()) {
+        if(!this._data.load(dataSrc)) {
             this._state = SelectorCore._STATES.INVALID_DATA_SOURCE;
             return this._state
         }
 
-        this._ui.setNativeObj(sourceCmp);
-        if (!this._ui.isValidNativeComponent) {
+        if (!this._ui.setNativeObj(sourceCmp)) {
             this._state = SelectorCore._STATES.INVALID_TARGET_COMPONENT;
             return this._state;
         }
 
-        this._ui.assignConfig(configObj);
-        this._state = this._ui.isValidConfig() ?
+        this._state = this._ui.assignConfig(configObj) ?
             SelectorCore._STATES.BINDED :
             SelectorCore._STATES.INVALID_CONFIG_OBJECT;
 
@@ -118,6 +115,7 @@ export class SelectorCore {
     _setSearchTerm(text) {
 
         this._searchTerm = (String(text)).toLowerCase();
+        return this._data.filterItems(this._searchTerm);
     }
 
 
@@ -126,8 +124,19 @@ export class SelectorCore {
      */
     setSearchTerm(text) {
 
-        this._setSearchTerm(text);
-        this.update();
+        return this._setSearchTerm(text);
+    }
+
+
+    _getItemGroups() {
+
+        return this._data.getItemsGroups();
+    }
+
+
+    getItemGroups() {
+
+        return this._getItemGroups();
     }
 
 
@@ -148,7 +157,6 @@ export class SelectorCore {
      */
     selectItem(targetId) {
 
-        // Todo: Refactor, hay un anzuelo aquí
         const ids = typeof (targetId) == 'object' ? targetId : [targetId];
         let k;
 
@@ -191,37 +199,21 @@ export class SelectorCore {
     }
 
 
+    getNativeValue() {
+
+        return this._ui.getNativeValue();
+    }
+
+
     _refreshSelection() {
 
         this._updateNativeValue();
     }
 
 
-    getNativeValue() {
-
-
-    }
-
-
-    /**
-     * Updates native select value
-     */
     _updateNativeValue() {
 
-        let _opts = '';
-
-        let _prev_value = this._$ui.html();
-
-        for (id of this._selectedIds) {
-            _opts += '<option value="' + id + '" selected="selected"></option>';
-        }
-
-        this.$select.html(_opts);
-
-        // Fire native select on change event
-        if (_opts != _prev_value) {
-            this.$select.trigger('change');
-        }
+        this._ui._updateNativeValue();
     }
 
 
@@ -255,9 +247,6 @@ export class SelectorCore {
     }
 
 
-    /**
-     * Render main component
-     */
     render() {
 
 
@@ -306,7 +295,7 @@ export class SelectorCore {
     }
 
 
-    getErrorMessage(codeValue) {
+    getStatusMessage(codeValue) {
 
         return Object.keys(SelectorCore._STATES).find((key) => SelectorCore._STATES[key] === codeValue);
     }

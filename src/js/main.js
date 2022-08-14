@@ -21,12 +21,8 @@ userData.then(userData => {
 		searchingText: 'Buscando usuarios...',
 		searchResultsNone: 'No se encontraron usuarios para esta búsqueda',
 	});
-
-	console.log(
-		userSelectorComponent.parentManagerId,
-		userSelectorComponent.id,
-		userSelectorComponent.init());
 });
+
 
 // Another Selector Component with errors for testing
 let wrongSelectorComponent = selectorManager.instanceNew();
@@ -34,33 +30,37 @@ let anotherData = Util.loadFromFile('./dist/data-src/another-src.json');
 
 anotherData.then(anotherData => {
 	wrongSelectorComponent.bind('.ux-selector-another', anotherData, {
-		isActive: true,			// => Wrong property
+		isActive: null,			// => Wrong property
 		isEditable: false,
-		placeholder: '45'			// => Wrong type
+		placeholder: '45'		// => Wrong type
 	});
-
-	console.log(
-		userSelectorComponent.parentManagerId,
-		wrongSelectorComponent.id,
-		wrongSelectorComponent.init());
 });
 
+
 // Some test for functionality
-const wait = setTimeout(printInfo, 1000);
+const wait = setTimeout(printInfo, 200);
 
 function printInfo() {
 
-	console.log('manager_id...', selectorManager.id);
-	console.log('manager_amount_instances...', selectorManager.instancesAmount);
-	console.log('component_state...', userSelectorComponent.id, userSelectorComponent.state);
-	console.log('component_state...', wrongSelectorComponent.id, wrongSelectorComponent.state);
+	console.log('Created manager id: ', selectorManager.id);
+	console.log('Components instances amount: ', selectorManager.instancesAmount);
+	console.log('\n');
 
-	console.log('manager_instances_object...', selectorManager.instancesObj);
+	let instancesObj = selectorManager.instancesObj;
 
-	userSelectorComponent.setSearchTerm('marketing');
+	for (const instance of instancesObj) {
+		console.log('Component: ', instance.id);
+		console.log('Name: ', instance.name);
+		console.log('State: ', instance.getStatusMessage(instance.state));
+		console.log('Native value: ', instance.getNativeValue());
+		console.log('\n');
 
-	// console.log('Buscando "marketing"...', this._data.filterItems('marketing'));
-	// console.log('Lista de categorías...', this._data.getItemsGroups());
+		console.log('Department list...', instance.getItemGroups());
+		console.log('Looking for "anna"...', instance.setSearchTerm('anna'));
+		console.log('Looking for "mark"...', instance.setSearchTerm('mark'));
+		console.log('\n');
+	}
+
 
 	clearTimeout(wait);
 }

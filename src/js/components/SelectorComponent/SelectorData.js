@@ -17,7 +17,6 @@ export class SelectorData {
     constructor() {
 
         this.data = {};
-        this._isValidData = false;
 
         this.configObj = {
             categoryKey: '',
@@ -48,9 +47,7 @@ export class SelectorData {
         let tmpLastSelectedIds = dataSrc[SelectorData._JSON_KEYS.LAST_SELECTED_IDS];
         tmpLastSelectedIds ? this.configObj.lastSelectedIds = tmpLastSelectedIds : false;
 
-        this._isValidData = true;
-
-        return this._isValidData;
+        return true;
     }
 
 

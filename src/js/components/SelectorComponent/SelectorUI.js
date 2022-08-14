@@ -105,10 +105,7 @@ export class SelectorUI {
     constructor() {
 
         this.configObj = {};
-        this._isValidConfig = false;
-
         this._$nativeComponent = {};
-        this._isValidNativeComponent = false;
         this._err_c = undefined;
     }
 
@@ -117,17 +114,19 @@ export class SelectorUI {
 
         let $sourceCmp = $(sourceCmp);
 
-        if ($sourceCmp.length > 0) {
-            this._isValidNativeComponent = true;
+        if (!$sourceCmp.length > 0) {
+            return false;
         }
 
         this._$nativeComponent = $sourceCmp
+        return true;
     }
 
 
     /**
      * Returns a new config object after validation process
      * @param newConfig
+     * @returns {boolean}
      */
     assignConfig(newConfig) {
 
@@ -135,11 +134,12 @@ export class SelectorUI {
 
         $.extend(true, tmpConfig, SelectorUI._CONFIG_DEFAULT, newConfig);
 
-        if (this._validateConfig(tmpConfig)) {
-            this._isValidConfig = true;
+        if (!this._validateConfig(tmpConfig)) {
+            return false;
         }
 
         this.configObj = tmpConfig;
+        return true;
     }
 
 
@@ -160,9 +160,10 @@ export class SelectorUI {
                 return false;
             }
 
-            if (keySpec.isNullable && entryVal === null) {
-                return false;
-            }
+            // Al hacer $.extend ya tendremos todas las keys necesarias, no faltará ninguna.
+            // if (keySpec.isNullable && entryVal === null) {
+            //     return false;
+            // }
         }
 
         return true;
@@ -184,8 +185,41 @@ export class SelectorUI {
     create() {
 
         this._$nativeComponent.addClass(SelectorUI._CSS_CLASSES.SOURCE_OBJECT_HIDDEN);
-
         return this.name()
+    }
+
+
+    _getNativeValue() {
+
+        return this._$nativeComponent.html();
+    }
+
+
+    getNativeValue() {
+
+        return this._getNativeValue();
+    }
+
+
+    /**
+     * Updates native select value
+     */
+    _updateNativeValue() {
+
+        let _opts = '';
+
+        let _prev_value = this._$ui.html();
+
+        for (id of this._selectedIds) {
+            _opts += '<option value="' + id + '" selected="selected"></option>';
+        }
+
+        this.$select.html(_opts);
+
+        // Fire native select on change event
+        if (_opts != _prev_value) {
+            this.$select.trigger('change');
+        }
     }
 
 
