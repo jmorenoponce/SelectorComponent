@@ -24,12 +24,12 @@ export class SelectorData {
             lastSelectedIds: [],
 
             /**
-             * Returns ...
+             * Returns coincidence validation looking for <term> in all value keys of <item>.
              * @param term
              * @param item
              * @returns {boolean}
              */
-            filter: function (term, item) {
+            filterAll: function (term, item) {
                 return Object.values(item).toString().toLowerCase().includes((term));
             }
         };
@@ -42,7 +42,7 @@ export class SelectorData {
      * @param dataSrc
      * @returns {boolean}
      */
-    load(dataSrc) {
+    setData(dataSrc) {
 
         if (!dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.DATA)
             || !dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.CATEGORY_KEY)) {
@@ -68,6 +68,16 @@ export class SelectorData {
 
 
     /**
+     * @param targetId
+     * @returns {*}
+     */
+    findId(targetId) {
+
+        return this.data.find(item => item.id === targetId);
+    }
+
+
+    /**
      * Returns the filtered item list (taking search term as filter seed).
      * @param searchTerm
      * @returns {[]}
@@ -78,7 +88,7 @@ export class SelectorData {
 
         for (let item of this.data) {
 
-            if (this.configObj.filter.apply(null, [searchTerm, item])) {
+            if (this.configObj.filterAll.apply(null, [searchTerm, item])) {
                 filtered.push(item);
             }
         }

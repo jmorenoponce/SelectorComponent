@@ -104,11 +104,30 @@ export class SelectorUI {
 
     constructor() {
 
-        this.configObj = {};
-
         this._$nativeComponent = {};
+        this._configObj = {};
+
         this._selectedIds = [];
+
         this._err_c = undefined;
+    }
+
+
+    /**
+     * Establishes source native Html select that handle final results.
+     * @param sourceCmp
+     * @returns {boolean}
+     */
+    setNativeComponent(sourceCmp) {
+
+        let $sourceCmp = $(sourceCmp);
+        if (!$sourceCmp.length > 0) {
+            return false;
+        }
+
+        this._$nativeComponent = $sourceCmp;
+
+        return true;
     }
 
 
@@ -117,7 +136,7 @@ export class SelectorUI {
      * @param newConfig
      * @returns {boolean}
      */
-    assignConfig(newConfig) {
+    setConfig(newConfig) {
 
         let tmpConfig = {};
 
@@ -127,7 +146,7 @@ export class SelectorUI {
             return false;
         }
 
-        this.configObj = tmpConfig;
+        this._configObj = tmpConfig;
 
         return true;
     }
@@ -160,28 +179,9 @@ export class SelectorUI {
     }
 
 
-    /**
-     * Establishes source native Html select that handle final results.
-     * @param sourceCmp
-     * @returns {boolean}
-     */
-    setNativeObj(sourceCmp) {
-
-        let $sourceCmp = $(sourceCmp);
-        if (!$sourceCmp.length > 0) {
-            return false;
-        }
-
-        this._$nativeComponent = $sourceCmp
-        return true;
-    }
+    _render() {
 
 
-    create() {
-
-        this._$nativeComponent.addClass(SelectorUI._CSS_CLASSES.SOURCE_OBJECT_HIDDEN);
-
-        return this.name();
     }
 
 
@@ -231,9 +231,15 @@ export class SelectorUI {
     }
 
 
-    render() {
+    enable() {
+
+        console.log('enable');
+    }
 
 
+    disable() {
+
+        console.log('disable');
     }
 
 

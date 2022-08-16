@@ -7,6 +7,9 @@
     
     - https://www.youtube.com/watch?v=3AIT1RdLprg
     
+    - Luis Fernández: El Proceso Unificado de Desarrollo aplicado al Desarrollo de Software del sector DEFENSA Y ESPACIO 
+        https://www.youtube.com/watch?v=mqGSnjJBM7Y
+    
 #### Vite 
     - Levanta su propio servidor de desarrollo en un puerto configurable.
     
@@ -32,3 +35,16 @@
     
     - Estudiar Webcomponents
     
+    
+#### Definición de requisitos
+
+    - El componente debe renderizarse al inicio del binding para mostrar estados todo el tiempo.
+    
+    
+#### Dudas
+
+    - Todos los métodos tienen que tener el privado y el público? dudo siempre acerca de esto.
+    - Nivel de acoplamiento, en estas clases simples donde el Core maneja el resto, hay peligro de acoplamiento real?.
+    - La selección de ids a través de métodos necesita comprobación de si existe?
+        
+        

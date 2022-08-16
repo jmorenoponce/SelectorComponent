@@ -2,7 +2,7 @@
 
 
 import {SelectorCore} from './SelectorCore.js';
-import {UtilityClass as Util} from '../Util/UtilityClass.js';
+import {UtilityClass} from '../Util/UtilityClass.js';
 
 
 export class SelectorManager {
@@ -28,7 +28,7 @@ export class SelectorManager {
 
 
     /**
-     * Create new instance core width new id and passing manager parent id
+     * Create new instance core width new id and passing manager parent id.
      * @returns {SelectorCore}
      */
     instanceNew() {
@@ -73,7 +73,7 @@ export class SelectorManager {
      */
     getInstanceById(targetId) {
 
-        return this._getInstanceByProp('id', targetId);
+        return this._getInstanceByProperty('id', targetId);
     }
 
 
@@ -82,7 +82,7 @@ export class SelectorManager {
      */
     getInstanceByName(targetName) {
 
-        return this._getInstanceByProp('name', targetName);
+        return this._getInstanceByProperty('name', targetName);
     }
 
 
@@ -93,7 +93,7 @@ export class SelectorManager {
      * @returns {boolean|number}
      * @private
      */
-    _getInstanceByProp(prop, targetValue) {
+    _getInstanceByProperty(prop, targetValue) {
 
         let tmpResponse = this._instancesObj.findIndex((instance) => instance[prop] === targetValue);
 
@@ -106,18 +106,32 @@ export class SelectorManager {
 
 
     /**
-     *
+     * Sends command action behaviour to managed target component.
      * @param targetId
      * @param action
+     * @returns {boolean}
      */
     sendInstanceAction(targetId, action) {
 
-        // Do stuff...
+        const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+
+        for (let id of ids) {
+
+            // Do stuff...
+            console.log(this.getInstanceById(id), action);
+        }
+
+        return true;
     }
 
 
+    /**
+     * Wrap method for getting any Uuid number.
+     * @returns {string}
+     * @private
+     */
     _generateId() {
 
-        return Util.generateUuid();
+        return UtilityClass.generateUuid();
     }
 }
