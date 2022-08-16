@@ -31,9 +31,9 @@ let anotherData = UtilityClass.loadFromFile('./dist/data-src/another-src.json');
 
 anotherData.then(anotherData => {
     wrongSelectorComponent.bind('.ux-selector-another', anotherData, {
-        isActive: null,		// => Wrong property
+        isActive: true,		// => Wrong property
         isEditable: false,
-        placeholder: 45		// => Wrong type
+        placeholder: '45'		// => Wrong type
     });
     wrongSelectorComponent.init();
 });
@@ -89,7 +89,7 @@ function printInfo() {
     userSelectorComponent._unselectAll();
     console.log('Unselecting all:', userSelectorComponent._selectedIds);
 
-    console.log('Looking for Id [5]:', userSelectorComponent._data.findId(5));
+    console.log('Looking for Id [5]:', userSelectorComponent._data.getById(5));
 
     clearTimeout(wait);
 }

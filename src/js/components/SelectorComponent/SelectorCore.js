@@ -142,6 +142,8 @@ export class SelectorCore {
         // Todo: Esos paréntesis?
         this._searchTerm = (String(text)).toLowerCase();
 
+        // var time = (new Date()).getTime();
+
         // Todo: Paso previo para extraer sólo Id's
         return this._data.filterItems(this._searchTerm);
     }
@@ -292,7 +294,7 @@ export class SelectorCore {
     }
 
 
-    enable() {
+    enable() { // Todo : Bridge
 
         this._ui.enable();
     }

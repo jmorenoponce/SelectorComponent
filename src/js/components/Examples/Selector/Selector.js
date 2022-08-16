@@ -16,7 +16,7 @@ export class Selector {
 			categoryKey: 'department',
 			dataProvider: function () {},
 			filter: function (term, item) {
-				return item.name.toLowerCase().includes(term);
+				return item.name.toLowerCase().includes(term) || item.department.toLowerCase().includes(term);
 			}
 		};
 

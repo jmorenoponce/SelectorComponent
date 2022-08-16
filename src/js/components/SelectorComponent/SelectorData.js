@@ -6,7 +6,7 @@ export class SelectorData {
 
     static _JSON_KEYS = {
 
-        TIMESTAMP: '',
+        TIMESTAMP: 'timestamp',
         NAME: 'dataSource',
         NOTES: 'notes',
         CATEGORY_KEY: 'categoryKey',
@@ -44,6 +44,7 @@ export class SelectorData {
      */
     setData(dataSrc) {
 
+        // Todo: Si no existe categoryKey no podemos hacer búsqueda agrupada.
         if (!dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.DATA)
             || !dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.CATEGORY_KEY)) {
             return false;
@@ -71,7 +72,7 @@ export class SelectorData {
      * @param targetId
      * @returns {*}
      */
-    findId(targetId) {
+    getById(targetId) {
 
         return this.data.find(item => item.id === targetId);
     }

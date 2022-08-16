@@ -202,26 +202,20 @@ export class SelectorUI {
      */
     _updateNativeValue() {
 
-        let _opts = '';
-
-        let _prev_value = this._$nativeComponent.html();
-
-        for (id of this._selectedIds) {
-            _opts += '<option value="' + id + '" selected="selected"></option>';
-        }
-
-        this._$nativeComponent.html(_opts);
-
-        // Fire native select on change event
-        if (_opts !== _prev_value) {
-            this._$nativeComponent.trigger('change');
-        }
-    }
-
-
-    name() {
-
-        return this._$nativeComponent.attr('data-selector-name');
+        // let _opts = '';
+        //
+        // let _prev_value = this._$nativeComponent.html();
+        //
+        // for (id of this._selectedIds) {
+        //     _opts += '<option value="' + id + '" selected="selected"></option>';
+        // }
+        //
+        // this._$nativeComponent.html(_opts);
+        //
+        // // Fire native select on change event
+        // if (_opts !== _prev_value) {
+        //     this._$nativeComponent.trigger('change');
+        // }
     }
 
 
@@ -240,6 +234,12 @@ export class SelectorUI {
     disable() {
 
         console.log('disable');
+    }
+
+
+    name() {
+
+        return this._$nativeComponent.attr('data-selector-name');
     }
 
 
