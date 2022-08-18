@@ -10,105 +10,44 @@
     <title>Practica · Componente selector de Usuarios</title>
 
     <link rel="icon" type="image/x-icon" href="/src/assets/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./src/sass/styles.css">
-    <link rel="stylesheet" href="src/sass/App/app_theme.css">
+    <link rel="stylesheet" href="src/sass/app_theme.css">
 </head>
 
 <body>
 
-<div class="practice-cnt">
-    <div class="practice-inner">
+    <div class="app-cnt">
 
-        <div class="practice-info-cnt">
+        <!-- Users Selector_Core Component -->
+        <div class="cmp-selector">
+            <div class="selector-inner">
 
-            <div class="info-block general-data">
-
-                <span class="info-title">Selector_Core.js</span>
-                <p class="info-description">Creación de un componente que permita...</p>
-            </div>
-
-            <div class="info-block documents-data">
-
-                <span class="info-subtitle">#documentación:</span>
-
-                <ul class="documents-list">
-
-                    <li class="doc-item"><a href="#">Documentación aportada (image/jpeg)</a></li>
-                    <li class="doc-item"><a href="#">Fuente de datos de usuarios clasificados por departamento (text/json)</a></li>
-                </ul>
-            </div>
-
-            <div class="info-block testing-data">
-
-                <span class="info-subtitle">#testeo de posicionamiento:</span>
-
-                <ul class="testing-list">
-
-                    <li class="doc-item">
-                        <button>Centrado</button>
-                    </li>
-                    <li class="doc-item">
-                        <button>Superior izquierda</button>
-                    </li>
-                    <li class="doc-item">
-                        <button>Superior derecha</button>
-                    </li>
-                    <li class="doc-item">
-                        <button>Inferior izquierda</button>
-                    </li>
-                    <li class="doc-item">
-                        <button>Inferior derecha</button>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="release-block">
-
-                <span class="release-version">Practice Skeleton 1.0.0</span>
-            </div>
-        </div>
-
-        <div class="practice-body-cnt">
-
-            <div class="app-cnt">
-
-                <!-- Users Selector_Core Component -->
-                <div class="cmp-selector">
-                    <div class="selector-inner">
-
-                        <label for="usersByDepartment">Selección de usuarios:</label>
-                        <select id="usersByDepartment" class="ux-selector-users" data-selector-name="usersByDepartment">
-                            <option value=""></option>
-                        </select>
-
-                    </div>
-                </div>
-
-                <!-- Another Selector_Core Component -->
-                <div class="cmp-selector">
-                    <div class="selector-inner">
-
-                        <label for="anotherTypology">Selección de otras cosas</label>
-                        <select id="anotherTypology" class="selector-base-element ux-selector-another ux-selector-observer" data-selector-name="anotherTypology">
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
-
-                    </div>
-                </div>
+                <label for="usersByDepartment">Selección de usuarios:</label>
+                <select id="usersByDepartment" class="ux-selector-users" data-selector-name="usersByDepartment">
+                    <option value=""></option>
+                </select>
 
             </div>
         </div>
+
+        <!-- Another Selector_Core Component -->
+        <div class="cmp-selector">
+            <div class="selector-inner">
+
+                <label for="anotherTypology">Selección de otras cosas</label>
+                <select id="anotherTypology" class="selector-base-element ux-selector-another ux-selector-observer" data-selector-name="anotherTypology">
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select>
+
+            </div>
+        </div>
+
     </div>
-</div>
 
 <script src="./dist/js/main.bundle.js"></script>
 

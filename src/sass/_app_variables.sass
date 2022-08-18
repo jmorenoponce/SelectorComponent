@@ -34,13 +34,6 @@ $theme-box-bg: #ffffff
 $theme-body-bg: #f5f5f7
 
 
-// ELEMENTOS: Colores - Menú Principal
-$theme-menu-item: #fdfdfc
-$theme-menu-icons: #cacaca
-$theme-menu-lines: #696969
-$theme-menu-bg: $brand-secondary
-
-
 // ELEMENTOS: Colores - Botones
 $theme-btn-primary-color: $brand-paragraph
 $theme-btn-primary-color-hover: $theme-white
@@ -49,14 +42,6 @@ $theme-btn-primary-bg: $brand-primary
 $theme-btn-light-color: $brand-paragraph
 $theme-btn-light-color-hover: $brand-primary
 $theme-btn-light-bg: $theme-white
-
-
-// ELEMENTOS: Colores - Footer
-$theme-footer-item: $theme-white
-$theme-footer-item-hover: $theme-white-md
-$theme-footer-paragraph: #fdfdfc
-$theme-footer-icons: #b8b8b8
-$theme-footer-bg: #2c2c2c
 
 
 // ELEMENTOS: Parámetros Generales
@@ -71,9 +56,6 @@ $theme-transition-function: ease-in-out
 $theme-transition-time-btn: 0.3s
 $theme-transition-function-btn: ease-in-out
 
-$theme-transition-time-nav: 0.7s
-$theme-transition-function-nav: cubic-bezier(0.5, 0.1, 0.35, 1)
-
 
 // ELEMENTOS: Mixins globales
 @mixin theme-border-radius($radius)
@@ -81,9 +63,6 @@ $theme-transition-function-nav: cubic-bezier(0.5, 0.1, 0.35, 1)
 
 @mixin theme-shadow()
     box-shadow: rgba($brand-paragraph, 0.04) 0 7px 7px -2px
-
-@mixin theme-shadow-raised()
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px
 
 @mixin theme-shadow-raised-btn()
     box-shadow: rgba($brand-titles, 0.2) 0 5px 15px 0
