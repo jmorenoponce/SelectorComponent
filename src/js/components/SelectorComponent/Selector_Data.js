@@ -1,7 +1,7 @@
 'use strict';
 
 
-export class SelectorData {
+export class Selector_Data {
 
 
     static _JSON_KEYS = {
@@ -19,9 +19,10 @@ export class SelectorData {
 
         this.data = {};
 
-        this.configObj = {
+        this.config_obj = {
+            searchable_fields: [],
             categoryKey: '',
-            lastSelectedIds: [],
+            selected_ids: [],
 
             /**
              * Returns coincidence validation looking for <term> in all value keys of <item>.
@@ -29,8 +30,10 @@ export class SelectorData {
              * @param item
              * @returns {boolean}
              */
-            filterAll: function (term, item) {
-                return Object.values(item).toString().toLowerCase().includes((term));
+            filter: function (term, item) {
+                return item.first_name.toString().toLowerCase().includes((term)) ||
+                    item.last_name.toString().toLowerCase().includes((term)) ||
+                    item.department.toString().toLowerCase().includes((term));
             }
         };
     }
@@ -42,17 +45,17 @@ export class SelectorData {
      * @param dataSrc
      * @returns {boolean}
      */
-    setData(dataSrc) {
+    set_data(dataSrc) {
 
         // Todo: Si no existe categoryKey no podemos hacer búsqueda agrupada.
-        if (!dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.DATA)
-            || !dataSrc.hasOwnProperty(SelectorData._JSON_KEYS.CATEGORY_KEY)) {
+        if (!dataSrc.hasOwnProperty(Selector_Data._JSON_KEYS.DATA)
+            || !dataSrc.hasOwnProperty(Selector_Data._JSON_KEYS.CATEGORY_KEY)) {
             return false;
         }
 
-        this.data = dataSrc[SelectorData._JSON_KEYS.DATA];
-        this.configObj.categoryKey = dataSrc[SelectorData._JSON_KEYS.CATEGORY_KEY];
-        this.configObj.lastSelectedIds = dataSrc[SelectorData._JSON_KEYS.LAST_SELECTED_IDS] || null;
+        this.data = dataSrc[Selector_Data._JSON_KEYS.DATA];
+        this.config_obj.categoryKey = dataSrc[Selector_Data._JSON_KEYS.CATEGORY_KEY];
+        this.config_obj.lastSelectedIds = dataSrc[Selector_Data._JSON_KEYS.LAST_SELECTED_IDS] || null;
 
         return true;
     }
@@ -89,7 +92,7 @@ export class SelectorData {
 
         for (let item of this.data) {
 
-            if (this.configObj.filterAll.apply(null, [searchTerm, item])) {
+            if (this.config_obj.filter.apply(null, [searchTerm, item])) {
                 filtered.push(item);
             }
         }
@@ -108,10 +111,11 @@ export class SelectorData {
 
         for (let item of this.data) {
 
-            let group = item[this.configObj.categoryKey];
+            let group = item[this.config_obj.categoryKey];
             groups[group] = 1;
         }
 
         return Object.keys(groups);
     }
+
 }

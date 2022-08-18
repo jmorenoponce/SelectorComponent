@@ -1,11 +1,12 @@
 'use strict';
 
 
-import {SelectorData} from "./SelectorData";
-import {SelectorUI} from './SelectorUI.js';
+import {Selector_Data} from "./Selector_Data";
+import {Selector_Ui} from './Selector_Ui';
+import {Selector_Config} from "./Selector_Config";
 
 
-export class SelectorCore {
+export class Selector_Core {
 
 
     static _STATES = {
@@ -33,24 +34,25 @@ export class SelectorCore {
 
 
     /**
-     * @param instanceId
-     * @param managerId
+     * @param instance_id
+     * @param manager_id
      * @returns {number}
      */
-    constructor(instanceId, managerId = null) {
+    constructor(instance_id, manager_id) {
 
-        this._instanceId = instanceId;
-        this._instanceName = '';
+        this._instance_id = instance_id;
+        this._instance_name = '';
 
-        this._managerId = managerId || SelectorCore._STATES.SINGLE_COMPONENT;
+        this._manager_id = manager_id || Selector_Core._STATES.SINGLE_COMPONENT;
 
-        this._data = new SelectorData();
-        this._ui = new SelectorUI();
+        this._config = new Selector_Config();
+        this._data = new Selector_Data(this._config.data_params);
+        this._ui = new Selector_Ui(this._config.ui_params);
 
-        this._selectedIds = [];
-        this._searchTerm = '';
+        this._selected_ids = [];
+        this._search_term = '';
 
-        this._state = SelectorCore._STATES.WAITING_FOR_BINDING;
+        this._state = Selector_Core._STATES.WAITING_FOR_BINDING;
         return this._state;
     }
 
@@ -58,28 +60,31 @@ export class SelectorCore {
     /**
      * Link the created component taking native Html component, categorized source data,
      * and configuration object with behaviour parameters. Then establishes the component <instanceName>.
-     * @param sourceCmp
-     * @param dataSrc
-     * @param configObj
+     * @param source_cmp
+     * @param data_src
+     * @param config_obj
      * @returns {number}
      */
-    bind(sourceCmp, dataSrc, configObj) {
+    bind(source_cmp, data_src, config_obj) {
 
-        if (!this._ui.setNativeComponent(sourceCmp)) {
-            this._state = SelectorCore._STATES.INVALID_TARGET_COMPONENT;
+        if (!this._config.assign(config_obj)) {
+            this._state = Selector_Core._STATES.INVALID_CONFIG_OBJECT;
             return this._state;
         }
 
-        if(!this._data.setData(dataSrc)) {
-            this._state = SelectorCore._STATES.INVALID_DATA_SOURCE;
+        if (!this._ui.set_native_component(source_cmp)) {
+            this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
             return this._state;
         }
 
-        this._state = this._ui.setConfig(configObj) ?
-            SelectorCore._STATES.BINDED :
-            SelectorCore._STATES.INVALID_CONFIG_OBJECT;
+        if(!this._data.set_data(data_src)) {
+            this._state = Selector_Core._STATES.INVALID_DATA_SOURCE;
+            return this._state;
+        }
 
-        this._instanceName = this._ui.name() || SelectorCore._STATES.UNKNOWN_TARGET_NAME;
+        this._instance_name = this._ui.get_native_name() || '';
+
+        this._state = Selector_Core._STATES.BINDED;
 
         return this._state;
     }
@@ -91,12 +96,13 @@ export class SelectorCore {
      */
     _init() {
 
-        if (this._state !== SelectorCore._STATES.BINDED) {
+        if (this._state !== Selector_Core._STATES.BINDED) {
             return this._state;
         }
 
         this._render();
-        this._state = SelectorCore._STATES.RUNNING;
+
+        this._state = Selector_Core._STATES.RUNNING;
 
         return this._state;
     }
@@ -116,13 +122,13 @@ export class SelectorCore {
 
     renderList_ungrouped() {
 
-
+        this._render();
     }
 
 
     renderList_grouped() {
 
-
+        this._render();
     }
 
 
@@ -139,13 +145,10 @@ export class SelectorCore {
      */
     setSearchTerm(text) {
 
-        // Todo: Esos paréntesis?
-        this._searchTerm = (String(text)).toLowerCase();
-
-        // var time = (new Date()).getTime();
+        this._search_term = (String(text)).toLowerCase();
 
         // Todo: Paso previo para extraer sólo Id's
-        return this._data.filterItems(this._searchTerm);
+        return this._data.filterItems(this._search_term);
     }
 
 
@@ -155,7 +158,7 @@ export class SelectorCore {
      */
     _setSelection(targetId) {
 
-        this._selectedIds = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
+        this._selected_ids = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
         this._refreshSelection();
     }
 
@@ -175,9 +178,9 @@ export class SelectorCore {
 
         for (const id of ids) {
 
-            if (!this._selectedIds.includes(id)) {
+            if (!this._selected_ids.includes(id)) {
 
-                this._selectedIds.push(id);
+                this._selected_ids.push(id);
             }
         }
 
@@ -191,14 +194,6 @@ export class SelectorCore {
     }
 
 
-    /**
-     *
-     */
-    selectAll() {
-
-
-    }
-
 
     /**
      * @param targetId
@@ -210,9 +205,9 @@ export class SelectorCore {
 
         for (const id of ids) {
 
-            if ((k = this._selectedIds.indexOf(id)) !== -1) {
+            if ((k = this._selected_ids.indexOf(id)) !== -1) {
 
-                this._selectedIds.splice(k, 1);
+                this._selected_ids.splice(k, 1);
             }
         }
 
@@ -231,7 +226,7 @@ export class SelectorCore {
      */
     _unselectAll() {
 
-        this._selectedIds = [];
+        this._selected_ids = [];
         this._refreshSelection();
     }
 
@@ -250,13 +245,13 @@ export class SelectorCore {
 
     _updateNativeValue() {
 
-        this._ui._updateNativeValue();
+        this._ui._update_native_value();
     }
 
 
     getNativeValue() {
 
-        return this._ui.getNativeValue();
+        return this._ui.get_native_value();
     }
 
 
@@ -267,30 +262,6 @@ export class SelectorCore {
     getItemGroups() {
 
         return this._data.getItemsGroups();
-    }
-
-
-    get id() {
-
-        return this._instanceId;
-    }
-
-
-    get name() {
-
-        return this._instanceName;
-    }
-
-
-    get parentManagerId() {
-
-        return this._managerId;
-    }
-
-
-    get state() {
-
-        return this._state;
     }
 
 
@@ -330,13 +301,43 @@ export class SelectorCore {
     }
 
 
+    get id() {
+
+        return this._instance_id;
+    }
+
+
+    get name() {
+
+        return this._instance_name;
+    }
+
+
+    get parentManagerId() {
+
+        return this._manager_id;
+    }
+
+
+    get state() {
+
+        return this._state;
+    }
+
+
+    is_valid_state() {
+
+        return !(this._state < 200 || this._state >= 400);
+    }
+
+
     /**
      * Returns the state key (description) from code value parameter, if empty value returns the actual state.
-     * @param codeValue
+     * @param code_value
      * @returns {string}
      */
-    getStateMessage(codeValue = this._state) {
+    get_state_msg(code_value = this._state) {
 
-        return Object.keys(SelectorCore._STATES).find((key) => SelectorCore._STATES[key] === codeValue);
+        return Object.keys(Selector_Core._STATES).find((key) => Selector_Core._STATES[key] === code_value);
     }
 }

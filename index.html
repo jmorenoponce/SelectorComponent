@@ -15,8 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./src/sass/styles.css">
-    <link rel="stylesheet" href="./src/sass/components/AppTheme.css">
-    <link rel="stylesheet" href="./src/sass/components/SelectorField/SelectorComponent.css">
+    <link rel="stylesheet" href="src/sass/App/app_theme.css">
 </head>
 
 <body>
@@ -28,7 +27,7 @@
 
             <div class="info-block general-data">
 
-                <span class="info-title">SelectorCore.js</span>
+                <span class="info-title">Selector_Core.js</span>
                 <p class="info-description">Creación de un componente que permita...</p>
             </div>
 
@@ -77,24 +76,24 @@
 
             <div class="app-cnt">
 
-                <!-- Users SelectorCore Component -->
+                <!-- Users Selector_Core Component -->
                 <div class="cmp-selector">
                     <div class="selector-inner">
 
-                        <select class="ux-selector-users ux-selector-observer" data-selector-name="usersByDepartment">
-                            <!-- usersByDepartment-source-data-->
+                        <label for="usersByDepartment">Selección de usuarios:</label>
+                        <select id="usersByDepartment" class="ux-selector-users" data-selector-name="usersByDepartment">
+                            <option value=""></option>
                         </select>
 
                     </div>
                 </div>
 
-                <!-- Another SelectorCore Component -->
+                <!-- Another Selector_Core Component -->
                 <div class="cmp-selector">
                     <div class="selector-inner">
 
                         <label for="anotherTypology">Selección de otras cosas</label>
                         <select id="anotherTypology" class="selector-base-element ux-selector-another ux-selector-observer" data-selector-name="anotherTypology">
-                            <!-- anotherTypology-source-data-->
                             <option value=""></option>
                             <option value=""></option>
                             <option value=""></option>

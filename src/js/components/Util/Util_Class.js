@@ -4,7 +4,7 @@
 import {v4 as uuidv4} from 'uuid';
 
 
-export class UtilityClass {
+export class Util_Class {
 
 
 	static print(msg, ...result) {
@@ -18,7 +18,7 @@ export class UtilityClass {
 	}
 
 
-	static loadFromFile(path) {
+	static load_from_file(path) {
 
 		async function fetchData() {
 			return await fetch(path)
@@ -29,7 +29,7 @@ export class UtilityClass {
 	}
 
 
-	static generateUuid() {
+	static generate_uuid() {
 
 		return uuidv4();
 	}
