@@ -1,0 +1,48 @@
+// ARCHIVO: theme_variables.sass
+
+
+$theme-btn-height: 24px
+
+
+$theme-general-separation: 6px
+$theme-general-padding: 10px
+
+
+// ELEMENTOS: Fuentes globales
+$font-primary: 'Open Sans', sans-serif
+
+$theme-icons: #b8b8b8
+$theme-lines: #c4c2c3
+
+$theme-box-bg: #ffffff
+$theme-body-bg: #f5f5f7
+
+
+// ELEMENTOS: Colores - Botones
+//$theme-btn-primary-color: $brand-paragraph
+//$theme-btn-primary-color-hover: $theme-white
+//$theme-btn-primary-bg: $brand-primary
+
+
+$theme-radius: 4px
+$theme-btn-radius: 50px
+
+$theme-transition-time: 0.2s
+$theme-transition-function: ease-in-out
+
+$theme-transition-time-btn: 0.3s
+$theme-transition-function-btn: ease-in-out
+
+
+// ELEMENTOS: Mixins globales
+@mixin theme-shadow()
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px
+
+@mixin theme-shadow-raised-btn()
+    //box-shadow: rgba($brand-titles, 0.2) 0 5px 15px 0
+
+@mixin theme-transition($property, $time, $function, $property2:'')
+    @if $property2 == ''
+        transition: $property $time $function
+    @else
+        transition: $property $time $function, unquote($property2) $time $function

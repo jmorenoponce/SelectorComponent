@@ -3,12 +3,11 @@
 
 // ELEMENTOS: Initial Html //
 .app-cnt
-    color: $brand-paragraph
-    font-family: $font-secondary
+    font-family: $font-primary
     font-variant-ligatures: no-common-ligatures
-    font-size: 15px
+    font-size: 13px
     font-weight: 400
-    line-height: 1.7
+    line-height: 1.4
     text-rendering: optimizeLegibility
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
@@ -19,19 +18,19 @@
 
     i
         position: relative
-        color: $theme-icons
+        //color: $theme-icons
         font-size: 17px
 
 
     a
-        color: $brand-links
+        //color: $brand-links
         font-weight: 500
         text-decoration: none
         cursor: pointer
         @include theme-transition(color, $theme-transition-time-btn, $theme-transition-function-btn)
 
         &:hover, &:active, &:focus
-            color: $brand-primary
+            //color: $brand-primary
             outline: none !important
 
     ul, li

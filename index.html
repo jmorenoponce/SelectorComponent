@@ -11,42 +11,100 @@
 
     <link rel="icon" type="image/x-icon" href="/src/assets/favicon.ico">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="src/sass/app_theme.css">
 </head>
 
 <body>
 
     <div class="app-cnt">
+        <div class="app-inner">
 
-        <!-- Users Selector_Core Component -->
-        <div class="cmp-selector">
-            <div class="selector-inner">
+            <div class="test-form">
+                <div class="test-inner ux-test-position ui-position-v-center ui-position-h-center">
 
-                <label for="usersByDepartment">Selección de usuarios:</label>
-                <select id="usersByDepartment" class="ux-selector-users" data-selector-name="usersByDepartment">
-                    <option value=""></option>
-                </select>
+                    <div class="test-object-cnt width-400">
 
+                        <!-- Users Selector Component -->
+                        <div class="cmp-selector">
+                            <div class="selector-inner">
+
+                                <label class="ux-slct-native-label ui-slct-display-hidden" for="usersByDepartment">Selección de usuarios:</label>
+                                <select class="ux-slct-native-field ui-slct-display-hidden" id="usersByDepartment" data-selector-name="usersByDepartment"></select>
+
+                                <div class="selector-input-cnt ux-slct-input ui-slct-loading">
+                                    <div class="input-inner">
+
+                                        <label class="input-label" for="%uuid%">%label%</label>
+
+                                        <div class="input-field-cnt">
+                                            <input class="input-field ux-slct-input-field" disabled id="%uuid%" type="text" placeholder="%placeholder%">
+
+                                            <div class="amount-selections-cnt">
+                                                <div class="amount-counter-display ux-slct-amount-display">
+                                                    %
+                                                </div>
+                                                <div class="amount-widget-cnt ux-slct-amount-widget ui-slct-display-hidden">
+                                                    <div class="widget-enumerated-list">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="input-dropdown-trigger ux-slct-dropdown-trigger">
+                                                ~
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="selector-dropdown-cnt ux-slct-dropdown ui-slct-dropdown-expanded">
+                                    <div class="dropdown-inner">
+
+                                        <div class="utils-cnt">
+                                            <div class="search-field-cnt">
+                                                <input class="input-field ux-slct-search-field" type="text" placeholder="%placeholder%">
+                                                <div class="search-icon"><i>~</i></div>
+                                            </div>
+
+                                            <div class="icons-line-cnt">
+                                                <div class="icon-group">
+                                                    <div class="icon-item ui-item-active">
+                                                        <i>~</i>
+                                                    </div>
+                                                    <div class="icon-item">
+                                                        <i>~</i>
+                                                    </div>
+                                                    <div class="icon-item">
+                                                        <i>~</i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="icon-item">
+                                                    <i>~</i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="results-cnt">
+                                            <div class="result-item-cnt ui-slct-no-results">
+                                                <span class="item-msg">%no-results-message%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
+
         </div>
-
-        <!-- Another Selector_Core Component -->
-        <div class="cmp-selector">
-            <div class="selector-inner">
-
-                <label for="anotherTypology">Selección de otras cosas</label>
-                <select id="anotherTypology" class="selector-base-element ux-selector-another ux-selector-observer" data-selector-name="anotherTypology">
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select>
-
-            </div>
-        </div>
-
     </div>
 
 <script src="./dist/js/main.bundle.js"></script>

@@ -1,2 +1,151 @@
+// FILE <_selector-component.sass>
 
-// Selector component <_cmp-selector.sass>
+.cmp-selector
+    .selector-inner
+        position: relative
+        display: flex
+        flex-direction: column
+        width: 100%
+
+        .ui-slct-display-hidden
+            display: none
+
+        .selector-input-cnt
+            .input-inner
+                display: flex
+                flex-direction: column
+
+                .input-label
+                    display: block
+                    padding: 0 $theme-general-padding
+
+                .input-field-cnt
+                    display: flex
+                    align-items: center
+                    background-color: $color-gray-100
+                    border-radius: $theme-radius
+
+                    .input-field
+                        cursor: pointer
+
+                    .amount-selections-cnt
+                        .amount-counter-display
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            height: 24px
+                            width: 24px
+                            margin-left: $theme-general-separation
+                            color: $color-white-75
+                            border-radius: 50%
+                            background-color: $color-gray
+                            cursor: pointer
+
+                        .amount-widget-cnt
+
+                    .input-dropdown-trigger
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        height: 24px
+                        width: 24px
+                        margin: 0 $theme-general-separation
+                        cursor: pointer
+
+
+        .selector-dropdown-cnt
+            position: absolute
+            top: 48px
+            width: 100%
+            display: none
+
+            &.ui-slct-dropdown-expanded
+                display: block
+
+            .dropdown-inner
+                background-color: $color-white
+                border-radius: $theme-radius
+                @include theme-shadow
+                overflow: hidden
+
+                .utils-cnt
+                    padding: $theme-general-padding
+
+                    .search-field-cnt
+                        display: flex
+                        align-items: center
+                        background-color: $color-gray-100
+                        border-radius: $theme-radius
+
+                        .input-field
+                        // Overwrite generic input declared in <_forms>
+
+                        .search-icon
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            height: 24px
+                            width: 24px
+                            margin: 0 $theme-general-separation
+                            cursor: pointer
+
+                    .icons-line-cnt
+                        display: flex
+                        justify-content: space-between
+                        align-items: center
+                        margin-top: $theme-general-padding
+
+                        .icon-item
+                            height: 30px
+                            width: 30px
+                            display: flex
+                            justify-content: center
+                            align-items: center
+                            color: $color-gray
+                            background-color: $color-white
+                            border: 1px solid $color-gray-300
+                            border-radius: $theme-radius
+                            cursor: pointer
+
+                            &.ui-item-active
+                                color: $color-white-75
+                                border-color: $color-blue
+                                background-color: $color-blue
+
+                            &:hover, &:focus
+                                border-color: $color-gray-400
+                                background-color: $color-gray-400
+
+                        .icon-group
+                            display: flex
+
+                            .icon-item
+                                border-width: 1px 0
+                                border-radius: 0
+
+                                &:first-child
+                                    border-width: 1px 0 1px 1px
+                                    border-radius: $theme-radius 0 0 $theme-radius
+
+                                &:last-child
+                                    border-width: 1px 1px 1px 0
+                                    border-radius: 0 $theme-radius $theme-radius 0
+
+                                &:only-child
+                                    border-width: 1px
+                                    border-radius: $theme-radius
+
+                .results-cnt
+                    border-top: 1px solid $color-gray-300
+                    padding: $theme-general-padding
+
+                    .result-item-cnt
+
+                        &.ui-slct-no-results
+                            display: flex
+                            min-height: 40px
+                            justify-content: center
+                            align-items: center
+
+                    .grouped-results
+                        .result-item-cnt
