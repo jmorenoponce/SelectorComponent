@@ -1,14 +1,14 @@
 // FILE <_selector-component.sass>
 
+.display-none
+    display: none
+
 .cmp-selector
     .selector-inner
         position: relative
         display: flex
         flex-direction: column
         width: 100%
-
-        .ui-slct-display-hidden
-            display: none
 
         .selector-input-cnt
             .input-inner
@@ -57,10 +57,10 @@
             position: absolute
             top: 48px
             width: 100%
-            display: none
 
-            &.ui-slct-dropdown-expanded
-                display: block
+            &:not(.ui-slct-dropdown-expanded)
+                display: none
+
 
             .dropdown-inner
                 background-color: $color-white

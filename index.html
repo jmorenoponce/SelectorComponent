@@ -32,22 +32,28 @@
                         <div class="cmp-selector">
                             <div class="selector-inner">
 
-                                <label class="ux-slct-native-label ui-slct-display-hidden" for="usersByDepartment">Selección de usuarios:</label>
-                                <select class="ux-slct-native-field ui-slct-display-hidden" id="usersByDepartment" data-selector-name="usersByDepartment"></select>
+<!--                                Todo: "select", no usamos <for< ni <id>-->
 
-                                <div class="selector-input-cnt ux-slct-input ui-slct-loading">
+                                <label class="ux-slct-native-label display-none" for="usersByDepartment">Selección de usuarios:</label>
+
+                                <div>
+                                    <select class="ux-slct-native-field display-none" id="usersByDepartment" data-selector-name="usersByDepartment"></select>
+                                </div>
+
+                                <div class="selector-input-cnt  ui-slct-loading">
                                     <div class="input-inner">
 
                                         <label class="input-label" for="%uuid%">%label%</label>
 
-                                        <div class="input-field-cnt">
-                                            <input class="input-field ux-slct-input-field" disabled id="%uuid%" type="text" placeholder="%placeholder%">
+                                        <div class="input-field-cnt ux-slct-input">
+                                            <input class="input-field ux-slct-input-field" disabled="disabled" id="%uuid%" type="text" placeholder="%placeholder%">
 
                                             <div class="amount-selections-cnt">
                                                 <div class="amount-counter-display ux-slct-amount-display">
-                                                    %
+<!--                                                    // Todo Ponerle atributo data-->
+                                                    <span>%</span>
                                                 </div>
-                                                <div class="amount-viewer-cnt ux-slct-amount-viewer ui-slct-display-hidden">
+                                                <div class="amount-viewer-cnt ux-slct-amount-viewer display-none">
                                                     <div class="viewer-list">
 
                                                     </div>
@@ -55,7 +61,7 @@
                                             </div>
 
                                             <div class="input-dropdown-trigger ux-slct-dropdown-trigger">
-                                                ~
+                                                <i>~</i>
                                             </div>
                                         </div>
                                     </div>
