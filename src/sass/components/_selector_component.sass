@@ -1,38 +1,23 @@
 // FILE <_selector-component.sass>
 
-.display-none
-    display: none
 
 .cmp-selector
     .selector-inner
         position: relative
-        display: flex
-        flex-direction: column
         width: 100%
 
         .selector-input-cnt
             .input-inner
-                display: flex
-                flex-direction: column
-
-                .input-label
-                    display: block
-                    padding: 0 $theme-general-padding
 
                 .input-field-cnt
-                    display: flex
-                    align-items: center
                     background-color: $color-gray-100
                     border-radius: $theme-radius
 
                     .input-field
                         cursor: pointer
 
-                    .amount-selections-cnt
-                        .amount-counter-display
-                            display: flex
-                            justify-content: center
-                            align-items: center
+                    .badge-selections-cnt
+                        .badge-counter-display
                             height: 24px
                             width: 24px
                             margin-left: $theme-general-separation
@@ -41,28 +26,25 @@
                             background-color: $color-gray
                             cursor: pointer
 
-                        .amount-viewer-cnt
+                        .badge-viewer-cnt
+                            .badge-list
 
                     .input-dropdown-trigger
-                        display: flex
-                        justify-content: center
-                        align-items: center
                         height: 24px
                         width: 24px
                         margin: 0 $theme-general-separation
                         cursor: pointer
 
-
         .selector-dropdown-cnt
-            position: absolute
-            top: 48px
-            width: 100%
+            position: relative
 
-            &:not(.ui-slct-dropdown-expanded)
+            &:not(.ui-selector-dropdown-expanded)
                 display: none
 
 
             .dropdown-inner
+                position: absolute
+                width: 100%
                 background-color: $color-white
                 border-radius: $theme-radius
                 @include theme-shadow
@@ -72,8 +54,6 @@
                     padding: $theme-general-padding
 
                     .search-field-cnt
-                        display: flex
-                        align-items: center
                         background-color: $color-gray-100
                         border-radius: $theme-radius
 
@@ -81,26 +61,17 @@
                         // Overwrite generic input declared in <_forms>
 
                         .search-icon
-                            display: flex
-                            justify-content: center
-                            align-items: center
                             height: 24px
                             width: 24px
                             margin: 0 $theme-general-separation
                             cursor: pointer
 
-                    .icons-line-cnt
-                        display: flex
-                        justify-content: space-between
-                        align-items: center
+                    .toolbar-cnt
                         margin-top: $theme-general-padding
 
-                        .icon-item
+                        .btn-item
                             height: 30px
                             width: 30px
-                            display: flex
-                            justify-content: center
-                            align-items: center
                             color: $color-gray
                             background-color: $color-white
                             border: 1px solid $color-gray-300
@@ -116,10 +87,10 @@
                                 border-color: $color-gray-400
                                 background-color: $color-gray-400
 
-                        .icon-group
+                        .btn-group
                             display: flex
 
-                            .icon-item
+                            .btn-item
                                 border-width: 1px 0
                                 border-radius: 0
 
@@ -141,7 +112,7 @@
 
                     .result-item-cnt
 
-                        &.ui-slct-no-results
+                        &.ui-selector-no-results
                             display: flex
                             min-height: 40px
                             justify-content: center

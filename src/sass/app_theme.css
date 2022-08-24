@@ -305,6 +305,27 @@ template {
   background-color: transparent !important;
   outline: none; }
 
+.display-none {
+  display: none; }
+
+.flex-center {
+  display: flex;
+  align-items: center; }
+
+.flex-column {
+  display: flex;
+  flex-direction: column; }
+
+.flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.flex-center-sb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
 .app-cnt .app-inner {
   display: flex;
   min-height: 100vh;
@@ -333,54 +354,37 @@ template {
         width: 400px; }
       .app-cnt .app-inner .test-form .test-inner .test-object-cnt.width-600 {
         width: 600px; }
-
-.display-none {
-  display: none; }
+      .app-cnt .app-inner .test-form .test-inner .test-object-cnt .test-label {
+        padding: 0 5px; }
 
 .cmp-selector .selector-inner {
   position: relative;
-  display: flex;
-  flex-direction: column;
   width: 100%; }
-  .cmp-selector .selector-inner .selector-input-cnt .input-inner {
-    display: flex;
-    flex-direction: column; }
-    .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-label {
-      display: block;
-      padding: 0 10px; }
-    .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-field-cnt {
-      display: flex;
-      align-items: center;
-      background-color: #F3F6F9;
-      border-radius: 4px; }
-      .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-field-cnt .input-field {
-        cursor: pointer; }
-      .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-field-cnt .amount-selections-cnt .amount-counter-display {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 24px;
-        width: 24px;
-        margin-left: 6px;
-        color: rgba(255, 255, 255, 0.75);
-        border-radius: 50%;
-        background-color: #7E8299;
-        cursor: pointer; }
-      .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-field-cnt .input-dropdown-trigger {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 24px;
-        width: 24px;
-        margin: 0 6px;
-        cursor: pointer; }
+  .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-field-cnt {
+    background-color: #F3F6F9;
+    border-radius: 4px; }
+    .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-field-cnt .input-field {
+      cursor: pointer; }
+    .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-field-cnt .badge-selections-cnt .badge-counter-display {
+      height: 24px;
+      width: 24px;
+      margin-left: 6px;
+      color: rgba(255, 255, 255, 0.75);
+      border-radius: 50%;
+      background-color: #7E8299;
+      cursor: pointer; }
+    .cmp-selector .selector-inner .selector-input-cnt .input-inner .input-field-cnt .input-dropdown-trigger {
+      height: 24px;
+      width: 24px;
+      margin: 0 6px;
+      cursor: pointer; }
   .cmp-selector .selector-inner .selector-dropdown-cnt {
-    position: absolute;
-    top: 48px;
-    width: 100%; }
-    .cmp-selector .selector-inner .selector-dropdown-cnt:not(.ui-slct-dropdown-expanded) {
+    position: relative; }
+    .cmp-selector .selector-inner .selector-dropdown-cnt:not(.ui-selector-dropdown-expanded) {
       display: none; }
     .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner {
+      position: absolute;
+      width: 100%;
       background-color: #FFFFFF;
       border-radius: 4px;
       box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
@@ -388,59 +392,48 @@ template {
       .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt {
         padding: 10px; }
         .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .search-field-cnt {
-          display: flex;
-          align-items: center;
           background-color: #F3F6F9;
           border-radius: 4px; }
           .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .search-field-cnt .search-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 24px;
             width: 24px;
             margin: 0 6px;
             cursor: pointer; }
-        .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+        .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt {
           margin-top: 10px; }
-          .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-item {
+          .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-item {
             height: 30px;
             width: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             color: #7E8299;
             background-color: #FFFFFF;
             border: 1px solid #E4E6EF;
             border-radius: 4px;
             cursor: pointer; }
-            .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-item.ui-item-active {
+            .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-item.ui-item-active {
               color: rgba(255, 255, 255, 0.75);
               border-color: #3699FF;
               background-color: #3699FF; }
-            .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-item:hover, .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-item:focus {
+            .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-item:hover, .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-item:focus {
               border-color: #D1D3E0;
               background-color: #D1D3E0; }
-          .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-group {
+          .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-group {
             display: flex; }
-            .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-group .icon-item {
+            .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-group .btn-item {
               border-width: 1px 0;
               border-radius: 0; }
-              .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-group .icon-item:first-child {
+              .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-group .btn-item:first-child {
                 border-width: 1px 0 1px 1px;
                 border-radius: 4px 0 0 4px; }
-              .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-group .icon-item:last-child {
+              .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-group .btn-item:last-child {
                 border-width: 1px 1px 1px 0;
                 border-radius: 0 4px 4px 0; }
-              .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .icons-line-cnt .icon-group .icon-item:only-child {
+              .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .utils-cnt .toolbar-cnt .btn-group .btn-item:only-child {
                 border-width: 1px;
                 border-radius: 4px; }
       .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .results-cnt {
         border-top: 1px solid #E4E6EF;
         padding: 10px; }
-        .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .results-cnt .result-item-cnt.ui-slct-no-results {
+        .cmp-selector .selector-inner .selector-dropdown-cnt .dropdown-inner .results-cnt .result-item-cnt.ui-selector-no-results {
           display: flex;
           min-height: 40px;
           justify-content: center;
