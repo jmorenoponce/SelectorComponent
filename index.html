@@ -20,98 +20,90 @@
 
 <body>
 
-    <div class="app-cnt">
-        <div class="app-inner">
+<div class="app-cnt">
+    <div class="app-inner">
 
-            <div class="test-form">
-                <div class="test-inner ux-test-position ui-position-v-center ui-position-h-center">
+        <div class="test-form">
+            <div class="test-inner ux-test-position ui-position-v-center ui-position-h-center">
 
-                    <div class="test-object-cnt width-400">
+                <div class="test-object-cnt width-400">
+                    <label class="test-label">Selección de usuarios:</label>
 
-                        <!-- Users Selector Component -->
-                        <div class="cmp-selector">
-                            <div class="selector-inner">
+                    <!-- Users Selector Component -->
+                    <div class="cmp-selector">
+                        <div class="selector-inner flex-column">
 
-<!--                                Todo: "select", no usamos <for< ni <id>-->
+                            <select class="ux-selector-native-field display-none" data-selector-name="usersByDepartment"></select>
 
-                                <label class="ux-slct-native-label display-none" for="usersByDepartment">Selección de usuarios:</label>
+                            <div class="selector-input-cnt ui-selector-loading">
+                                <div class="input-inner">
 
-                                <div>
-                                    <select class="ux-slct-native-field display-none" id="usersByDepartment" data-selector-name="usersByDepartment"></select>
-                                </div>
+                                    <div class="input-field-cnt flex-center ux-selector-input">
+                                        <input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="%placeholder%">
 
-                                <div class="selector-input-cnt  ui-slct-loading">
-                                    <div class="input-inner">
+                                        <div class="badge-selections-cnt">
+                                            <div class="badge-counter-display flex-center-center ux-selector-amount-display">
+                                                <span data-badge-selections-amount="8"></span>
+                                            </div>
 
-                                        <label class="input-label" for="%uuid%">%label%</label>
+                                            <div class="badge-viewer-cnt ux-selector-amount-viewer display-none">
+                                                <div class="badge-list">
 
-                                        <div class="input-field-cnt ux-slct-input">
-                                            <input class="input-field ux-slct-input-field" disabled="disabled" id="%uuid%" type="text" placeholder="%placeholder%">
-
-                                            <div class="amount-selections-cnt">
-                                                <div class="amount-counter-display ux-slct-amount-display">
-<!--                                                    // Todo Ponerle atributo data-->
-                                                    <span>%</span>
                                                 </div>
-                                                <div class="amount-viewer-cnt ux-slct-amount-viewer display-none">
-                                                    <div class="viewer-list">
+                                            </div>
+                                        </div>
 
-                                                    </div>
+                                        <div class="input-dropdown-trigger flex-center-center ux-selector-dropdown-trigger">
+                                            <i>~</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="selector-dropdown-cnt ux-selector-dropdown ui-selector-dropdown-expanded">
+                                <div class="dropdown-inner">
+
+                                    <div class="utils-cnt">
+                                        <div class="search-field-cnt flex-center">
+                                            <input class="input-field ux-selector-search-field" type="text" placeholder="%placeholder%">
+                                            <div class="search-icon flex-center-center"><i>~</i></div>
+                                        </div>
+
+                                        <div class="toolbar-cnt flex-center-sb">
+                                            <div class="btn-group">
+                                                <div class="btn-item flex-center-center ui-item-active">
+                                                    <i>~</i>
+                                                </div>
+                                                <div class="btn-item flex-center-center">
+                                                    <i>~</i>
+                                                </div>
+                                                <div class="btn-item flex-center-center">
+                                                    <i>~</i>
                                                 </div>
                                             </div>
 
-                                            <div class="input-dropdown-trigger ux-slct-dropdown-trigger">
+                                            <div class="btn-item flex-center-center">
                                                 <i>~</i>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="selector-dropdown-cnt ux-slct-dropdown ui-slct-dropdown-expanded">
-                                    <div class="dropdown-inner">
-
-                                        <div class="utils-cnt">
-                                            <div class="search-field-cnt">
-                                                <input class="input-field ux-slct-search-field" type="text" placeholder="%placeholder%">
-                                                <div class="search-icon"><i>~</i></div>
-                                            </div>
-
-                                            <div class="icons-line-cnt">
-                                                <div class="icon-group">
-                                                    <div class="icon-item ui-item-active">
-                                                        <i>~</i>
-                                                    </div>
-                                                    <div class="icon-item">
-                                                        <i>~</i>
-                                                    </div>
-                                                    <div class="icon-item">
-                                                        <i>~</i>
-                                                    </div>
-                                                </div>
-
-                                                <div class="icon-item">
-                                                    <i>~</i>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="results-cnt">
-                                            <div class="result-item-cnt ui-slct-no-results">
-                                                <span class="item-msg">%no-results-message%</span>
-                                            </div>
+                                    <div class="results-cnt">
+                                        <div class="result-item-cnt ui-selector-no-results">
+                                            <span class="item-msg">%no-results-message%</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-            </div>
 
+            </div>
         </div>
+
     </div>
+</div>
 
 <script src="./dist/js/main.bundle.js"></script>
 
