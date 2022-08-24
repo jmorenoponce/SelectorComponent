@@ -27,37 +27,45 @@
             <div class="test-inner ux-test-position ui-position-v-center ui-position-h-center">
 
                 <div class="test-object-cnt width-400">
+
                     <label class="test-label">Selección de usuarios:</label>
+                    <select class="ux-selector-native-field display-none" data-selector-name="usersByDepartment"></select>
 
                     <!-- Users Selector Component -->
                     <div class="cmp-selector">
                         <div class="selector-inner flex-column">
 
-                            <select class="ux-selector-native-field display-none" data-selector-name="usersByDepartment"></select>
-
                             <div class="selector-input-cnt ui-selector-loading">
-                                <div class="input-inner">
 
-                                    <div class="input-field-cnt flex-center ux-selector-input">
-                                        <input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="%placeholder%">
+                                <div class="input-field-cnt flex-center ux-selector-input">
+                                    <input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="%placeholder%">
 
-                                        <div class="badge-selections-cnt">
-                                            <div class="badge-counter-display flex-center-center ux-selector-amount-display">
-                                                <span data-badge-selections-amount="8"></span>
+<!--                                    <div class="badge selections-cnt">-->
+<!--                                        <div class="selections-counter-display flex-center-center ux-selector-amount-display">-->
+<!--                                            <span data-badge-selections-amount="8"></span>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="selections-viewer-cnt ux-selector-amount-viewer display-none">-->
+<!--                                            <div class="selections-list">-->
+
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+                                    <div class="badge ux-popover-trigger">
+                                        <span class="badge-text" data-param="selections-amount">24</span>
+                                        <div class="ux-popover ui-popover selections-badge-cnt" data-shown="0">
+                                            <div class="inner bla-bla-bla ux-selections-list-cnt">
+                                                I'm the popover content
                                             </div>
-
-                                            <div class="badge-viewer-cnt ux-selector-amount-viewer display-none">
-                                                <div class="badge-list">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="input-dropdown-trigger flex-center-center ux-selector-dropdown-trigger">
-                                            <i>~</i>
                                         </div>
                                     </div>
+
+                                    <div class="input-dropdown-trigger flex-center-center ux-selector-dropdown-trigger">
+                                        <i>~</i>
+                                    </div>
                                 </div>
+
                             </div>
 
                             <div class="selector-dropdown-cnt ux-selector-dropdown ui-selector-dropdown-expanded">
@@ -106,6 +114,10 @@
 </div>
 
 <script src="./dist/js/main.bundle.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="src/js/badge.js"></script>
 
 </body>
 
