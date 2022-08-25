@@ -1,23 +1,22 @@
 // FILE <_selector-component.sass>
 
 .cmp-selector
-    .selector-inner
+    .inner
         position: relative
         width: 100%
 
         .selector-input-cnt
-            .input-field-cnt
-                background-color: $color-gray-100
-                border-radius: $theme-radius
+            background-color: $color-gray-100
+            border-radius: $theme-radius
 
-                .input-field
-                    cursor: pointer
+            .input-field
+                cursor: pointer
 
-                .input-dropdown-trigger
-                    height: 24px
-                    width: 24px
-                    margin: 0 $theme-general-separation
-                    cursor: pointer
+            .input-dropdown-trigger
+                height: 24px
+                width: 24px
+                margin: 0 $theme-general-separation
+                cursor: pointer
 
         .selector-dropdown-cnt
             position: relative
@@ -25,7 +24,7 @@
             &:not(.ui-selector-dropdown-expanded)
                 display: none
 
-            .dropdown-inner
+            .inner
                 position: absolute
                 width: 100%
                 background-color: $color-white
@@ -105,23 +104,10 @@
                         .result-item-cnt
 
 
-.selections-badge-cnt
-    .selections-counter-display
-        height: 24px
-        width: 24px
-        margin-left: $theme-general-separation
-        color: $color-white-75
-        border-radius: 50%
-        background-color: $color-gray
-        cursor: pointer
-
-    .selections-viewer-cnt
-        .viewer-list
-
-
 .ux-popover-trigger
     user-select: none
     position: relative
+
 
 .ui-popover
     position: absolute
@@ -137,7 +123,8 @@
     &:not([data-shown="1"])
         display: none
 
+
 .bla-bla-bla
     background-color: #17A2B8
-    border: #187DE4
+    border: 1px solid #187DE4
     padding: 10px
