@@ -4,103 +4,121 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Practica · Componente selector de Usuarios</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Practica · Componente selector de Usuarios</title>
 
-    <link rel="icon" type="image/x-icon" href="/src/assets/favicon.ico">
+	<link rel="icon" type="image/x-icon" href="/src/assets/favicon.ico">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="src/sass/app_theme.css">
+	<link rel="stylesheet" href="src/sass/app_theme.css">
 </head>
 
 <body>
 
 <div class="app-cnt">
-    <div class="app-inner">
+	<div class="app-inner">
 
-        <div class="test-form">
-            <div class="test-inner ux-test-position ui-position-v-center ui-position-h-center">
+		<div class="test-form">
+			<div class="test-inner ux-test-position ui-position-v-center ui-position-h-center">
 
-                <div class="test-object-cnt width-400">
+				<div class="test-object-cnt width-400">
 
-                    <label class="test-label">Selección de usuarios:</label>
-                    <select class="ux-selector-native-field display-none" data-selector-name="usersByDepartment"></select>
+					<label class="test-label">Selección de usuarios:</label>
+					<select class="ux-selector-native-field display-none" data-selector-name="usersByDepartment"></select>
 
-                    <!-- Users Selector Component -->
-                    <div class="cmp-selector">
-                        <div class="inner flex-column">
+					<!-- Users Selector Component -->
+					<div class="cmp-selector">
+						<div class="selector-inner flex-column">
 
-                            <div class="selector-input-cnt flex-center ux-selector-input ui-selector-loading">
-                                <input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="%placeholder%">
+							<div class="selector-input-cnt ux-selector-input">
+								<div class="input-inner flex-center">
 
-                                <div class="badge badge-circle ml-5 ux-popover-trigger">
-                                    <span class="badge-text" data-param="selections-amount">24</span>
-                                    <div class="ux-popover ui-popover" data-shown="0">
-                                        <div class="inner bla-bla-bla ux-selections-list-cnt">
-                                            I'm the popover content
-                                        </div>
-                                    </div>
-                                </div>
+									<input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="%placeholder%">
 
-                                <div class="input-dropdown-trigger flex-center ux-selector-dropdown-trigger">
-                                    <i>~</i>
-                                </div>
-                            </div>
+									<div class="input-badge badge badge-circle ml-5 ux-popover-trigger">
+										<span class="badge-text" data-param="selections-amount">24</span>
 
-                            <div class="selector-dropdown-cnt ux-selector-dropdown ui-selector-dropdown-expanded">
-                                <div class="inner">
+										<div class="ux-popover ui-popover" data-shown="0">
+											<div class="inner bla-bla-bla ux-selections-list-cnt">
+												I'm the popover content
+											</div>
+										</div>
+									</div>
 
-                                    <div class="utils-cnt">
-                                        <div class="search-field-cnt flex-align-center">
-                                            <input class="input-field ux-selector-search-field" type="text" placeholder="%placeholder%">
-                                            <div class="search-icon flex-center"><i>~</i></div>
-                                        </div>
+									<div class="input-dropdown-trigger flex-center ml-5 mr-5 ux-selector-dropdown-trigger">
+										<i>~</i>
+									</div>
+								</div>
+							</div>
 
-                                        <div class="toolbar-cnt flex-justify-space-between">
-                                            <div class="btn-group">
-                                                <div class="btn-item flex-center ui-item-active">
-                                                    <i>~</i>
-                                                </div>
-                                                <div class="btn-item flex-center">
-                                                    <i>~</i>
-                                                </div>
-                                                <div class="btn-item flex-center">
-                                                    <i>~</i>
-                                                </div>
-                                            </div>
+							<div class="selector-dropdown-cnt ux-selector-dropdown ui-selector-dropdown-expanded">
+								<div class="dropdown-inner">
 
-                                            <div class="btn-item flex-center">
-                                                <i>~</i>
-                                            </div>
-                                        </div>
-                                    </div>
+									<div class="tools-cnt dropdown-list-cnt">
 
-                                    <div class="results-cnt">
-                                        <div class="result-item-cnt ui-selector-no-results">
-                                            <span class="item-msg">%no-results-message%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+										<div class="search-filter-cnt list-item">
+											<div class="filter-inner flex-align-center">
 
-            </div>
-        </div>
+												<input class="input-field ux-selector-search-field" type="text" placeholder="%placeholder%">
+												<div class="filter-icon flex-center mr-5"><i>~</i></div>
+											</div>
+										</div>
 
-    </div>
+										<div class="view-mode-cnt list-item">
+											<div class="btn-toolbar flex-justify-space-between">
+
+												<div class="btn-group">
+													<div class="btn ui-active">
+														<i class="btn-icon">~</i>
+													</div>
+
+													<div class="btn">
+														<i class="btn-icon">~</i>
+													</div>
+												</div>
+
+												<div class="btn">
+													<i class="btn-icon">~</i>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="results-cnt dropdown-list-cnt">
+
+										<div class="result-item-cnt list-item ui-selector-no-results">
+											<span class="item-msg">%no-results-message%</span>
+										</div>
+
+										<div class="result-item-cnt list-item ui-selector-no-results">
+											<span class="item-msg">%no-results-message%</span>
+										</div>
+
+										<div class="result-item-cnt list-item ui-selector-no-results">
+											<span class="item-msg">%no-results-message%</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
 </div>
 
 <script src="./dist/js/main.bundle.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous"></script>
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"></script>
 <script src="src/js/badge.js"></script>
 
 </body>

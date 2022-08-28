@@ -1,26 +1,25 @@
-
 $steps: ("1":5, "2": 10, "3": 15, "4": 20, "5": 25, "6": 30, "7": 35, "8":40, "9": 45, "10": 50, "11": 60, "12": 70, "13": 80, "14": 90, "15": 100)
 
 @each $key, $margin in $steps
     .m-#{$margin}
-        margin: #{$margin}px
+        margin: #{$margin}px !important
     .mt-#{$margin}
-        margin-top: #{$margin}px
+        margin-top: #{$margin}px !important
     .mb-#{$margin}
-        margin-bottom: #{$margin}px
+        margin-bottom: #{$margin}px !important
     .ml-#{$margin}
-        margin-left: #{$margin}px
+        margin-left: #{$margin}px !important
     .mr-#{$margin}
-        margin-right: #{$margin}px
+        margin-right: #{$margin}px !important
 
 @each $key, $padding in $steps
     .p-#{$padding}
-        padding: #{$padding}px
+        padding: #{$padding}px !important
     .pt-#{$padding}
-        padding-top: #{$padding}px
+        padding-top: #{$padding}px !important
     .pb-#{$padding}
-        padding-bottom: #{$padding}px
+        padding-bottom: #{$padding}px !important
     .pl-#{$padding}
-        padding-left: #{$padding}px
+        padding-left: #{$padding}px !important
     .pr-#{$padding}
-        padding-right: #{$padding}px
+        padding-right: #{$padding}px !important
