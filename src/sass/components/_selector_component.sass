@@ -1,130 +1,83 @@
 // FILE <_selector-component.sass>
 
 .cmp-selector
-    .inner
-        position: relative
-        width: 100%
+	.selector-inner
+		position: relative
+		width: 100%
 
-    .selector-input-cnt
-        background-color: $color-gray-100
-        border-radius: $theme-radius
+	.selector-input-cnt
+		.input-inner
+			border-radius: $theme-radius
+			background-color: $color-gray-100
 
-        .input-field
-            cursor: pointer
+		.input-field
+			// Overwrite generic input properties declared in <_forms>
+			cursor: pointer
 
-        .input-dropdown-trigger
-            height: 24px
-            width: 24px
-            margin: 0 $theme-general-separation
-            cursor: pointer
+		.input-badge
 
-        .selector-dropdown-cnt
-            position: relative
-
-            &:not(.ui-selector-dropdown-expanded)
-                display: none
-
-            .inner
-                position: absolute
-                width: 100%
-                background-color: $color-white
-                border-radius: $theme-radius
-                @include theme-shadow
-                overflow: hidden
-
-                .utils-cnt
-                    padding: $theme-general-padding
-
-                    .search-field-cnt
-                        background-color: $color-gray-100
-                        border-radius: $theme-radius
-
-                        .input-field
-                        // Overwrite generic input declared in <_forms>
-
-                        .search-icon
-                            height: 24px
-                            width: 24px
-                            margin: 0 $theme-general-separation
-                            cursor: pointer
-
-                    .toolbar-cnt
-                        margin-top: $theme-general-padding
-
-                        .btn-item
-                            height: 30px
-                            width: 30px
-                            color: $color-gray
-                            background-color: $color-white
-                            border: 1px solid $color-gray-300
-                            border-radius: $theme-radius
-                            cursor: pointer
-
-                            &.ui-item-active
-                                color: $color-white-75
-                                border-color: $color-blue
-                                background-color: $color-blue
-
-                            &:hover, &:focus
-                                border-color: $color-gray-400
-                                background-color: $color-gray-400
-
-                        .btn-group
-                            display: flex
-
-                            .btn-item
-                                border-width: 1px 0
-                                border-radius: 0
-
-                                &:first-child
-                                    border-width: 1px 0 1px 1px
-                                    border-radius: $theme-radius 0 0 $theme-radius
-
-                                &:last-child
-                                    border-width: 1px 1px 1px 0
-                                    border-radius: 0 $theme-radius $theme-radius 0
-
-                                &:only-child
-                                    border-width: 1px
-                                    border-radius: $theme-radius
-
-                .results-cnt
-                    border-top: 1px solid $color-gray-300
-                    padding: $theme-general-padding
-
-                    .result-item-cnt
-
-                        &.ui-selector-no-results
-                            display: flex
-                            min-height: 40px
-                            justify-content: center
-                            align-items: center
-
-                    .grouped-results
-                        .result-item-cnt
+		.input-dropdown-trigger
+			height: 24px
+			width: 24px
+			min-width: 24px
+			cursor: pointer
 
 
-.ux-popover-trigger
-    user-select: none
-    position: relative
+	.selector-dropdown-cnt
+		position: relative
+
+		&:not(.ui-selector-dropdown-expanded)
+			display: none
+
+		.dropdown-inner
+			position: absolute
+			width: 100%
+			border-radius: $theme-radius
+			background-color: $color-white
+			@include theme-shadow
 
 
-.ui-popover
-    position: absolute
-    top: 100%
-    left: 0
-    z-index: 999
-    padding-top: 10px
+	.dropdown-list-cnt
+		padding: ($theme-general-padding / 2) 0
 
-    .inner
-        position: relative
-        left: -25%
-
-    &:not([data-shown="1"])
-        display: none
+		.list-item
+			padding: ($theme-general-padding / 2) $theme-general-padding
 
 
-.bla-bla-bla
-    background-color: #17A2B8
-    border: 1px solid #187DE4
-    padding: 10px
+	.tools-cnt
+		border-bottom: 1px solid $color-gray-400
+
+
+	.search-filter-cnt
+		padding: 0 $theme-general-padding
+
+		.filter-inner
+			border-radius: $theme-radius
+			background-color: $color-gray-100 !important
+
+		.input-field
+		// Overwrite generic input properties declared in <_forms>
+
+		.filter-icon
+			height: 24px
+			width: 24px
+			min-width: 24px
+			cursor: pointer
+
+
+	.view-mode-cnt
+		padding: 0 $theme-general-padding
+
+
+	.results-cnt
+		.result-item-cnt
+
+			&.ui-selector-no-results
+				display: flex
+				min-height: 40px
+				justify-content: center
+				align-items: center
+
+
+		.grouped-results
+			.result-item-cnt

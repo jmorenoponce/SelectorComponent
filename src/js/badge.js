@@ -88,7 +88,7 @@ UI_Popover.prototype.trigger_click = function (e) {
     let $target = $(e.target);
 
     if (e.target.classList.contains('.ux-popover') || $target.closest('.ux-popover').length) {
-        // Prevent .ux-popover  clicks to hide the popover element
+        // Prevent .ux-popover clicks to hide the popover element
         return;
     }
 
