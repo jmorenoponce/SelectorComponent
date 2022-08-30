@@ -5,6 +5,7 @@
 		position: relative
 		width: 100%
 
+
 	.selector-input-cnt
 		.input-inner
 			border-radius: $theme-radius
@@ -12,14 +13,6 @@
 
 		.input-field
 			// Overwrite generic input properties declared in <_forms>
-			cursor: pointer
-
-		.input-badge
-
-		.input-dropdown-trigger
-			height: 24px
-			width: 24px
-			min-width: 24px
 			cursor: pointer
 
 
@@ -38,14 +31,16 @@
 
 
 	.dropdown-list-cnt
-		padding: ($theme-general-padding / 2) 0
+		display: flex
+		flex-direction: column
+		padding: $theme-general-padding 0
 
 		.list-item
-			padding: ($theme-general-padding / 2) $theme-general-padding
+			padding: 0 $theme-general-padding
 
 
 	.tools-cnt
-		border-bottom: 1px solid $color-gray-400
+		//border-bottom: 1px solid $color-gray-400
 
 
 	.search-filter-cnt
@@ -58,26 +53,37 @@
 		.input-field
 		// Overwrite generic input properties declared in <_forms>
 
-		.filter-icon
-			height: 24px
-			width: 24px
-			min-width: 24px
-			cursor: pointer
-
 
 	.view-mode-cnt
 		padding: 0 $theme-general-padding
 
 
 	.results-cnt
-		.result-item-cnt
+		border-top: 1px solid $color-gray-400
 
-			&.ui-selector-no-results
-				display: flex
-				min-height: 40px
-				justify-content: center
-				align-items: center
+	.results-item-cnt
 
+		.item-inner
+			padding: ($theme-general-padding / 2)
+			border-radius: $theme-radius
 
-		.grouped-results
-			.result-item-cnt
+		&:not(.ui-no-results)
+			.item-inner
+				cursor: pointer
+				&:hover
+					background-color: $color-gray-200
+
+		.item-check
+			//margin-left: 2px
+
+		&:not([data-recent="1"])
+			.is-item-recent
+				display: none
+
+		&.ui-no-results
+			display: flex
+			justify-content: center
+			align-items: center
+			min-height: 50px
+			color: $color-warning
+			background-color: $color-light-warning

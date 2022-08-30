@@ -1,7 +1,7 @@
 
 .ux-popover-trigger
-    user-select: none
     position: relative
+    user-select: none
 
 
 .ui-popover
@@ -11,12 +11,12 @@
     z-index: 999
     padding-top: 10px
 
-    &:not([data-shown="1"])
-        display: none
-
-    .inner
+    .popover-inner
         position: relative
         left: -25%
+
+    &:not([data-shown="1"])
+        display: none
 
 
 .bla-bla-bla
