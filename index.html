@@ -40,19 +40,17 @@
 
 									<input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="%placeholder%">
 
-									<div class="input-badge badge badge-circle ml-5 ux-popover-trigger">
+									<div class="badge badge-circle ml-5 ux-popover-trigger">
 										<span class="badge-text" data-param="selections-amount">24</span>
 
-										<div class="ux-popover ui-popover" data-shown="0">
-											<div class="inner bla-bla-bla ux-selections-list-cnt">
+										<div class="ui-popover ux-popover" data-shown="0">
+											<div class="popover-inner bla-bla-bla ux-selections-list-cnt">
 												I'm the popover content
 											</div>
 										</div>
 									</div>
 
-									<div class="input-dropdown-trigger flex-center ml-5 mr-5 ux-selector-dropdown-trigger">
-										<i>~</i>
-									</div>
+									<i class="icon ml-5 mr-5 ux-selector-dropdown-trigger">~</i>
 								</div>
 							</div>
 
@@ -61,11 +59,11 @@
 
 									<div class="tools-cnt dropdown-list-cnt">
 
-										<div class="search-filter-cnt list-item">
+										<div class="search-filter-cnt list-item mb-10">
 											<div class="filter-inner flex-align-center">
 
 												<input class="input-field ux-selector-search-field" type="text" placeholder="%placeholder%">
-												<div class="filter-icon flex-center mr-5"><i>~</i></div>
+												<i class="icon mr-5">~</i>
 											</div>
 										</div>
 
@@ -91,16 +89,100 @@
 
 									<div class="results-cnt dropdown-list-cnt">
 
-										<div class="result-item-cnt list-item ui-selector-no-results">
-											<span class="item-msg">%no-results-message%</span>
+										<div class="results-item-cnt list-item ux-selector-result-item ui-selector-view-extended ui-order-by-data-recent">
+											<div class="item-inner item-extended flex-align-center">
+
+												<input class="item-check checkbox-field" type="checkbox" value="Cosas" checked="checked">
+
+												<div class="user-card user-card-xs ml-10">
+													<div class="card-image">
+														<div class="avatar">
+															<span class="avatar-initials">JM</span>
+															<span class="avatar-chat-state" data-user-chat-state="0"></span>
+														</div>
+													</div>
+
+													<div class="card-data flex-column">
+														<span class="data-name" data-param="item-name">José Martos Rodríguez</span>
+														<span class="data-email" data-param="item-email">j.martos@avanzasi.es</span>
+													</div>
+												</div>
+
+												<i class="icon is-item-recent">~</i>
+											</div>
 										</div>
 
-										<div class="result-item-cnt list-item ui-selector-no-results">
-											<span class="item-msg">%no-results-message%</span>
+										<div class="results-item-cnt list-item ux-selector-result-item ui-selector-view-extended ui-order-by-data-recent">
+											<div class="item-inner flex-align-center">
+
+												<input class="item-check checkbox-field" type="checkbox" value="Cosas" checked="checked">
+
+												<div class="user-card user-card-sm ml-10">
+													<div class="card-image">
+														<div class="avatar">
+															<span class="avatar-initials">MM</span>
+															<span class="avatar-chat-state" data-user-chat-state="0"></span>
+														</div>
+													</div>
+
+													<div class="card-data flex-column">
+														<span class="data-name" data-param="item-name">María del Mar Iglesias López</span>
+														<span class="data-email" data-param="item-email">mm.iglesiaslopez@avanzasi.es</span>
+													</div>
+												</div>
+
+												<i class="icon is-item-recent">~</i>
+											</div>
 										</div>
 
-										<div class="result-item-cnt list-item ui-selector-no-results">
-											<span class="item-msg">%no-results-message%</span>
+										<div class="results-item-cnt list-item ux-selector-result-item ui-selector-view-extended ui-order-by-data-recent">
+											<div class="item-inner flex-align-center">
+
+												<input class="item-check checkbox-field" type="checkbox" value="Cosas" checked="checked">
+
+												<div class="user-card ml-10">
+													<div class="card-image">
+														<div class="avatar">
+															<span class="avatar-initials">JC</span>
+															<span class="avatar-chat-state" data-user-chat-state="0"></span>
+														</div>
+													</div>
+
+													<div class="card-data flex-column">
+														<span class="data-name" data-param="item-name">José Carlos Rico Higueras</span>
+														<span class="data-email" data-param="item-email">jcricohigueras@avanzasi.es</span>
+													</div>
+												</div>
+
+												<i class="icon is-item-recent">~</i>
+											</div>
+										</div>
+
+										<div class="results-item-cnt list-item ux-selector-result-item ui-selector-view-extended ui-order-by-data-recent" data-recent="1">
+											<div class="item-inner flex-align-center">
+
+												<div class="user-card user-card-sm">
+													<div class="card-image">
+														<div class="avatar">
+															<span class="avatar-initials">JC</span>
+															<span class="avatar-chat-state" data-user-chat-state="0"></span>
+														</div>
+													</div>
+
+													<div class="card-data flex-column">
+														<span class="data-name" data-param="item-name">José Carlos Rico Higueras</span>
+														<span class="data-email" data-param="item-email">jcricohigueras@avanzasi.es</span>
+													</div>
+												</div>
+
+												<i class="icon is-item-recent">~</i>
+											</div>
+										</div>
+
+										<div class="results-item-cnt list-item ui-no-results">
+											<div class="item-inner flex-center">
+												<span class="item-msg" data-no-results-msg="">%no-results-message%</span>
+											</div>
 										</div>
 									</div>
 								</div>

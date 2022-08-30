@@ -1,0 +1,32 @@
+
+.avatar
+	position: relative
+	display: flex
+	justify-content: center
+	align-items: center
+	height: 100%
+	width: 100%
+
+	.avatar-initials
+		display: flex
+		justify-content: center
+		align-items: center
+		height: 100%
+		width: 100%
+		border-radius: $theme-radius
+		background-color: $color-success
+		overflow: hidden
+
+	.avatar-chat-state
+		position: absolute
+		height: 8px
+		width: 8px
+		bottom: -1px
+		right: -1px
+		border: 1px solid $color-white
+		border-radius: 50%
+		background-color: #5e6278
+
+	&.avatar-circle
+		.avatar-initials
+			border-radius: 50%
