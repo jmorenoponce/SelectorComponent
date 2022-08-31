@@ -7,7 +7,7 @@
 
 
 	.selector-input-cnt
-		> .input-inner
+		> .inner
 			border-radius: $theme-radius
 			background-color: $color-gray-100
 
@@ -22,7 +22,7 @@
 		&:not(.ui-selector-dropdown-expanded)
 			display: none
 
-		.dropdown-inner
+		> .inner
 			position: absolute
 			width: 100%
 			border-radius: $theme-radius
@@ -46,7 +46,7 @@
 	.search-filter-cnt
 		padding: 0 $theme-general-padding
 
-		.filter-inner
+		> .inner
 			border-radius: $theme-radius
 			background-color: $color-gray-100 !important
 
@@ -61,29 +61,35 @@
 	.results-cnt
 		border-top: 1px solid $color-gray-400
 
+		> .inner
+			background-color: #1BC5BD
 
-	.result-item
-		.item-inner
-			padding: ($theme-general-padding / 2)
-			border-radius: $theme-radius
-
-		&:not(.ui-no-results)
-			.item-inner
+		.result-item
+			> .item-inner
+				padding: ($theme-general-padding / 2)
+				border-radius: $theme-radius
 				cursor: pointer
 
 				&:hover
 					background-color: $color-gray-200
 
-		.item-check
+			&[ui-no-results]
+				.item-inner
+					display: flex
+					justify-content: center
+					align-items: center
+					min-height: 50px
+					color: $color-warning
+					background-color: $color-light-warning
+					cursor: default
 
-		&:not([data-recent="1"])
-			.is-item-recent
-				display: none
+					&:hover
+						background-color: transparent
 
-		&.ui-no-results
-			display: flex
-			justify-content: center
-			align-items: center
-			min-height: 50px
-			color: $color-warning
-			background-color: $color-light-warning
+			.item-check
+
+			&:not([data-recent="1"])
+				.icon-recent
+					display: none
+
+			&.ui-no-results
