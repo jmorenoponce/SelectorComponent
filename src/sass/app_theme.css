@@ -967,11 +967,7 @@ template {
 .cmp-selector .selector-inner {
   position: relative;
   width: 100%; }
-<<<<<<< HEAD
-.cmp-selector .selector-input-cnt > .input-inner {
-=======
 .cmp-selector .selector-input-cnt > .inner {
->>>>>>> develop/jose
   border-radius: 4px;
   background-color: #F3F6F9; }
 .cmp-selector .selector-input-cnt .input-field {
@@ -980,11 +976,7 @@ template {
   position: relative; }
   .cmp-selector .selector-dropdown-cnt:not(.ui-selector-dropdown-expanded) {
     display: none; }
-<<<<<<< HEAD
-  .cmp-selector .selector-dropdown-cnt .dropdown-inner {
-=======
   .cmp-selector .selector-dropdown-cnt > .inner {
->>>>>>> develop/jose
     position: absolute;
     width: 100%;
     border-radius: 4px;
@@ -998,35 +990,13 @@ template {
     padding: 0 10px; }
 .cmp-selector .search-filter-cnt {
   padding: 0 10px; }
-<<<<<<< HEAD
-  .cmp-selector .search-filter-cnt .filter-inner {
-=======
   .cmp-selector .search-filter-cnt > .inner {
->>>>>>> develop/jose
     border-radius: 4px;
     background-color: #F3F6F9 !important; }
 .cmp-selector .view-mode-cnt {
   padding: 0 10px; }
 .cmp-selector .results-cnt {
   border-top: 1px solid #D1D3E0; }
-<<<<<<< HEAD
-.cmp-selector .result-item .item-inner {
-  padding: 5px;
-  border-radius: 4px; }
-.cmp-selector .result-item:not(.ui-no-results) .item-inner {
-  cursor: pointer; }
-  .cmp-selector .result-item:not(.ui-no-results) .item-inner:hover {
-    background-color: #EBEDF3; }
-.cmp-selector .result-item:not([data-recent="1"]) .is-item-recent {
-  display: none; }
-.cmp-selector .result-item.ui-no-results {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50px;
-  color: #FFA800;
-  background-color: #FFF4DE; }
-=======
   .cmp-selector .results-cnt > .inner {
     background-color: #1BC5BD; }
   .cmp-selector .results-cnt .result-item > .item-inner {
@@ -1047,6 +1017,5 @@ template {
       background-color: transparent; }
   .cmp-selector .results-cnt .result-item:not([data-recent="1"]) .icon-recent {
     display: none; }
->>>>>>> develop/jose
 
 /*# sourceMappingURL=app_theme.css.map */
