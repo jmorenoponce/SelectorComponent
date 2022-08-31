@@ -1016,10 +1016,19 @@ template {
 }
 
 .user-card {
+  width: 100%;
+}
+.user-card > .inner {
   display: flex;
   align-items: center;
-  height: 40px;
-  width: 100%;
+}
+.user-card .card-checkable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 14px;
+  width: 14px;
+  margin-right: 10px;
 }
 .user-card .card-image {
   height: 40px;
@@ -1029,25 +1038,59 @@ template {
 .user-card .card-data {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
-.user-card.user-card-sm {
+.user-card .card-flags {
+  display: flex;
+  flex-direction: row;
+}
+
+.ui-user-card-list[data-user-card-type=sm] > .inner, .user-card.user-card-sm > .inner {
   height: 24px;
 }
-.user-card.user-card-sm .card-image {
+.ui-user-card-list[data-user-card-type=sm] .card-image, .user-card.user-card-sm .card-image {
   height: 24px;
   min-width: 24px;
 }
-.user-card.user-card-sm .data-email {
+.ui-user-card-list[data-user-card-type=sm] .data-email, .user-card.user-card-sm .data-email {
   display: none;
 }
-.user-card.user-card-xs {
+
+.ui-user-card-list[data-user-card-type=xs] > .inner, .user-card.user-card-xs > .inner {
   height: 24px;
 }
-.user-card.user-card-xs .card-image, .user-card.user-card-xs .data-email {
+.ui-user-card-list[data-user-card-type=xs] .card-image, .ui-user-card-list[data-user-card-type=xs] .data-email, .user-card.user-card-xs .card-image, .user-card.user-card-xs .data-email {
   display: none;
 }
-.user-card .avatar-state[data-user-chat-state="0"] {
-  background-color: #187DE4;
+
+.user-card[data-activity-state="0"] .avatar-state {
+  background-color: #3699FF;
+}
+.user-card[data-activity-state="1"] .avatar-state {
+  background-color: #F64E60;
+}
+.user-card[data-activity-state="2"] .avatar-state {
+  background-color: #8950FC;
+}
+.user-card[data-user-color="1"] .avatar-initials {
+  color: #8950FC;
+  background-color: #EEE5FF;
+}
+.user-card[data-user-color="2"] .avatar-initials {
+  color: #3699FF;
+  background-color: #E1F0FF;
+}
+.user-card[data-user-color="3"] .avatar-initials {
+  color: #1BC5BD;
+  background-color: #C9F7F5;
+}
+.user-card[data-user-color="4"] .avatar-initials {
+  color: #F64E60;
+  background-color: #FFE2E5;
+}
+.user-card[data-user-color="5"] .avatar-initials {
+  color: #3699FF;
+  background-color: #E1F0FF;
 }
 
 .avatar {
@@ -1065,10 +1108,11 @@ template {
   height: 100%;
   width: 100%;
   border-radius: 4px;
-  background-color: #1BC5BD;
+  color: #D1D3E0;
+  background-color: #E4E6Ef;
   overflow: hidden;
 }
-.avatar .avatar-chat-state {
+.avatar .avatar-state {
   position: absolute;
   height: 8px;
   width: 8px;
@@ -1255,30 +1299,23 @@ template {
 .cmp-selector .results-cnt {
   border-top: 1px solid #D1D3E0;
 }
-.cmp-selector .results-cnt > .inner {
-  background-color: #1BC5BD;
-}
-.cmp-selector .results-cnt .result-item > .item-inner {
+.cmp-selector .result-item > .inner {
+  display: flex;
+  align-items: center;
   padding: 5px;
   border-radius: 4px;
   cursor: pointer;
 }
-.cmp-selector .results-cnt .result-item > .item-inner:hover {
+.cmp-selector .result-item > .inner:hover {
   background-color: #EBEDF3;
 }
-.cmp-selector .results-cnt .result-item[ui-no-results] .item-inner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.cmp-selector .result-item.ui-no-results > .inner {
   min-height: 50px;
   color: #FFA800;
   background-color: #FFF4DE;
   cursor: default;
 }
-.cmp-selector .results-cnt .result-item[ui-no-results] .item-inner:hover {
-  background-color: transparent;
-}
-.cmp-selector .results-cnt .result-item:not([data-recent="1"]) .icon-recent {
+.cmp-selector .result-item:not([data-recent="1"]) .icon-recent {
   display: none;
 }
 

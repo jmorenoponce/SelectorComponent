@@ -1,42 +1,94 @@
 
 .user-card
-	display: flex
-	align-items: center
-	height: 40px
-	width: 100%
+    width: 100%
 
-	//.inner
+    > .inner
+        display: flex
+        align-items: center
 
-	.card-image
-		height: 40px
-		min-width: 40px
-		margin-right: 10px
+    .card-checkable
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 14px
+        width: 14px
+        margin-right: 10px
 
-	.card-data
-		display: flex
-		flex-direction: column
+    .card-image
+        height: 40px
+        min-width: 40px
+        margin-right: 10px
 
-		.data-name
+    .card-data
+        display: flex
+        flex-direction: column
+        flex-grow: 1
 
-		.data-email
+        .data-name
 
-	&.user-card-sm
-		height: 24px
+        .data-email
 
-		.card-image
-			height: 24px
-			min-width: 24px
-
-		.data-email
-			display: none
-
-	&.user-card-xs
-		height: 24px
-
-		.card-image, .data-email
-			display: none
+    .card-flags
+        display: flex
+        flex-direction: row
 
 
-	.avatar-state
-		&[data-user-chat-state="0"]
-			background-color: #187DE4
+.ui-user-card-list[data-user-card-type="sm"], .user-card.user-card-sm
+    > .inner
+        height: 24px
+
+    .card-image
+        height: 24px
+        min-width: 24px
+
+    .data-email
+        display: none
+
+
+.ui-user-card-list[data-user-card-type="xs"], .user-card.user-card-xs
+    > .inner
+        height: 24px
+
+    .card-image, .data-email
+        display: none
+
+
+.user-card
+    &[data-activity-state="0"]
+        .avatar-state
+            background-color: $color-blue
+
+    &[data-activity-state="1"]
+        .avatar-state
+            background-color: $color-danger
+
+    &[data-activity-state="2"]
+        .avatar-state
+            background-color: $color-purple
+
+
+    &[data-user-color="1"]
+        .avatar-initials
+            color: $color-purple
+            background-color: $color-light-purple
+
+    &[data-user-color="2"]
+        .avatar-initials
+            color: $color-blue
+            background-color: $color-light-blue
+
+    &[data-user-color="3"]
+        .avatar-initials
+            color: $color-teal
+            background-color: $color-light-teal
+
+    &[data-user-color="4"]
+        .avatar-initials
+            color: $color-red
+            background-color: $color-light-red
+
+    &[data-user-color="5"]
+        .avatar-initials
+            color: $color-primary
+            background-color: $color-light-primary
+
