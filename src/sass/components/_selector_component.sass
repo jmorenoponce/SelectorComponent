@@ -1,91 +1,90 @@
-// FILE <_selector-component.sass>
 
 .cmp-selector
-    .selector-inner
-        position: relative
-        width: 100%
+	.selector-inner
+		position: relative
+		width: 100%
 
 
-    .selector-input-cnt
-        > .inner
-            border-radius: $theme-radius
-            background-color: $color-gray-100
+	.selector-input-cnt
+		> .inner
+			border-radius: $theme-radius
+			background-color: $color-gray-100
 
-        .input-field
-            // Overwrite generic input properties declared in <_forms>
-            cursor: pointer
-
-
-    .selector-dropdown-cnt
-        position: relative
-
-        &:not(.ui-selector-dropdown-expanded)
-            display: none
-
-        > .inner
-            position: absolute
-            width: 100%
-            border-radius: $theme-radius
-            background-color: $color-white
-            @include theme-shadow
+		.input-field
+			// Overwrite generic input properties declared in <_forms>
+			cursor: pointer
 
 
-    .dropdown-list-cnt
-        display: flex
-        flex-direction: column
-        padding: $theme-general-padding 0
+	.selector-dropdown-cnt
+		position: relative
 
-        .list-item
-            padding: 0 $theme-general-padding
+		&:not(.ui-selector-dropdown-expanded)
+			display: none
 
-
-    .tools-cnt
-    //border-bottom: 1px solid $color-gray-400
-
-
-    .search-filter-cnt
-        padding: 0 $theme-general-padding
-
-        > .inner
-            border-radius: $theme-radius
-            background-color: $color-gray-100 !important
-
-        .input-field
-            // Overwrite generic input properties declared in <_forms>
+		> .inner
+			position: absolute
+			width: 100%
+			background-color: $color-white
+			border-radius: $theme-radius
+			@include theme-shadow
 
 
-    .view-mode-cnt
-        padding: 0 $theme-general-padding
+	.dropdown-list-cnt
+		display: flex
+		flex-direction: column
+		padding: $theme-general-padding 0
+
+		.list-item
+			padding: 0 $theme-general-padding
 
 
-    .results-cnt
-        border-top: 1px solid $color-gray-400
-
-        > .inner
+	.tools-cnt
+	// border-bottom: 1px solid $color-gray-400
 
 
-    .result-item
-        > .inner
-            display: flex
-            align-items: center
-            padding: ($theme-general-padding / 2)
-            border-radius: $theme-radius
-            cursor: pointer
+	.search-filter-cnt
+		padding: 0 $theme-general-padding
 
-            &:hover
-                background-color: $color-gray-200
+		> .inner
+			border-radius: $theme-radius
+			background-color: $color-gray-100 !important
 
-        &.ui-no-results
-            > .inner
-                min-height: 50px
-                color: $color-warning
-                background-color: $color-light-warning
-                cursor: default
+		.input-field
+		// Overwrite generic input properties declared in <_forms>
 
-                &:hover
 
-        .item-check
+	.view-mode-cnt
+		padding: 0 $theme-general-padding
 
-        &:not([data-recent="1"])
-            .icon-recent
-                display: none
+
+	.results-cnt
+		border-top: 1px solid $color-gray-400
+
+		> .inner
+
+
+	.result-item
+		> .inner
+			display: flex
+			align-items: center
+			padding: ($theme-general-padding / 2)
+			border-radius: $theme-radius
+			cursor: pointer
+
+			&:hover
+				background-color: $color-gray-200
+
+		&.ui-no-results
+			> .inner
+				min-height: 50px
+				color: $color-warning
+				background-color: $color-light-warning
+				cursor: default
+
+				&:hover
+
+		.item-check
+
+		&:not([data-recent="1"])
+			.icon-recent
+				display: none
