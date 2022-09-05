@@ -1022,12 +1022,12 @@ template {
   padding: 10px 0; }
   .cmp-selector .dropdown-list-cnt .list-item {
     padding: 0 10px; }
-.cmp-selector .search-filter-cnt {
+.cmp-selector .search-filter {
   padding: 0 10px; }
-  .cmp-selector .search-filter-cnt > .inner {
+  .cmp-selector .search-filter > .inner {
     border-radius: 4px;
     background-color: #F3F6F9 !important; }
-.cmp-selector .view-mode-cnt {
+.cmp-selector .view-mode {
   padding: 0 10px; }
 .cmp-selector .results-cnt {
   border-top: 1px solid #D1D3E0; }
