@@ -1,6 +1,6 @@
 
 .cmp-selector
-	.selector-inner
+	> .inner
 		position: relative
 		width: 100%
 
@@ -36,12 +36,15 @@
 		flex-direction: column
 		padding: $theme-general-padding 0
 
+		&.list-scrollable
+			overflow-y: scroll
+
 		.list-item
 			padding: 0 $theme-general-padding
 
 
 	.tools-cnt
-	// border-bottom: 1px solid $color-gray-400
+		border-bottom: 1px solid $color-gray-400
 
 
 	.search-filter
@@ -60,9 +63,8 @@
 
 
 	.results-cnt
-		border-top: 1px solid $color-gray-400
-
 		> .inner
+			height: 200px
 
 
 	.result-item
@@ -91,11 +93,11 @@
 
 
 	.result-group
-		.result-item
-			> .inner
+		> .inner
 
+		.group-header
 
-
-
-
-
+		.group-content
+			.result-item
+				> .inner
+					padding-left: 30px
