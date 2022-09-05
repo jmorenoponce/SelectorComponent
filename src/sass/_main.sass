@@ -1,44 +1,32 @@
 // FILE: <_main.sass>
 
 .app-cnt
-    .app-inner
-        display: flex
-        min-height: 100vh
-        width: 100%
-        padding: 30px
-        background-color: $color-dark-default
+	.app-inner
+		display: flex
+		min-height: 100vh
+		width: 100%
+		padding: 30px
+		background-color: $color-dark-default
 
-        .test-form
-            width: 100%
-            background-color: $color-white
-            border-radius: $theme-radius
+		.test-form
+			width: 100%
+			background-color: $color-white
+			border-radius: $theme-radius
 
-            .test-inner
-                display: flex
-                height: 100%
-                padding: 20px
+			.test-inner
+				display: flex
+				height: 100%
+				padding: 20px
 
-                &.ui-position-h-center
-                    justify-content: center
+				.test-object-cnt
+					&.width-liquid
+						width: 100%
 
-                &.ui-position-h-end
-                    justify-content: end
+					&.width-450
+						width: 450px
 
-                &.ui-position-v-center
-                    align-items: center
+					&.width-600
+						width: 600px
 
-                &.ui-position-v-end
-                    align-items: end
-
-                .test-object-cnt
-                    &.width-liquid
-                        width: 100%
-
-                    &.width-450
-                        width: 450px
-
-                    &.width-600
-                        width: 600px
-
-                    .test-label
-                        padding: 0 5px
+					.test-label
+						padding: 0 5px

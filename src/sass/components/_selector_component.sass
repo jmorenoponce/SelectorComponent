@@ -37,7 +37,7 @@
 		padding: $theme-general-padding 0
 
 		&.list-scrollable
-			overflow-y: scroll
+			overflow-y: auto
 
 		.list-item
 			padding: 0 $theme-general-padding
@@ -64,7 +64,7 @@
 
 	.results-cnt
 		> .inner
-			height: 200px
+			//height: 200px
 
 
 	.result-item
@@ -98,6 +98,9 @@
 		.group-header
 
 		.group-content
+			&.dropdown-list-cnt
+				padding: 0
+
 			.result-item
 				> .inner
 					padding-left: 30px

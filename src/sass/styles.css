@@ -1228,18 +1228,6 @@ template {
   height: 100%;
   padding: 20px;
 }
-.app-cnt .app-inner .test-form .test-inner.ui-position-h-center {
-  justify-content: center;
-}
-.app-cnt .app-inner .test-form .test-inner.ui-position-h-end {
-  justify-content: end;
-}
-.app-cnt .app-inner .test-form .test-inner.ui-position-v-center {
-  align-items: center;
-}
-.app-cnt .app-inner .test-form .test-inner.ui-position-v-end {
-  align-items: end;
-}
 .app-cnt .app-inner .test-form .test-inner .test-object-cnt.width-liquid {
   width: 100%;
 }
@@ -1287,7 +1275,7 @@ template {
   padding: 10px 0;
 }
 .cmp-selector .dropdown-list-cnt.list-scrollable {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .cmp-selector .dropdown-list-cnt .list-item {
   padding: 0 10px;
@@ -1304,9 +1292,6 @@ template {
 }
 .cmp-selector .view-mode {
   padding: 0 10px;
-}
-.cmp-selector .results-cnt > .inner {
-  height: 200px;
 }
 .cmp-selector .result-item > .inner {
   display: flex;
@@ -1326,6 +1311,9 @@ template {
 }
 .cmp-selector .result-item:not([data-recent="1"]) .icon-recent {
   display: none;
+}
+.cmp-selector .result-group .group-content.dropdown-list-cnt {
+  padding: 0;
 }
 .cmp-selector .result-group .group-content .result-item > .inner {
   padding-left: 30px;
