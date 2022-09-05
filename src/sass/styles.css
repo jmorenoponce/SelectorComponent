@@ -1272,26 +1272,16 @@ template {
 .cmp-selector .dropdown-list-cnt {
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
 }
 .cmp-selector .dropdown-list-cnt.list-scrollable {
   overflow-y: auto;
 }
-.cmp-selector .dropdown-list-cnt .list-item {
-  padding: 0 10px;
-}
 .cmp-selector .tools-cnt {
   border-bottom: 1px solid #D1D3E0;
-}
-.cmp-selector .search-filter {
-  padding: 0 10px;
 }
 .cmp-selector .search-filter > .inner {
   border-radius: 4px;
   background-color: #F3F6F9 !important;
-}
-.cmp-selector .view-mode {
-  padding: 0 10px;
 }
 .cmp-selector .result-item > .inner {
   display: flex;
