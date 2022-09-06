@@ -8,130 +8,130 @@ import {Utility} from '../../utils/Utility';
 export class Selector_Manager {
 
 
-    constructor() {
+	constructor() {
 
-        this._id = null;
-        this._instances_obj = [];
+		this._id = null;
+		this._instances_obj = [];
 
-        this._initialize();
-    }
-
-
-    /**
-     * Initialize the manager instance width new id.
-     * @private
-     */
-    _initialize() {
-
-        this._id = this._generate_id();
-    }
+		this._initialize();
+	}
 
 
-    /**
-     * Create new instance core width new id and passing manager parent id.
-     * @returns {Selector_Core}
-     */
-    instance_create() {
+	/**
+	 * Initialize the manager instance width new id.
+	 * @private
+	 */
+	_initialize() {
 
-        let tmpId = this._generate_id();
-        let tmpObj = new Selector_Core(tmpId, this._id);
-
-        this._instances_obj.push(tmpObj);
-
-        return tmpObj;
-    }
+		this._id = this._generate_id();
+	}
 
 
-    get id() {
+	/**
+	 * Create new instance core width new id and passing manager parent id.
+	 * @returns {Selector_Core}
+	 */
+	instance_create() {
 
-        return this._id;
-    }
+		let tmpId = this._generate_id();
+		let tmpObj = new Selector_Core(tmpId, this._id);
 
+		this._instances_obj.push(tmpObj);
 
-    /**
-     * Returns object that contains all component instances managed for this manager.
-     * @returns {[]}
-     */
-    get instances_obj() {
-
-        return this._instances_obj;
-    }
-
-
-    /**
-     * Returns amount of component instances managed for this manager.
-     * @returns {number}
-     */
-    get instances_amount() {
-
-        return this._instances_obj.length;
-    }
+		return tmpObj;
+	}
 
 
-    /**
-     * @param targetId
-     */
-    get_instance_by_id(targetId) {
+	get id() {
 
-        return this._get_instance_by_any_property('id', targetId);
-    }
+		return this._id;
+	}
 
 
-    /**
-     * @param targetName
-     */
-    get_instance_by_name(targetName) {
+	/**
+	 * Returns object that contains all component instances managed for this manager.
+	 * @returns {[]}
+	 */
+	get instances_obj() {
 
-        return this._get_instance_by_any_property('name', targetName);
-    }
-
-
-    /**
-     * Returns object instance looking for targetValue in any property as key.
-     * @param prop
-     * @param targetValue
-     * @returns {boolean|number}
-     * @private
-     */
-    _get_instance_by_any_property(property, targetValue) {
-
-        let tmpResponse = this._instances_obj.findIndex((instance) => instance[property] === targetValue);
-
-        if (tmpResponse < 0) {
-            return false;
-        }
-
-        return this._instances_obj[tmpResponse];
-    }
+		return this._instances_obj;
+	}
 
 
-    /**
-     * Sends command action behaviour to managed target component.
-     * @param targetId
-     * @param action
-     * @returns {boolean}
-     */
-    send_instance_action(targetId, action) {
+	/**
+	 * Returns amount of component instances managed for this manager.
+	 * @returns {number}
+	 */
+	get instances_amount() {
 
-        const ids = typeof (targetId) == 'object' ? targetId : [targetId];
-
-        for (let id of ids) {
-
-            // Do stuff...
-            console.log(this.get_instance_by_id(id), action);
-        }
-
-        return true;
-    }
+		return this._instances_obj.length;
+	}
 
 
-    /**
-     * Wrap method for getting any Uuid number.
-     * @returns {string}
-     * @private
-     */
-    _generate_id() {
+	/**
+	 * @param targetId
+	 */
+	get_instance_by_id(targetId) {
 
-        return Utility.generate_uuid();
-    }
+		return this._get_instance_by_any_property('id', targetId);
+	}
+
+
+	/**
+	 * @param targetName
+	 */
+	get_instance_by_name(targetName) {
+
+		return this._get_instance_by_any_property('name', targetName);
+	}
+
+
+	/**
+	 * Returns object instance looking for targetValue in any property as key.
+	 * @param prop
+	 * @param targetValue
+	 * @returns {boolean|number}
+	 * @private
+	 */
+	_get_instance_by_any_property(property, targetValue) {
+
+		let tmpResponse = this._instances_obj.findIndex((instance) => instance[property] === targetValue);
+
+		if (tmpResponse < 0) {
+			return false;
+		}
+
+		return this._instances_obj[tmpResponse];
+	}
+
+
+	/**
+	 * Sends command action behaviour to managed target component.
+	 * @param targetId
+	 * @param action
+	 * @returns {boolean}
+	 */
+	send_instance_action(targetId, action) {
+
+		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+
+		for (let id of ids) {
+
+			// Do stuff...
+			console.log(this.get_instance_by_id(id), action);
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Wrap method for getting any Uuid number.
+	 * @returns {string}
+	 * @private
+	 */
+	_generate_id() {
+
+		return Utility.generate_uuid();
+	}
 }

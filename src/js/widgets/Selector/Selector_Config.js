@@ -7,6 +7,7 @@ export class Selector_Config {
 	static _CONFIG_DEFAULT = {
 
 		category_key: null,
+		lastSelectedIds: null,
 		is_active: true,
 		is_editable: true,
 		placeholder: 'Seleccionar...',
@@ -23,38 +24,52 @@ export class Selector_Config {
 		category_key: {
 			is_nullable: true,
 			type: 'string',
+			class: 'data',
+		},
+		lastSelectedIds: {
+			is_nullable: true,
+			type: 'object',
+			class: 'data',
 		},
 		is_active: {
 			is_nullable: false,
 			type: 'boolean',
+			class: 'ui',
 		},
 		is_editable: {
 			isNullable: false,
 			type: 'boolean',
+			class: 'ui',
 		},
 		placeholder: {
 			isNullable: true,
 			type: 'string',
+			class: 'ui',
 		},
 		search_placeholder: {
 			isNullable: true,
 			type: 'string',
+			class: 'ui',
 		},
 		searching_text: {
 			isNullable: true,
 			type: 'string',
+			class: 'ui',
 		},
 		search_results_none: {
 			isNullable: true,
 			type: 'string',
+			class: 'ui',
 		},
 		min_width: {
 			isNullable: true,
 			type: 'string',
+			class: 'ui',
 		},
 		max_rows: {
 			is_nullable: true,
 			type: 'number',
+			class: 'ui',
 		}
 	};
 
@@ -79,23 +94,24 @@ export class Selector_Config {
 
 		$.extend(true, tmpConfig, Selector_Config._CONFIG_DEFAULT, new_config);
 
-		if (!this._validate_config(tmpConfig)) {
+		if (!this._validate(tmpConfig)) {
 			return false;
 		}
 
 		this._config_obj = tmpConfig;
+		this._extract_params();
 
 		return true;
 	}
 
 
 	/**
-	 * Returns config validation response comparing the new object with config map
+	 * Returns config validation response comparing the new object with a config mapping
 	 * @param new_config
 	 * @returns {boolean}
 	 * @private
 	 */
-	_validate_config(new_config) {
+	_validate(new_config) {
 
 		for (const key in Selector_Config._CONFIG_MAP) {
 
@@ -108,5 +124,24 @@ export class Selector_Config {
 		}
 
 		return true;
+	}
+
+
+	_extract_params() {
+
+		const tmpParams = {
+			data: [],
+			ui: []
+		};
+
+		for (const key in this._config_obj) {
+
+			const keyClass = Selector_Config._CONFIG_MAP[key].class;
+
+			tmpParams[keyClass].push([key, this._config_obj[key]]);
+		}
+
+		this.data_params = tmpParams['data'];
+		this.ui_params = tmpParams['ui']
 	}
 }
