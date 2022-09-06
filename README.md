@@ -1,6 +1,6 @@
-## SelectorComponent
+# SelectorComponent
 
-#### Don't forget
+## Don't forget
     - https://es.javascript.info/task/spy-decorator
     
     - https://www.30secondsofcode.org/articles/s/javascript-array-comparison
@@ -9,8 +9,9 @@
     
     - Luis Fernández: El Proceso Unificado de Desarrollo aplicado al Desarrollo de Software del sector DEFENSA Y ESPACIO 
         https://www.youtube.com/watch?v=mqGSnjJBM7Y
+
     
-#### Vite 
+## Primer vistazo a Vite 
     - Levanta su propio servidor de desarrollo en un puerto configurable.
     
     - Se basa en el funcionamiendo del dev server, prepara un index.html para desarrollo con ES Modules 
@@ -32,19 +33,30 @@
     - Puedes tener un archivo .ENV para la configuración de desarrollo y producción.
     
     - Tira de PostCss, La importación de archivos .css inyectará su contenido en la página a través de una etiqueta <style> con soporte HMR (Reemplazo de módulo en caliente)
-    
-    - Estudiar Webcomponents
-    
-    
-#### Definición de requisitos
 
-    - El componente debe renderizarse al inicio del binding para mostrar estados todo el tiempo.
     
-    
-#### Dudas
+## Punteros UI
+### Selector
+	ux-selector-native-field 
+	
+	ux-selector-input
+	ux-selector-input-field
+    ux-selector-selections-list
 
-    - Todos los métodos tienen que tener el privado y el público? dudo siempre acerca de esto.
-    - Nivel de acoplamiento, en estas clases simples donde el Core maneja el resto, hay peligro de acoplamiento real?.
-    - La selección de ids a través de métodos necesita comprobación de si existe?
-        
-        
+	ux-selector-dropdown-trigger
+	ux-selector-dropdown
+
+	ux-selector-search-field
+
+	ux-selector-view-ungrouped
+	ux-selector-view-grouped	
+	ux-selector-view-expanded
+
+	ux-selector-results-selected
+	ux-selector-results
+	
+	ux-selector-result-item
+	ux-selector-group-item
+
+### Popover
+	ux-popover-trigger

@@ -2,7 +2,7 @@
 
 
 import {Selector_Core} from './Selector_Core';
-import {Util_Class} from '../Util/Util_Class';
+import {Utility} from '../../utils/Utility';
 
 
 export class Selector_Manager {
@@ -132,6 +132,6 @@ export class Selector_Manager {
      */
     _generate_id() {
 
-        return Util_Class.generate_uuid();
+        return Utility.generate_uuid();
     }
 }

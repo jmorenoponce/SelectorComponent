@@ -42,8 +42,8 @@
 									<div class="badge badge-circle ml-5 ux-popover-trigger">
 										<span class="badge-text" data-param="selections-amount">24</span>
 
-										<div class="ui-popover ux-popover" data-shown="0">
-											<div class="popover-inner bla-bla-bla ux-selections-list-cnt">
+										<div class="popover ux-popover" data-shown="0">
+											<div class="popover-inner bla-bla-bla ux-selector-selections-list">
 												I'm the popover content
 											</div>
 										</div>
@@ -88,7 +88,7 @@
 										</div>
 									</div>
 
-									<div class="results-cnt">
+									<div class="results-cnt results-selected ux-selector-results-selected">
 										<div class="inner dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type="">
 
 											<div class="result-item list-item ux-selector-result-item">
@@ -144,8 +144,8 @@
 																		</div>
 
 																		<div class="card-data flex-column">
-																			<span class="data-name" data-param="item-name">Jose Manuel Moreno Ponce</span>
-																			<span class="data-email" data-param="item-email">jose.moreno@avanzasi.es</span>
+																			<span class="data-name" data-param="name">Jose Manuel Moreno Ponce</span>
+																			<span class="data-email" data-param="email">jose.moreno@avanzasi.es</span>
 																		</div>
 
 																		<div class="card-flags">
@@ -155,7 +155,7 @@
 																</div>
 
 																<div class="badge badge-circle ml-5">
-																	<span class="badge-text" data-param="selections-amount">3</span>
+																	<span class="badge-text" data-param="selections-amount">5</span>
 																</div>
 
 																<div class="group-dropdown-icon ux-selector-dropdown-trigger">
@@ -185,8 +185,8 @@
 																		</div>
 
 																		<div class="card-data flex-column">
-																			<span class="data-name" data-param="item-name">José Carlos asdfRico Higueras</span>
-																			<span class="data-email" data-param="item-email">jcricohigueras@avanzasi.es</span>
+																			<span class="data-name" data-param="name">José Carlos asdfRico Higueras</span>
+																			<span class="data-email" data-param="email">jcricohigueras@avanzasi.es</span>
 																		</div>
 
 																		<div class="card-flags">
@@ -215,8 +215,8 @@
 																		</div>
 
 																		<div class="card-data flex-column">
-																			<span class="data-name" data-param="item-name">María del Mar Iglesias López</span>
-																			<span class="data-email" data-param="item-email">mm.iglesiaslopez@avanzasi.es</span>
+																			<span class="data-name" data-param="name">María del Mar Iglesias López</span>
+																			<span class="data-email" data-param="email">mm.iglesiaslopez@avanzasi.es</span>
 																		</div>
 
 																		<div class="card-flags">
@@ -229,6 +229,11 @@
 													</div>
 												</div>
 											</div>
+										</div>
+									</div>
+
+									<div class="results-cnt ux-selector-results">
+										<div class="inner dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type="">
 
 											<div class="result-group list-item ux-selector-group-item">
 												<div class="inner">
@@ -253,8 +258,8 @@
 																		</div>
 
 																		<div class="card-data flex-column">
-																			<span class="data-name" data-param="item-name">David Tello Cebollada</span>
-																			<span class="data-email" data-param="item-email">d.tello@avanzasi.es</span>
+																			<span class="data-name" data-param="name">David Tello Cebollada</span>
+																			<span class="data-email" data-param="email">d.tello@avanzasi.es</span>
 																		</div>
 
 																		<div class="card-flags">
@@ -294,8 +299,8 @@
 																		</div>
 
 																		<div class="card-data flex-column">
-																			<span class="data-name" data-param="item-name">Borja Escalona Pavón</span>
-																			<span class="data-email" data-param="item-email">borja@avanzasi.es</span>
+																			<span class="data-name" data-param="name">Borja Escalona Pavón</span>
+																			<span class="data-email" data-param="email">borja@avanzasi.es</span>
 																		</div>
 
 																		<div class="card-flags">
@@ -324,8 +329,8 @@
 																		</div>
 
 																		<div class="card-data flex-column">
-																			<span class="data-name" data-param="item-name">María Trinidad Iglesias</span>
-																			<span class="data-email" data-param="item-email">latrini@avanzasi.es</span>
+																			<span class="data-name" data-param="name">María Trinidad Iglesias</span>
+																			<span class="data-email" data-param="email">latrini@avanzasi.es</span>
 																		</div>
 
 																		<div class="card-flags">
@@ -353,8 +358,8 @@
 															</div>
 
 															<div class="card-data flex-column">
-																<span class="data-name" data-param="item-name">José Carlos Rico Higueras</span>
-																<span class="data-email" data-param="item-email">jcricohigueras@avanzasi.es</span>
+																<span class="data-name" data-param="name">José Carlos Rico Higueras</span>
+																<span class="data-email" data-param="email">jcricohigueras@avanzasi.es</span>
 															</div>
 
 															<div class="card-flags">
@@ -367,7 +372,7 @@
 
 											<div class="result-item list-item ux-selector-result-item ui-no-results">
 												<div class="inner flex-center">
-													<span class="item-msg" data-param="item-msg">%no-results-message%</span>
+													<span class="item-msg" data-param="msg">%no-results-message%</span>
 												</div>
 											</div>
 										</div>
@@ -388,7 +393,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
-<script src="src/js/UI_Popover.js"></script>
+<script src="src/js/components/UI_Popover.js"></script>
 
 </body>
 

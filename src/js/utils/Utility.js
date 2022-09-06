@@ -4,8 +4,7 @@
 import {v4 as uuidv4} from 'uuid';
 
 
-export class Util_Class {
-
+export class Utility {
 
 	static print(msg, ...result) {
 

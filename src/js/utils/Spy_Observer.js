@@ -1,7 +1,7 @@
 'use strict';
 
 
-export class SpyClass {
+export class Spy_Observer {
 
 
 	static _dinamicMethods = {};

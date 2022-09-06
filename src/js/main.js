@@ -1,8 +1,8 @@
 'use strict';
 
 
-import {Selector_Manager} from './components/SelectorComponent/Selector_Manager';
-import {Util_Class} from "./components/Util/Util_Class";
+import {Selector_Manager} from './widgets/Selector/Selector_Manager';
+import {Utility} from "./utils/Utility";
 
 
 let manager = new Selector_Manager();
@@ -10,7 +10,7 @@ let manager = new Selector_Manager();
 
 //  Users Selector Component
 let userSelector = manager.instance_create();
-let userData = Util_Class.load_from_file('./dist/data-src/users-src.json');
+let userData = Utility.load_from_file('./dist/data-src/users-src.json');
 
 userData.then(userData => {
 	userSelector.bind('.ux-selector-users', userData, {
@@ -28,15 +28,15 @@ userData.then(userData => {
 
 // Another Selector Component with errors for testing
 let wrongSelector = manager.instance_create();
-let anotherData = Util_Class.load_from_file('./dist/data-src/another-src.json');
+let anotherData = Utility.load_from_file('./dist/data-src/another-src.json');
 
 anotherData.then(anotherData => {
 
 	wrongSelector.bind('.ux-selector-another', anotherData, {
 		category_key: '',
-		is_active: true, 		// => Wrong property
+		is_active: 'true', 		// => Wrong property
 		is_editable: false,
-		placeholder: '45'	    	// => Wrong type
+		placeholder: 45	    	// => Wrong type
 	});
 	wrongSelector.init();
 });
