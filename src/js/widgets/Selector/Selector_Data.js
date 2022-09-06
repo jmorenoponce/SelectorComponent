@@ -47,7 +47,6 @@ export class Selector_Data {
      */
     set_data(dataSrc) {
 
-        // Todo: Si no existe categoryKey no podemos hacer búsqueda agrupada.
         if (!dataSrc.hasOwnProperty(Selector_Data._JSON_KEYS.DATA)
             || !dataSrc.hasOwnProperty(Selector_Data._JSON_KEYS.CATEGORY_KEY)) {
             return false;
@@ -117,5 +116,4 @@ export class Selector_Data {
 
         return Object.keys(groups);
     }
-
 }

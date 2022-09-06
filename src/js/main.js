@@ -15,9 +15,9 @@ let userData = Utility.load_from_file('./dist/data-src/users-src.json');
 userData.then(userData => {
 	userSelector.bind('.ux-selector-users', userData, {
 		category_key: 'department',
+		lastSelectedIds: [3, 20, 35, 48, 54, 8],
 		is_active: true,
 		is_editable: true,
-		label: 'Selección de usuarios:',
 		placeholder: 'Seleccionar usuarios...',
 		searching_text: 'Buscando usuarios...',
 		search_results_none: 'No se encontraron usuarios para esta búsqueda',
@@ -26,20 +26,20 @@ userData.then(userData => {
 });
 
 
-// Another Selector Component with errors for testing
-let wrongSelector = manager.instance_create();
-let anotherData = Utility.load_from_file('./dist/data-src/another-src.json');
-
-anotherData.then(anotherData => {
-
-	wrongSelector.bind('.ux-selector-another', anotherData, {
-		category_key: '',
-		is_active: 'true', 		// => Wrong property
-		is_editable: false,
-		placeholder: 45	    	// => Wrong type
-	});
-	wrongSelector.init();
-});
+// // Another Selector Component with errors for testing
+// let wrongSelector = manager.instance_create();
+// let anotherData = Utility.load_from_file('./dist/data-src/another-src.json');
+//
+// anotherData.then(anotherData => {
+//
+// 	wrongSelector.bind('.ux-selector-another', anotherData, {
+// 		category_key: 'department',
+// 		is_active: true, 		// => Wrong property
+// 		is_editable: false,
+// 		placeholder: '45'	    	// => Wrong type
+// 	});
+// 	wrongSelector.init();
+// });
 
 
 // Some test for functionality

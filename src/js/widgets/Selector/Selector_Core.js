@@ -58,8 +58,8 @@ export class Selector_Core {
 
 
     /**
-     * Link the created component taking native Html component, categorized source data,
-     * and configuration object with behaviour parameters. Then establishes the component <instanceName>.
+     * Link the created component taking native Html component, categorized source data, and
+     * configuration object with behaviour parameters. Then establishes the component <instanceName>.
      * @param source_cmp
      * @param data_src
      * @param config_obj

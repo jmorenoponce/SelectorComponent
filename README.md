@@ -35,7 +35,7 @@
     - Tira de PostCss, La importación de archivos .css inyectará su contenido en la página a través de una etiqueta <style> con soporte HMR (Reemplazo de módulo en caliente)
 
     
-## Punteros UI
+## Punteros UX
 ### Selector
 	ux-selector-native-field 
 	

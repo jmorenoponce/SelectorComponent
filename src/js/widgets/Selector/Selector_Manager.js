@@ -93,9 +93,9 @@ export class Selector_Manager {
      * @returns {boolean|number}
      * @private
      */
-    _get_instance_by_any_property(prop, targetValue) {
+    _get_instance_by_any_property(property, targetValue) {
 
-        let tmpResponse = this._instances_obj.findIndex((instance) => instance[prop] === targetValue);
+        let tmpResponse = this._instances_obj.findIndex((instance) => instance[property] === targetValue);
 
         if (tmpResponse < 0) {
             return false;

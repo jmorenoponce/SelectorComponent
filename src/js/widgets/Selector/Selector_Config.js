@@ -9,7 +9,6 @@ export class Selector_Config {
 		category_key: null,
 		is_active: true,
 		is_editable: true,
-		label: 'Selección:',
 		placeholder: 'Seleccionar...',
 		search_placeholder: 'Buscar...',
 		searching_text: 'Buscando...',
@@ -32,10 +31,6 @@ export class Selector_Config {
 		is_editable: {
 			isNullable: false,
 			type: 'boolean',
-		},
-		label: {
-			isNullable: true,
-			type: 'string',
 		},
 		placeholder: {
 			isNullable: true,
