@@ -10,13 +10,13 @@ export class Selector_Data {
 	}
 
 
-	constructor(config) {
+	constructor() {
 
-		this.data = {};
+		this._data = {};
 
-		this.config_obj = {
-			categoryKey: config.categoryKey,
-			lastSelectedIds: config.lastSelectedIds,
+		this._config_obj = {
+			category_key: '',
+			last_selected_ids: [],
 
 			/**
 			 * Returns coincidence validation looking for <term> in all value keys of <item>.
@@ -39,16 +39,25 @@ export class Selector_Data {
 	 * @param dataSrc
 	 * @return {boolean}
 	 */
-
 	set_data(dataSrc) {
 
 		if (!dataSrc.hasOwnProperty(Selector_Data._JSON_KEYS.DATA)) {
 			return false;
 		}
 
-		this.data = dataSrc[Selector_Data._JSON_KEYS.DATA];
+		this._data = dataSrc[Selector_Data._JSON_KEYS.DATA];
 
 		return true;
+	}
+
+
+	/**
+	 *
+	 * @param params
+	 */
+	set_config(params) {
+
+		Object.assign(this._config_obj, params);
 	}
 
 
@@ -68,7 +77,7 @@ export class Selector_Data {
 	 */
 	getById(targetId) {
 
-		return this.data.find(item => item.id === targetId);
+		return this._data.find(item => item.id === targetId);
 	}
 
 
@@ -81,9 +90,9 @@ export class Selector_Data {
 
 		let filtered = [];
 
-		for (let item of this.data) {
+		for (let item of this._data) {
 
-			if (this.config_obj.filter.apply(null, [searchTerm, item])) {
+			if (this._config_obj.filter.apply(null, [searchTerm, item])) {
 				filtered.push(item);
 			}
 		}
@@ -100,9 +109,9 @@ export class Selector_Data {
 
 		let groups = {};
 
-		for (let item of this.data) {
+		for (let item of this._data) {
 
-			let group = item[this.config_obj.categoryKey];
+			let group = item[this._config_obj.categoryKey];
 			groups[group] = 1;
 		}
 

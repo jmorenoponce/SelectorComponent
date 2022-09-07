@@ -15,7 +15,7 @@ let userData = Utility.load_from_file('./dist/data-src/users-src.json');
 userData.then(userData => {
 	userSelector.bind('.ux-selector-users', userData, {
 		category_key: 'department',
-		lastSelectedIds: [3, 20, 35, 48, 54, 8],
+		last_selected_ids: [3, 20, 35, 48, 54, 8],
 		is_active: true,
 		is_editable: true,
 		placeholder: 'Seleccionar usuarios...',

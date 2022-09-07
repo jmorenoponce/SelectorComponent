@@ -46,8 +46,8 @@ export class Selector_Core {
 		this._manager_id = manager_id || Selector_Core._STATES.SINGLE_COMPONENT;
 
 		this._config = new Selector_Config();
-		this._data = new Selector_Data(this._config.data_params);
-		this._ui = new Selector_UI(this._config.ui_params);
+		this._data = new Selector_Data();
+		this._ui = new Selector_UI();
 
 		this._selected_ids = [];
 		this._search_term = '';
@@ -76,14 +76,15 @@ export class Selector_Core {
 			this._state = Selector_Core._STATES.INVALID_DATA_SOURCE;
 			return this._state;
 		}
+		this._data.set_config(this._config.data_params);
 
 		if (!this._ui.set_native_component(source_cmp)) {
 			this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
 			return this._state;
 		}
+		this._ui.set_config(this._config.ui_params);
 
 		this._instance_name = this._ui.get_native_name() || '';
-
 		this._state = Selector_Core._STATES.BINDED;
 
 		return this._state;
@@ -192,7 +193,6 @@ export class Selector_Core {
 
 		this._selectItem((targetId));
 	}
-
 
 
 	/**

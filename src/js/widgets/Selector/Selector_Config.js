@@ -4,21 +4,6 @@
 export class Selector_Config {
 
 
-	static _CONFIG_DEFAULT = {
-
-		category_key: null,
-		lastSelectedIds: null,
-		is_active: true,
-		is_editable: true,
-		placeholder: 'Seleccionar...',
-		search_placeholder: 'Buscar...',
-		searching_text: 'Buscando...',
-		search_results_none: 'No hay resultados para esta búsqueda',
-		min_width: 'auto',
-		max_rows: 10
-	};
-
-
 	static _CONFIG_MAP = {
 
 		category_key: {
@@ -26,7 +11,7 @@ export class Selector_Config {
 			type: 'string',
 			class: 'data',
 		},
-		lastSelectedIds: {
+		last_selected_ids: {
 			is_nullable: true,
 			type: 'object',
 			class: 'data',
@@ -74,6 +59,21 @@ export class Selector_Config {
 	};
 
 
+	static _CONFIG_DEFAULT = {
+
+		category_key: null,
+		last_selected_ids: null,
+		is_active: true,
+		is_editable: true,
+		placeholder: 'Seleccionar...',
+		search_placeholder: 'Buscar...',
+		searching_text: 'Buscando...',
+		search_results_none: 'No hay resultados para esta búsqueda',
+		min_width: 'auto',
+		max_rows: 10
+	};
+
+
 	constructor() {
 
 		this._config_obj = {};
@@ -99,6 +99,7 @@ export class Selector_Config {
 		}
 
 		this._config_obj = tmpConfig;
+
 		this._extract_params();
 
 		return true;
@@ -127,21 +128,25 @@ export class Selector_Config {
 	}
 
 
+	/**
+	 * Pull apart Ui and Data parameters from config type of values
+	 * @private
+	 */
 	_extract_params() {
 
-		const tmpParams = {
-			data: [],
-			ui: []
+		let tmpParams = {
+			data: {},
+			ui: {}
 		};
 
 		for (const key in this._config_obj) {
 
 			const keyClass = Selector_Config._CONFIG_MAP[key].class;
 
-			tmpParams[keyClass].push([key, this._config_obj[key]]);
+			Object.assign(tmpParams[keyClass], {[key]: this._config_obj[key]});
 		}
 
-		this.data_params = tmpParams['data'];
-		this.ui_params = tmpParams['ui']
+		Object.assign(this.data_params, tmpParams.data);
+		Object.assign(this.ui_params, tmpParams.ui);
 	}
 }

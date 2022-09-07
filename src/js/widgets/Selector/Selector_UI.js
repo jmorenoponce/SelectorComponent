@@ -72,10 +72,10 @@ export class Selector_UI {
 	}
 
 
-	constructor(config) {
+	constructor() {
 
+		this._config_obj = {};
 		this._$native_cmp = {};
-		this._config_obj = config;
 
 		this._is_binded = false;
 		this._is_grupable = false;
@@ -99,6 +99,16 @@ export class Selector_UI {
 		this._is_binded = true;
 
 		return true;
+	}
+
+
+	/**
+	 *
+	 * @param params
+	 */
+	set_config(params) {
+
+		this._config_obj = Object.assign(params);
 	}
 
 
