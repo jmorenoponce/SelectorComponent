@@ -61,8 +61,8 @@ export class Selector_Config {
 
 	static _CONFIG_DEFAULT = {
 
-		category_key: null,
-		last_selected_ids: null,
+		category_key: '',
+		last_selected_ids: [],
 		is_active: true,
 		is_editable: true,
 		placeholder: 'Seleccionar...',
@@ -129,7 +129,7 @@ export class Selector_Config {
 
 
 	/**
-	 * Pull apart Ui and Data parameters from config type of values
+	 * Pull apart Ui and Data parameters from each type of config values
 	 * @private
 	 */
 	_extract_params() {

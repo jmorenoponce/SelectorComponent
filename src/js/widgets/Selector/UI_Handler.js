@@ -1,10 +1,10 @@
 'use strict';
 
 
-// import {UserInterfaceTpl} from "./UserInterfaceTpl.html";
+import Tpl from "./UI_Templates.html";
 
 
-export class Selector_UI {
+export class UI_Handler {
 
 
 	static _CSS_UX_CLASSES = {
@@ -12,30 +12,27 @@ export class Selector_UI {
 		NATIVE_FIELD: 'ux-selector-native-field',
 
 		INPUT_CNT: 'ux-selector-input',
-			INPUT_FIELD: 'ux-selector-input-field',
-			INPUT_SELECTIONS: 'ux-selector-selections-list',
+		INPUT_FIELD: 'ux-selector-input-field',
+		INPUT_SELECTIONS: 'ux-selector-selections-list',
 
 		DROPDOWN_CNT: 'ux-selector-dropdown',
-			DROPDOWN_TRIGGER: 'ux-selector-dropdown-trigger',
+		DROPDOWN_TRIGGER: 'ux-selector-dropdown-trigger',
 
-			DROPDOWN_SEARCH_FIELD: 'ux-selector-search-field',
+		DROPDOWN_SEARCH_FIELD: 'ux-selector-search-field',
 
-			DROPDOWN_VIEW_UNGROUPED: 'ux-selector-view-ungrouped',
-			DROPDOWN_VIEW_GROUPED: 'ux-selector-view-grouped',
-			DROPDOWN_VIEW_EXPANDED: 'ux-selector-view-expanded',
+		DROPDOWN_VIEW_UNGROUPED: 'ux-selector-view-ungrouped',
+		DROPDOWN_VIEW_GROUPED: 'ux-selector-view-grouped',
+		DROPDOWN_VIEW_EXPANDED: 'ux-selector-view-expanded',
 
-			DROPDOWN_RESULTS_SELECTED_CNT: 'ux-selector-results-selected',
-			DROPDOWN_RESULTS_CNT: 'ux-selector-results',
+		DROPDOWN_RESULTS_SELECTED_CNT: 'ux-selector-results-selected',
+		DROPDOWN_RESULTS_CNT: 'ux-selector-results',
 
-			DROPDOWN_RESULT_ITEM: 'ux-selector-result-item',
-			DROPDOWN_RESULT_GROUP: 'ux-selector-group-item'
+		DROPDOWN_RESULT_ITEM: 'ux-selector-result-item',
+		DROPDOWN_RESULT_GROUP: 'ux-selector-group-item'
 	}
 
 
 	static _CSS_UI_CLASSES = {
-
-		// General
-		SOURCE_OBJECT_HIDDEN: '.ui-selector-source-hidden',
 
 		// Actions
 		ENABLE: '.ui-selector-enable',
@@ -77,6 +74,8 @@ export class Selector_UI {
 		this._config_obj = {};
 		this._$native_cmp = {};
 
+		this._selected_ids = [];
+
 		this._is_binded = false;
 		this._is_grupable = false;
 		this._is_extendable = false;
@@ -84,7 +83,7 @@ export class Selector_UI {
 
 
 	/**
-	 * Establishes source native Html select that handle final results.
+	 * Establishes source native Html select that handle final results
 	 * @param source_cmp
 	 * @returns {boolean}
 	 */
@@ -112,7 +111,52 @@ export class Selector_UI {
 	}
 
 
+	enable() {
+
+		console.log('enable');
+	}
+
+
+	disable() {
+
+		console.log('disable');
+	}
+
+
+	renderList_ungrouped() {
+
+		this._render();
+	}
+
+
+	renderList_grouped() {
+
+		this._render();
+	}
+
+
+	get_native_name() {
+
+		return this._get_native_name();
+	}
+
+
+	get_native_value() {
+
+		return this._get_native_value();
+	}
+
+
+
+
 	_render() {
+
+		// let tmp = $('script[data-template="this-is-another-test"]')[0];
+
+		let tmp = $(Tpl)[2];
+
+		// ($('script[data-template="this-is-another-test"]'))
+		console.log(tmp)
 
 		console.log('Component Painted');
 	}
@@ -124,21 +168,11 @@ export class Selector_UI {
 	}
 
 
-	get_native_name() {
-
-		return this._get_native_name();
-	}
 
 
 	_get_native_value() {
 
 		return this._$native_cmp.html();
-	}
-
-
-	get_native_value() {
-
-		return this._get_native_value();
 	}
 
 
@@ -151,7 +185,7 @@ export class Selector_UI {
 
 		let _prev_value = this._$native_cmp.html();
 
-		for (id of this._selectedIds) {
+		for (id of this._selected_ids) {
 			_opts += '<option value="' + id + '" selected="selected"></option>';
 		}
 
@@ -161,23 +195,5 @@ export class Selector_UI {
 		if (_opts !== _prev_value) {
 			this._$native_cmp.trigger('change');
 		}
-	}
-
-
-	update() {
-
-
-	}
-
-
-	enable() {
-
-		console.log('enable');
-	}
-
-
-	disable() {
-
-		console.log('disable');
 	}
 }

@@ -64,19 +64,18 @@ function printInfo() {
 			continue;
 		}
 
-		console.log('Native value (To do): ', instance.getNativeValue());
+		console.log('Native value (To do): ', instance.get_native_value());
 		console.log('Object: ', instance);
 		console.log('\n');
 
-		console.log('Department list:', instance.getItemGroups());
-		console.log('Looking for "anna":', instance.setSearchTerm('anna'));
-		console.log('Looking for "rk":', instance.setSearchTerm('mark'));
+		console.log('Department list:', instance.get_item_groups());
+		console.log('Looking for "anna":', instance.set_search_term('anna'));
+		console.log('Looking for "rk":', instance.set_search_term('mark'));
 		console.log('\n');
 	}
 
-
 	console.log('-');
-	console.log('Looking for name property "anotherTypology": ', manager.get_instance_by_name('anotherTypology'));
+	console.log('Looking for name property "usersByDepartment": ', manager.get_instance_by_name('usersByDepartment'));
 	console.log('Looking for id property "' + userSelector.id + '": ', manager.get_instance_by_id(userSelector.id));
 
 	console.log('Sending action "hola" to', userSelector.id);
@@ -84,22 +83,22 @@ function printInfo() {
 
 	console.log('-');
 
-	userSelector.setSelection([1, 2, 3]);
+	userSelector.set_selection([1, 2, 3]);
 	console.log('Selecting items [1, 2, 3]:', userSelector._selected_ids);
 
-	userSelector._selectItem([4, 8, 22]);
+	userSelector.select_item([4, 8, 22]);
 	console.log('Selecting items [4, 8, 22]:', userSelector._selected_ids);
 
-	userSelector._selectItem([9, 9, 9]);
+	userSelector.select_item([9, 9, 9]);
 	console.log('Selecting items [9, 9, 9]:', userSelector._selected_ids);
 
-	userSelector._unselectItem([9, 22]);
+	userSelector.unselect_item([9, 22]);
 	console.log('Unselecting items [9, 22]:', userSelector._selected_ids);
 
-	userSelector._unselectAll();
+	userSelector.unselect_all();
 	console.log('Unselecting all:', userSelector._selected_ids);
 
-	console.log('Looking for Id [5]:', userSelector._data.getById(5));
+	console.log('Looking for Id [5]:', userSelector._data_handler.get_by_id(5));
 
 	clearTimeout(wait);
 }

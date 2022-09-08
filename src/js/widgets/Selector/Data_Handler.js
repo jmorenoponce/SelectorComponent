@@ -1,7 +1,7 @@
 'use strict';
 
 
-export class Selector_Data {
+export class Data_Handler {
 
 
 	static _JSON_KEYS = {
@@ -17,6 +17,7 @@ export class Selector_Data {
 		this._config_obj = {
 			category_key: '',
 			last_selected_ids: [],
+			searchable_fields: [], // ??
 
 			/**
 			 * Returns coincidence validation looking for <term> in all value keys of <item>.
@@ -24,7 +25,7 @@ export class Selector_Data {
 			 * @param item
 			 * @returns {boolean}
 			 */
-			filter: function (term, item) {
+			filter: function (term, item) { // ?? Searchable fields
 				return item.first_name.toString().toLowerCase().includes((term)) ||
 					item.last_name.toString().toLowerCase().includes((term)) ||
 					item.department.toString().toLowerCase().includes((term));
@@ -36,23 +37,22 @@ export class Selector_Data {
 	/**
 	 * Take de values from json data filling owner configuration keys.
 	 *  <data> and <category_key> are required keys for valid <dataSrc>.
-	 * @param dataSrc
+	 * @param data_source
 	 * @return {boolean}
 	 */
-	set_data(dataSrc) {
+	data_seed(data_source) {
 
-		if (!dataSrc.hasOwnProperty(Selector_Data._JSON_KEYS.DATA)) {
+		if (!data_source.hasOwnProperty(Data_Handler._JSON_KEYS.DATA)) {
 			return false;
 		}
 
-		this._data = dataSrc[Selector_Data._JSON_KEYS.DATA];
+		this._data = data_source[Data_Handler._JSON_KEYS.DATA];
 
 		return true;
 	}
 
 
 	/**
-	 *
 	 * @param params
 	 */
 	set_config(params) {
@@ -62,42 +62,12 @@ export class Selector_Data {
 
 
 	/**
-	 *
-	 * @param dataSrc
-	 */
-	refresh(dataSrc) {
-
-		// Control de versión de los datos con un timestamp?
-	}
-
-
-	/**
 	 * @param targetId
 	 * @returns {*}
 	 */
-	getById(targetId) {
+	get_by_id(targetId) {
 
 		return this._data.find(item => item.id === targetId);
-	}
-
-
-	/**
-	 * Returns the filtered item list (taking search term as filter seed).
-	 * @param searchTerm
-	 * @returns {[]}
-	 */
-	filterItems(searchTerm) {
-
-		let filtered = [];
-
-		for (let item of this._data) {
-
-			if (this._config_obj.filter.apply(null, [searchTerm, item])) {
-				filtered.push(item);
-			}
-		}
-
-		return filtered;
 	}
 
 
@@ -105,16 +75,36 @@ export class Selector_Data {
 	 * Returns an enumerated array containing the categories of data items.
 	 * @returns {string[]}
 	 */
-	getItemsGroups() {
+	get_groups() {
 
 		let groups = {};
 
 		for (let item of this._data) {
 
-			let group = item[this._config_obj.categoryKey];
+			let group = item[this._config_obj.category_key];
 			groups[group] = 1;
 		}
 
 		return Object.keys(groups);
+	}
+
+
+	/**
+	 * Returns the filtered item list (taking search term as filter seed).
+	 * @param search_term
+	 * @returns {[]}
+	 */
+	search(search_term) {
+
+		let filtered = [];
+
+		for (let item of this._data) {
+
+			if (this._config_obj.filter.apply(null, [search_term, item])) {
+				filtered.push(item);
+			}
+		}
+
+		return filtered;
 	}
 }

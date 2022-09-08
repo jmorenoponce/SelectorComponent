@@ -1,9 +1,9 @@
 'use strict';
 
 
-import {Selector_Data} from "./Selector_Data";
-import {Selector_UI} from './Selector_UI';
 import {Selector_Config} from "./Selector_Config";
+import {Data_Handler} from "./Data_Handler";
+import {UI_Handler} from './UI_Handler';
 
 
 export class Selector_Core {
@@ -40,17 +40,16 @@ export class Selector_Core {
 	 */
 	constructor(instance_id, manager_id) {
 
-		this._instance_id = instance_id;
 		this._instance_name = '';
-
+		this._instance_id = instance_id || Selector_Core._STATES.SINGLE_COMPONENT;
 		this._manager_id = manager_id || Selector_Core._STATES.SINGLE_COMPONENT;
 
 		this._config = new Selector_Config();
-		this._data = new Selector_Data();
-		this._ui = new Selector_UI();
+		this._data_handler = new Data_Handler();
+		this._ui_handler = new UI_Handler();
 
-		this._selected_ids = [];
 		this._search_term = '';
+		this._selected_ids = [];
 
 		this._state = Selector_Core._STATES.WAITING_FOR_BINDING;
 		return this._state;
@@ -67,27 +66,152 @@ export class Selector_Core {
 	 */
 	bind(source_cmp, data_src, config_obj) {
 
+		if (!this._ui_handler.set_native_component(source_cmp)) {
+			this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
+			return this._state;
+		}
+		this._ui_handler.set_config(this._config.ui_params);
+
+		if(!this._data_handler.data_seed(data_src)) {
+			this._state = Selector_Core._STATES.INVALID_DATA_SOURCE;
+			return this._state;
+		}
+		this._data_handler.set_config(this._config.data_params);
+
 		if (!this._config.assign(config_obj)) {
 			this._state = Selector_Core._STATES.INVALID_CONFIG_OBJECT;
 			return this._state;
 		}
 
-		if(!this._data.set_data(data_src)) {
-			this._state = Selector_Core._STATES.INVALID_DATA_SOURCE;
-			return this._state;
-		}
-		this._data.set_config(this._config.data_params);
-
-		if (!this._ui.set_native_component(source_cmp)) {
-			this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
-			return this._state;
-		}
-		this._ui.set_config(this._config.ui_params);
-
-		this._instance_name = this._ui.get_native_name() || '';
+		this._instance_name = this._ui_handler.get_native_name() || '';
 		this._state = Selector_Core._STATES.BINDED;
 
 		return this._state;
+	}
+
+
+	init() {
+
+		return this._init();
+	}
+
+
+	enable() {
+
+		this._ui_handler.enable();
+		// return Selector_Core._STATES.RUNNING;
+	}
+
+
+	disable() {
+
+		this._ui_handler.disable();
+		// return Selector_Core._STATES.STOPPED;
+	}
+
+
+	dropdown_open() {
+
+		this._ui_handler.open();
+	}
+
+
+	dropdown_close() {
+
+		this._ui_handler.close();
+	}
+
+
+	destroy() {
+
+		// return Selector_Core._STATES.FINISHED;
+	}
+
+
+	/**
+	 * Establishes new search term and throw filter method.
+	 * @param text
+	 * @returns {*[]}
+	 */
+	set_search_term(text) {
+
+		this._search_term = (String(text)).toLowerCase();
+
+		// Solo para testing, paso previo para extraer sólo Id's
+		return this._data_handler.search(this._search_term);
+	}
+
+
+	/**
+	 * @param targetId
+	 */
+	set_selection(targetId) {
+
+		this._set_selection(targetId);
+	}
+
+
+	/**
+	 * @param targetId
+	 */
+	select_item(targetId) {
+
+		this._select_item((targetId));
+	}
+
+
+	/**
+	 * @param targetId
+	 */
+	unselect_item(targetId) {
+
+		this._unselect_item(targetId);
+	}
+
+
+	/**
+	 */
+	unselect_all() {
+
+		this._unselect_all();
+	}
+
+
+	/**
+	 * @returns {string[]}
+	 */
+	get_item_groups() {
+
+		return this._data_handler.get_groups();
+	}
+
+
+	/**
+	 * @returns {*}
+	 */
+	get_native_value() {
+
+		return this._ui_handler.get_native_value();
+	}
+
+
+	/**
+	 * Returns the state key (description) from code value parameter, if empty value returns the actual state.
+	 * @param code_value
+	 * @returns {string}
+	 */
+	get_state_msg(code_value = this._state) {
+
+		return Object.keys(Selector_Core._STATES).find((key) => Selector_Core._STATES[key] === code_value);
+	}
+
+
+	/**
+	 * @returns {boolean}
+	 */
+	is_valid_state() {
+
+		return !(this._state < 200 || this._state >= 400);
 	}
 
 
@@ -109,47 +233,9 @@ export class Selector_Core {
 	}
 
 
-	init() {
-
-		return this._init();
-	}
-
-
 	_render() {
 
-		this._ui._render();
-	}
-
-
-	renderList_ungrouped() {
-
-		this._render();
-	}
-
-
-	renderList_grouped() {
-
-		this._render();
-	}
-
-
-	refresh() {
-
-
-	}
-
-
-	/**
-	 * Establishes new search term and throw filter method.
-	 * @param text
-	 * @returns {*[]}
-	 */
-	setSearchTerm(text) {
-
-		this._search_term = (String(text)).toLowerCase();
-
-		// Todo: Paso previo para extraer sólo Id's
-		return this._data.filterItems(this._search_term);
+		this._ui_handler._render();
 	}
 
 
@@ -157,23 +243,17 @@ export class Selector_Core {
 	 * @param targetId
 	 * @private
 	 */
-	_setSelection(targetId) {
+	_set_selection(targetId) {
 
 		this._selected_ids = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
-		this._refreshSelection();
-	}
-
-
-	setSelection(targetId) {
-
-		this._setSelection(targetId);
+		this._refresh_selection();
 	}
 
 
 	/**
 	 * @param targetId
 	 */
-	_selectItem(targetId) {
+	_select_item(targetId) {
 
 		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
 
@@ -185,20 +265,14 @@ export class Selector_Core {
 			}
 		}
 
-		this._refreshSelection();
-	}
-
-
-	selectItem(targetId) {
-
-		this._selectItem((targetId));
+		this._refresh_selection();
 	}
 
 
 	/**
 	 * @param targetId
 	 */
-	_unselectItem(targetId) {
+	_unselect_item(targetId) {
 
 		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
 		let k;
@@ -211,94 +285,32 @@ export class Selector_Core {
 			}
 		}
 
-		this._refreshSelection();
-	}
-
-
-	unselectItem(targetId) {
-
-		this._unselectItem(targetId);
+		this._refresh_selection();
 	}
 
 
 	/**
 	 *
 	 */
-	_unselectAll() {
+	_unselect_all() {
 
 		this._selected_ids = [];
-		this._refreshSelection();
+		this._refresh_selection();
 	}
 
 
-	unselectAll() {
+	_refresh_selection() {
 
-		this._unselectAll();
+		this._update_native_value();
 	}
 
 
-	_refreshSelection() {
+	_update_native_value() {
 
-		this._updateNativeValue();
+		this._ui_handler._update_native_value();
 	}
 
 
-	_updateNativeValue() {
-
-		this._ui._update_native_value();
-	}
-
-
-	getNativeValue() {
-
-		return this._ui.get_native_value();
-	}
-
-
-	/**
-	 *
-	 * @returns {string[]}
-	 */
-	getItemGroups() {
-
-		return this._data.getItemsGroups();
-	}
-
-
-	enable() { // Todo : Bridge
-
-		this._ui.enable();
-	}
-
-
-	disable() {
-
-		this._ui.disable();
-	}
-
-
-	update() {
-
-
-	}
-
-
-	openDropdown() {
-
-		this._ui.open();
-	}
-
-
-	closeDropdown() {
-
-		this._ui.close();
-	}
-
-
-	destroy() {
-
-
-	}
 
 
 	get id() {
@@ -313,7 +325,7 @@ export class Selector_Core {
 	}
 
 
-	get parentManagerId() {
+	get parent_id() {
 
 		return this._manager_id;
 	}
@@ -322,22 +334,5 @@ export class Selector_Core {
 	get state() {
 
 		return this._state;
-	}
-
-
-	is_valid_state() {
-
-		return !(this._state < 200 || this._state >= 400);
-	}
-
-
-	/**
-	 * Returns the state key (description) from code value parameter, if empty value returns the actual state.
-	 * @param code_value
-	 * @returns {string}
-	 */
-	get_state_msg(code_value = this._state) {
-
-		return Object.keys(Selector_Core._STATES).find((key) => Selector_Core._STATES[key] === code_value);
 	}
 }

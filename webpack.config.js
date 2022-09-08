@@ -14,4 +14,12 @@ module.exports = {
             jQuery: 'jquery'
         })
     ],
+    module: {
+        rules: [
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
+            },
+        ]
+    }
 };
