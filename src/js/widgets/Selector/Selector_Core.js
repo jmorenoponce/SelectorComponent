@@ -66,11 +66,10 @@ export class Selector_Core {
 	 */
 	bind(source_cmp, data_src, config_obj) {
 
-		if (!this._ui_handler.set_native_component(source_cmp)) {
-			this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
+		if (!this._config.assign(config_obj)) {
+			this._state = Selector_Core._STATES.INVALID_CONFIG_OBJECT;
 			return this._state;
 		}
-		this._ui_handler.set_config(this._config.ui_params);
 
 		if(!this._data_handler.data_seed(data_src)) {
 			this._state = Selector_Core._STATES.INVALID_DATA_SOURCE;
@@ -78,12 +77,13 @@ export class Selector_Core {
 		}
 		this._data_handler.set_config(this._config.data_params);
 
-		if (!this._config.assign(config_obj)) {
-			this._state = Selector_Core._STATES.INVALID_CONFIG_OBJECT;
+		if (!this._ui_handler.set_native_component(source_cmp)) {
+			this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
 			return this._state;
 		}
+		this._ui_handler.set_config(this._config.ui_params);
 
-		this._instance_name = this._ui_handler.get_native_name() || '';
+		this._instance_name = this._ui_handler.get_native_name() || 'nameless';
 		this._state = Selector_Core._STATES.BINDED;
 
 		return this._state;
@@ -110,18 +110,6 @@ export class Selector_Core {
 	}
 
 
-	dropdown_open() {
-
-		this._ui_handler.open();
-	}
-
-
-	dropdown_close() {
-
-		this._ui_handler.close();
-	}
-
-
 	destroy() {
 
 		// return Selector_Core._STATES.FINISHED;
@@ -135,10 +123,7 @@ export class Selector_Core {
 	 */
 	set_search_term(text) {
 
-		this._search_term = (String(text)).toLowerCase();
-
-		// Solo para testing, paso previo para extraer sólo Id's
-		return this._data_handler.search(this._search_term);
+		return this._set_search_term(text);
 	}
 
 
@@ -239,13 +224,34 @@ export class Selector_Core {
 	}
 
 
+	_dropdown_open() {
+
+		this._ui_handler.open();
+	}
+
+
+	_dropdown_close() {
+
+		this._ui_handler.close();
+	}
+
+
+	_set_search_term(text) {
+
+		this._search_term = (String(text)).toLowerCase();
+
+		// Paso previo para extraer sólo Id's
+		return this._data_handler.search(this._search_term);
+	}
+
+
 	/**
-	 * @param targetId
+	 * @param target_id
 	 * @private
 	 */
-	_set_selection(targetId) {
+	_set_selection(target_id) {
 
-		this._selected_ids = [...(typeof (targetId) == 'object' ? targetId : [targetId])];
+		this._selected_ids = [...(typeof (target_id) == 'object' ? target_id : [target_id])];
 		this._refresh_selection();
 	}
 
@@ -311,8 +317,6 @@ export class Selector_Core {
 	}
 
 
-
-
 	get id() {
 
 		return this._instance_id;
@@ -325,14 +329,14 @@ export class Selector_Core {
 	}
 
 
-	get parent_id() {
-
-		return this._manager_id;
-	}
-
-
 	get state() {
 
 		return this._state;
+	}
+
+
+	get parent_id() {
+
+		return this._manager_id;
 	}
 }

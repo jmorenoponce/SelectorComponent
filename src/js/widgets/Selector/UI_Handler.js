@@ -1,50 +1,50 @@
 'use strict';
 
 
-import Tpl from "./UI_Templates.html";
+import {UI_Template_Handler} from "./UI_Template_Handler";
 
 
 export class UI_Handler {
 
 
-	static _CSS_UX_CLASSES = {
+	static UX_CLASSES = {
 
 		NATIVE_FIELD: 'ux-selector-native-field',
 
 		INPUT_CNT: 'ux-selector-input',
 		INPUT_FIELD: 'ux-selector-input-field',
-		INPUT_SELECTIONS: 'ux-selector-selections-list',
+		SELECTIONS_WIDGET: 'ux-selector-selections-list',
 
 		DROPDOWN_CNT: 'ux-selector-dropdown',
 		DROPDOWN_TRIGGER: 'ux-selector-dropdown-trigger',
+		SEARCH_FIELD: 'ux-selector-search-field',
 
-		DROPDOWN_SEARCH_FIELD: 'ux-selector-search-field',
+		VIEW_UNGROUPED: 'ux-selector-view-ungrouped',
+		VIEW_GROUPED: 'ux-selector-view-grouped',
 
-		DROPDOWN_VIEW_UNGROUPED: 'ux-selector-view-ungrouped',
-		DROPDOWN_VIEW_GROUPED: 'ux-selector-view-grouped',
-		DROPDOWN_VIEW_EXPANDED: 'ux-selector-view-expanded',
+		VIEW_EXPANDED: 'ux-selector-view-expanded',
+		RESULTS_SELECTED_CNT: 'ux-selector-results-selected',
+		RESULTS_CNT: 'ux-selector-results',
 
-		DROPDOWN_RESULTS_SELECTED_CNT: 'ux-selector-results-selected',
-		DROPDOWN_RESULTS_CNT: 'ux-selector-results',
-
-		DROPDOWN_RESULT_ITEM: 'ux-selector-result-item',
-		DROPDOWN_RESULT_GROUP: 'ux-selector-group-item'
+		RESULT_ITEM: 'ux-selector-result-item',
+		RESULT_GROUP: 'ux-selector-group-item'
 	}
 
 
-	static _CSS_UI_CLASSES = {
+	static UI_CLASSES = {
 
-		// Actions
 		ENABLE: '.ui-selector-enable',
 		DISABLE: '.ui-selector-disable',
 		DROPDOWN_EXPANDED: '.ui-selector-dropdown-expanded',
 		VIEW_GROUPED: '.ui-selector-view-grouped',
 		VIEW_EXTENDED: '.ui-selector-view-extended',
 
-		// States
 		IS_LOADING: '.ui-selector-loading',
 		HAS_ERROR: '.ui-selector-has-error'
 	}
+
+
+	static ATTRIBUTES = {}
 
 
 	static _KEY_CODES = {
@@ -71,14 +71,16 @@ export class UI_Handler {
 
 	constructor() {
 
+		this._tpl_handler = new (UI_Template_Handler);
+
 		this._config_obj = {};
 		this._$native_cmp = {};
-
-		this._selected_ids = [];
 
 		this._is_binded = false;
 		this._is_grupable = false;
 		this._is_extendable = false;
+
+		this._selected_ids = [];
 	}
 
 
@@ -111,15 +113,9 @@ export class UI_Handler {
 	}
 
 
-	enable() {
+	render() {
 
-		console.log('enable');
-	}
-
-
-	disable() {
-
-		console.log('disable');
+		this._render();
 	}
 
 
@@ -135,6 +131,18 @@ export class UI_Handler {
 	}
 
 
+	enable() {
+
+		console.log('enable');
+	}
+
+
+	disable() {
+
+		console.log('disable');
+	}
+
+
 	get_native_name() {
 
 		return this._get_native_name();
@@ -147,16 +155,7 @@ export class UI_Handler {
 	}
 
 
-
-
 	_render() {
-
-		// let tmp = $('script[data-template="this-is-another-test"]')[0];
-
-		let tmp = $(Tpl)[2];
-
-		// ($('script[data-template="this-is-another-test"]'))
-		console.log(tmp)
 
 		console.log('Component Painted');
 	}
@@ -166,8 +165,6 @@ export class UI_Handler {
 
 		return this._$native_cmp.attr('data-selector-name');
 	}
-
-
 
 
 	_get_native_value() {

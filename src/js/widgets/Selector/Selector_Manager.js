@@ -18,16 +18,6 @@ export class Selector_Manager {
 
 
 	/**
-	 * Initialize the manager instance width new id.
-	 * @private
-	 */
-	_initialize() {
-
-		this._id = this._generate_id();
-	}
-
-
-	/**
 	 * Create new instance core width new id and passing manager parent id.
 	 * @returns {Selector_Core}
 	 */
@@ -39,12 +29,6 @@ export class Selector_Manager {
 		this._instances_obj.push(tmpObj);
 
 		return tmpObj;
-	}
-
-
-	get id() {
-
-		return this._id;
 	}
 
 
@@ -69,51 +53,32 @@ export class Selector_Manager {
 
 
 	/**
-	 * @param targetId
+	 * @param target_id
 	 */
-	get_instance_by_id(targetId) {
+	get_instance_by_id(target_id) {
 
-		return this._get_instance_by_any_property('id', targetId);
+		return this._get_instance_by_any_property('id', target_id);
 	}
 
 
 	/**
-	 * @param targetName
+	 * @param target_name
 	 */
-	get_instance_by_name(targetName) {
+	get_instance_by_name(target_name) {
 
-		return this._get_instance_by_any_property('name', targetName);
-	}
-
-
-	/**
-	 * Returns object instance looking for targetValue in any property as key.
-	 * @param prop
-	 * @param targetValue
-	 * @returns {boolean|number}
-	 * @private
-	 */
-	_get_instance_by_any_property(property, targetValue) {
-
-		let tmpResponse = this._instances_obj.findIndex((instance) => instance[property] === targetValue);
-
-		if (tmpResponse < 0) {
-			return false;
-		}
-
-		return this._instances_obj[tmpResponse];
+		return this._get_instance_by_any_property('name', target_name);
 	}
 
 
 	/**
 	 * Sends command action behaviour to managed target component.
-	 * @param targetId
+	 * @param target_id
 	 * @param action
 	 * @returns {boolean}
 	 */
-	send_instance_action(targetId, action) {
+	send_instance_action(target_id, action) {
 
-		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+		const ids = typeof (target_id) == 'object' ? target_id : [target_id];
 
 		for (let id of ids) {
 
@@ -122,6 +87,41 @@ export class Selector_Manager {
 		}
 
 		return true;
+	}
+
+
+	get id() {
+
+		return this._id;
+	}
+
+
+	/**
+	 * Initialize the manager instance width new id.
+	 * @private
+	 */
+	_initialize() {
+
+		this._id = this._generate_id();
+	}
+
+
+	/**
+	 * Returns object instance looking for targetValue in any property as key.
+	 * @param property
+	 * @param target_value
+	 * @returns {boolean|number}
+	 * @private
+	 */
+	_get_instance_by_any_property(property, target_value) {
+
+		let tmpResponse = this._instances_obj.findIndex((instance) => instance[property] === target_value);
+
+		if (tmpResponse < 0) {
+			return false;
+		}
+
+		return this._instances_obj[tmpResponse];
 	}
 
 

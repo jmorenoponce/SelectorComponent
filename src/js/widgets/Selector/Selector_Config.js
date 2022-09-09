@@ -16,6 +16,11 @@ export class Selector_Config {
 			type: 'object',
 			class: 'data',
 		},
+		searchable_fields: {
+			is_nullable: true,
+			type: 'object',
+			class: 'data',
+		},
 		is_active: {
 			is_nullable: false,
 			type: 'boolean',
@@ -63,6 +68,7 @@ export class Selector_Config {
 
 		category_key: '',
 		last_selected_ids: [],
+		searchable_fields: [],
 		is_active: true,
 		is_editable: true,
 		placeholder: 'Seleccionar...',

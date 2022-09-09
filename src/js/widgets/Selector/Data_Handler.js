@@ -17,7 +17,7 @@ export class Data_Handler {
 		this._config_obj = {
 			category_key: '',
 			last_selected_ids: [],
-			searchable_fields: [], // ??
+			searchable_fields: [],
 
 			/**
 			 * Returns coincidence validation looking for <term> in all value keys of <item>.
@@ -36,17 +36,17 @@ export class Data_Handler {
 
 	/**
 	 * Take de values from json data filling owner configuration keys.
-	 *  <data> and <category_key> are required keys for valid <dataSrc>.
-	 * @param data_source
+	 *  <data> is a required global key for valid <data_src>.
+	 * @param data_src
 	 * @return {boolean}
 	 */
-	data_seed(data_source) {
+	data_seed(data_src) {
 
-		if (!data_source.hasOwnProperty(Data_Handler._JSON_KEYS.DATA)) {
+		if (!data_src.hasOwnProperty(Data_Handler._JSON_KEYS.DATA)) {
 			return false;
 		}
 
-		this._data = data_source[Data_Handler._JSON_KEYS.DATA];
+		this._data = data_src[Data_Handler._JSON_KEYS.DATA];
 
 		return true;
 	}
