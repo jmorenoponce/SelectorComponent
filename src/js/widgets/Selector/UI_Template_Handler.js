@@ -11,26 +11,22 @@ export class UI_Template_Handler {
 	static _TPL_BASE_FILE = 'UI_Templates.hbs';
 
 
-	constructor() {
+	constructor(callback) {
 
-		this._tpl_base = this._load_tpl_file()
-		this._tpl_collect = this._get_tpl_collect();
+		this._tpl_collection = {};
 
-		this._init();
+		this._load_tpl_file(callback);
 	}
 
 
 	/**
 	 *
 	 * @param partial_id
-	 * @param json_data
-	 * @returns {HandlebarsTemplateDelegate<any>}
+	 * @returns {*}
 	 */
-	compile(partial_id, json_data) {
+	get_tpl_partial(partial_id) {
 
-		let tmp_partial = this.get_tpl_partial(partial_id)
-
-		return Handlebars.compile(tmp_partial(json_data));
+		return this._tpl_collection[partial_id];
 	}
 
 
@@ -38,67 +34,35 @@ export class UI_Template_Handler {
 	 *
 	 * @private
 	 */
-	_init() {
+	_load_tpl_file(callback) {
 
-		console.log(this._tpl_base);
-		console.log(this._tpl_collect);
-	}
-
-
-	/**
-	 *
-	 * @private
-	 */
-	_load_tpl_file() {
-
-		let _this = this;
-		let _tmp_target = UI_Template_Handler._TPL_PATH + UI_Template_Handler._TPL_BASE_FILE;
+		const _tmp_target = UI_Template_Handler._TPL_PATH + UI_Template_Handler._TPL_BASE_FILE;
 
 		$.get(_tmp_target).done((response) => {
 
-			_this._tpl_base = $($.parseHTML(response));
+			let tmpCollection = $(response).filter('[type="text/x-handlebars-template"]');
+
+			tmpCollection.each((k, v) => {
+
+				Object.assign(this._tpl_collection, {
+					[$(v).attr('id')]: this._compile($(v).html())
+				});
+			});
+
+			callback();
 		});
 	}
 
 
 	/**
-	 *
-	 * @private
+	 * Returns a compiled concrete partial from template collection
+	 * @param plain_html
+	 * @returns {HandlebarsTemplateDelegate<any>}
 	 */
-	_get_tpl_collect() {
+	_compile(plain_html) {
 
-		let _this = this;
-
-		setTimeout(() => {
-
-			_this._tpl_collect = this._tpl_base.filter('script[type="text/x-handlebars-template"]');
-
-		}, 500);
+		return Handlebars.compile(plain_html);
 	}
-
-
-	/**
-	 *
-	 * @param partial_id
-	 * @returns {*|jQuery}
-	 * @private
-	 */
-	get_tpl_partial(partial_id) {
-
-		return this._tpl_collect.filter(partial_id).html();
-	}
-
-
-	// cosas() {
-	//
-	// 	$.get('./src/js/widgets/Selector/UI_Templates.hbs').done(function (response) {
-	//
-	// 		let content = $($.parseHTML(response));
-	// 		let compiled_tpl = Handlebars.compile(content.filter('#test-template').html())
-	//
-	// 		console.log(compiled_tpl({cosas: 'mías'}))
-	// 	});
-	// }
 
 
 	// /**

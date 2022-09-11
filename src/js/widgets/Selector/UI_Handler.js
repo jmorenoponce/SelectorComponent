@@ -71,7 +71,7 @@ export class UI_Handler {
 
 	constructor() {
 
-		this._tpl_handler = new (UI_Template_Handler);
+		this._tpl_handler = new UI_Template_Handler(this.init);
 
 		this._config_obj = {};
 		this._$native_cmp = {};
@@ -81,6 +81,12 @@ export class UI_Handler {
 		this._is_extendable = false;
 
 		this._selected_ids = [];
+	}
+
+
+	init() {
+
+		console.log('Render temporal con un estado de Loading...');
 	}
 
 
@@ -119,13 +125,13 @@ export class UI_Handler {
 	}
 
 
-	renderList_ungrouped() {
+	render_ungrouped() {
 
 		this._render();
 	}
 
 
-	renderList_grouped() {
+	render_grouped() {
 
 		this._render();
 	}
@@ -157,6 +163,7 @@ export class UI_Handler {
 
 	_render() {
 
+		console.log(this._tpl_handler.get_tpl_partial('test-template'));
 		console.log('Component Painted');
 	}
 

@@ -3,6 +3,7 @@
 
 import {Selector_Manager} from './widgets/Selector/Selector_Manager';
 import {Utility} from "./utils/Utility";
+import {UI_Handler} from "./widgets/Selector/UI_Handler";
 
 
 let manager = new Selector_Manager();

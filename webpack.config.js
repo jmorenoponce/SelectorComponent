@@ -14,11 +14,6 @@ module.exports = {
 			jQuery: 'jquery'
 		})
 	],
-	module: {
-		rules: [
-			{test: /\.handlebars$/, loader: "handlebars-loader"}
-		]
-	},
 	resolve: {
 		alias: {
 			handlebars: 'handlebars/dist/handlebars.min.js'
