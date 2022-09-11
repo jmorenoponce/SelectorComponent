@@ -66,6 +66,12 @@ export class Selector_Core {
 	 */
 	bind(source_cmp, data_src, config_obj) {
 
+		if (!this._ui_handler.set_native_component(source_cmp)) {
+			this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
+			return this._state;
+		}
+		this._ui_handler.set_config(this._config.ui_params);
+
 		if (!this._config.assign(config_obj)) {
 			this._state = Selector_Core._STATES.INVALID_CONFIG_OBJECT;
 			return this._state;
@@ -76,12 +82,6 @@ export class Selector_Core {
 			return this._state;
 		}
 		this._data_handler.set_config(this._config.data_params);
-
-		if (!this._ui_handler.set_native_component(source_cmp)) {
-			this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
-			return this._state;
-		}
-		this._ui_handler.set_config(this._config.ui_params);
 
 		this._instance_name = this._ui_handler.get_native_name() || 'nameless';
 		this._state = Selector_Core._STATES.BINDED;

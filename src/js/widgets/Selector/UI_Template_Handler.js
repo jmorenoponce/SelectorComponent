@@ -11,11 +11,11 @@ export class UI_Template_Handler {
 	static _TPL_BASE_FILE = 'UI_Templates.hbs';
 
 
-	constructor(callback) {
+	constructor(callback_f) {
 
 		this._tpl_collection = {};
 
-		this._load_tpl_file(callback);
+		this._load_tpl_file(callback_f);
 	}
 
 
@@ -34,7 +34,7 @@ export class UI_Template_Handler {
 	 *
 	 * @private
 	 */
-	_load_tpl_file(callback) {
+	_load_tpl_file(callback_f) {
 
 		const _tmp_target = UI_Template_Handler._TPL_PATH + UI_Template_Handler._TPL_BASE_FILE;
 
@@ -49,7 +49,7 @@ export class UI_Template_Handler {
 				});
 			});
 
-			callback();
+			callback_f();
 		});
 	}
 
