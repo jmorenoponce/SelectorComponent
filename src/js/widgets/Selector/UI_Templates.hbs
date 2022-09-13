@@ -1,7 +1,104 @@
-<script id="test-template" type="text/x-handlebars-template">
-    <option value="{{ cosas }}" selected="selected"></option>
+<!-- Selector-->
+
+<script id="cmp-selector" type="text/x-handlebars-template">
+	<div class="cmp-selector">
+		<div class="inner flex-column"></div>
+	</div>
 </script>
 
-<script id="another-template" type="text/x-handlebars-template">
-	<p>Buenos días {{ nombre }}</p>
+
+<script id="selector-input-cnt" type="text/x-handlebars-template">
+	<div class="selector-input-cnt ux-selector-input">
+		<div class="inner flex-center"></div>
+	</div>
+</script>
+
+
+<script id="selector-dropdown-cnt" type="text/x-handlebars-template">
+	<div class="selector-dropdown-cnt ux-selector-dropdown ui-selector-dropdown-expanded">
+		<div class="inner"></div>
+	</div>
+</script>
+
+
+
+<script id="tools-cnt" type="text/x-handlebars-template">
+	<div class="tools-cnt dropdown-list-cnt p-10"></div>
+</script>
+
+
+<script id="results-cnt" type="text/x-handlebars-template">
+	<div class="results-cnt results-selected ux-selector-results-selected">
+		<div class="inner dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type=""></div>
+	</div>
+</script>
+
+
+<script id="result-group" type="text/x-handlebars-template">
+	<div class="result-group list-item ux-selector-group-item">
+		<div class="inner">
+			<div class="group-header"></div>
+			<div class="group-content dropdown-list-cnt ui-order-by-data-recent ui-user-card-list" data-user-card-type="sm"></div>
+		</div>
+	</div>
+</script>
+
+
+<script id="result-item" type="text/x-handlebars-template">
+	<div class="result-item list-item ux-selector-result-item">
+		<div class="inner"></div>
+	</div>
+</script>
+
+
+<script id="search-filter" type="text/x-handlebars-template">
+	<div class="search-filter list-item mb-10">
+		<div class="inner flex-align-center">
+
+			<input class="input-field ux-selector-search-field" type="text" placeholder="%placeholder%">
+			<i class="icon mr-5">~</i>
+		</div>
+	</div>
+</script>
+
+
+<script id="view-mode" type="text/x-handlebars-template">
+	<div class="view-mode list-item"></div>
+</script>
+
+
+<!-- Buttons -->
+
+<script id="btn-toolbar" type="text/x-handlebars-template">
+	<div class="btn-toolbar flex-justify-space-between"></div>
+</script>
+
+<script id="btn-group" type="text/x-handlebars-template">
+	<div class="btn-group"></div>
+</script>
+
+<script id="btn" type="text/x-handlebars-template">
+	<div class="btn ux-selector-view-grouped">
+		<i class="btn-icon">~</i>
+	</div>
+</script>
+
+
+<!-- Badges -->
+
+<script id="badge" type="text/x-handlebars-template">
+
+	<div class="badge badge-circle ml-5 ux-popover-trigger">
+		<span class="badge-text" data-param="selections-amount">24</span>
+	</div>
+</script>
+
+
+<!-- Popovers -->
+
+<script id="popover" type="text/x-handlebars-template">
+
+	<div class="popover ux-popover" data-shown="0">
+		<div class="popover-inner bla-bla-bla ux-selector-selections-list"></div>
+	</div>
 </script>

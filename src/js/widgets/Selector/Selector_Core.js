@@ -71,6 +71,7 @@ export class Selector_Core {
 			return this._state;
 		}
 		this._ui_handler.set_config(this._config.ui_params);
+		this._instance_name = this._ui_handler.get_native_name() || 'nameless';
 
 		if (!this._config.assign(config_obj)) {
 			this._state = Selector_Core._STATES.INVALID_CONFIG_OBJECT;
@@ -83,7 +84,6 @@ export class Selector_Core {
 		}
 		this._data_handler.set_config(this._config.data_params);
 
-		this._instance_name = this._ui_handler.get_native_name() || 'nameless';
 		this._state = Selector_Core._STATES.BINDED;
 
 		return this._state;

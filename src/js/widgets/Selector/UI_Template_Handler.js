@@ -63,28 +63,4 @@ export class UI_Template_Handler {
 
 		return Handlebars.compile(plain_html);
 	}
-
-
-	// /**
-	//  * This is only another try but with Ajax
-	//  * @param path
-	//  * @param template_key
-	//  * @param jsonData
-	//  * @returns {jQuery|{getAllResponseHeaders: (function(): *), abort: (function(*=): jqXHR), setRequestHeader: (function(*=, *): jqXHR), readyState: number, getResponseHeader: (function(*): *), overrideMimeType: (function(*): jqXHR), statusCode: (function(*=): jqXHR)}|HTMLElement|(function(*=, *=): *)|(function(*=, *=): *)|{getAllResponseHeaders: (function(): *), abort: (function(*=): jqXHR), setRequestHeader: (function(*=, *): jqXHR), readyState: number, getResponseHeader: (function(*): *), overrideMimeType: (function(*): jqXHR), statusCode: (function(*=): jqXHR)}}
-	//  */
-	// get_template_ajax(path, template_key, jsonData) {
-	//
-	// 	let source;
-	// 	let template;
-	//
-	// 	return $.ajax({
-	// 		url: path,
-	// 		cache: true,
-	// 		success: function (data) {
-	// 			source = data
-	// 			template = Handlebars.compile(source);
-	// 			$(template_key).html(template(jsonData));
-	// 		}
-	// 	});
-	// }
 }
