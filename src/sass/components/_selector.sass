@@ -20,9 +20,6 @@
 	.selector-dropdown-cnt
 		position: relative
 
-		&:not(.ui-selector-dropdown-expanded)
-			display: none
-
 		> .inner
 			position: absolute
 			width: 100%
@@ -30,6 +27,8 @@
 			border-radius: $theme-radius
 			@include theme-shadow
 
+		&:not(.ui-selector-dropdown-expanded)
+			display: none
 
 	.dropdown-list-cnt
 		display: flex

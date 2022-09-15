@@ -1002,14 +1002,14 @@ template {
   cursor: pointer; }
 .cmp-selector .selector-dropdown-cnt {
   position: relative; }
-  .cmp-selector .selector-dropdown-cnt:not(.ui-selector-dropdown-expanded) {
-    display: none; }
   .cmp-selector .selector-dropdown-cnt > .inner {
     position: absolute;
     width: 100%;
     background-color: #FFFFFF;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; }
+  .cmp-selector .selector-dropdown-cnt:not(.ui-selector-dropdown-expanded) {
+    display: none; }
 .cmp-selector .dropdown-list-cnt {
   display: flex;
   flex-direction: column; }

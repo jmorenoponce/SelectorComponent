@@ -9,7 +9,7 @@ import {UI_Handler} from './UI_Handler';
 export class Selector_Core {
 
 
-	static _STATES = {
+	static _states = {
 
 		// Informative
 		WAITING_FOR_BINDING: 100,
@@ -33,6 +33,28 @@ export class Selector_Core {
 	};
 
 
+	static _key_codes = {
+
+		BACKSPACE: 8,
+		TAB: 9,
+		ENTER: 13,
+		SHIFT: 16,
+		CTRL: 17,
+		ALT: 18,
+		ESC: 27,
+		SPACE: 32,
+		PAGE_UP: 33,
+		PAGE_DOWN: 34,
+		END: 35,
+		HOME: 36,
+		LEFT: 37,
+		UP: 38,
+		RIGHT: 39,
+		DOWN: 40,
+		DELETE: 46
+	}
+
+
 	/**
 	 * @param instance_id
 	 * @param manager_id
@@ -41,17 +63,17 @@ export class Selector_Core {
 	constructor(instance_id, manager_id) {
 
 		this._instance_name = '';
-		this._instance_id = instance_id || Selector_Core._STATES.SINGLE_COMPONENT;
-		this._manager_id = manager_id || Selector_Core._STATES.SINGLE_COMPONENT;
+		this._instance_id = instance_id || Selector_Core._states.SINGLE_COMPONENT;
+		this._manager_id = manager_id || Selector_Core._states.SINGLE_COMPONENT;
 
-		this._config = new Selector_Config();
-		this._data_handler = new Data_Handler();
 		this._ui_handler = new UI_Handler();
+		this._data_handler = new Data_Handler();
+		this._config = new Selector_Config();
 
 		this._search_term = '';
 		this._selected_ids = [];
 
-		this._state = Selector_Core._STATES.WAITING_FOR_BINDING;
+		this._state = Selector_Core._states.WAITING_FOR_BINDING;
 		return this._state;
 	}
 
@@ -67,24 +89,24 @@ export class Selector_Core {
 	bind(source_cmp, data_src, config_obj) {
 
 		if (!this._ui_handler.set_native_component(source_cmp)) {
-			this._state = Selector_Core._STATES.INVALID_TARGET_COMPONENT;
+			this._state = Selector_Core._states.INVALID_TARGET_COMPONENT;
 			return this._state;
 		}
 		this._ui_handler.set_config(this._config.ui_params);
 		this._instance_name = this._ui_handler.get_native_name() || 'nameless';
 
 		if (!this._config.assign(config_obj)) {
-			this._state = Selector_Core._STATES.INVALID_CONFIG_OBJECT;
+			this._state = Selector_Core._states.INVALID_CONFIG_OBJECT;
 			return this._state;
 		}
 
 		if(!this._data_handler.data_seed(data_src)) {
-			this._state = Selector_Core._STATES.INVALID_DATA_SOURCE;
+			this._state = Selector_Core._states.INVALID_DATA_SOURCE;
 			return this._state;
 		}
 		this._data_handler.set_config(this._config.data_params);
 
-		this._state = Selector_Core._STATES.BINDED;
+		this._state = Selector_Core._states.BINDED;
 
 		return this._state;
 	}
@@ -187,7 +209,7 @@ export class Selector_Core {
 	 */
 	get_state_msg(code_value = this._state) {
 
-		return Object.keys(Selector_Core._STATES).find((key) => Selector_Core._STATES[key] === code_value);
+		return Object.keys(Selector_Core._states).find((key) => Selector_Core._states[key] === code_value);
 	}
 
 
@@ -206,13 +228,13 @@ export class Selector_Core {
 	 */
 	_init() {
 
-		if (this._state !== Selector_Core._STATES.BINDED) {
+		if (this._state !== Selector_Core._states.BINDED) {
 			return this._state;
 		}
 
 		this._render();
 
-		this._state = Selector_Core._STATES.RUNNING;
+		this._state = Selector_Core._states.RUNNING;
 
 		return this._state;
 	}
@@ -221,6 +243,12 @@ export class Selector_Core {
 	_render() {
 
 		this._ui_handler._render();
+	}
+
+
+	_refresh() {
+
+
 	}
 
 
@@ -307,13 +335,13 @@ export class Selector_Core {
 
 	_refresh_selection() {
 
-		this._update_native_value();
+		// this._update_native_value();
 	}
 
 
 	_update_native_value() {
 
-		this._ui_handler._update_native_value();
+		// this._ui_handler._update_native_value();
 	}
 
 

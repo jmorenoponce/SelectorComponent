@@ -7,15 +7,18 @@ import * as Handlebars from "handlebars";
 export class UI_Template_Handler {
 
 
-	static _TPL_PATH = './src/js/widgets/Selector/'
-	static _TPL_BASE_FILE = 'UI_Templates.hbs';
+	static _tpl_path = './src/js/components/Selector/'
+	static _tpl_base_file = 'UI_Templates.hbs';
+	static _tpl_instructor_file = 'UI_Instructor.json';
 
 
 	constructor(callback_f) {
 
 		this._tpl_collection = {};
+		this._tpl_instructor = {};
 
 		this._load_tpl_file(callback_f);
+		this._load_tpl_instructor();
 	}
 
 
@@ -32,11 +35,21 @@ export class UI_Template_Handler {
 
 	/**
 	 *
+	 * @returns {{}}
+	 */
+	get_tpl_instructor() {
+
+		return this._tpl_instructor;
+	}
+
+
+	/**
+	 *
 	 * @private
 	 */
 	_load_tpl_file(callback_f) {
 
-		const _tmp_target = UI_Template_Handler._TPL_PATH + UI_Template_Handler._TPL_BASE_FILE;
+		const _tmp_target = UI_Template_Handler._tpl_path + UI_Template_Handler._tpl_base_file;
 
 		$.get(_tmp_target).done((response) => {
 
@@ -44,12 +57,21 @@ export class UI_Template_Handler {
 
 			tmpCollection.each((k, v) => {
 
-				Object.assign(this._tpl_collection, {
-					[$(v).attr('id')]: this._compile($(v).html())
-				});
+				this._tpl_collection[$(v).attr('id')] = this._compile($(v).html());
 			});
 
 			callback_f();
+		});
+	}
+
+
+	_load_tpl_instructor() {
+
+		const _tmp_target = UI_Template_Handler._tpl_path + UI_Template_Handler._tpl_instructor_file;
+
+		$.get(_tmp_target).done((response) => {
+
+			this._tpl_instructor = response;
 		});
 	}
 

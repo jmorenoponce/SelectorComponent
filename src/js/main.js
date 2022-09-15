@@ -1,9 +1,9 @@
 'use strict';
 
 
-import {Selector_Manager} from './widgets/Selector/Selector_Manager';
+import {Selector_Manager} from './components/Selector/Selector_Manager';
 import {Utility} from "./utils/Utility";
-import {UI_Handler} from "./widgets/Selector/UI_Handler";
+import {UI_Manager} from "./components/Selector/UI_Handler";
 
 
 let manager = new Selector_Manager();
