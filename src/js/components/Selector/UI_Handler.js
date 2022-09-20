@@ -7,35 +7,36 @@ import {UI_Template_Handler} from "./UI_Template_Handler";
 export class UI_Handler {
 
 
-	static ux_classes = {
+	static _ux = {
 
-		NATIVE_FIELD: '.ux-selector-native-field',
+		SELECTOR_CNT: 'ux-selector-cnt',
 
-		SELECTOR_CNT: '.ux-selector-cnt',
+		INPUT_CNT: 'ux-selector-input',
+		INPUT_FIELD: 'ux-selector-input-field',
 
-		INPUT_CNT: '.ux-selector-input',
-			INPUT_FIELD: '.ux-selector-input-field',
-			SELECTIONS_WIDGET: '.ux-selector-selections-list',
+		POPOVER_TRIGGER: 'ux-popover-trigger',
+		SELECTIONS_WIDGET: 'ux-selector-selections-list',
 
-		DROPDOWN_CNT: '.ux-selector-dropdown',
-		DROPDOWN_TRIGGER: '.ux-selector-dropdown-trigger',
+		DROPDOWN_CNT: 'ux-selector-dropdown',
+		DROPDOWN_TRIGGER: 'ux-selector-dropdown-trigger',
 
-		DROPDOWN_TOOLS: '.ux-selector-tools-cnt',
-			SEARCH_FIELD: '.ux-selector-search-field',
+		DROPDOWN_TOOLS: 'ux-selector-tools-cnt',
+		SEARCH_FILTER: 'ux-selector-search-filter',
+		SEARCH_FIELD: 'ux-selector-search-field',
 
-			VIEW_UNGROUPED: '.ux-selector-view-ungrouped',
-			VIEW_GROUPED: '.ux-selector-view-grouped',
-			VIEW_EXPANDED: '.ux-selector-view-expanded',
+		VIEW_UNGROUPED: 'ux-selector-view-ungrouped',
+		VIEW_GROUPED: 'ux-selector-view-grouped',
+		VIEW_EXPANDED: 'ux-selector-view-expanded',
 
-		RESULTS_SELECTED_CNT: '.ux-selector-results-selected',
-		RESULTS_CNT: '.ux-selector-results',
+		RESULTS_SELECTED_CNT: 'ux-selector-results-selected',
+		RESULTS_CNT: 'ux-selector-results',
 
-		RESULT_ITEM: '.ux-selector-result-item',
-		RESULT_GROUP: '.ux-selector-group-item'
+		RESULT_ITEM: 'ux-selector-result-item',
+		RESULT_GROUP: 'ux-selector-group-item'
 	}
 
 
-	static ui_classes = {
+	static _ui = {
 
 		ENABLE: '.ui-selector-enable',
 		DISABLE: '.ui-selector-disable',
@@ -145,42 +146,82 @@ export class UI_Handler {
 	}
 
 
-	_render(state, data) {
+	/**
+	 *
+	 * @param settings
+	 * @private
+	 */
+	_render(settings) {
 
-		console.log(this._tpl_handler.get_tpl_instructor())
+		// Vendrán de settings:
+		// <placeholder>, <selections-amount>
 
-		const tmpMain = this._tpl_handler.get_tpl_partial('cmp-selector__main');
+		const cmp_selector__main = this._tpl_handler.get_tpl_partial('cmp-selector__main');
 
-		const tmpInputCnt = this._tpl_handler.get_tpl_partial('cmp-selector__input-cnt');
-		const tmpInputField = this._tpl_handler.get_tpl_partial('generics__input-field');
-		const tmpBadge = this._tpl_handler.get_tpl_partial('generics__badge');
+		const cmp_selector__input_cnt = this._tpl_handler.get_tpl_partial('cmp-selector__input-cnt');
+		const generics__input_field = this._tpl_handler.get_tpl_partial('generics__input-field');
+		const generics__badge = this._tpl_handler.get_tpl_partial('generics__badge');
+		const generics__popover = this._tpl_handler.get_tpl_partial('generics__popover');
+		const cmp_selector__input_dropdown_icon = this._tpl_handler.get_tpl_partial('cmp-selector__input-dropdown-icon');
 
-		const tmpDropdownCnt = this._tpl_handler.get_tpl_partial('cmp-selector__dropdown-cnt');
-		const tmpTools = this._tpl_handler.get_tpl_partial('cmp-selector__tools-cnt');
-		const tmpSearch = this._tpl_handler.get_tpl_partial('cmp-selector__tools__search-filter');
-		const tmpModes = this._tpl_handler.get_tpl_partial('cmp-selector__tools__view-mode')
+		const cmp_selector__dropdown_cnt = this._tpl_handler.get_tpl_partial('cmp-selector__dropdown-cnt');
+		const cmp_selector__tools_cnt = this._tpl_handler.get_tpl_partial('cmp-selector__tools-cnt');
+		const cmp_selector__tools__search_filter = this._tpl_handler.get_tpl_partial('cmp-selector__tools__search-filter');
+		const cmp_selector__tools_view_mode = this._tpl_handler.get_tpl_partial('cmp-selector__tools__view-mode')
+		const cmp_selector__result_cnt = this._tpl_handler.get_tpl_partial('cmp-selector__results-cnt');
+		const cmp_selector__result_item = this._tpl_handler.get_tpl_partial('cmp-selector__result-item');
+		const cmp_selector__result_group = this._tpl_handler.get_tpl_partial('cmp-selector__result-group');
 
-		const tmpResults = this._tpl_handler.get_tpl_partial('cmp-selector__results-cnt');
-
-		$(this._$native_cmp).after(tmpMain);
-
-		$(UI_Handler.ux_classes.SELECTOR_CNT + '> .inner').append(tmpInputCnt);
-		$(UI_Handler.ux_classes.SELECTOR_CNT + '> .inner').append(tmpDropdownCnt);
-
-		$(UI_Handler.ux_classes.INPUT_CNT + '> .inner').append(tmpInputField);
-		$(UI_Handler.ux_classes.INPUT_CNT + '> .inner').append(tmpBadge);
-
-		$(UI_Handler.ux_classes.DROPDOWN_CNT + '> .inner').append(tmpTools);
-		$(UI_Handler.ux_classes.DROPDOWN_CNT + '> .inner').append(tmpSearch);
-		$(UI_Handler.ux_classes.DROPDOWN_CNT + '> .inner').append(tmpModes);
-	}
-
-
-	_render_composite(instructor) {
+		const generics__btn = this._tpl_handler.get_tpl_partial('generics__btn');
+		const generics__btn_group = this._tpl_handler.get_tpl_partial('generics__btn-group');
+		const generics__btn_toolbar = this._tpl_handler.get_tpl_partial('generics__btn-toolbar');
 
 
+		let $tmp = {};
+		let $composite = $(cmp_selector__main());
 
 
+		$('> .inner', $composite)
+			.append(cmp_selector__input_cnt())
+			.append(cmp_selector__dropdown_cnt());
+
+
+		$tmp = $(generics__input_field({placeholder: 'Seleccionar usuario/s...'}))
+			.addClass(UI_Handler._ux.INPUT_FIELD)
+			.attr('disabled', 'disabled');
+		$('.' + UI_Handler._ux.INPUT_CNT + '> .inner', $composite).append($tmp);
+
+
+		$tmp = $(generics__badge({text: 24}))
+			.addClass(UI_Handler._ux.POPOVER_TRIGGER)
+			.append(generics__popover());
+		$('.' + UI_Handler._ux.INPUT_CNT + '> .inner', $composite).append($tmp);
+
+
+		$tmp = $(cmp_selector__input_dropdown_icon())
+			.addClass(UI_Handler._ux.DROPDOWN_TRIGGER);
+		$('.' + UI_Handler._ux.INPUT_CNT + '> .inner', $composite).append($tmp);
+
+
+		$('.' + UI_Handler._ux.DROPDOWN_CNT + '> .inner', $composite).append(cmp_selector__tools_cnt());
+
+
+		$tmp = $('.' + UI_Handler._ux.SEARCH_FILTER + '> .inner', $(cmp_selector__tools__search_filter()))
+			.append(generics__input_field({placeholder: 'Buscar...'}))
+
+
+		console.log($tmp.html());
+
+
+
+		$(UI_Handler._ux.DROPDOWN_TOOLS, $composite)
+			.append($tmp);
+
+		$(UI_Handler._ux.DROPDOWN_TOOLS, $composite).append(cmp_selector__tools__search_filter());
+
+
+		console.log($composite.html());
+		$(this._$native_cmp).after($composite);
 	}
 
 

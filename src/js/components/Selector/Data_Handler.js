@@ -89,6 +89,31 @@ export class Data_Handler {
 	}
 
 
+	list_reduce_to_key (key) {
+
+		let list = [];
+
+		for (let item of this._data) {
+
+			list.push(item[key]);
+		}
+
+		return list;
+	}
+
+	list_reduce_to_key_unique (key) {
+
+		let list = {};
+
+		for (let item of this._data) {
+
+			list[item[key]] = 1;
+		}
+
+		return Object.keys(list);
+	}
+
+
 	/**
 	 * Returns the filtered item list (taking search term as filter seed).
 	 * @param search_term

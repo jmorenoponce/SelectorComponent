@@ -9,16 +9,12 @@ export class UI_Template_Handler {
 
 	static _tpl_path = './src/js/components/Selector/'
 	static _tpl_base_file = 'UI_Templates.hbs';
-	static _tpl_instructor_file = 'UI_Instructor.json';
 
 
-	constructor(callback_f) {
+	constructor() {
 
 		this._tpl_collection = {};
-		this._tpl_instructor = {};
-
-		this._load_tpl_file(callback_f);
-		this._load_tpl_instructor();
+		this._load_tpl_file();
 	}
 
 
@@ -35,19 +31,9 @@ export class UI_Template_Handler {
 
 	/**
 	 *
-	 * @returns {{}}
-	 */
-	get_tpl_instructor() {
-
-		return this._tpl_instructor;
-	}
-
-
-	/**
-	 *
 	 * @private
 	 */
-	_load_tpl_file(callback_f) {
+	_load_tpl_file() {
 
 		const _tmp_target = UI_Template_Handler._tpl_path + UI_Template_Handler._tpl_base_file;
 
@@ -59,19 +45,6 @@ export class UI_Template_Handler {
 
 				this._tpl_collection[$(v).attr('id')] = this._compile($(v).html());
 			});
-
-			callback_f();
-		});
-	}
-
-
-	_load_tpl_instructor() {
-
-		const _tmp_target = UI_Template_Handler._tpl_path + UI_Template_Handler._tpl_instructor_file;
-
-		$.get(_tmp_target).done((response) => {
-
-			this._tpl_instructor = response;
 		});
 	}
 

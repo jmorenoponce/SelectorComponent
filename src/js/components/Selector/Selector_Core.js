@@ -154,7 +154,7 @@ export class Selector_Core {
 	 */
 	set_selection(targetId) {
 
-		this._set_selection(targetId);
+		this._set_selection(typeof(targetId) != 'object' ? [targetId] : targetId);
 	}
 
 

@@ -44,7 +44,7 @@ userData.then(userData => {
 
 
 // Some test for functionality
-const wait = setTimeout(printInfo, 300);
+// const wait = setTimeout(printInfo, 300);
 
 function printInfo() {
 
