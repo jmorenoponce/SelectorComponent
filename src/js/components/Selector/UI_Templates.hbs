@@ -4,6 +4,99 @@
 
 <!-- Selector Main container -->
 
+
+<script id="cmp-selector-base" type="text/x-handlebars-template">
+	<div class="cmp-selector">
+		<div class="ux-native-select display-none">
+
+		</div>
+		<div class="inner flex-column">
+
+			<div class="selector-input-cnt ux-selector-input">
+				<div class="inner flex-center">
+
+					<input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="%placeholder%">
+
+					<div class="badge badge-circle ml-5 ux-popover-trigger">
+						<span class="badge-text" data-param="selections-amount">24</span>
+
+						<div class="popover ux-popover" data-shown="0">
+							<div class="popover-inner bla-bla-bla ux-selector-selections-list">
+								I'm the popover content
+							</div>
+						</div>
+					</div>
+
+					<div class="input-dropdown-icon ux-selector-dropdown-trigger">
+						<i class="icon ml-5 mr-5">~</i>
+					</div>
+				</div>
+			</div>
+			<div class="selector-dropdown-cnt ux-selector-dropdown-cnt ui-selector-dropdown-expanded">
+			</div>
+		</div>
+	</div>
+</script>
+
+<script id="cmp-selector-dropdown" type="text/x-handlebars-template">
+	<div class="inner">
+
+		<div class="tools-cnt dropdown-list-cnt p-10">
+
+			<div class="search-filter list-item mb-10">
+				<div class="inner flex-align-center">
+
+					<input class="input-field ux-selector-search-field" type="text" placeholder="%placeholder%">
+					<i class="icon mr-5">~</i>
+				</div>
+			</div>
+
+			<div class="view-mode list-item">
+				<div class="btn-toolbar flex-justify-space-between">
+
+				</div>
+			</div>
+		</div>
+
+		<div class="results-cnt ux-results-cnt results-selected ux-selector-results-selected">
+		</div>
+	</div>
+</script>
+
+
+<script id="cmp-selector-result" type="text/x-handlebars-template">
+	<div class="result-item list-item ux-selector-result-item">
+		<div class="inner">
+
+			<div class="user-card user-card-sm" data-activity-state="1" data-user-color="1">
+				<div class="inner">
+
+					<div class="card-checkable">
+						<input class="checkbox-field" type="checkbox" value="Cosas" checked="checked">
+					</div>
+
+					<div class="card-image">
+						<div class="avatar">
+							<span class="avatar-initials">{{avatar_initials}}</span>
+							<span class="avatar-state"></span>
+						</div>
+					</div>
+
+					<div class="card-data flex-column">
+						<span class="data-name" data-param="name">{{first_name}} {{last_name}}</span>
+						<span class="data-email" data-param="email">{{email}}</span>
+					</div>
+
+					<div class="card-flags">
+						<i class="icon icon-recent">~</i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+
 <script id="cmp-selector__main" type="text/x-handlebars-template">
 	<div class="cmp-selector ux-selector-cnt">
 		<div class="inner flex-column"></div>

@@ -4,10 +4,15 @@
 import {Selector_Config} from "./Selector_Config";
 import {Data_Handler} from "./Data_Handler";
 import {UI_Handler} from './UI_Handler';
+import {UI_Template_Handler} from "./UI_Template_Handler";
 
-
+/**
+ *
+ */
 export class Selector_Core {
 
+
+	static __idCounter = 0;
 
 	static _states = {
 
@@ -56,65 +61,70 @@ export class Selector_Core {
 
 
 	/**
-	 * @param instance_id
-	 * @param manager_id
 	 * @returns {number}
 	 */
-	constructor(instance_id, manager_id) {
+	constructor($elem, config) {
 
-		this._instance_name = '';
-		this._instance_id = instance_id || Selector_Core._states.SINGLE_COMPONENT;
-		this._manager_id = manager_id || Selector_Core._states.SINGLE_COMPONENT;
+
+		window.UI_Template_Handler = UI_Template_Handler;
+
+		this._instance_id = 'CmpSC_' + (++Selector_Core.__idCounter);
+
+		this._config = {
+			category_key: '',
+			last_selected_ids: [],
+			searchable_fields: [
+				'first_name',
+				'last_name'
+			],
+
+			/**
+			 * Returns coincidence validation looking for <term> in all value keys of <item>.
+			 * @returns {boolean}
+			 */
+			filter: function (term, item, config) { // ?? Searchable fields
+
+				for (let key of config.searchable_fields) {
+
+					if (item[key].toString().toLowerCase().includes(term)) {
+						return true;
+					}
+				}
+			}
+		};
+
+		this.data = [];
+
+		this.set_config(config);
+
+		this.$cnt = $elem.parent();
 
 		this._ui_handler = new UI_Handler();
 		this._data_handler = new Data_Handler();
-		this._config = new Selector_Config();
+
+		this._is_open = false;
 
 		this._search_term = '';
 		this._selected_ids = [];
-
 		this._state = Selector_Core._states.WAITING_FOR_BINDING;
-		return this._state;
 	}
 
 
-	/**
-	 * Link the created component taking native Html component, categorized source data, and
-	 * configuration object with behaviour parameters. Then establishes the component <instanceName>.
-	 * @param source_cmp
-	 * @param data_src
-	 * @param config_obj
-	 * @returns {number}
-	 */
-	bind(source_cmp, data_src, config_obj) {
+	set_config(config) {
 
-		if (!this._ui_handler.set_native_component(source_cmp)) {
-			this._state = Selector_Core._states.INVALID_TARGET_COMPONENT;
-			return this._state;
-		}
-		this._ui_handler.set_config(this._config.ui_params);
-		this._instance_name = this._ui_handler.get_native_name() || 'nameless';
+		$.extend(true, this._config, config);
+	}
 
-		if (!this._config.assign(config_obj)) {
-			this._state = Selector_Core._states.INVALID_CONFIG_OBJECT;
-			return this._state;
-		}
 
-		if(!this._data_handler.data_seed(data_src)) {
-			this._state = Selector_Core._states.INVALID_DATA_SOURCE;
-			return this._state;
-		}
-		this._data_handler.set_config(this._config.data_params);
+	set_data(data) {
 
-		this._state = Selector_Core._states.BINDED;
-
-		return this._state;
+		this.data = data;
 	}
 
 
 	init() {
 
-		return this._init();
+		this._init();
 	}
 
 
@@ -141,11 +151,10 @@ export class Selector_Core {
 	/**
 	 * Establishes new search term and throw filter method.
 	 * @param text
-	 * @returns {*[]}
 	 */
 	set_search_term(text) {
 
-		return this._set_search_term(text);
+		this._set_search_term(text);
 	}
 
 
@@ -154,25 +163,35 @@ export class Selector_Core {
 	 */
 	set_selection(targetId) {
 
-		this._set_selection(typeof(targetId) != 'object' ? [targetId] : targetId);
+		this._set_selected_ids(typeof (targetId) != 'object' ? [targetId] : targetId);
 	}
 
 
-	/**
-	 * @param targetId
-	 */
-	select_item(targetId) {
+	select_items(targetId) {
 
-		this._select_item((targetId));
+		targetId = typeof (targetId) != 'object' ? [targetId] : targetId;
+
+		if (!this._selected_ids.length) {
+
+			this._set_selected_ids(targetId);
+
+		} else {
+
+			this._selection_add(targetId);
+		}
 	}
 
 
-	/**
-	 * @param targetId
-	 */
-	unselect_item(targetId) {
+	unselect_items(targetId) {
 
-		this._unselect_item(targetId);
+		if (typeof (targetId) == 'undefined') {
+
+			this._selection_remove_all();
+
+		} else {
+
+			this._selection_remove(typeof (targetId) != 'object' ? [targetId] : targetId);
+		}
 	}
 
 
@@ -180,25 +199,58 @@ export class Selector_Core {
 	 */
 	unselect_all() {
 
-		this._unselect_all();
+		this._selection_remove_all();
 	}
 
 
-	/**
-	 * @returns {string[]}
-	 */
-	get_item_groups() {
+	_selection_add(targetId) {
 
-		return this._data_handler.get_groups();
+		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+
+		let new_selection = [...this._selected_ids];
+
+		for (const id of ids) {
+
+			if (!new_selection.includes(id)) {
+
+				new_selection.push(id);
+			}
+		}
+
+		this._set_selected_ids(new_selection);
 	}
 
 
-	/**
-	 * @returns {*}
-	 */
-	get_native_value() {
+	_selection_remove(targetId) {
 
-		return this._ui_handler.get_native_value();
+		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+		let k;
+
+		let new_selection = [];
+
+		for (const id of ids) {
+
+			if ((k = this._selected_ids.indexOf(id)) === -1) {
+
+				new_selection.push(id);
+			}
+		}
+
+		this._set_selected_ids(new_selection);
+	}
+
+
+	_selection_remove_all() {
+
+		this._set_selected_ids([]);
+	}
+
+
+	_set_selected_ids(ids) {
+
+		this._selected_ids = [...ids];
+
+		this._refresh_selection();
 	}
 
 
@@ -228,108 +280,143 @@ export class Selector_Core {
 	 */
 	_init() {
 
-		if (this._state !== Selector_Core._states.BINDED) {
-			return this._state;
-		}
-
-		this._render();
+		this._render_init();
 
 		this._state = Selector_Core._states.RUNNING;
+	}
 
-		return this._state;
+
+	_render_init() {
+
+		let $_ = UI_Template_Handler.$get('cmp-selector-base');
+
+		this.elements = {};
+
+		$_.find('.ux-native-select').html(this.$cnt.html());
+		this.$cnt.html('').append($_);
+
+		this._set_events();
+
+		this._render_refresh();
+	}
+
+
+	_render_refresh () {
+
+		this._render_results();
+	}
+
+	_render_results () {
+
+		if (!this.isOpen()) {
+			return;
+		}
+
+		let $results = $('<div/>');
+
+		for (let i in this.data) {
+
+			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this.data[i], this._config])) {
+
+				$results.append(UI_Template_Handler.$get('cmp-selector-result', this.data[i]));
+			}
+		}
+
+		this.elements.results_cnt.html($results.html());
+	}
+
+
+	_set_events() {
+
+		this.$cnt.on('click', (e) => {
+			this._on_cnt_click(e);
+		});
+
+		this.$cnt.on('keyup', '.ux-selector-search-field', (e) => {
+			this._on_search_field_keyup(e);
+		});
+
+		$('body').on('click', (e) => {
+			this._on_body_click(e);
+		});
 	}
 
 
 	_render() {
 
-		this._ui_handler._render();
 	}
 
 
-	_refresh() {
+	_on_cnt_click() {
 
+		if (!this.isOpen()) {
+			this._open();
+		}
+	}
+
+	_on_body_click(e) {
+
+		if (this.isOpen()) {
+
+			//if (e.target !== this.$cnt[0]) {
+			if (e.target !== this.$cnt[0] && !$.contains(this.$cnt[0], e.target)) {
+				this._close();
+			}
+		}
+	}
+
+	_on_search_field_keyup (e) {
+
+		this.set_search_term(this.$cnt.find('input.ux-selector-search-field').val());
+
+		this._render_results();
+	}
+
+	isOpen() {
+
+		return this._is_open;
+	}
+
+	_render_ensure_dropdown_init () {
+
+		if (this._drop_down_initialized) {
+			return;
+		}
+
+		this.elements.dropdown_cnt = this.$cnt.find('.ux-selector-dropdown-cnt');
+		this.elements.dropdown_cnt.html(UI_Template_Handler.$get('cmp-selector-dropdown'));
+		this.elements.results_cnt = this.elements.dropdown_cnt.find('.ux-results-cnt');
+		this.elements.search_input = this.elements.dropdown_cnt.find('.ux-selector-search-field');
+
+		this._drop_down_initialized = true;
+	}
+
+	_open() {
+
+		this._render_ensure_dropdown_init();
+
+		this.$cnt.find('.ux-selector-dropdown-cnt').addClass('ui-selector-dropdown-expanded');
+		this._is_open = true;
+
+		this._render_refresh();
+
+		this.elements.search_input.focus();
 
 	}
 
+	_close() {
 
-	_dropdown_open() {
+		this.$cnt.find('.ux-selector-dropdown-cnt').removeClass('ui-selector-dropdown-expanded');
+		this._is_open = false;
 
-		this._ui_handler.open();
-	}
+		this.elements.results_cnt.empty();
 
-
-	_dropdown_close() {
-
-		this._ui_handler.close();
 	}
 
 
 	_set_search_term(text) {
 
 		this._search_term = (String(text)).toLowerCase();
-
-		// Paso previo para extraer sólo Id's
-		return this._data_handler.search(this._search_term);
-	}
-
-
-	/**
-	 * @param target_id
-	 * @private
-	 */
-	_set_selection(target_id) {
-
-		this._selected_ids = [...(typeof (target_id) == 'object' ? target_id : [target_id])];
-		this._refresh_selection();
-	}
-
-
-	/**
-	 * @param targetId
-	 */
-	_select_item(targetId) {
-
-		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
-
-		for (const id of ids) {
-
-			if (!this._selected_ids.includes(id)) {
-
-				this._selected_ids.push(id);
-			}
-		}
-
-		this._refresh_selection();
-	}
-
-
-	/**
-	 * @param targetId
-	 */
-	_unselect_item(targetId) {
-
-		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
-		let k;
-
-		for (const id of ids) {
-
-			if ((k = this._selected_ids.indexOf(id)) !== -1) {
-
-				this._selected_ids.splice(k, 1);
-			}
-		}
-
-		this._refresh_selection();
-	}
-
-
-	/**
-	 *
-	 */
-	_unselect_all() {
-
-		this._selected_ids = [];
-		this._refresh_selection();
 	}
 
 
@@ -339,32 +426,14 @@ export class Selector_Core {
 	}
 
 
-	_update_native_value() {
-
-		// this._ui_handler._update_native_value();
-	}
-
-
 	get id() {
 
 		return this._instance_id;
 	}
 
 
-	get name() {
-
-		return this._instance_name;
-	}
-
-
 	get state() {
 
 		return this._state;
-	}
-
-
-	get parent_id() {
-
-		return this._manager_id;
 	}
 }

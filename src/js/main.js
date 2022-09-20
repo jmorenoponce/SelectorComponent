@@ -4,17 +4,14 @@
 import {Selector_Manager} from './components/Selector/Selector_Manager';
 import {Utility} from "./utils/Utility";
 import {UI_Manager} from "./components/Selector/UI_Handler";
+import {Selector_Core} from "./components/Selector/Selector_Core";
+import {UI_Template_Handler} from "./components/Selector/UI_Template_Handler";
 
 
-let manager = new Selector_Manager();
 
-
-//  Users Selector Component
-let userSelector = manager.instance_create();
-let userData = Utility.load_from_file('./dist/data-src/users-src.json');
-
-userData.then(userData => {
-	userSelector.bind('.ux-selector-users', userData, {
+UI_Template_Handler.onLoaded(function () {
+	//  Users Selector Component
+	let userSelector = new Selector_Core($('#mySelector'), {
 		category_key: 'department',
 		last_selected_ids: [3, 20, 35, 48, 54, 8],
 		is_active: true,
@@ -23,8 +20,20 @@ userData.then(userData => {
 		searching_text: 'Buscando usuarios...',
 		search_results_none: 'No se encontraron usuarios para esta búsqueda',
 	});
-	userSelector.init();
+
+	window.uuuu = userSelector
+
+	let userData = Utility.load_from_file('./dist/data-src/users-src.json');
+
+	userData.then(userData => {
+		userSelector.set_data(userData.data);
+		userSelector.init();
+	});
+
+
 });
+
+
 
 
 // // Another Selector Component with errors for testing
