@@ -213,7 +213,6 @@ export class UI_Handler {
 		console.log($tmp.html());
 
 
-
 		$(UI_Handler._ux.DROPDOWN_TOOLS, $composite)
 			.append($tmp);
 

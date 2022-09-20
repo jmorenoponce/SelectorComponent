@@ -2,14 +2,13 @@
 
 
 import {Selector_Manager} from './components/Selector/Selector_Manager';
-import {Utility} from "./utils/Utility";
-import {UI_Manager} from "./components/Selector/UI_Handler";
 import {Selector_Core} from "./components/Selector/Selector_Core";
 import {UI_Template_Handler} from "./components/Selector/UI_Template_Handler";
+import {Utility} from "./utils/Utility";
 
 
+UI_Template_Handler.on_loaded(function () {
 
-UI_Template_Handler.onLoaded(function () {
 	//  Users Selector Component
 	let userSelector = new Selector_Core($('#mySelector'), {
 		category_key: 'department',
@@ -21,35 +20,13 @@ UI_Template_Handler.onLoaded(function () {
 		search_results_none: 'No se encontraron usuarios para esta búsqueda',
 	});
 
-	window.uuuu = userSelector
-
 	let userData = Utility.load_from_file('./dist/data-src/users-src.json');
 
 	userData.then(userData => {
 		userSelector.set_data(userData.data);
 		userSelector.init();
 	});
-
-
 });
-
-
-
-
-// // Another Selector Component with errors for testing
-// let wrongSelector = manager.instance_create();
-// let anotherData = Utility.load_from_file('./dist/data-src/another-src.json');
-//
-// anotherData.then(anotherData => {
-//
-// 	wrongSelector.bind('.ux-selector-another', anotherData, {
-// 		category_key: 'department',
-// 		is_active: true, 		// => Wrong property
-// 		is_editable: false,
-// 		placeholder: '45'	    	// => Wrong type
-// 	});
-// 	wrongSelector.init();
-// });
 
 
 // Some test for functionality

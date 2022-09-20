@@ -1,14 +1,11 @@
 'use strict';
 
 
-import {Selector_Config} from "./Selector_Config";
 import {Data_Handler} from "./Data_Handler";
 import {UI_Handler} from './UI_Handler';
 import {UI_Template_Handler} from "./UI_Template_Handler";
 
-/**
- *
- */
+
 export class Selector_Core {
 
 
@@ -61,12 +58,11 @@ export class Selector_Core {
 
 
 	/**
-	 * @returns {number}
+	 *
+	 * @param $elem
+	 * @param config
 	 */
 	constructor($elem, config) {
-
-
-		window.UI_Template_Handler = UI_Template_Handler;
 
 		this._instance_id = 'CmpSC_' + (++Selector_Core.__idCounter);
 
@@ -82,7 +78,7 @@ export class Selector_Core {
 			 * Returns coincidence validation looking for <term> in all value keys of <item>.
 			 * @returns {boolean}
 			 */
-			filter: function (term, item, config) { // ?? Searchable fields
+			filter: function (term, item, config) {
 
 				for (let key of config.searchable_fields) {
 
@@ -93,20 +89,25 @@ export class Selector_Core {
 			}
 		};
 
-		this.data = [];
-
 		this.set_config(config);
 
+		this.data = [];
 		this.$cnt = $elem.parent();
 
 		this._ui_handler = new UI_Handler();
 		this._data_handler = new Data_Handler();
 
 		this._is_open = false;
-
 		this._search_term = '';
 		this._selected_ids = [];
+
 		this._state = Selector_Core._states.WAITING_FOR_BINDING;
+	}
+
+
+	init() {
+
+		this._init();
 	}
 
 
@@ -119,12 +120,6 @@ export class Selector_Core {
 	set_data(data) {
 
 		this.data = data;
-	}
-
-
-	init() {
-
-		this._init();
 	}
 
 
@@ -148,6 +143,12 @@ export class Selector_Core {
 	}
 
 
+	is_open() {
+
+		return this._is_open;
+	}
+
+
 	/**
 	 * Establishes new search term and throw filter method.
 	 * @param text
@@ -167,6 +168,10 @@ export class Selector_Core {
 	}
 
 
+	/**
+	 *
+	 * @param targetId
+	 */
 	select_items(targetId) {
 
 		targetId = typeof (targetId) != 'object' ? [targetId] : targetId;
@@ -182,6 +187,10 @@ export class Selector_Core {
 	}
 
 
+	/**
+	 *
+	 * @param targetId
+	 */
 	unselect_items(targetId) {
 
 		if (typeof (targetId) == 'undefined') {
@@ -196,61 +205,11 @@ export class Selector_Core {
 
 
 	/**
+	 *
 	 */
 	unselect_all() {
 
 		this._selection_remove_all();
-	}
-
-
-	_selection_add(targetId) {
-
-		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
-
-		let new_selection = [...this._selected_ids];
-
-		for (const id of ids) {
-
-			if (!new_selection.includes(id)) {
-
-				new_selection.push(id);
-			}
-		}
-
-		this._set_selected_ids(new_selection);
-	}
-
-
-	_selection_remove(targetId) {
-
-		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
-		let k;
-
-		let new_selection = [];
-
-		for (const id of ids) {
-
-			if ((k = this._selected_ids.indexOf(id)) === -1) {
-
-				new_selection.push(id);
-			}
-		}
-
-		this._set_selected_ids(new_selection);
-	}
-
-
-	_selection_remove_all() {
-
-		this._set_selected_ids([]);
-	}
-
-
-	_set_selected_ids(ids) {
-
-		this._selected_ids = [...ids];
-
-		this._refresh_selection();
 	}
 
 
@@ -286,6 +245,10 @@ export class Selector_Core {
 	}
 
 
+	/**
+	 *
+	 * @private
+	 */
 	_render_init() {
 
 		let $_ = UI_Template_Handler.$get('cmp-selector-base');
@@ -301,14 +264,23 @@ export class Selector_Core {
 	}
 
 
-	_render_refresh () {
+	/**
+	 *
+	 * @private
+	 */
+	_render_refresh() {
 
 		this._render_results();
 	}
 
-	_render_results () {
 
-		if (!this.isOpen()) {
+	/**
+	 *
+	 * @private
+	 */
+	_render_results() {
+
+		if (!this.is_open()) {
 			return;
 		}
 
@@ -326,6 +298,80 @@ export class Selector_Core {
 	}
 
 
+	/**
+	 *
+	 * @param targetId
+	 * @private
+	 */
+	_selection_add(targetId) {
+
+		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+
+		let new_selection = [...this._selected_ids];
+
+		for (const id of ids) {
+
+			if (!new_selection.includes(id)) {
+
+				new_selection.push(id);
+			}
+		}
+
+		this._set_selected_ids(new_selection);
+	}
+
+
+	/**
+	 *
+	 * @param targetId
+	 * @private
+	 */
+	_selection_remove(targetId) {
+
+		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+		let k;
+
+		let new_selection = [];
+
+		for (const id of ids) {
+
+			if ((k = this._selected_ids.indexOf(id)) === -1) {
+
+				new_selection.push(id);
+			}
+		}
+
+		this._set_selected_ids(new_selection);
+	}
+
+
+	/**
+	 *
+	 * @private
+	 */
+	_selection_remove_all() {
+
+		this._set_selected_ids([]);
+	}
+
+
+	/**
+	 *
+	 * @param ids
+	 * @private
+	 */
+	_set_selected_ids(ids) {
+
+		this._selected_ids = [...ids];
+
+		this._refresh_selection();
+	}
+
+
+	/**
+	 *
+	 * @private
+	 */
 	_set_events() {
 
 		this.$cnt.on('click', (e) => {
@@ -342,21 +388,17 @@ export class Selector_Core {
 	}
 
 
-	_render() {
-
-	}
-
-
 	_on_cnt_click() {
 
-		if (!this.isOpen()) {
+		if (!this.is_open()) {
 			this._open();
 		}
 	}
 
+
 	_on_body_click(e) {
 
-		if (this.isOpen()) {
+		if (this.is_open()) {
 
 			//if (e.target !== this.$cnt[0]) {
 			if (e.target !== this.$cnt[0] && !$.contains(this.$cnt[0], e.target)) {
@@ -365,19 +407,16 @@ export class Selector_Core {
 		}
 	}
 
-	_on_search_field_keyup (e) {
+
+	_on_search_field_keyup(e) {
 
 		this.set_search_term(this.$cnt.find('input.ux-selector-search-field').val());
 
 		this._render_results();
 	}
 
-	isOpen() {
 
-		return this._is_open;
-	}
-
-	_render_ensure_dropdown_init () {
+	_render_ensure_dropdown_init() {
 
 		if (this._drop_down_initialized) {
 			return;
@@ -391,6 +430,7 @@ export class Selector_Core {
 		this._drop_down_initialized = true;
 	}
 
+
 	_open() {
 
 		this._render_ensure_dropdown_init();
@@ -401,8 +441,8 @@ export class Selector_Core {
 		this._render_refresh();
 
 		this.elements.search_input.focus();
-
 	}
+
 
 	_close() {
 

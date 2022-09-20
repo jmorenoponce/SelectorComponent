@@ -10,6 +10,7 @@ export class UI_Template_Handler {
 	static _tpl_path = './src/js/components/Selector/'
 	static _tpl_base_file = 'UI_Templates.hbs';
 
+
 	/**
 	 * @type {UI_Template_Handler|boolean}
 	 * @private
@@ -17,23 +18,35 @@ export class UI_Template_Handler {
 	static _instance = false;
 
 
-	static get (tpl_id, data) {
+	static get(tpl_id, data) {
 
 		if (!UI_Template_Handler._instance) {
 			UI_Template_Handler._instance = new UI_Template_Handler();
+			UI_Template_Handler._instance.loadTpls();
 		}
 
-		UI_Template_Handler._instance.loadTpls();
 
 		return UI_Template_Handler._instance.get_tpl_partial(tpl_id, data);
 	}
 
-	static $get (tpl_id, data) {
+
+	/**
+	 *
+	 * @param tpl_id
+	 * @param data
+	 * @return {*|jQuery.fn.init|jQuery|HTMLElement}
+	 */
+	static $get(tpl_id, data) {
 
 		return $(UI_Template_Handler.get(tpl_id, data));
 	}
 
-	static onLoaded (f) {
+
+	/**
+	 *
+	 * @param f
+	 */
+	static on_loaded(f) {
 
 		if (!UI_Template_Handler._instance) {
 			UI_Template_Handler._instance = new UI_Template_Handler();
@@ -50,14 +63,21 @@ export class UI_Template_Handler {
 	}
 
 
-	loadTpls (callback) {
+	/**
+	 *
+	 * @param callback
+	 */
+	loadTpls(callback) {
+
 		this._load_tpl_file(callback);
 	}
+
 
 	/**
 	 *
 	 * @param partial_id
-	 * @returns {*}
+	 * @param data
+	 * @return {*}
 	 */
 	get_tpl_partial(partial_id, data) {
 
@@ -73,9 +93,12 @@ export class UI_Template_Handler {
 
 		const _tmp_target = UI_Template_Handler._tpl_path + UI_Template_Handler._tpl_base_file;
 
-		$.get(_tmp_target).done((response) => {
+		$.get({
+			url: _tmp_target,
+			dataType: 'text'
+		}).done((response) => {
 
-			let tmpCollection = $(response).filter('[type="text/x-handlebars-template"]');
+			let tmpCollection = $(response).filter('[data-hello="1"]');
 
 			tmpCollection.each((k, v) => {
 

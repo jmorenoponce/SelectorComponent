@@ -89,7 +89,7 @@ export class Data_Handler {
 	}
 
 
-	list_reduce_to_key (key) {
+	list_reduce_to_key(key) {
 
 		let list = [];
 
@@ -101,7 +101,7 @@ export class Data_Handler {
 		return list;
 	}
 
-	list_reduce_to_key_unique (key) {
+	list_reduce_to_key_unique(key) {
 
 		let list = {};
 
