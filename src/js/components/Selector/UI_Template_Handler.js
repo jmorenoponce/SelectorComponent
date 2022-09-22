@@ -19,18 +19,32 @@ export class UI_Template_Handler {
 
 
 	/**
+	 *
+	 * @param callback
+	 */
+	static on_loaded(callback) {
+
+		if (!UI_Template_Handler._instance) {
+			UI_Template_Handler._instance = new UI_Template_Handler();
+		}
+
+		UI_Template_Handler._instance._load_tpl_file(callback);
+	}
+
+
+	/**
 	 * @param tpl_id
 	 * @param data
 	 * @returns {*}
 	 */
-	static get(tpl_id, data) {
+	static _get(tpl_id, data) {
 
 		if (!UI_Template_Handler._instance) {
 			UI_Template_Handler._instance = new UI_Template_Handler();
-			UI_Template_Handler._instance.load_tpl_file();
+			UI_Template_Handler._instance._load_tpl_file();
 		}
 
-		return UI_Template_Handler._instance.get_tpl_partial(tpl_id, data);
+		return UI_Template_Handler._instance._get_tpl_partial(tpl_id, data);
 	}
 
 
@@ -41,38 +55,13 @@ export class UI_Template_Handler {
 	 */
 	static $get(tpl_id, data) {
 
-		return $(UI_Template_Handler.get(tpl_id, data));
-	}
-
-
-	/**
-	 *
-	 * @param callback
-	 */
-	static on_loaded(callback) {
-
-		if (!UI_Template_Handler._instance) {
-			UI_Template_Handler._instance = new UI_Template_Handler();
-		}
-
-		UI_Template_Handler._instance.load_tpl_file(callback);
+		return $(UI_Template_Handler._get(tpl_id, data));
 	}
 
 
 	constructor() {
 
 		this._tpl_collection = {};
-		this._load_tpl_file();
-	}
-
-
-	/**
-	 *
-	 * @param callback
-	 */
-	load_tpl_file(callback) {
-
-		this._load_tpl_file(callback);
 	}
 
 
@@ -82,7 +71,7 @@ export class UI_Template_Handler {
 	 * @param data
 	 * @return {*}
 	 */
-	get_tpl_partial(partial_id, data) {
+	_get_tpl_partial(partial_id, data) {
 
 		return this._tpl_collection[partial_id](data);
 	}

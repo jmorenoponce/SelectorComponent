@@ -1,7 +1,6 @@
 'use strict';
 
 
-import {UI_Handler} from './UI_Handler';
 import {UI_Template_Handler} from "./UI_Template_Handler";
 
 
@@ -103,13 +102,13 @@ export class Selector_Core {
 
 	enable() {
 
-		this._ui_handler.enable();
+		// this._ui_handler.enable();
 	}
 
 
 	disable() {
 
-		this._ui_handler.disable();
+		// this._ui_handler.disable();
 	}
 
 
@@ -204,10 +203,11 @@ export class Selector_Core {
 	 */
 	_render_init() {
 
-		let $_ = UI_Template_Handler.$get('cmp-selector-base');
+		let $_tpl = UI_Template_Handler.$get('cmp-selector-base');
 
-		$_.find('.ux-native-select').html(this._$parent_cnt.html());
-		this._$parent_cnt.html('').append($_);
+		$_tpl.find('.ux-selector-native-field').html(this._$parent_cnt.html());
+
+		this._$parent_cnt.html('').append($_tpl);
 
 		this._set_events();
 
@@ -237,11 +237,11 @@ export class Selector_Core {
 
 		let $results = $('<div/>');
 
-		for (let i in this._data) {
+		for (let item in this._data) {
 
-			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this._data[i], this._config])) {
+			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this._data[item], this._config])) {
 
-				$results.append(UI_Template_Handler.$get('cmp-selector-result', this._data[i]));
+				$results.append(UI_Template_Handler.$get('cmp-selector-result', this._data[item]));
 			}
 		}
 

@@ -1,8 +1,8 @@
 'use strict';
 
 
-import {Selector_Core} from "./components/Selector/Selector_Core";
 import {UI_Template_Handler} from "./components/Selector/UI_Template_Handler";
+import {Selector_Core} from "./components/Selector/Selector_Core";
 import {Utility} from "./utils/Utility";
 
 
