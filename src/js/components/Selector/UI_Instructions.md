@@ -2,24 +2,6 @@
 
 *** Ux pointers
 
-    - ux-selector-native-field
-    
-    - ux-selector-cnt
-    - ux-selector-input
-    - ux-selector-input-field
-    - ux-selector-selections-list
-    - ux-selector-dropdown
-    - ux-selector-dropdown-trigger
-    
-    - ux-selector-search-field
-    - ux-selector-view-ungrouped
-    - ux-selector-view-grouped
-    - ux-selector-view-expanded
-    - ux-selector-results-selected
-    - ux-selector-results
-    - ux-selector-result-item
-    - ux-selector-group-item
-
 **** Ui classes    
 
     - ui-selector-enable
