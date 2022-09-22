@@ -1,4 +1,5 @@
 // MAIN.JS
+
 // Some test for functionality
 // const wait = setTimeout(printInfo, 300);
 
@@ -62,44 +63,45 @@ function printInfo() {
 
 
 // DATA_HANDLER
+
 /**
-	 * Returns an enumerated array containing the categories of data items.
-	 * @returns {string[]}
-	 */
-	get_groups() {
+ * Returns an enumerated array containing the categories of data items.
+ * @returns {string[]}
+ */
+get_groups() {
 
-		let groups = {};
+	let groups = {};
 
-		for (let item of this._data) {
+	for (let item of this._data) {
 
-			let group = item[this._config_obj.category_key];
-			groups[group] = 1;
-		}
-
-		return Object.keys(groups);
+		let group = item[this._config_obj.category_key];
+		groups[group] = 1;
 	}
 
+	return Object.keys(groups);
+}
 
-	list_reduce_to_key(key) {
 
-		let list = [];
+list_reduce_to_key(key) {
 
-		for (let item of this._data) {
+	let list = [];
 
-			list.push(item[key]);
-		}
+	for (let item of this._data) {
 
-		return list;
+		list.push(item[key]);
 	}
 
-	list_reduce_to_key_unique(key) {
+	return list;
+}
 
-		let list = {};
+list_reduce_to_key_unique(key) {
 
-		for (let item of this._data) {
+	let list = {};
 
-			list[item[key]] = 1;
-		}
+	for (let item of this._data) {
 
-		return Object.keys(list);
+		list[item[key]] = 1;
 	}
+
+	return Object.keys(list);
+}

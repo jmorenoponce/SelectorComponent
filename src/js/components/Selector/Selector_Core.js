@@ -10,30 +10,6 @@ export class Selector_Core {
 
 	static __id_counter = 0;
 
-	static _states = {
-
-		// Informative
-		WAITING_FOR_BINDING: 100,
-		SINGLE_COMPONENT: 110,
-
-		// Successful
-		BINDED: 200,
-		RUNNING: 210,
-		STOPPED: 220,
-		FINISHED: 230,
-
-		// Error
-		INVALID_TARGET_COMPONENT: 400,
-		UNKNOWN_TARGET_NAME: 410,
-		INVALID_CONFIG_OBJECT: 420,
-		INVALID_DATA_SOURCE: 430,
-		UNKNOWN_DATA_SOURCE: 440,
-
-		// Other
-		UNKNOWN_PROBLEM: 900
-	};
-
-
 	static _key_codes = {
 
 		BACKSPACE: 8,
@@ -68,11 +44,7 @@ export class Selector_Core {
 		this._config = {
 			category_key: '',
 			last_selected_ids: [],
-			searchable_fields: [
-				'first_name',
-				'last_name',
-				'department'
-			],
+			searchable_fields: [],
 
 			/**
 			 * Returns coincidence validation looking for <term> in all value keys of <item>.
@@ -90,20 +62,18 @@ export class Selector_Core {
 		};
 
 		this._$parent_cnt = $elem.parent();
-		this._elements = {};
 
+		this._elements = {};
 		this._data = [];
 
-		// this._ui_handler = new UI_Handler();
-
-		this._dropdown_initialized = false;
-		this._dropdown_opened = false;
 		this._search_term = '';
 		this._selected_ids = [];
 
-		this.set_config(config);
+		this._enabled = true;
+		this._dropdown_initialized = false;
+		this._dropdown_opened = false;
 
-		this._state = Selector_Core._states.WAITING_FOR_BINDING;
+		this.set_config(config);
 	}
 
 
@@ -134,20 +104,17 @@ export class Selector_Core {
 	enable() {
 
 		this._ui_handler.enable();
-		// return Selector_Core._STATES.RUNNING;
 	}
 
 
 	disable() {
 
 		this._ui_handler.disable();
-		// return Selector_Core._STATES.STOPPED;
 	}
 
 
 	destroy() {
 
-		// return Selector_Core._STATES.FINISHED;
 	}
 
 
@@ -222,34 +189,12 @@ export class Selector_Core {
 
 
 	/**
-	 * Returns the state key (description) from code value parameter, if empty value returns the actual state.
-	 * @param code_value
-	 * @returns {string}
-	 */
-	get_state_msg(code_value = this._state) {
-
-		return Object.keys(Selector_Core._states).find((key) => Selector_Core._states[key] === code_value);
-	}
-
-
-	/**
-	 * @returns {boolean}
-	 */
-	is_valid_state() {
-
-		return !(this._state < 200 || this._state >= 400);
-	}
-
-
-	/**
 	 * @returns {number}
 	 * @private
 	 */
 	_init() {
 
 		this._render_init();
-
-		this._state = Selector_Core._states.RUNNING;
 	}
 
 
@@ -416,7 +361,6 @@ export class Selector_Core {
 
 		if (this.is_open()) {
 
-			//if (e.target !== this.$cnt[0]) {
 			if (e.target !== this._$parent_cnt[0] && !$.contains(this._$parent_cnt[0], e.target)) {
 				this._close();
 			}

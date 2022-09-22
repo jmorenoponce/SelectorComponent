@@ -47,15 +47,15 @@ export class UI_Template_Handler {
 
 	/**
 	 *
-	 * @param f
+	 * @param callback
 	 */
-	static on_loaded(f) {
+	static on_loaded(callback) {
 
 		if (!UI_Template_Handler._instance) {
 			UI_Template_Handler._instance = new UI_Template_Handler();
 		}
 
-		UI_Template_Handler._instance.load_tpl_file(f);
+		UI_Template_Handler._instance.load_tpl_file(callback);
 	}
 
 

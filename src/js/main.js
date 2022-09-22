@@ -8,9 +8,13 @@ import {Utility} from "./utils/Utility";
 
 UI_Template_Handler.on_loaded(function () {
 
-	//  Users Selector Component
 	let userSelector = new Selector_Core($('#userSelector'), {
 		category_key: 'department',
+		searchable_fields: [
+			'first_name',
+			'last_name',
+			"department"
+		],
 		last_selected_ids: [3, 20, 35, 48, 54, 8],
 		is_active: true,
 		is_editable: true,
