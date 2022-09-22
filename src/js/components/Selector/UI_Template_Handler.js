@@ -18,20 +18,23 @@ export class UI_Template_Handler {
 	static _instance = false;
 
 
+	/**
+	 * @param tpl_id
+	 * @param data
+	 * @returns {*}
+	 */
 	static get(tpl_id, data) {
 
 		if (!UI_Template_Handler._instance) {
 			UI_Template_Handler._instance = new UI_Template_Handler();
-			UI_Template_Handler._instance.loadTpls();
+			UI_Template_Handler._instance.load_tpl_file();
 		}
-
 
 		return UI_Template_Handler._instance.get_tpl_partial(tpl_id, data);
 	}
 
 
 	/**
-	 *
 	 * @param tpl_id
 	 * @param data
 	 * @return {*|jQuery.fn.init|jQuery|HTMLElement}
@@ -52,7 +55,7 @@ export class UI_Template_Handler {
 			UI_Template_Handler._instance = new UI_Template_Handler();
 		}
 
-		UI_Template_Handler._instance.loadTpls(f);
+		UI_Template_Handler._instance.load_tpl_file(f);
 	}
 
 
@@ -67,7 +70,7 @@ export class UI_Template_Handler {
 	 *
 	 * @param callback
 	 */
-	loadTpls(callback) {
+	load_tpl_file(callback) {
 
 		this._load_tpl_file(callback);
 	}
@@ -98,7 +101,7 @@ export class UI_Template_Handler {
 			dataType: 'text'
 		}).done((response) => {
 
-			let tmpCollection = $(response).filter('[data-hello="1"]');
+			let tmpCollection = $(response).filter('[type="text/x-handlebars-template"]');
 
 			tmpCollection.each((k, v) => {
 

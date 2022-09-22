@@ -1,7 +1,6 @@
 'use strict';
 
 
-import {Data_Handler} from "./Data_Handler";
 import {UI_Handler} from './UI_Handler';
 import {UI_Template_Handler} from "./UI_Template_Handler";
 
@@ -9,7 +8,7 @@ import {UI_Template_Handler} from "./UI_Template_Handler";
 export class Selector_Core {
 
 
-	static __idCounter = 0;
+	static __id_counter = 0;
 
 	static _states = {
 
@@ -64,14 +63,15 @@ export class Selector_Core {
 	 */
 	constructor($elem, config) {
 
-		this._instance_id = 'CmpSC_' + (++Selector_Core.__idCounter);
+		this._instance_id = 'CmpSC_' + (++Selector_Core.__id_counter);
 
 		this._config = {
 			category_key: '',
 			last_selected_ids: [],
 			searchable_fields: [
 				'first_name',
-				'last_name'
+				'last_name',
+				'department'
 			],
 
 			/**
@@ -89,17 +89,19 @@ export class Selector_Core {
 			}
 		};
 
-		this.set_config(config);
+		this._$parent_cnt = $elem.parent();
+		this._elements = {};
 
-		this.data = [];
-		this.$cnt = $elem.parent();
+		this._data = [];
 
-		this._ui_handler = new UI_Handler();
-		this._data_handler = new Data_Handler();
+		// this._ui_handler = new UI_Handler();
 
-		this._is_open = false;
+		this._dropdown_initialized = false;
+		this._dropdown_opened = false;
 		this._search_term = '';
 		this._selected_ids = [];
+
+		this.set_config(config);
 
 		this._state = Selector_Core._states.WAITING_FOR_BINDING;
 	}
@@ -111,15 +113,21 @@ export class Selector_Core {
 	}
 
 
+	/**
+	 * @param config
+	 */
 	set_config(config) {
 
 		$.extend(true, this._config, config);
 	}
 
 
+	/**
+	 * @param data
+	 */
 	set_data(data) {
 
-		this.data = data;
+		this._data = data;
 	}
 
 
@@ -145,7 +153,7 @@ export class Selector_Core {
 
 	is_open() {
 
-		return this._is_open;
+		return this._dropdown_opened;
 	}
 
 
@@ -160,46 +168,46 @@ export class Selector_Core {
 
 
 	/**
-	 * @param targetId
+	 * @param target_id
 	 */
-	set_selection(targetId) {
+	set_selection(target_id) {
 
-		this._set_selected_ids(typeof (targetId) != 'object' ? [targetId] : targetId);
+		this._set_selected_ids(typeof (target_id) != 'object' ? [target_id] : target_id);
 	}
 
 
 	/**
 	 *
-	 * @param targetId
+	 * @param target_id
 	 */
-	select_items(targetId) {
+	select_items(target_id) {
 
-		targetId = typeof (targetId) != 'object' ? [targetId] : targetId;
+		target_id = typeof (target_id) != 'object' ? [target_id] : target_id;
 
 		if (!this._selected_ids.length) {
 
-			this._set_selected_ids(targetId);
+			this._set_selected_ids(target_id);
 
 		} else {
 
-			this._selection_add(targetId);
+			this._selection_add(target_id);
 		}
 	}
 
 
 	/**
 	 *
-	 * @param targetId
+	 * @param target_id
 	 */
-	unselect_items(targetId) {
+	unselect_items(target_id) {
 
-		if (typeof (targetId) == 'undefined') {
+		if (typeof (target_id) == 'undefined') {
 
 			this._selection_remove_all();
 
 		} else {
 
-			this._selection_remove(typeof (targetId) != 'object' ? [targetId] : targetId);
+			this._selection_remove(typeof (target_id) != 'object' ? [target_id] : target_id);
 		}
 	}
 
@@ -253,10 +261,8 @@ export class Selector_Core {
 
 		let $_ = UI_Template_Handler.$get('cmp-selector-base');
 
-		this.elements = {};
-
-		$_.find('.ux-native-select').html(this.$cnt.html());
-		this.$cnt.html('').append($_);
+		$_.find('.ux-native-select').html(this._$parent_cnt.html());
+		this._$parent_cnt.html('').append($_);
 
 		this._set_events();
 
@@ -286,26 +292,26 @@ export class Selector_Core {
 
 		let $results = $('<div/>');
 
-		for (let i in this.data) {
+		for (let i in this._data) {
 
-			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this.data[i], this._config])) {
+			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this._data[i], this._config])) {
 
-				$results.append(UI_Template_Handler.$get('cmp-selector-result', this.data[i]));
+				$results.append(UI_Template_Handler.$get('cmp-selector-result', this._data[i]));
 			}
 		}
 
-		this.elements.results_cnt.html($results.html());
+		this._elements.results_cnt.html($results.html());
 	}
 
 
 	/**
 	 *
-	 * @param targetId
+	 * @param target_id
 	 * @private
 	 */
-	_selection_add(targetId) {
+	_selection_add(target_id) {
 
-		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+		const ids = typeof (target_id) == 'object' ? target_id : [target_id];
 
 		let new_selection = [...this._selected_ids];
 
@@ -323,12 +329,12 @@ export class Selector_Core {
 
 	/**
 	 *
-	 * @param targetId
+	 * @param target_id
 	 * @private
 	 */
-	_selection_remove(targetId) {
+	_selection_remove(target_id) {
 
-		const ids = typeof (targetId) == 'object' ? targetId : [targetId];
+		const ids = typeof (target_id) == 'object' ? target_id : [target_id];
 		let k;
 
 		let new_selection = [];
@@ -374,11 +380,11 @@ export class Selector_Core {
 	 */
 	_set_events() {
 
-		this.$cnt.on('click', (e) => {
+		this._$parent_cnt.on('click', (e) => {
 			this._on_cnt_click(e);
 		});
 
-		this.$cnt.on('keyup', '.ux-selector-search-field', (e) => {
+		this._$parent_cnt.on('keyup', '.ux-selector-search-field', (e) => {
 			this._on_search_field_keyup(e);
 		});
 
@@ -388,78 +394,113 @@ export class Selector_Core {
 	}
 
 
+	/**
+	 *
+	 * @private
+	 */
 	_on_cnt_click() {
 
 		if (!this.is_open()) {
+
 			this._open();
 		}
 	}
 
 
+	/**
+	 *
+	 * @param e
+	 * @private
+	 */
 	_on_body_click(e) {
 
 		if (this.is_open()) {
 
 			//if (e.target !== this.$cnt[0]) {
-			if (e.target !== this.$cnt[0] && !$.contains(this.$cnt[0], e.target)) {
+			if (e.target !== this._$parent_cnt[0] && !$.contains(this._$parent_cnt[0], e.target)) {
 				this._close();
 			}
 		}
 	}
 
 
+	/**
+	 *
+	 * @param e
+	 * @private
+	 */
 	_on_search_field_keyup(e) {
 
-		this.set_search_term(this.$cnt.find('input.ux-selector-search-field').val());
+		this.set_search_term(this._$parent_cnt.find('input.ux-selector-search-field').val());
 
 		this._render_results();
 	}
 
 
+	/**
+	 *
+	 * @private
+	 */
 	_render_ensure_dropdown_init() {
 
-		if (this._drop_down_initialized) {
+		if (this._dropdown_initialized) {
 			return;
 		}
 
-		this.elements.dropdown_cnt = this.$cnt.find('.ux-selector-dropdown-cnt');
-		this.elements.dropdown_cnt.html(UI_Template_Handler.$get('cmp-selector-dropdown'));
-		this.elements.results_cnt = this.elements.dropdown_cnt.find('.ux-results-cnt');
-		this.elements.search_input = this.elements.dropdown_cnt.find('.ux-selector-search-field');
+		this._elements.dropdown_cnt = this._$parent_cnt.find('.ux-selector-dropdown-cnt');
+		this._elements.dropdown_cnt.html(UI_Template_Handler.$get('cmp-selector-dropdown'));
+		this._elements.results_cnt = this._elements.dropdown_cnt.find('.ux-results-cnt');
+		this._elements.search_input = this._elements.dropdown_cnt.find('.ux-selector-search-field');
 
-		this._drop_down_initialized = true;
+		this._dropdown_initialized = true;
 	}
 
 
+	/**
+	 *
+	 * @private
+	 */
 	_open() {
 
 		this._render_ensure_dropdown_init();
 
-		this.$cnt.find('.ux-selector-dropdown-cnt').addClass('ui-selector-dropdown-expanded');
-		this._is_open = true;
+		this._$parent_cnt.find('.ux-selector-dropdown-cnt').addClass('ui-selector-dropdown-expanded');
+		this._dropdown_opened = true;
 
 		this._render_refresh();
 
-		this.elements.search_input.focus();
+		this._elements.search_input.focus();
 	}
 
 
+	/**
+	 *
+	 * @private
+	 */
 	_close() {
 
-		this.$cnt.find('.ux-selector-dropdown-cnt').removeClass('ui-selector-dropdown-expanded');
-		this._is_open = false;
+		this._$parent_cnt.find('.ux-selector-dropdown-cnt').removeClass('ui-selector-dropdown-expanded');
+		this._dropdown_opened = false;
 
-		this.elements.results_cnt.empty();
-
+		this._elements.results_cnt.empty();
 	}
 
 
+	/**
+	 *
+	 * @param text
+	 * @private
+	 */
 	_set_search_term(text) {
 
 		this._search_term = (String(text)).toLowerCase();
 	}
 
 
+	/**
+	 *
+	 * @private
+	 */
 	_refresh_selection() {
 
 		// this._update_native_value();
