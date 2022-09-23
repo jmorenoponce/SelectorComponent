@@ -70,7 +70,7 @@ export class Selector_Core {
 
 		this._enabled = true;
 		this._dropdown_initialized = false;
-		this._dropdown_opened = false;
+		this._dropdown_is_open = false;
 
 		this.set_config(config);
 	}
@@ -120,7 +120,7 @@ export class Selector_Core {
 
 	is_open() {
 
-		return this._dropdown_opened;
+		return this._dropdown_is_open;
 	}
 
 
@@ -410,7 +410,7 @@ export class Selector_Core {
 		this._render_ensure_dropdown_init();
 
 		this._$parent_cnt.find('.ux-selector-dropdown-cnt').addClass('ui-selector-dropdown-expanded');
-		this._dropdown_opened = true;
+		this._dropdown_is_open = true;
 
 		this._render_refresh();
 
@@ -425,7 +425,7 @@ export class Selector_Core {
 	_close() {
 
 		this._$parent_cnt.find('.ux-selector-dropdown-cnt').removeClass('ui-selector-dropdown-expanded');
-		this._dropdown_opened = false;
+		this._dropdown_is_open = false;
 
 		this._elements.results_cnt.empty();
 	}
