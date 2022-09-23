@@ -60,6 +60,7 @@ export class Selector_Core {
 			}
 		};
 
+		this._$native_field = $elem;
 		this._$parent_cnt = $elem.parent();
 
 		this._elements = {};
@@ -68,7 +69,6 @@ export class Selector_Core {
 		this._search_term = '';
 		this._selected_ids = [];
 
-		this._enabled = true;
 		this._dropdown_initialized = false;
 		this._dropdown_is_open = false;
 
@@ -100,30 +100,6 @@ export class Selector_Core {
 	}
 
 
-	enable() {
-
-		// this._ui_handler.enable();
-	}
-
-
-	disable() {
-
-		// this._ui_handler.disable();
-	}
-
-
-	destroy() {
-
-
-	}
-
-
-	is_open() {
-
-		return this._dropdown_is_open;
-	}
-
-
 	/**
 	 * Establishes new search term and throw filter method.
 	 * @param text
@@ -131,6 +107,8 @@ export class Selector_Core {
 	set_search_term(text) {
 
 		this._set_search_term(text);
+
+		this.select_items([1, 2, 3]);
 	}
 
 
@@ -185,6 +163,26 @@ export class Selector_Core {
 	unselect_all() {
 
 		this._selection_remove_all();
+	}
+
+
+	enable() {
+
+		this._config.is_active = true;
+		this._set_events();
+	}
+
+
+	disable() {
+
+		this._config.is_active = false;
+		this._set_events();
+	}
+
+
+	is_open() {
+
+		return this._dropdown_is_open;
 	}
 
 
@@ -247,6 +245,26 @@ export class Selector_Core {
 		}
 
 		this._elements.results_cnt.html($results.html());
+	}
+
+
+	/**
+	 *
+	 * @private
+	 */
+	_render_ensure_dropdown_init() {
+
+		if (this._dropdown_initialized) {
+			return;
+		}
+
+		this._elements.dropdown_cnt = this._$parent_cnt.find('.ux-selector-dropdown-cnt');
+		this._elements.dropdown_cnt.html(UI_Template_Handler.$get('cmp-selector-dropdown'));
+
+		this._elements.search_input = this._elements.dropdown_cnt.find('.ux-selector-search-field');
+		this._elements.results_cnt = this._elements.dropdown_cnt.find('.ux-results-cnt');
+
+		this._dropdown_initialized = true;
 	}
 
 
@@ -322,13 +340,44 @@ export class Selector_Core {
 
 	/**
 	 *
+	 * @param text
+	 * @private
+	 */
+	_set_search_term(text) {
+
+		this._search_term = (String(text)).toLowerCase();
+	}
+
+
+	/**
+	 *
+	 * @private
+	 */
+	_refresh_selection() {
+
+		console.log(this._$native_field.val());
+
+		// e.options[e.selectedIndex].value
+
+	}
+
+
+	/**
+	 *
 	 * @private
 	 */
 	_set_events() {
 
-		this._$parent_cnt.on('click', (e) => {
-			this._on_cnt_click(e);
-		});
+		if (this._config.is_active) {
+
+			this._$parent_cnt.on('click', (e) => {
+				this._on_cnt_click(e);
+			});
+
+		} else {
+
+			this._$parent_cnt.unbind('click');
+		}
 
 		this._$parent_cnt.on('keyup', '.ux-selector-search-field', (e) => {
 			this._on_search_field_keyup(e);
@@ -363,6 +412,7 @@ export class Selector_Core {
 		if (this.is_open()) {
 
 			if (e.target !== this._$parent_cnt[0] && !$.contains(this._$parent_cnt[0], e.target)) {
+
 				this._close();
 			}
 		}
@@ -379,25 +429,6 @@ export class Selector_Core {
 		this.set_search_term(this._$parent_cnt.find('input.ux-selector-search-field').val());
 
 		this._render_results();
-	}
-
-
-	/**
-	 *
-	 * @private
-	 */
-	_render_ensure_dropdown_init() {
-
-		if (this._dropdown_initialized) {
-			return;
-		}
-
-		this._elements.dropdown_cnt = this._$parent_cnt.find('.ux-selector-dropdown-cnt');
-		this._elements.dropdown_cnt.html(UI_Template_Handler.$get('cmp-selector-dropdown'));
-		this._elements.results_cnt = this._elements.dropdown_cnt.find('.ux-results-cnt');
-		this._elements.search_input = this._elements.dropdown_cnt.find('.ux-selector-search-field');
-
-		this._dropdown_initialized = true;
 	}
 
 
@@ -428,27 +459,6 @@ export class Selector_Core {
 		this._dropdown_is_open = false;
 
 		this._elements.results_cnt.empty();
-	}
-
-
-	/**
-	 *
-	 * @param text
-	 * @private
-	 */
-	_set_search_term(text) {
-
-		this._search_term = (String(text)).toLowerCase();
-	}
-
-
-	/**
-	 *
-	 * @private
-	 */
-	_refresh_selection() {
-
-		// this._update_native_value();
 	}
 
 

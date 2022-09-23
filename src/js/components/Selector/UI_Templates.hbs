@@ -8,7 +8,7 @@
 			<div class="selector-input-cnt ux-selector-input">
 				<div class="inner flex-center">
 
-					<input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="%placeholder%"/>
+					<input class="input-field ux-selector-input-field" disabled="disabled" type="text" placeholder="{{ input_placeholder }}"/>
 
 					<div class="badge badge-circle ml-5 ux-popover-trigger">
 						<span class="badge-text" data-param="selections-amount">24</span>
@@ -44,7 +44,22 @@
 			</div>
 
 			<div class="view-mode list-item">
-				<div class="btn-toolbar flex-justify-space-between"></div>
+				<div class="btn-toolbar flex-justify-space-between">
+
+					<div class="btn-group">
+						<div class="btn ux-selector-view-ungrouped ui-active">
+							<i class="btn-icon">~</i>
+						</div>
+
+						<div class="btn ux-selector-view-grouped">
+							<i class="btn-icon">~</i>
+						</div>
+					</div>
+
+					<div class="btn ux-selector-view-expanded">
+						<i class="btn-icon">~</i>
+					</div>
+				</div>
 			</div>
 		</div>
 
