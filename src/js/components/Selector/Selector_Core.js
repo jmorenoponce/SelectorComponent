@@ -38,8 +38,6 @@ export class Selector_Core {
 	 */
 	constructor($elem, config) {
 
-		this._instance_id = 'CmpSC_' + (++Selector_Core.__id_counter);
-
 		this._config = {
 			category_key: '',
 			last_selected_ids: [],
@@ -60,17 +58,19 @@ export class Selector_Core {
 			}
 		};
 
+		this._instance_id = 'CmpSC_' + (++Selector_Core.__id_counter);
+
 		this._$native_field = $elem;
 		this._$parent_cnt = $elem.parent();
 
 		this._elements = {};
 		this._data = [];
 
-		this._search_term = '';
-		this._selected_ids = [];
-
 		this._dropdown_initialized = false;
 		this._dropdown_is_open = false;
+
+		this._search_term = '';
+		this._selected_ids = [];
 
 		this.set_config(config);
 	}
@@ -97,18 +97,6 @@ export class Selector_Core {
 	set_data(data) {
 
 		this._data = data;
-	}
-
-
-	/**
-	 * Establishes new search term and throw filter method.
-	 * @param text
-	 */
-	set_search_term(text) {
-
-		this._set_search_term(text);
-
-		this.select_items([1, 2, 3]);
 	}
 
 
@@ -163,6 +151,18 @@ export class Selector_Core {
 	unselect_all() {
 
 		this._selection_remove_all();
+	}
+
+
+	/**
+	 * Establishes new search term and throw filter method.
+	 * @param text
+	 */
+	set_search_term(text) {
+
+		this._set_search_term(text);
+
+		this.select_items([1, 2, 3]);
 	}
 
 
@@ -357,8 +357,7 @@ export class Selector_Core {
 
 		console.log(this._$native_field.val());
 
-		// e.options[e.selectedIndex].value
-
+		this._$native_field.val(this._selected_ids);
 	}
 
 
@@ -368,16 +367,12 @@ export class Selector_Core {
 	 */
 	_set_events() {
 
-		if (this._config.is_active) {
+		this._$parent_cnt.on('click', (e) => {
 
-			this._$parent_cnt.on('click', (e) => {
+			if (this._config.is_active) {
 				this._on_cnt_click(e);
-			});
-
-		} else {
-
-			this._$parent_cnt.unbind('click');
-		}
+			}
+		});
 
 		this._$parent_cnt.on('keyup', '.ux-selector-search-field', (e) => {
 			this._on_search_field_keyup(e);

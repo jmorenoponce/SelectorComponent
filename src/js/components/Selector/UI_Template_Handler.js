@@ -35,7 +35,7 @@ export class UI_Template_Handler {
 	/**
 	 * @param tpl_id
 	 * @param data
-	 * @returns {*}
+	 * @returns {*}e
 	 */
 	static _get(tpl_id, data) {
 
