@@ -9,30 +9,23 @@ export class Selector_Core {
 
 	static __id_counter = 0;
 
-	static _key_codes = {
+	static _tpl_pointers = {
 
-		BACKSPACE: 8,
-		TAB: 9,
-		ENTER: 13,
-		SHIFT: 16,
-		CTRL: 17,
-		ALT: 18,
-		ESC: 27,
-		SPACE: 32,
-		PAGE_UP: 33,
-		PAGE_DOWN: 34,
-		END: 35,
-		HOME: 36,
-		LEFT: 37,
-		UP: 38,
-		RIGHT: 39,
-		DOWN: 40,
-		DELETE: 46
+		selector_base: 'cmp-selector-base',
+		selector_dropdown: 'cmp-selector-dropdown',
+		selector_result_item: 'cmp-selector-result-item'
 	}
 
+	static _ux_pointers = {
+
+		native_field_cnt: '.ux-selector-native-field-cnt',
+		input_field: '.ux-selector-input-field',
+		dropdown_trigger: '.ux-selector-dropdown-trigger',
+		dropdown_cnt: '.ux-selector-dropdown-cnt',
+		search_field: '.ux-selector-search-field'
+	}
 
 	/**
-	 *
 	 * @param $elem
 	 * @param config
 	 */
@@ -40,8 +33,13 @@ export class Selector_Core {
 
 		this._config = {
 			category_key: '',
-			last_selected_ids: [],
 			searchable_fields: [],
+			last_selected_ids: [],
+			is_active: true,
+			is_editable: true,
+			placeholder: 'Seleccionar...',
+			searching_text: 'Buscando...',
+			search_results_none: 'No se encontraron coincidencias para esta búsqueda',
 
 			/**
 			 * Returns coincidence validation looking for <term> in all value keys of <item>.
@@ -60,7 +58,7 @@ export class Selector_Core {
 
 		this._instance_id = 'CmpSC_' + (++Selector_Core.__id_counter);
 
-		this._$native_field = $elem;
+		this._$original_field = $elem;
 		this._$parent_cnt = $elem.parent();
 
 		this._elements = {};
@@ -161,8 +159,6 @@ export class Selector_Core {
 	set_search_term(text) {
 
 		this._set_search_term(text);
-
-		this.select_items([1, 2, 3]);
 	}
 
 
@@ -202,9 +198,11 @@ export class Selector_Core {
 	 */
 	_render_init() {
 
-		let $_tpl = UI_Template_Handler.$get('cmp-selector-base');
+		let $_tpl = UI_Template_Handler.$get(Selector_Core._tpl_pointers.selector_base, {
+			input_placeholder: this._config.placeholder,
+		});
 
-		$_tpl.find('.ux-selector-native-field').html(this._$parent_cnt.html());
+		$_tpl.find(Selector_Core._ux_pointers.native_field_cnt).html(this._$parent_cnt.html());
 
 		this._$parent_cnt.html('').append($_tpl);
 
@@ -240,7 +238,7 @@ export class Selector_Core {
 
 			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this._data[item], this._config])) {
 
-				$results.append(UI_Template_Handler.$get('cmp-selector-result', this._data[item]));
+				$results.append(UI_Template_Handler.$get(Selector_Core._tpl_pointers.selector_result_item, this._data[item]));
 			}
 		}
 
@@ -258,8 +256,10 @@ export class Selector_Core {
 			return;
 		}
 
-		this._elements.dropdown_cnt = this._$parent_cnt.find('.ux-selector-dropdown-cnt');
-		this._elements.dropdown_cnt.html(UI_Template_Handler.$get('cmp-selector-dropdown'));
+		this._elements.dropdown_cnt = this._$parent_cnt.find(Selector_Core._ux_pointers.dropdown_cnt);
+		this._elements.dropdown_cnt.html(UI_Template_Handler.$get(Selector_Core._tpl_pointers.selector_dropdown, {
+
+		}));
 
 		this._elements.search_input = this._elements.dropdown_cnt.find('.ux-selector-search-field');
 		this._elements.results_cnt = this._elements.dropdown_cnt.find('.ux-results-cnt');
@@ -355,9 +355,9 @@ export class Selector_Core {
 	 */
 	_refresh_selection() {
 
-		console.log(this._$native_field.val());
+		console.log(this._$original_field.val());
 
-		this._$native_field.val(this._selected_ids);
+		this._$original_field.val(this._selected_ids);
 	}
 
 
@@ -367,14 +367,11 @@ export class Selector_Core {
 	 */
 	_set_events() {
 
-		this._$parent_cnt.on('click', (e) => {
-
-			if (this._config.is_active) {
-				this._on_cnt_click(e);
-			}
+		$(Selector_Core._ux_pointers.input_field + ', ' + Selector_Core._ux_pointers.dropdown_trigger).on('click', (e) => {
+			this._on_input_field_click(e);
 		});
 
-		this._$parent_cnt.on('keyup', '.ux-selector-search-field', (e) => {
+		this._$parent_cnt.on('keyup', Selector_Core._ux_pointers.search_field, (e) => {
 			this._on_search_field_keyup(e);
 		});
 
@@ -388,11 +385,12 @@ export class Selector_Core {
 	 *
 	 * @private
 	 */
-	_on_cnt_click() {
+	_on_input_field_click() {
 
-		if (!this.is_open()) {
-
+		if (!this.is_open() && this._config.is_active) {
 			this._open();
+		} else {
+			this._close();
 		}
 	}
 
@@ -421,7 +419,7 @@ export class Selector_Core {
 	 */
 	_on_search_field_keyup(e) {
 
-		this.set_search_term(this._$parent_cnt.find('input.ux-selector-search-field').val());
+		this.set_search_term(this._$parent_cnt.find(Selector_Core._ux_pointers.search_field).val());
 
 		this._render_results();
 	}
@@ -460,11 +458,5 @@ export class Selector_Core {
 	get id() {
 
 		return this._instance_id;
-	}
-
-
-	get state() {
-
-		return this._state;
 	}
 }
