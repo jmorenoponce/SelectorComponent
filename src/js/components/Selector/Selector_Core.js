@@ -1,36 +1,33 @@
 'use strict';
 
-
 import {UI_Template_Handler} from "./UI_Template_Handler";
-
 
 export class Selector_Core {
 
-
 	static __id_counter = 0;
-
 
 	static _tpl_pointers = {
 
 		SELECTOR_BASE: 			'cmp-selector-base',
 		SELECTOR_DROPDOWN: 		'cmp-selector-dropdown',
-		SELECTOR_RESULT_ITEM: 	'cmp-selector-result-item'
+		SELECTOR_RESULT_ITEM: 	'cmp-selector-result-item',
+		SELECTOR_RESULT_GROUP:	'cmp-selector-result-group',
 	}
-
 
 	static _ux_pointers = {
 
-		ORIGINAL_FIELD_CNT: 	'.ux-selector-original-field-cnt',
+		NATIVE_FIELD_CNT: 		'.ux-selector-original-field-cnt',
 		INPUT_FIELD: 			'.ux-selector-input-field',
 		DROPDOWN_TRIGGER: 		'.ux-selector-dropdown-trigger',
 		DROPDOWN_CNT: 			'.ux-selector-dropdown-cnt',
-		SEARCH_FIELD: 			'.ux-selector-search-field'
+		SEARCH_FIELD: 			'.ux-selector-search-field',
+		SELECTED_CNT:			'.ux-selector-results-selected',
+		RESULTS_CNT:			'.ux-results-cnt'
 	}
-
 
 	static _ui_modifiers = {
 
-		DROPDOWN_EXPANDED: 'ui-selector-dropdown-expanded'
+		DROPDOWN_OPENED: 		'ui-selector-dropdown-opened'
 	}
 
 
@@ -41,14 +38,14 @@ export class Selector_Core {
 	constructor($elem, config) {
 
 		this._config = {
-			category_key: '',
-			searchable_fields: [],
-			last_selected_ids: [],
-			is_active: true,
-			is_editable: true,
-			placeholder: 'Seleccionar...',
-			searching_text: 'Buscar...',
-			search_results_none: 'No se encontraron coincidencias para esta búsqueda',
+			category_key: 		'',
+			searchable_fields: 	[],
+			last_selected_ids: 	[],
+			active: 			true,
+			editable: 		true,
+			placeholder: 		'Seleccionar...',
+			searching_text: 	'Buscar...',
+			search_no_results: 	'No se encontraron coincidencias para esta búsqueda',
 
 			/**
 			 * Returns coincidence validation looking for <term> in all value keys of <searchable_fields>
@@ -67,14 +64,20 @@ export class Selector_Core {
 
 		this._instance_id = 'CmpSC_' + (++Selector_Core.__id_counter);
 
-		this._$original_field = $elem;
-		this._$original_parent_cnt = $elem.parent();
+		this._$native_field = $elem;
+		this._$native_parent_cnt = $elem.parent();
 
-		this._elements = {};
+		this._elements = {
+			dropdown_cnt: 		{},
+			search_field: 		{},
+			selected_cnt: 		{},
+			results_cnt: 		{}
+		};
+
 		this._data = [];
 
 		this._dropdown_initialized = false;
-		this._dropdown_is_open = false;
+		this._dropdown_opened = false;
 
 		this._search_term = '';
 		this._selected_ids = [];
@@ -91,15 +94,13 @@ export class Selector_Core {
 
 	activate() {
 
-		this._config.is_active = true;
-		this._set_events();
+		this._config.active = true;
 	}
 
 
 	deactivate() {
 
-		this._config.is_active = false;
-		this._set_events();
+		this._config.active = false;
 	}
 
 
@@ -189,6 +190,15 @@ export class Selector_Core {
 
 
 	/**
+	 * @returns {string}
+	 */
+	get id() {
+
+		return this._instance_id;
+	}
+
+
+	/**
 	 * @returns {number}
 	 * @private
 	 */
@@ -208,9 +218,9 @@ export class Selector_Core {
 			input_placeholder: this._config.placeholder,
 		});
 
-		$_tmpTpl.find(Selector_Core._ux_pointers.ORIGINAL_FIELD_CNT).html(this._$original_parent_cnt.html());
+		$_tmpTpl.find(Selector_Core._ux_pointers.NATIVE_FIELD_CNT).html(this._$native_parent_cnt.html());
 
-		this._$original_parent_cnt.html('').append($_tmpTpl);
+		this._$native_parent_cnt.html('').append($_tmpTpl);
 
 		this._set_events();
 		this._render_refresh();
@@ -231,9 +241,32 @@ export class Selector_Core {
 	 *
 	 * @private
 	 */
+	_render_ensure_dropdown_init() {
+
+		if (this._dropdown_initialized) {
+			return;
+		}
+
+		this._elements.dropdown_cnt = this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT);
+		this._elements.dropdown_cnt.html(UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_DROPDOWN, {}));
+
+		this._elements.search_field = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
+
+		this._elements.selected_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SELECTED_CNT)
+
+		this._elements.results_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.RESULTS_CNT);
+
+		this._dropdown_initialized = true;
+	}
+
+
+	/**
+	 *
+	 * @private
+	 */
 	_render_results() {
 
-		if (!this._dropdown_is_open) {
+		if (!this._dropdown_opened) {
 			return;
 		}
 
@@ -248,26 +281,6 @@ export class Selector_Core {
 		}
 
 		this._elements.results_cnt.html($results.html());
-	}
-
-
-	/**
-	 *
-	 * @private
-	 */
-	_render_ensure_dropdown_init() {
-
-		if (this._dropdown_initialized) {
-			return;
-		}
-
-		this._elements.dropdown_cnt = this._$original_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT);
-		this._elements.dropdown_cnt.html(UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_DROPDOWN, {}));
-
-		this._elements.search_input = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
-		this._elements.results_cnt = this._elements.dropdown_cnt.find('.ux-results-cnt');
-
-		this._dropdown_initialized = true;
 	}
 
 
@@ -358,9 +371,9 @@ export class Selector_Core {
 	 */
 	_refresh_selection() {
 
-		console.log(this._$original_field.val());
+		console.log(this._$native_field.val());
 
-		this._$original_field.val(this._selected_ids);
+		this._$native_field.val(this._selected_ids);
 	}
 
 
@@ -374,7 +387,7 @@ export class Selector_Core {
 			this._on_input_field_click(e);
 		});
 
-		this._$original_parent_cnt.on('keyup', Selector_Core._ux_pointers.SEARCH_FIELD, (e) => {
+		this._$native_parent_cnt.on('keyup', Selector_Core._ux_pointers.SEARCH_FIELD, (e) => {
 			this._on_search_field_keyup(e);
 		});
 
@@ -390,7 +403,7 @@ export class Selector_Core {
 	 */
 	_on_input_field_click() {
 
-		if (!this._dropdown_is_open && this._config.is_active) {
+		if (!this._dropdown_opened && this._config.active) {
 			this._open();
 		} else {
 			this._close();
@@ -405,9 +418,9 @@ export class Selector_Core {
 	 */
 	_on_body_click(e) {
 
-		if (this._dropdown_is_open) {
+		if (this._dropdown_opened) {
 
-			if (e.target !== this._$original_parent_cnt[0] && !$.contains(this._$original_parent_cnt[0], e.target)) {
+			if (e.target !== this._$native_parent_cnt[0] && !$.contains(this._$native_parent_cnt[0], e.target)) {
 
 				this._close();
 			}
@@ -422,43 +435,35 @@ export class Selector_Core {
 	 */
 	_on_search_field_keyup(e) {
 
-		this.set_search_term(this._$original_parent_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD).val());
+		this.set_search_term(this._$native_parent_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD).val());
 
 		this._render_results();
 	}
 
 
 	/**
-	 *
 	 * @private
 	 */
 	_open() {
 
 		this._render_ensure_dropdown_init();
 
-		this._$original_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).addClass(Selector_Core._ui_modifiers.DROPDOWN_EXPANDED);
-		this._dropdown_is_open = true;
+		this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).addClass(Selector_Core._ui_modifiers.DROPDOWN_OPENED);
+		this._dropdown_opened = true;
 
 		this._render_refresh();
-		this._elements.search_input.focus();
+		this._elements.search_field.focus();
 	}
 
 
 	/**
-	 *
 	 * @private
 	 */
 	_close() {
 
-		this._$original_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).removeClass(Selector_Core._ui_modifiers.DROPDOWN_EXPANDED);
-		this._dropdown_is_open = false;
+		this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).removeClass(Selector_Core._ui_modifiers.DROPDOWN_OPENED);
+		this._dropdown_opened = false;
 
 		this._elements.results_cnt.empty();
-	}
-
-
-	get id() {
-
-		return this._instance_id;
 	}
 }
