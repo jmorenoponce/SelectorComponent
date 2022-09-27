@@ -19,7 +19,7 @@ UI_Template_Handler.on_loaded(function () {
 		is_active: true,
 		is_editable: true,
 		placeholder: 'Seleccionar usuarios...',
-		searching_text: 'Buscando usuarios...',
+		searching_text: 'Buscar usuarios...',
 		search_results_none: 'No se encontraron usuarios para esta búsqueda',
 	});
 
