@@ -1,6 +1,8 @@
 'use strict';
 
+
 import {UI_Template_Handler} from "./UI_Template_Handler";
+
 
 export class Selector_Core {
 
@@ -252,7 +254,7 @@ export class Selector_Core {
 
 		this._elements.search_field = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
 
-		this._elements.selected_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SELECTED_CNT)
+		// this._elements.selected_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SELECTED_CNT)
 
 		this._elements.results_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.RESULTS_CNT);
 
@@ -398,10 +400,10 @@ export class Selector_Core {
 
 
 	/**
-	 *
+	 * @param e
 	 * @private
 	 */
-	_on_input_field_click() {
+	_on_input_field_click(e) {
 
 		if (!this._dropdown_opened && this._config.active) {
 			this._open();

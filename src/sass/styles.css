@@ -1266,7 +1266,7 @@ template {
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
-.cmp-selector .selector-dropdown-cnt:not(.ui-selector-dropdown-expanded) {
+.cmp-selector .selector-dropdown-cnt:not(.ui-selector-dropdown-opened) {
   display: none;
 }
 .cmp-selector .dropdown-list-cnt {
