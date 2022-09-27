@@ -44,7 +44,7 @@ export class Selector_Core {
 			searchable_fields: 	[],
 			last_selected_ids: 	[],
 			active: 			true,
-			editable: 		true,
+			editable: 			true,
 			placeholder: 		'Seleccionar...',
 			searching_text: 	'Buscar...',
 			search_no_results: 	'No se encontraron coincidencias para esta búsqueda',
@@ -70,10 +70,10 @@ export class Selector_Core {
 		this._$native_parent_cnt = $elem.parent();
 
 		this._elements = {
-			dropdown_cnt: 		{},
-			search_field: 		{},
-			selected_cnt: 		{},
-			results_cnt: 		{}
+			dropdown_cnt: {},
+			search_field: {},
+			selected_cnt: {},
+			results_cnt: {}
 		};
 
 		this._data = [];
