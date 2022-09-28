@@ -446,6 +446,8 @@ export class Selector_Core {
 
 		let _tmpItem = item.closest(Selector_Core._ux_pointers.RESULT_ITEM);
 
+		let _tmpId =
+
 		console.log(_tmpItem)
 	}
 
