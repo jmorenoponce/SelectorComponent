@@ -24,7 +24,7 @@
 				</div>
 			</div>
 
-			<div class="selector-dropdown-cnt ux-selector-dropdown-cnt ui-selector-dropdown-opened"></div>
+			<div class="selector-dropdown-cnt ux-selector-dropdown-cnt"></div>
 		</div>
 	</div>
 </template>
@@ -63,8 +63,13 @@
 			</div>
 		</div>
 
-<!--		<div class="results-cnt results-selected ux-selector-selected-cnt"></div>-->
-        <div class="results-cnt ux-results-cnt"></div>
+		<div class="results-cnt results-selected">
+            <div class="inner ux-selector-selected-cnt dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type=""></div>
+        </div>
+
+        <div class="results-cnt">
+            <div class="inner ux-selector-results-cnt dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type=""></div>
+        </div>
 	</div>
 </template>
 
@@ -77,7 +82,7 @@
 				<div class="inner">
 
 					<div class="card-checkable">
-						<input class="checkbox-field" type="checkbox" value="" checked="checked"/>
+						<input class="checkbox-field" type="checkbox" value="" />
 					</div>
 
 					<div class="card-image">
