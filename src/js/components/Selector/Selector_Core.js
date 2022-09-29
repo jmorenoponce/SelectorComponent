@@ -13,7 +13,7 @@ export class Selector_Core {
 		SELECTOR_BASE: 			'cmp-selector-base',
 		SELECTOR_DROPDOWN: 		'cmp-selector-dropdown',
 		SELECTOR_RESULT_ITEM: 	'cmp-selector-result-item',
-		SELECTOR_RESULT_GROUP:	'cmp-selector-result-group',
+		SELECTOR_RESULT_GROUP: 	'cmp-selector-result-group',
 	}
 
 	static _ux_pointers = {
@@ -23,9 +23,9 @@ export class Selector_Core {
 		DROPDOWN_TRIGGER: 		'.ux-selector-dropdown-trigger',
 		DROPDOWN_CNT: 			'.ux-selector-dropdown-cnt',
 		SEARCH_FIELD: 			'.ux-selector-search-field',
-		SELECTED_CNT:			'.ux-selector-selected-cnt',
-		RESULTS_CNT:			'.ux-selector-results-cnt',
-		RESULT_ITEM:			'.ux-selector-result-item'
+		SELECTED_CNT: 			'.ux-selector-selected-cnt',
+		RESULTS_CNT: 			'.ux-selector-results-cnt',
+		RESULT_ITEM: 			'.ux-selector-result-item'
 	}
 
 	static _ui_modifiers = {
@@ -41,14 +41,14 @@ export class Selector_Core {
 	constructor($elem, config) {
 
 		this._config = {
-			category_key: 		'',
-			searchable_fields: 	[],
-			last_selected_ids: 	[],
-			active: 			true,
-			editable: 			true,
-			placeholder: 		'Seleccionar...',
-			searching_text: 	'Buscar...',
-			search_no_results: 	'No se encontraron coincidencias para esta búsqueda',
+			category_key: '',
+			searchable_fields: [],
+			last_selected_ids: [],
+			active: true,
+			editable: true,
+			placeholder: 'Seleccionar...',
+			searching_text: 'Buscar...',
+			search_no_results: 'No se encontraron coincidencias para esta búsqueda',
 
 			/**
 			 * Returns coincidence validation looking for <term> in all value keys of <searchable_fields>
@@ -113,7 +113,6 @@ export class Selector_Core {
 	set_config(config) {
 
 		$.extend(true, this._config, config);
-		// Do Stuff...
 	}
 
 
@@ -123,7 +122,6 @@ export class Selector_Core {
 	set_data(data) {
 
 		this._data = data;
-		// Do Stuff...
 	}
 
 
@@ -225,9 +223,6 @@ export class Selector_Core {
 
 		this._$native_parent_cnt.html('').append(_$tmpTpl);
 
-		// this._elements.dropdown_cnt
-
-
 		this._set_events();
 		this._render_refresh();
 	}
@@ -254,9 +249,12 @@ export class Selector_Core {
 		}
 
 		this._elements.dropdown_cnt = this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT);
-		this._elements.dropdown_cnt.html(UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_DROPDOWN, {}));
+		this._elements.dropdown_cnt.html(UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_DROPDOWN, {
+			// ...data
+		}));
 
 		this._elements.search_field = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
+		//this._elements.buttons = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
 
 		this._elements.selected_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SELECTED_CNT)
 		this._elements.results_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.RESULTS_CNT);
@@ -280,6 +278,10 @@ export class Selector_Core {
 		for (let item in this._data) {
 
 			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this._data[item], this._config])) {
+
+				if ($.inArray(this._data[item].id, this._config.last_selected_ids) >= 0) {
+					this._data[item]['item_recent'] = 1;
+				}
 
 				$results.append(UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_RESULT_ITEM, this._data[item]));
 			}
@@ -400,10 +402,12 @@ export class Selector_Core {
 
 			if (e.target.closest(Selector_Core._ux_pointers.RESULTS_CNT)) {
 				this._on_results_cnt_click(e.target);
+				return false;
 			}
 
 			if (e.target.closest(Selector_Core._ux_pointers.SELECTED_CNT)) {
 				this._on_selected_cnt_click(e.target);
+				return false;
 			}
 		});
 
@@ -446,9 +450,7 @@ export class Selector_Core {
 
 		let _tmpItem = item.closest(Selector_Core._ux_pointers.RESULT_ITEM);
 
-		let _tmpId =
-
-		console.log(_tmpItem)
+		$(_tmpItem).appendTo(this._elements.selected_cnt);
 	}
 
 
@@ -458,7 +460,9 @@ export class Selector_Core {
 	 */
 	_on_selected_cnt_click(item) {
 
-		console.log('Hiciste click en selected')
+		let _tmpItem = item.closest(Selector_Core._ux_pointers.RESULT_ITEM);
+
+		$(_tmpItem).appendTo(this._elements.results_cnt)
 	}
 
 
