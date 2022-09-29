@@ -2,6 +2,7 @@
 
 
 import {UI_Template_Handler} from "./UI_Template_Handler";
+import {Utility} from "../../utils/Utility";
 
 
 export class Selector_Core {
@@ -23,6 +24,7 @@ export class Selector_Core {
 		DROPDOWN_TRIGGER: 		'.ux-selector-dropdown-trigger',
 		DROPDOWN_CNT: 			'.ux-selector-dropdown-cnt',
 		SEARCH_FIELD: 			'.ux-selector-search-field',
+		VIEW_MODE_CNT:			'.ux-selector-view-mode-cnt',
 		SELECTED_CNT: 			'.ux-selector-selected-cnt',
 		RESULTS_CNT: 			'.ux-selector-results-cnt',
 		RESULT_ITEM: 			'.ux-selector-result-item'
@@ -73,6 +75,7 @@ export class Selector_Core {
 		this._elements = {
 			dropdown_cnt: {},
 			search_field: {},
+			view_mode_cnt: {},
 			selected_cnt: {},
 			results_cnt: {}
 		};
@@ -81,6 +84,7 @@ export class Selector_Core {
 
 		this._dropdown_initialized = false;
 		this._dropdown_opened = false;
+		this._list_groupable = false;
 
 		this._search_term = '';
 		this._selected_ids = [];
@@ -113,6 +117,10 @@ export class Selector_Core {
 	set_config(config) {
 
 		$.extend(true, this._config, config);
+
+		if (this._config.category_key) {
+			this._list_groupable = true;
+		}
 	}
 
 
@@ -123,6 +131,15 @@ export class Selector_Core {
 
 		this._data = data;
 
+		// Only for testing
+		for (let item of this._data) {
+
+			item.avatar_initials = Utility.take_name_initials(item.first_name + ' ' + item.last_name)
+			item.activity_state = 2
+			item.user_color = 1
+		}
+
+		// Only for testing
 		for (let id of this._config.last_selected_ids) {
 			this._data.find(item => item['id'] === id)['item_recent'] = 1;
 		}
@@ -254,11 +271,12 @@ export class Selector_Core {
 
 		this._elements.dropdown_cnt = this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT);
 		this._elements.dropdown_cnt.html(UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_DROPDOWN, {
-			// ...data
+			search_placeholder: this._config.searching_text,
+			list_groupable: this._list_groupable ? 1 : 0
 		}));
 
 		this._elements.search_field = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
-		//this._elements.buttons = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
+		this._elements.view_mode_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.VIEW_MODE_CNT);
 
 		this._elements.selected_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SELECTED_CNT)
 		this._elements.results_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.RESULTS_CNT);

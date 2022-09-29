@@ -34,6 +34,18 @@ export class Utility {
 	}
 
 
+	static take_name_initials(name) {
+
+		return name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
+	}
+
+
+	static take_name_color() {
+
+
+	}
+
+
 	testEnumerableDinamicMethod() {
 
 		// This method is created for listing properties comparison

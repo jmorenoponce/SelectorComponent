@@ -38,15 +38,15 @@
 			<div class="search-filter list-item mb-10">
 				<div class="inner flex-align-center">
 
-					<input class="input-field ux-selector-search-field" type="text" placeholder="%placeholder%"/>
+					<input class="input-field ux-selector-search-field" type="text" placeholder="{{ search_placeholder }}"/>
 					<i class="icon mr-5">~</i>
 				</div>
 			</div>
 
-			<div class="view-mode list-item">
+			<div class="view-mode list-item ux-selector-view-mode-cnt">
 				<div class="btn-toolbar flex-justify-space-between">
 
-					<div class="btn-group">
+					<div class="btn-group" data-groupable="{{ list_groupable }}">
 						<div class="btn ux-selector-view-ungrouped ui-active">
 							<i class="btn-icon">~</i>
 						</div>
