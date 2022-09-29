@@ -122,6 +122,18 @@ export class Selector_Core {
 	set_data(data) {
 
 		this._data = data;
+
+		for (k in this._config.last_selected_ids) {
+
+			console.log(k)
+
+		}
+		//
+		// if ($.inArray(this._data[item].id, this._config.last_selected_ids) >= 0) {
+		// 	this._data[item]['item_recent'] = 1;
+		// }
+
+
 	}
 
 
@@ -278,10 +290,6 @@ export class Selector_Core {
 		for (let item in this._data) {
 
 			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this._data[item], this._config])) {
-
-				if ($.inArray(this._data[item].id, this._config.last_selected_ids) >= 0) {
-					this._data[item]['item_recent'] = 1;
-				}
 
 				$results.append(UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_RESULT_ITEM, this._data[item]));
 			}
