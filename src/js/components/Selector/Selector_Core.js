@@ -123,17 +123,9 @@ export class Selector_Core {
 
 		this._data = data;
 
-		for (k in this._config.last_selected_ids) {
-
-			console.log(k)
-
+		for (let id of this._config.last_selected_ids) {
+			this._data.find(item => item['id'] === id)['item_recent'] = 1;
 		}
-		//
-		// if ($.inArray(this._data[item].id, this._config.last_selected_ids) >= 0) {
-		// 	this._data[item]['item_recent'] = 1;
-		// }
-
-
 	}
 
 
