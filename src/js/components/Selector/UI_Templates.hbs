@@ -47,16 +47,16 @@
 				<div class="btn-toolbar flex-justify-space-between">
 
 					<div class="btn-group" data-groupable="{{ list_groupable }}">
-						<div class="btn ux-selector-view-ungrouped ui-active">
+						<div class="btn ux-selector-view-mode-ungrouped ui-active">
 							<i class="btn-icon">~</i>
 						</div>
 
-						<div class="btn ux-selector-view-grouped">
+						<div class="btn ux-selector-view-mode-grouped">
 							<i class="btn-icon">~</i>
 						</div>
 					</div>
 
-					<div class="btn ux-selector-view-expanded">
+					<div class="btn ux-selector-view-mode-extended">
 						<i class="btn-icon">~</i>
 					</div>
 				</div>
@@ -64,11 +64,11 @@
 		</div>
 
 		<div class="results-cnt results-selected">
-            <div class="inner ux-selector-selected-cnt dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type=""></div>
+            <div class="inner ux-selector-selected-cnt dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type="sm"></div>
         </div>
 
         <div class="results-cnt">
-            <div class="inner ux-selector-results-cnt dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type=""></div>
+            <div class="inner ux-selector-results-cnt dropdown-list-cnt list-scrollable p-10 ui-order-by-data-recent ui-user-card-list" data-user-card-type="sm"></div>
         </div>
 	</div>
 </template>
@@ -78,7 +78,7 @@
 	<div class="result-item list-item ux-selector-result-item" data-recent="{{ item_recent }}">
 		<div class="inner">
 
-			<div class="user-card user-card-sm" data-activity-state="{{ activity_state }}" data-user-color="{{ user_color }}">
+			<div class="user-card" data-activity-state="{{ activity_state }}" data-user-color="{{ user_color }}">
 				<div class="inner">
 
 					<div class="card-checkable">
