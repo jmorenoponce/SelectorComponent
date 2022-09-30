@@ -45,6 +45,13 @@ export class Selector_Core {
 	};
 
 
+	static _ui_attributes = {
+
+		ITEM_RECENT: 'data-recent',
+		ITEM_SELECTED: 'data-selected'
+	}
+
+
 	/**
 	 * @param $elem
 	 * @param config
@@ -337,11 +344,6 @@ export class Selector_Core {
 				this._on_results_cnt_click(e.target);
 				return false;
 			}
-
-			if (e.target.closest(Selector_Core._ux_pointers.SELECTED_CNT)) {
-				this._on_selected_cnt_click(e.target);
-				return false;
-			}
 		});
 
 		this._$native_parent_cnt.on("click", Selector_Core._ux_pointers.VIEW_MODE_CNT, (e) => {
@@ -416,18 +418,15 @@ export class Selector_Core {
 	_on_results_cnt_click(item) {
 
 		let _tmpItem = item.closest(Selector_Core._ux_pointers.RESULT_ITEM);
-		$(_tmpItem).appendTo(this._elements.selected_cnt);
-	}
+		let _tmpState = $(_tmpItem).attr(Selector_Core._ui_attributes.ITEM_SELECTED);
 
+		if (_tmpState === undefined || _tmpState == 0) {
+			_tmpState = 1;
+		} else {
+			_tmpState = 0
+		}
 
-	/**
-	 * @param e
-	 * @private
-	 */
-	_on_selected_cnt_click(item) {
-
-		let _tmpItem = item.closest(Selector_Core._ux_pointers.RESULT_ITEM);
-		$(_tmpItem).appendTo(this._elements.results_cnt);
+		$(_tmpItem).attr(Selector_Core._ui_attributes.ITEM_SELECTED, _tmpState);
 	}
 
 
