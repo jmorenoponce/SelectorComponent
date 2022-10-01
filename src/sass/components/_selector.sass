@@ -27,7 +27,7 @@
 			border-radius: $theme-radius
 			@include theme-shadow
 
-		&:not(.ui-selector-dropdown-opened)
+		&:not(.ui-selector-dropdown-open)
 			display: none
 
 	.dropdown-list-cnt
@@ -89,10 +89,6 @@
 		&[data-selected="1"]
 			order: -1
 
-		&:last-child
-			&[data-selected="1"]
-				border-bottom: 1px solid red
-
 
 	.result-group
 		> .inner
@@ -110,4 +106,4 @@
 
 .ui-order-by-data-recent
 	[data-recent="1"]
-		order: -1
+		order: -2

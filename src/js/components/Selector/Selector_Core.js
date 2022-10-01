@@ -28,7 +28,7 @@ export class Selector_Core {
 		DROPDOWN_TRIGGER: 		".ux-selector-dropdown-trigger",
 		SEARCH_FIELD: 			".ux-selector-search-field",
 		VIEW_MODE_CNT: 			".ux-selector-view-mode-cnt",
-		VIEW_MODE_UNGROUPED: 	".ux-selector-view-mode-ungrouped",
+		VIEW_MODE_UNITARY: 		".ux-selector-view-mode-unitary",
 		VIEW_MODE_GROUPED: 		".ux-selector-view-mode-grouped",
 		VIEW_MODE_EXTENDED: 	".ux-selector-view-mode-extended",
 		SELECTED_CNT: 			".ux-selector-selected-cnt",
@@ -38,18 +38,18 @@ export class Selector_Core {
 	};
 
 
-	static _ui_modifiers = {
-
-		DROPDOWN_OPENED: 		"ui-selector-dropdown-opened",
-		BUTTONS_ACTIVE:			"ui-active"
-	};
-
-
 	static _ui_attributes = {
 
 		ITEM_RECENT: 'data-recent',
 		ITEM_SELECTED: 'data-selected'
 	}
+
+
+	static _ui_modifiers = {
+
+		DROPDOWN_OPEN: 			"ui-selector-dropdown-open",
+		BTN_ACTIVE:				"ui-active"
+	};
 
 
 	/**
@@ -118,18 +118,6 @@ export class Selector_Core {
 	}
 
 
-	activate() {
-
-		this._config.active = true;
-	}
-
-
-	deactivate() {
-
-		this._config.active = false;
-	}
-
-
 	/**
 	 * @param config
 	 */
@@ -182,9 +170,7 @@ export class Selector_Core {
 	 */
 	set_selection(target_id) {
 
-		this._set_selected_ids(
-			typeof target_id != "object" ? [target_id] : target_id
-		);
+		this._set_selected_ids(typeof target_id != "object" ? [target_id] : target_id);
 	}
 
 
@@ -232,6 +218,42 @@ export class Selector_Core {
 
 
 	/**
+	 *
+	 */
+	open() {
+
+		this._dropdown_open();
+	}
+
+
+	/**
+	 *
+	 */
+	close() {
+
+		this._dropdown_close()
+	}
+
+
+	/**
+	 *
+	 */
+	activate() {
+
+		this._config.active = true;
+	}
+
+
+	/**
+	 *
+	 */
+	deactivate() {
+
+		this._config.active = false;
+	}
+
+
+	/**
 	 * @returns {string}
 	 */
 	get id() {
@@ -256,6 +278,7 @@ export class Selector_Core {
 	_render_init() {
 
 		let _$tmpTplBase = UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_BASE, {
+
 			input_placeholder: this._config.placeholder
 		});
 
@@ -296,15 +319,6 @@ export class Selector_Core {
 	/**
 	 * @private
 	 */
-	_render_refresh() {
-
-		this._render_results();
-	}
-
-
-	/**
-	 * @private
-	 */
 	_render_results() {
 
 		if (!this._dropdown_opened) {
@@ -328,13 +342,24 @@ export class Selector_Core {
 	/**
 	 * @private
 	 */
+	_render_refresh() {
+
+		this._render_results();
+	}
+
+
+	/**
+	 * @private
+	 */
 	_set_events() {
 
 		$(Selector_Core._ux_pointers.INPUT_FIELD + ", " + Selector_Core._ux_pointers.DROPDOWN_TRIGGER).on("click", (e) => {
+
 			this._on_input_field_click(e);
 		});
 
 		this._$native_parent_cnt.on("keyup", Selector_Core._ux_pointers.SEARCH_FIELD, (e) => {
+
 			this._on_search_field_keyup(e);
 		});
 
@@ -348,12 +373,7 @@ export class Selector_Core {
 
 		this._$native_parent_cnt.on("click", Selector_Core._ux_pointers.VIEW_MODE_CNT, (e) => {
 
-			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_EXTENDED)) {
-				this._on_view_mode_extended_click();
-				return false;
-			}
-
-			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_UNGROUPED)) {
+			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_UNITARY)) {
 				console.log("Vista por usuarios");
 				return false;
 			}
@@ -362,9 +382,15 @@ export class Selector_Core {
 				console.log("Vista por equipos");
 				return false;
 			}
+
+			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_EXTENDED)) {
+				this._on_view_mode_extended_click();
+				return false;
+			}
 		});
 
 		$("body").on("click", (e) => {
+
 			this._on_body_click(e);
 		});
 	}
@@ -377,9 +403,9 @@ export class Selector_Core {
 	_on_input_field_click(e) {
 
 		if (!this._dropdown_opened && this._config.active) {
-			this._open();
+			this._dropdown_open();
 		} else {
-			this._close();
+			this._dropdown_close();
 		}
 	}
 
@@ -405,22 +431,22 @@ export class Selector_Core {
 		let tmpCardType = this._view_mode_extended ? 'md' : 'sm';
 		$(Selector_Core._ux_pointers.RESULTS_CNT).attr('data-user-card-type', tmpCardType);
 
-		$(Selector_Core._ux_pointers.VIEW_MODE_EXTENDED).toggleClass(Selector_Core._ui_modifiers.BUTTONS_ACTIVE);
+		$(Selector_Core._ux_pointers.VIEW_MODE_EXTENDED).toggleClass(Selector_Core._ui_modifiers.BTN_ACTIVE);
 
 		this._render_refresh();
 	}
 
 
 	/**
-	 * @param e
 	 * @private
+	 * @param item
 	 */
 	_on_results_cnt_click(item) {
 
 		let _tmpItem = item.closest(Selector_Core._ux_pointers.RESULT_ITEM);
 		let _tmpState = $(_tmpItem).attr(Selector_Core._ui_attributes.ITEM_SELECTED);
 
-		if (_tmpState === undefined || _tmpState == 0) {
+		if (_tmpState === undefined || _tmpState === 0) {
 			_tmpState = 1;
 		} else {
 			_tmpState = 0
@@ -439,7 +465,7 @@ export class Selector_Core {
 		if (this._dropdown_opened) {
 
 			if (e.target !== this._$native_parent_cnt[0] &&	!$.contains(this._$native_parent_cnt[0], e.target)) {
-				this._close();
+				this._dropdown_close();
 			}
 		}
 	}
@@ -464,7 +490,7 @@ export class Selector_Core {
 	_set_selected_ids(ids) {
 
 		this._selected_ids = [...ids];
-		this._refresh_selection();
+		this._refresh_native_field();
 	}
 
 
@@ -525,7 +551,7 @@ export class Selector_Core {
 	 *
 	 * @private
 	 */
-	_refresh_selection() {
+	_refresh_native_field() {
 
 		console.log(this._$native_field.val());
 		this._$native_field.val(this._selected_ids);
@@ -535,11 +561,11 @@ export class Selector_Core {
 	/**
 	 * @private
 	 */
-	_open() {
+	_dropdown_open() {
 
 		this._render_ensure_dropdown_init();
 
-		this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).addClass(Selector_Core._ui_modifiers.DROPDOWN_OPENED);
+		this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).addClass(Selector_Core._ui_modifiers.DROPDOWN_OPEN);
 		this._dropdown_opened = true;
 
 		this._render_refresh();
@@ -550,9 +576,9 @@ export class Selector_Core {
 	/**
 	 * @private
 	 */
-	_close() {
+	_dropdown_close() {
 
-		this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).removeClass(Selector_Core._ui_modifiers.DROPDOWN_OPENED);
+		this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).removeClass(Selector_Core._ui_modifiers.DROPDOWN_OPEN);
 		this._dropdown_opened = false;
 
 		this._elements.results_cnt.empty();
