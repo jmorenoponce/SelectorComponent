@@ -86,9 +86,6 @@
 			.icon-recent
 				display: none
 
-		&[data-selected="1"]
-			order: -1
-
 
 	.result-group
 		> .inner
@@ -103,7 +100,29 @@
 				> .inner
 					padding-left: 30px
 
+	// Imaginary selection elements block line
 
-.ui-order-by-data-recent
-	[data-recent="1"]
-		order: -2
+
+	.result-item[data-selected="1"]
+		border-bottom: 1px solid #000432
+		margin-top: -1px
+
+	// Order
+
+	.ui-order-by-data-recent
+		[data-recent="1"]
+			order: -1
+
+	.result-item
+		&[data-selected="1"]
+			background: #0BB7AF
+			order: -2
+
+
+	.ui-order-by-data-recent
+		.result-item
+			&[data-selected="1"]
+				&[data-recent="1"]
+					order: -3
+
+

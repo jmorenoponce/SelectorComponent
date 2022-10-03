@@ -416,19 +416,16 @@ export class Selector_Core {
 			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_UNITARY)) {
 
 				this._on_view_mode_unitary_click();
-				return false;
 			}
 
 			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_GROUPED)) {
 
 				this._on_view_mode_grouped_click();
-				return false;
 			}
 
 			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_EXTENDED)) {
 
 				this._on_view_mode_extended_click();
-				return false;
 			}
 		});
 
@@ -515,15 +512,18 @@ export class Selector_Core {
 	_on_results_cnt_click(item) {
 
 		let _tmpItem = item.closest(Selector_Core._ux_pointers.RESULT_ITEM);
-		let _tmpState = $(_tmpItem).attr(Selector_Core._ui_attributes.ITEM_SELECTED);
 
-		if (_tmpState === undefined || _tmpState === 0) {
-			_tmpState = 1;
+		let _selected_state = parseInt($(_tmpItem).attr(Selector_Core._ui_attributes.ITEM_SELECTED)) ? 0 : 1;
+
+		let _tmpState = $(_tmpItem).attr(Selector_Core._ui_attributes.ITEM_SELECTED, _selected_state);
+
+		let item_id = $(_tmpItem).attr('data-id');
+
+		if (_selected_state) {
+			this._selection_add(item_id);
 		} else {
-			_tmpState = 0
+			this._selection_remove(item_id);
 		}
-
-		$(_tmpItem).attr(Selector_Core._ui_attributes.ITEM_SELECTED, _tmpState);
 	}
 
 
@@ -561,7 +561,15 @@ export class Selector_Core {
 	_set_selected_ids(ids) {
 
 		this._selected_ids = [...ids];
+
 		this._refresh_native_field();
+		this._refresh_selections_badge();
+	}
+
+
+	_refresh_selections_badge () {
+
+		this._$native_parent_cnt.find('.ux-global-selections:first').text(this._selected_ids.length);
 	}
 
 
@@ -577,6 +585,7 @@ export class Selector_Core {
 		let new_selection = [...this._selected_ids];
 
 		for (const id of ids) {
+
 			if (!new_selection.includes(id)) {
 				new_selection.push(id);
 			}
@@ -598,8 +607,9 @@ export class Selector_Core {
 
 		let new_selection = [];
 
-		for (const id of ids) {
-			if ((k = this._selected_ids.indexOf(id)) === -1) {
+		for (const id of this._selected_ids) {
+
+			if (ids.indexOf(id) === -1) {
 				new_selection.push(id);
 			}
 		}
