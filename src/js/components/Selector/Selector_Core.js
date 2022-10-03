@@ -34,7 +34,8 @@ export class Selector_Core {
 		SELECTED_CNT: 			".ux-selector-selected-cnt",
 		RESULTS_CNT: 			".ux-selector-results-cnt",
 		RESULT_ITEM: 			".ux-selector-result-item",
-		RESULT_GROUP: 			".ux-selector-result-group"
+		RESULT_GROUP: 			".ux-selector-result-group",
+		RESULT_GROUP_CONTENT:   ".ux-selector-group-content"
 	};
 
 
@@ -322,7 +323,7 @@ export class Selector_Core {
 	 */
 	_render_results_unitary() {
 
-		let $results = $("<div/>");
+		let $results = $("<div/>"); // Todo:
 
 		for (let item in this._data) {
 
@@ -342,7 +343,35 @@ export class Selector_Core {
 	 */
 	_render_results_grouped() {
 
+		let $results = $("<div>");
+		let groups = {};
 
+		for (let item in this._data) {
+
+			if (!this._search_term || this._config.filter.apply(this, [this._search_term, this._data[item], this._config,])) {
+
+				let $tmpItem = UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_RESULT_ITEM, this._data[item]);
+				let tmpCategory = this._data[item][this._config.category_key];
+
+				if (!groups[tmpCategory]) {
+
+					groups[tmpCategory] = UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_RESULT_GROUP, {
+						group_color: '',
+						group_initials: '',
+						group_name: this._data[item][this._config.category_key]
+					});
+				}
+
+				$tmpItem.appendTo($(groups[tmpCategory]).find(Selector_Core._ux_pointers.RESULT_GROUP_CONTENT));
+			}
+		}
+
+		$.each(groups, (k,v) => {
+
+			this._elements.results_cnt.append(v);
+		});
+
+		// this._elements.results_cnt.html($.each(groups).html());
 	}
 
 
@@ -586,6 +615,25 @@ export class Selector_Core {
 	_selection_remove_all() {
 
 		this._set_selected_ids([]);
+	}
+
+
+	/**
+	 * Returns an enumerated array containing the categories of data items.
+	 * @returns {string[]}
+	 * @private
+	 */
+	_get_groups() {
+
+		let groups = {};
+
+		for (let item of this._data) {
+
+			let group = item[this._config.category_key];
+			groups[group] = 1;
+		}
+
+		return Object.keys(groups);
 	}
 
 
