@@ -1,7 +1,7 @@
 <template id="cmp-selector-base" type="text/x-handlebars-template">
 	<div class="cmp-selector">
 
-		<div class="ux-selector-original-field-cnt display-none"></div>
+		<div class="ux-selector-native-field-cnt display-none"></div>
 
 		<div class="inner flex-column">
 
@@ -73,7 +73,6 @@
 <template id="cmp-selector-result-item" type="text/x-handlebars-template">
 	<div class="result-item list-item ux-selector-result-item" data-recent="{{ item_recent }}">
 		<div class="inner">
-
 			<div class="user-card" data-activity-state="{{ activity_state }}" data-user-color="{{ user_color }}">
 				<div class="inner">
 
@@ -100,4 +99,52 @@
 			</div>
 		</div>
 	</div>
+</template>
+
+
+<template id="cmp-selector-result-group" type="text/x-handlebars-template">
+    <div class="result-group list-item ux-selector-result-group">
+        <div class="inner">
+            <div class="group-header">
+
+                <div class="result-item">
+                    <div class="inner">
+                        <div class="user-card" data-user-color="{{ group_color }}">
+                            <div class="inner">
+
+                                <div class="card-checkable">
+                                    <input class="checkbox-field" type="checkbox" value="" />
+                                </div>
+
+                                <div class="card-image">
+                                    <div class="avatar">
+                                        <span class="avatar-initials">{{ group_initials }}</span>
+                                        <span class="avatar-state"></span>
+                                    </div>
+                                </div>
+
+                                <div class="card-data flex-column">
+                                    <span class="data-name" data-param="name">{{ group_name }}</span>
+                                </div>
+
+                                <div class="card-flags">
+                                    <i class="icon icon-recent">~</i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="badge badge-circle ml-5">
+                            <span class="badge-text" data-param="selections-amount">5</span>
+                        </div>
+
+                        <div class="group-dropdown-icon ux-selector-dropdown-trigger">
+                            <i class="icon ml-5">~</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group-content dropdown-list-cnt ui-order-by-data-recent ui-user-card-list" data-user-card-type="sm"></div>
+        </div>
+    </div>
 </template>

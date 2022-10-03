@@ -16,13 +16,13 @@ export class Selector_Core {
 		SELECTOR_BASE: 			"cmp-selector-base",
 		SELECTOR_DROPDOWN: 		"cmp-selector-dropdown",
 		SELECTOR_RESULT_ITEM: 	"cmp-selector-result-item",
-		SELECTOR_RESULT_GROUP: 	"cmp-selector-result-group",
+		SELECTOR_RESULT_GROUP: 	"cmp-selector-result-group"
 	};
 
 
 	static _ux_pointers = {
 
-		NATIVE_FIELD_CNT: 		".ux-selector-original-field-cnt",
+		NATIVE_FIELD_CNT: 		".ux-selector-native-field-cnt",
 		INPUT_FIELD: 			".ux-selector-input-field",
 		DROPDOWN_CNT: 			".ux-selector-dropdown-cnt",
 		DROPDOWN_TRIGGER: 		".ux-selector-dropdown-trigger",
@@ -40,8 +40,8 @@ export class Selector_Core {
 
 	static _ui_attributes = {
 
-		ITEM_RECENT: 'data-recent',
-		ITEM_SELECTED: 'data-selected'
+		ITEM_RECENT: 			"data-recent",
+		ITEM_SELECTED: 			"data-selected"
 	}
 
 
@@ -57,6 +57,8 @@ export class Selector_Core {
 	 * @param config
 	 */
 	constructor($elem, config) {
+
+		this._instance_id = "CmpSC_" + ++Selector_Core.__id_counter;
 
 		this._config = {
 			category_key: 		"",
@@ -83,8 +85,6 @@ export class Selector_Core {
 			},
 		};
 
-		this._instance_id = "CmpSC_" + ++Selector_Core.__id_counter;
-
 		this._$native_field = $elem;
 		this._$native_parent_cnt = $elem.parent();
 
@@ -101,7 +101,7 @@ export class Selector_Core {
 		this._dropdown_initialized = false;
 		this._dropdown_opened = false;
 
-		this._view_mode_groupable = true;
+		this._view_mode_groupable = false;
 		this._view_mode_grouped = false;
 		this._view_mode_extended = false;
 
@@ -125,8 +125,8 @@ export class Selector_Core {
 
 		$.extend(true, this._config, config);
 
-		if (!this._config.category_key) {
-			this._view_mode_groupable = false;
+		if (this._config.category_key) {
+			this._view_mode_groupable = true;
 		}
 	}
 
@@ -161,6 +161,7 @@ export class Selector_Core {
 	set_search_term(text) {
 
 		this._set_search_term(text);
+
 		this._render_refresh();
 	}
 
@@ -283,10 +284,10 @@ export class Selector_Core {
 		});
 
 		_$tmpTplBase.find(Selector_Core._ux_pointers.NATIVE_FIELD_CNT).html(this._$native_parent_cnt.html());
-
-		this._$native_parent_cnt.html("").append(_$tmpTplBase);
+		this._$native_parent_cnt.html('').append(_$tmpTplBase);
 
 		this._set_events();
+
 		this._render_refresh();
 	}
 
@@ -307,9 +308,9 @@ export class Selector_Core {
 		}));
 
 		this._elements.search_field = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
+
 		this._elements.view_mode_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.VIEW_MODE_CNT);
 
-		this._elements.selected_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SELECTED_CNT);
 		this._elements.results_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.RESULTS_CNT);
 
 		this._dropdown_initialized = true;
@@ -319,11 +320,7 @@ export class Selector_Core {
 	/**
 	 * @private
 	 */
-	_render_results() {
-
-		if (!this._dropdown_opened) {
-			return;
-		}
+	_render_results_unitary() {
 
 		let $results = $("<div/>");
 
@@ -340,11 +337,25 @@ export class Selector_Core {
 
 
 	/**
+	 *
+	 * @private
+	 */
+	_render_results_grouped() {
+
+
+	}
+
+
+	/**
 	 * @private
 	 */
 	_render_refresh() {
 
-		this._render_results();
+		if (!this._dropdown_opened) {
+			return;
+		}
+
+		this._view_mode_grouped ? this._render_results_grouped() : this._render_results_unitary();
 	}
 
 
@@ -374,16 +385,19 @@ export class Selector_Core {
 		this._$native_parent_cnt.on("click", Selector_Core._ux_pointers.VIEW_MODE_CNT, (e) => {
 
 			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_UNITARY)) {
-				console.log("Vista por usuarios");
+
+				this._on_view_mode_unitary_click();
 				return false;
 			}
 
 			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_GROUPED)) {
-				console.log("Vista por equipos");
+
+				this._on_view_mode_grouped_click();
 				return false;
 			}
 
 			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_EXTENDED)) {
+
 				this._on_view_mode_extended_click();
 				return false;
 			}
@@ -403,8 +417,11 @@ export class Selector_Core {
 	_on_input_field_click(e) {
 
 		if (!this._dropdown_opened && this._config.active) {
+
 			this._dropdown_open();
+
 		} else {
+
 			this._dropdown_close();
 		}
 	}
@@ -417,7 +434,36 @@ export class Selector_Core {
 	_on_search_field_keyup(e) {
 
 		this.set_search_term(this._$native_parent_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD).val());
-		this._render_results();
+
+		this._render_refresh();
+	}
+
+
+	/**
+	 * @private
+	 */
+	_on_view_mode_unitary_click() {
+
+		if (!this._view_mode_grouped) {
+			return;
+		}
+
+		this._view_mode_grouped = false;
+		this._render_refresh();
+	}
+
+
+	/**
+	 * @private
+	 */
+	_on_view_mode_grouped_click() {
+
+		if (this._view_mode_grouped) {
+			return;
+		}
+
+		this._view_mode_grouped = true;
+		this._render_refresh();
 	}
 
 
@@ -428,12 +474,8 @@ export class Selector_Core {
 
 		this._view_mode_extended = !this._view_mode_extended;
 
-		let tmpCardType = this._view_mode_extended ? 'md' : 'sm';
-		$(Selector_Core._ux_pointers.RESULTS_CNT).attr('data-user-card-type', tmpCardType);
-
+		$(Selector_Core._ux_pointers.RESULTS_CNT).attr('data-user-card-type', this._view_mode_extended ? 'md' : 'sm');
 		$(Selector_Core._ux_pointers.VIEW_MODE_EXTENDED).toggleClass(Selector_Core._ui_modifiers.BTN_ACTIVE);
-
-		this._render_refresh();
 	}
 
 
