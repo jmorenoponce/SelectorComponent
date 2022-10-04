@@ -28,7 +28,7 @@ export class Selector_Core {
 		DROPDOWN_TRIGGER: 		".ux-selector-dropdown-trigger",
 		SEARCH_FIELD: 			".ux-selector-search-field",
 		VIEW_MODE_CNT: 			".ux-selector-view-mode-cnt",
-		VIEW_MODE_UNITARY: 		".ux-selector-view-mode-unitary",
+		VIEW_MODE_SIMPLE: 		".ux-selector-view-mode-simple",
 		VIEW_MODE_GROUPED: 		".ux-selector-view-mode-grouped",
 		VIEW_MODE_EXTENDED: 	".ux-selector-view-mode-extended",
 		SELECTED_CNT: 			".ux-selector-selected-cnt",
@@ -64,7 +64,7 @@ export class Selector_Core {
 		this._config = {
 			category_key: 		"",
 			searchable_fields: 	[],
-			last_selected_ids: 	[],
+			last_selected_ids: 	[], // Todo: Debe venir en el json
 			active: 			true,
 			editable: 			true,
 			placeholder: 		"Seleccionar...",
@@ -86,15 +86,15 @@ export class Selector_Core {
 			},
 		};
 
-		this._$native_field = $elem;
-		this._$native_parent_cnt = $elem.parent();
+		this._$dom_cnt = $elem.parent();
+		this._$dom_field = $elem;
 
 		this._elements = {
-			dropdown_cnt: {},
-			search_field: {},
-			view_mode_cnt: {},
-			selected_cnt: {},
-			results_cnt: {},
+			dropdown_cnt: false,
+			search_field: false,
+			view_mode_cnt: false,
+			selected_cnt: false,
+			results_cnt: false,
 		};
 
 		this._data = [];
@@ -280,12 +280,11 @@ export class Selector_Core {
 	_render_init() {
 
 		let _$tmpTplBase = UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_BASE, {
-
 			input_placeholder: this._config.placeholder
 		});
 
-		_$tmpTplBase.find(Selector_Core._ux_pointers.NATIVE_FIELD_CNT).html(this._$native_parent_cnt.html());
-		this._$native_parent_cnt.html('').append(_$tmpTplBase);
+		_$tmpTplBase.find(Selector_Core._ux_pointers.NATIVE_FIELD_CNT).html(this._$dom_cnt.html());
+		this._$dom_cnt.html('').append(_$tmpTplBase);
 
 		this._set_events();
 
@@ -302,16 +301,15 @@ export class Selector_Core {
 			return;
 		}
 
-		this._elements.dropdown_cnt = this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT);
+		this._elements.dropdown_cnt = this._$dom_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT);
+
 		this._elements.dropdown_cnt.html(UI_Template_Handler.$get(Selector_Core._tpl_pointers.SELECTOR_DROPDOWN, {
 			search_placeholder: this._config.searching_text,
 			list_groupable: this._view_mode_groupable ? 1 : 0
 		}));
 
 		this._elements.search_field = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD);
-
 		this._elements.view_mode_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.VIEW_MODE_CNT);
-
 		this._elements.results_cnt = this._elements.dropdown_cnt.find(Selector_Core._ux_pointers.RESULTS_CNT);
 
 		this._dropdown_initialized = true;
@@ -321,9 +319,9 @@ export class Selector_Core {
 	/**
 	 * @private
 	 */
-	_render_results_unitary() {
+	_render_results_simple() {
 
-		let $results = $("<div/>"); // Todo:
+		let $results = $("<div/>");
 
 		for (let item in this._data) {
 
@@ -384,7 +382,7 @@ export class Selector_Core {
 			return;
 		}
 
-		this._view_mode_grouped ? this._render_results_grouped() : this._render_results_unitary();
+		this._view_mode_grouped ? this._render_results_grouped() : this._render_results_simple();
 	}
 
 
@@ -398,12 +396,12 @@ export class Selector_Core {
 			this._on_input_field_click(e);
 		});
 
-		this._$native_parent_cnt.on("keyup", Selector_Core._ux_pointers.SEARCH_FIELD, (e) => {
+		this._$dom_cnt.on("keyup", Selector_Core._ux_pointers.SEARCH_FIELD, (e) => {
 
 			this._on_search_field_keyup(e);
 		});
 
-		this._$native_parent_cnt.on("click", Selector_Core._ux_pointers.DROPDOWN_CNT, (e) => {
+		this._$dom_cnt.on("click", Selector_Core._ux_pointers.DROPDOWN_CNT, (e) => {
 
 			if (e.target.closest(Selector_Core._ux_pointers.RESULTS_CNT)) {
 				this._on_results_cnt_click(e.target);
@@ -411,9 +409,9 @@ export class Selector_Core {
 			}
 		});
 
-		this._$native_parent_cnt.on("click", Selector_Core._ux_pointers.VIEW_MODE_CNT, (e) => {
+		this._$dom_cnt.on("click", Selector_Core._ux_pointers.VIEW_MODE_CNT, (e) => {
 
-			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_UNITARY)) {
+			if (e.target.closest(Selector_Core._ux_pointers.VIEW_MODE_SIMPLE)) {
 
 				this._on_view_mode_unitary_click();
 			}
@@ -459,7 +457,7 @@ export class Selector_Core {
 	 */
 	_on_search_field_keyup(e) {
 
-		this.set_search_term(this._$native_parent_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD).val());
+		this.set_search_term(this._$dom_cnt.find(Selector_Core._ux_pointers.SEARCH_FIELD).val());
 
 		this._render_refresh();
 	}
@@ -535,7 +533,7 @@ export class Selector_Core {
 
 		if (this._dropdown_opened) {
 
-			if (e.target !== this._$native_parent_cnt[0] &&	!$.contains(this._$native_parent_cnt[0], e.target)) {
+			if (e.target !== this._$dom_cnt[0] &&	!$.contains(this._$dom_cnt[0], e.target)) {
 				this._dropdown_close();
 			}
 		}
@@ -567,9 +565,13 @@ export class Selector_Core {
 	}
 
 
+	/**
+	 *
+	 * @private
+	 */
 	_refresh_selections_badge () {
 
-		this._$native_parent_cnt.find('.ux-global-selections:first').text(this._selected_ids.length);
+		this._$dom_cnt.find('.ux-global-selections:first').text(this._selected_ids.length);
 	}
 
 
@@ -629,32 +631,13 @@ export class Selector_Core {
 
 
 	/**
-	 * Returns an enumerated array containing the categories of data items.
-	 * @returns {string[]}
-	 * @private
-	 */
-	_get_groups() {
-
-		let groups = {};
-
-		for (let item of this._data) {
-
-			let group = item[this._config.category_key];
-			groups[group] = 1;
-		}
-
-		return Object.keys(groups);
-	}
-
-
-	/**
 	 *
 	 * @private
 	 */
 	_refresh_native_field() {
 
-		console.log(this._$native_field.val());
-		this._$native_field.val(this._selected_ids);
+		console.log(this._$dom_field.val());
+		this._$dom_field.val(this._selected_ids);
 	}
 
 
@@ -665,8 +648,9 @@ export class Selector_Core {
 
 		this._render_ensure_dropdown_init();
 
-		this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).addClass(Selector_Core._ui_modifiers.DROPDOWN_OPEN);
+		this._$dom_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).addClass(Selector_Core._ui_modifiers.DROPDOWN_OPEN);
 		this._dropdown_opened = true;
+
 
 		this._render_refresh();
 		this._elements.search_field.focus();
@@ -678,7 +662,7 @@ export class Selector_Core {
 	 */
 	_dropdown_close() {
 
-		this._$native_parent_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).removeClass(Selector_Core._ui_modifiers.DROPDOWN_OPEN);
+		this._$dom_cnt.find(Selector_Core._ux_pointers.DROPDOWN_CNT).removeClass(Selector_Core._ui_modifiers.DROPDOWN_OPEN);
 		this._dropdown_opened = false;
 
 		this._elements.results_cnt.empty();
