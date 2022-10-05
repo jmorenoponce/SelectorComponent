@@ -3,6 +3,7 @@
   "name": "selectorcomponent",
   "version": "1.0.0",
   "description": "This is a practice coding for a selector component that replaces the normal HTML Select",
+  "type": "module",
   "main": "./src/js/main.js",
   "directories": {
     "doc": "docs",
@@ -13,7 +14,7 @@
     "build": "webpack --config webpack.config.js --mode=production",
     "dev": "webpack --config webpack.config.js --mode=development",
     "watch": "webpack --config webpack.config.js --mode=development -w",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",

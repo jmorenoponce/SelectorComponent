@@ -1,11 +1,17 @@
 'use strict';
 
 
-import {UI_Template_Handler} from "./UI_Template_Handler";
-import {Utility} from "../../utils/Utility";
+import {UI_Template_Handler} from "./UI_Template_Handler.js";
+import {Utility} from "../../utils/Utility.js";
 
 
 export class Selector_Core {
+
+
+	static _for_test_with_jest () {
+
+		return true;
+	}
 
 
 	static __id_counter = 0;

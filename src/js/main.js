@@ -1,8 +1,8 @@
 'use strict';
 
-import {UI_Template_Handler} from "./components/Selector/UI_Template_Handler";
-import {Selector_Core} from "./components/Selector/Selector_Core";
-import {Utility} from "./utils/Utility";
+import {UI_Template_Handler} from "./components/Selector/UI_Template_Handler.js";
+import {Selector_Core} from "./components/Selector/Selector_Core.js";
+import {Utility} from "./utils/Utility.js";
 
 UI_Template_Handler.on_loaded(function () {
 
